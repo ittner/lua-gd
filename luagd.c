@@ -171,6 +171,25 @@ static int LgdImageJpeg(lua_State *L)
     return 1;
 }
     
+static int LgdImageJpegPtr(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int quality = getint(L, 2);
+    char *str;
+    int size;
+
+    str = gdImageJpegPtr(im, &size, quality);
+    if(str != NULL)
+    {
+        lua_pushlstring(L, str, size);
+        gdFree(str);
+    }
+    else
+        lua_pushnil(L);  /* Error */
+    return 1;
+}
+
+
 
 
 static const luaL_reg LgdFunctions[] =
@@ -180,6 +199,7 @@ static const luaL_reg LgdFunctions[] =
 	{ "ImageDestroy",           LgdImageDestroy },
 	{ "ImageCreateFromJpeg",    LgdImageCreateFromJpeg },
 	{ "ImageJpeg",              LgdImageJpeg },
+    { "ImageJpegPtr",           LgdImageJpegPtr },
     { NULL, NULL }
 };
 
