@@ -20,8 +20,8 @@
 
 CC=gcc
 
-# Automatic configuration using gdlib-config and sed.  These lines should
-# work on most Linux/Unix systems. If you system does not have these programs
+# Automatic configuration using gdlib-config and sed. These lines should
+# work on most Linux/Unix systems. If your system does not have these programs
 # you must comment out these lines and uncomment and change the next ones.
 
 OUTFILE=libluagd.so
