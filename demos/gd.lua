@@ -1,9 +1,9 @@
+-- Generic loader for Lua-GD.
 
--- Routines to find and load lua-gd.
-
+-- Common locations (add new ones if needed).
 local locs = {
-    -- Unices (Linux, FreeBSD, etc.)
-    "libluagd.so",          -- the default, the simple, the perfect :)
+    -- Unices
+    "libluagd.so",
     "./libluagd.so",
     "/usr/lib/libluagd.so",
     "/usr/local/lib/libluagd.so",
@@ -12,21 +12,16 @@ local locs = {
     "libluagd.dll",
     "luagd.dll",
     ".\\luagd.dll",
+    ".\\libluagd.dll",
     "c:\\lua\\lib\\libluagd.dll"
 }
 
-local loadgd = nil
-local fname, _
-
-for _,fname in ipairs(locs) do
+local loadgd, fname, ndx
+for ndx, fname in ipairs(locs) do
   loadgd = loadlib(fname, "luaopen_gd")
   if loadgd then
     break
   end
 end
-
-if loadgd then
-  loadgd()
-else
-  error("Can't load luagd")
-end
+assert(loadgd, "Can't load Lua-GD")
+loadgd()
