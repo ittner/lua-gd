@@ -17,7 +17,7 @@ function createClock(size, hours, minutes)
 
   im:filledRectangle(0, 0, size, size, white)
   im:setThickness(math.max(1, size/100))
-  im:arc(cxy, cxy, size, size, 0, 360, gray)
+  im:arc(cxy, cxy, size, size, 0, 360, black)
 
   local ang = 0
   local rang, gsize
@@ -52,7 +52,7 @@ function createClock(size, hours, minutes)
 
   im:setThickness(1)
   local sp = math.max(1, size/20)
-  im:filledArc(cxy, cxy, sp, sp, 0, 360, gray, gd.ARC)
+  im:filledArc(cxy, cxy, sp, sp, 0, 360, black, gd.ARC)
 
   return im
 end
