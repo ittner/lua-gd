@@ -17,10 +17,12 @@ cp -r test_features.lua $DIRNAME
 
 cp -r demos $DIRNAME
 rm -rf $DIRNAME/demos/CVS
+rm -rf $DIRNAME/demos/.xvpics
 rm -f $DIRNAME/demos/out.*
 
 cp -r doc $DIRNAME
 rm -rf $DIRNAME/doc/CVS
+rm -rf $DIRNAME/doc/.xvpics
 
 
 tar -czf $TGZNAME $DIRNAME

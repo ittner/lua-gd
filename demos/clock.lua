@@ -61,8 +61,8 @@ dh = os.date("*t")
 im = createClock(100, dh.hour, dh.min)
 
 print("Content-type: image/png")
-print("Refresh: 60")                -- Reload the image after 60s
-print("Pragma: no-cache")           -- Can mozilla understand this?
+print("Refresh: 60")            -- Ask browser to reload the image after 60s
+print("Pragma: no-cache")       -- Can mozilla understand this?
 print("Expires: Thu Jan 01 00:00:00 UTC 1970")  -- Marks as expired
 print("")
 
