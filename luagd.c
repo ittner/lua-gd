@@ -41,8 +41,6 @@
 #define MY_GD_VERSION           "gd 2.0.33"
 #define GD_IMAGE_TYPENAME       "gdImage_handle"
 #define GD_IMAGE_PTR_TYPENAME   "gdImagePtr_handle"
-#define GD_FONT_TYPENAME        "gdFont_handle"
-#define GD_FONT_PTR_TYPENAME    "gdFontPtr_handle"
 
 #define LIB_VERSION "lua-gd " MY_GD_VERSION " (c) 2004 Alexandre Erwin Ittner"
 
