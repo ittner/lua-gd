@@ -1,10 +1,11 @@
--- an analog clock with lua and lua-gd
+#!/usr/bin/env lua
+
+-- a cgi script that draws an analog clock with lua and lua-gd
 -- (c) 2004 Alexandre Erwin Ittner
 -- $Id$
 
 load_gd = assert(loadlib("libluagd.so", "luaopen_gd"))
 load_gd()
-
 
 function createClock(size, hours, minutes)
   local im = gd.createTrueColor(size, size)
@@ -42,9 +43,14 @@ function createClock(size, hours, minutes)
   return im
 end
 
-
 dh = os.date("*t")
-im = createClock(120, dh.hour, dh.min)
-im:png("./out.png")
-os.execute("display out.png")
+im = createClock(100, dh.hour, dh.min)
+
+print("Content-type: image/png")
+print("Refresh: 60")                -- Reload the image after 60s
+print("Pragma: no-cache")           -- Can mozilla understand this?
+print("Expires: Thu Jan 01 00:00:00 UTC 1970")  -- Marks as expired
+print("")
+
+io.write(im:pngStr())
 
