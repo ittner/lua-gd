@@ -481,6 +481,13 @@ affects all semitransparent PNG images, but the difference is essentially
 invisible to the eye. 7 bits of alpha channel resolution is, in practice,
 quite a lot. </p>
 
+<p>Example:
+<pre class="example">
+-- copies the content of picture.png to a new image
+local im = gd.createFromPng("picture.png")
+</pre>
+</p>
+
 
 
 <h4>gd.createFromGif(filename)</h4>
@@ -505,47 +512,96 @@ general purpose use and should never be used to distribute images. Its
 purpose is solely to allow very fast loading of images. </p>
 
 
-
 <h4>gd.createFromGd2(filename)</h4>
+
+<p> <code>gd.createFromGd2</code> is called to load images from gd2 format
+files. Invoke <code>gd.createFromGd2</code> with a string pointing to
+an existing file containing the desired image to return a new image or
+<b>nil</b> if unable to load the image (most often because the file is
+corrupt or does not contain a gd2 image). You can determine the size of
+the image with <code>gd.sizeXY</code>. This format is not intended for
+general purpose use and should never be used to distribute images. Its
+purpose is solely to allow very fast loading of images. </p>
+
+
 <h4>gd.createFromGd2Part(filename, x, y, w, h)</h4>
 
+<p> <code>gd.createFromGd2Part</code> is called to load parts
+of images from gd2 format files. Invoked in the same way as
+<code>gd.createFromGd2</code>, but with extra parameters indicating the
+source (x, y) and width/height of the desired image. </p>
 
-<h4>gd.createFromXbm(filename)</h4>
-<h4>gd.createFromXpm(filename)</h4>
-
-<p>These functions creates new images from files on disk. It will return
-a new image, without modifying the files. <code>createFromGd2Part</code>
-has a special feature: can copy <b>parts</b> of and GD2 image. These
-functions returns <b>nil</b> on error (eg. a non-existing or corrupted
-file or a file in the wrong format).</p>
-
-<p>Example:</p>
-<pre class="example">
--- copies the content of picture.png to a new image
-local im = gd.createFromPng("picture.png")
-</pre>
-
-<p>Example:</p>
+<p> Example:
 <pre class="example">
 -- Being base.gd2 a 40x40px image, copies its upper-left part to a new image
 local im = gd.createFromGd2Part("base.gd2", 0, 0, 20, 20)
 </pre>
+</p>
+
+
+<h4>gd.createFromXbm(filename)</h4>
+
+<p> <code>gd.createFromXbm</code> is called to load images from monochrome
+X bitmap format files. Invoke <code>gd.createFromXbm</code> with a string
+pointing to an existing file containing the desired image to return a
+new image or <b>nil</b> if unable to load the image (most often because
+the file is corrupt or does not contain a XBM image). You can determine
+the size of the image with <code>gd.sizeXY</code>. </p>
+
+
+<h4>gd.createFromXpm(filename)</h4>
+
+<p> <code>gd.createFromXpm</code> is called to load images from color X
+bitmap format files. Invoke <code>gd.createFromXpm</code> with a string
+pointing to an existing file containing the desired image to return a
+new image or <b>nil</b> if unable to load the image (most often because
+the file is corrupt or does not contain a XPM image). You can determine
+the size of the image with <code>gd.sizeXY</code>. </p>
 
 
 <h4>gd.createFromJpegStr(string)</h4>
+
+<p> <code>gd.createFromJpegStr</code> is called to load
+truecolor images from strings with JPEG format image data. Invoke
+<code>gd.createFromJpegStr</code> passing a string with the desired
+image to return a new truecolor image or <b>nil</b> if unable to
+load the image (most often because the data is corrupt or does not
+contain a JPEG image). You can determine the size of the image with
+<code>gd.sizeXY</code>. The returned image is always a truecolor
+image. </p>
+
+
 <h4>gd.createFromGifStr(string)</h4>
+
+<p> <code>gd.createFromGifStr</code> is called to load
+palette-based images from strings with GIF format image data. Invoke
+<code>gd.createFromGifStr</code> passing a string with the desired image
+to return a new image or <b>nil</b> if unable to load the image (most
+often because the data is corrupt or does not contain a GIF image). You
+can determine the size of the image with <code>gd.sizeXY</code>. </p>
+
+
 <h4>gd.createFromPngStr(string)</h4>
-<h4>gd.createFromGdStr(string)</h4>
-<h4>gd.createFromGd2Str(string)</h4>
-<h4>gd.createFromGd2PartStr(string, x, y, w, h)</h4>
 
-<p>These functions creates new images from strings in memory. It will
-return a new image. <code>createFromGd2PartStr</code> has a special
-feature: can copy <b>parts</b> of and GD2 image. These functions returns
-<b>nil</b> on error (eg. a non-string or a string with an image in the
-wrong format).</p>
+<p> <code>gd.createFromPngStr</code> is called to load images from strings
+with PNG format image data. Invoke <code>gd.createFromPngStr</code>
+passing a string with the desired image to return a new image or
+<b>nil</b> if unable to load the image (most often because the data is
+corrupt or does not contain a PNG image). You can determine the size of
+the image with <code>gd.sizeXY</code>. </p>
 
-<p>Example:</p>
+<p> If the PNG image being loaded is a truecolor image, the resulting
+value will refer to a truecolor image. If the PNG image being loaded
+is a palette or grayscale image, the resulting data will refer to a
+palette image. gd retains only 8 bits of resolution for each of the red,
+green and blue channels, and only 7 bits of resolution for the alpha
+channel. The former restriction affects only a handful of very rare
+48-bit color and 16-bit grayscale PNG images. The second restriction
+affects all semitransparent PNG images, but the difference is essentially
+invisible to the eye. 7 bits of alpha channel resolution is, in practice,
+quite a lot. </p>
+
+<p> Example:
 <pre class="example">
 -- reads the contents of the file to a string
 fp = io.open("picture.png")
@@ -555,6 +611,39 @@ fp:close()
 -- creates an image from the string
 local im = gd.createFromPngStr(str)
 </pre>
+</p>
+
+
+<h4>gd.createFromGdStr(string)</h4>
+
+<p> <code>gd.createFromGdStr</code> is called to load images from strings
+with gd format image data. Invoke <code>gd.createFromGdStr</code> passing
+a string with the desired image to return a new image or <b>nil</b>
+if unable to load the image (most often because the data is corrupt or
+does not contain a gd image). You can determine the size of the image
+with <code>gd.sizeXY</code>. This format is not intended for general
+purpose use and should never be used to distribute images. Its purpose
+is solely to allow very fast loading of images. </p>
+
+
+<h4>gd.createFromGd2Str(string)</h4>
+
+<p> <code>gd.createFromGd2Str</code> is called to load images from strings
+with gd2 format image data. Invoke <code>gd.createFromGd2Str</code>
+passing a string with the desired image to return a new image or
+<b>nil</b> if unable to load the image (most often because the data is
+corrupt or does not contain a gd2 image). You can determine the size of
+the image with <code>gd.sizeXY</code>. This format is not intended for
+general purpose use and should never be used to distribute images. Its
+purpose is solely to allow very fast loading of images. </p>
+
+
+<h4>gd.createFromGd2PartStr(string, x, y, w, h)</h4>
+
+<p> <code>gd.createFromGd2PartStr</code> is called to load parts
+of images from gd2 format strings. Invoked in the same way as
+<code>gd.createFromGd2Str</code>, but with extra parameters indicating
+the source (x, y) and width/height of the desired image. </p>
 
 
 <a name="api.output"></a>
