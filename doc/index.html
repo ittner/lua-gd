@@ -248,45 +248,202 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 <a name="api.constants"></a>
 <h3>Constants</h3>
 
-<h4>gd.VERSION</h4>
-<p>A string with library's version information.</p>
+<dl>
+<dt>gd.VERSION</dt>
+<dd>A string with library's version information.</dd>
 
-<h4>gd.MAX_COLORS</h4>
-<h4>gd.GD2_FMT_RAW</h4>
-<h4>gd.GD2_FMT_COMPRESSED</h4>
-<h4>gd.ARC</h4>
-<h4>gd.CHORD</h4>
-<h4>gd.PIE</h4>
-<h4>gd.NO_FILL</h4>
-<h4>gd.EDGED</h4>
-<h4>gd.ANTI_ALIASED</h4>
-<h4>gd.BRUSHED</h4>
-<h4>gd.STYLED</h4>
-<h4>gd.STYLED_BRUSHED</h4>
-<h4>gd.TILED</h4>
-<h4>gd.TRANSPARENT</h4>
+<dt>gd.MAX_COLORS</dt>
+<dd>The constant 256. This is the maximum number of colors in a
+palette-based PNG file according to the PNG standard, and is also the
+maximum number of colors in a palette-based gd image. This of course
+does not apply to truecolor images.</dd>
 
-<h4>gd.FONT_TINY</h4>
-<h4>gd.FONT_SMALL</h4>
-<h4>gd.FONT_MEDIUM</h4>
-<h4>gd.FONT_LARGE</h4>
-<h4>gd.FONT_GIANT</h4>
+<dt>gd.GD2_FMT_RAW</dt>
+<dt>gd.GD2_FMT_COMPRESSED</dt>
 
-<p> These are standard font sizes used by<a href="#gd.string">
-<code>gd.string</code></a> and <a href="#gd.stringUp">
-<code>gd.stringUp</code></a>. </p>
+<dt>gd.ARC</dt>
+<dt>gd.CHORD</dt>
+<dt>gd.PIE</dt>
+<dt>gd.NO_FILL</dt>
+<dt>gd.EDGED</dt>
 
+<dt>gd.ANTI_ALIASED</dt>
+<dd>Used in place of a color when invoking a line-drawing function
+such as gd.line or gd.rectangle. When <code>gd.ANTI_ALIASED</code>
+is used as the color, the foreground color set with
+<a href="#gd.setAntiAliased"><code>gd.setAntiAliased</code></a>
+is used, with antialiasing mechanisms to minimize any
+"jagged" appearance. For more information, see
+<a href="#gd.setAntiAliased"><code>gd.setAntiAliased</code></a>.</dd>
+
+<dt>gd.BRUSHED</dt>
+<dd>Used in place of a color when invoking a line-drawing
+function such as <a href="#gd.line"><code>gd.line</code></a>
+or <a href="#gd.rectangle"><code>gd.rectangle</code></a>. When
+<code>gd.BRUSHED</code> is used as the color, the brush image set with <a
+href="#gd.setBrush"><code>gd.setBrush</code></a> is drawn in place of each
+pixel of the line (the brush is usually larger than one pixel, creating
+the effect of a wide paintbrush). See also <code>gd.STYLED_BRUSHED</code>
+for a way to draw broken lines with a series of distinct copies of an
+image. </dd>
+
+<dt>gd.STYLED</dt>
+<dt>gd.STYLED_BRUSHED</dt>
+<dt>gd.TILED</dt>
+<dt>gd.TRANSPARENT</dt>
+
+<dt>gd.FONT_TINY</dt>
+<dt>gd.FONT_SMALL</dt>
+<dt>gd.FONT_MEDIUM</dt>
+<dt>gd.FONT_LARGE</dt>
+<dt>gd.FONT_GIANT</dt>
+
+<dd> These are standard font sizes used by 
+<a href="#gd.string"><code>gd.string</code></a> and 
+<a href="#gd.stringUp"><code>gd.stringUp</code></a>. </dd>
+</dl>
 
 
 
 <a name="api.create"></a>
 <h3>Image creation and destruction</h3>
 
+
+<h4>gd.create(sx, sy)</h4>
+<h4>gd.createPalette(sx, sy)</h4>
+<h4>gd.createTrueColor(sx, sy)</h4>
+<h4>gd.createPaletteFromTrueColor(sx, sy)</h4>
+<h4>gd.trueColorToPalette(sx, sy)</h4>
+
+<p> These function will create and return a new image with the specified
+X and Y size. </p>
+
+<p>Example:</p>
+<pre class="example">
+-- creates a 20x20px true color image
+local im = gd.createTrueColor(20, 20)
+</pre>
+
+
 <a name="api.input"></a>
 <h3>Image input</h3>
 
+<h4>gd.createFromJpeg(filename)</h4>
+<h4>gd.createFromGif(filename)</h4>
+<h4>gd.createFromPng(filename)</h4>
+<h4>gd.createFromGd(filename)</h4>
+<h4>gd.createFromGd2(filename)</h4>
+<h4>gd.createFromGd2Part(filename, x, y, w, h)</h4>
+<h4>gd.createFromXbm(filename)</h4>
+<h4>gd.createFromXpm(filename)</h4>
+
+<p>These functions creates new images from files on disk. It will return
+a new image, without modifying the files. <code>gd.createFromGd2Part()</code>
+has a special feature: can copy <b>parts</b> of and GD2 image. These
+functions returns <b>nil</b> on error (eg. a non-existing or corrupted file
+or a file in the wrong format).</p>
+
+<p>Example:</p>
+<pre class="example">
+-- copies the content of picture.png to a new image
+local im = gd.createFromPng("picture.png")
+</pre>
+
+<p>Example:</p>
+<pre class="example">
+-- Being base.gd2 a 40x40px image, copies its upper-left part to a new image
+local im = gd.createFromGd2Part("base.gd2", 0, 0, 20, 20)
+</pre>
+
+
+<h4>gd.createFromJpegStr(string)</h4>
+<h4>gd.createFromGifStr(string)</h4>
+<h4>gd.createFromPngStr(string)</h4>
+<h4>gd.createFromGdStr(string)</h4>
+<h4>gd.createFromGd2Str(string)</h4>
+<h4>gd.createFromGd2PartStr(string, x, y, w, h)</h4>
+
+<p>These functions creates new images from strings in memory. It will
+return a new image. <code>gd.createFromGd2PartStr()</code> has a special
+feature: can copy <b>parts</b> of and GD2 image. These functions returns
+<b>nil</b> on error (eg. a non-string or a string with an image in the
+wrong format).</p>
+
+<p>Example:</p>
+<pre class="example">
+-- reads the contents of the file to a string
+fp = io.open("picture.png")
+str = fp:read("*a")
+fp:close()
+
+-- creates an image from the string
+local im = gd.createFromPngStr(str)
+</pre>
+
+
 <a name="api.output"></a>
 <h3>Image output</h3>
+
+<h4>gdImage:jpeg(filename, quality)</h4>
+<h4>gdImage:png(filename)</h4>
+<h4>gdImage:pngEx(filename, compression_level)</h4>
+<h4>gdImage:gif(filename)</h4>
+<h4>gdImage:gd(filename)</h4>
+<h4>gdImage:gd2(filename, chunkSize, format)</h4>
+<h4>gdImage:wbmp(filename)</h4>
+
+<p>These functions writes image files to the disk.
+<code>gdImage:jpeg()</code> allows you to specify the quality of
+the generated JPEG file from 1 (worst quality, small files) to 100
+(best quality, large files). <code>gdImage:pngEx()</code> allows you to
+specify the compression level of a PNG image, from 1 to 6 (or -1 for
+the default compression level of libpng). <code>gdImage:gd2()</code>
+must receive the chunk size (an integer, or 0 for the default)
+and the file format, which can be <code>gd.GD2_FMT_RAW</code> or
+<code>gd.GD2_FMT_COMPRESSED</code>. These functions returns <b>nil</b>
+on error (eg. permission denied to overwrite an existing file) and
+<b>true</b> on success. </p>
+
+<p>Example:</p>
+<pre class="example">
+-- creates a new image
+local im = gd.createTrueColor(20, 20)
+
+-- ** DO SOME ART HERE **
+
+-- writes the image to a PNG file.
+im:png("picture.png")
+
+-- writes the image to a JPEG file.
+im:jpeg("picture.jpg", 75)
+</pre>
+
+
+<p>To check if the writting was succeful:</p>
+<pre class="example">
+-- creates a new image
+local im = gd.createTrueColor(20, 20)
+
+-- ** DO SOME ART HERE **
+
+if im:png("picture.png") then
+  print("Image written to disk")
+else
+  print("Oops, an error...")
+end
+</pre>
+
+
+
+
+<h4>gdImage:jpegStr(string, quality)</h4>
+<h4>gdImage:pngStr(string)</h4>
+<h4>gdImage:pngStrEx(string, compression_level)</h4>
+<h4>gdImage:gifStr(string)</h4>
+<h4>gdImage:gdStr(string)</h4>
+<h4>gdImage:gd2Str(string, chunkSize, format)</h4>
+<h4>gdImage:wbmpStr(string)</h4>
+
 
 <a name="api.color"></a>
 <h3>Color manipulation</h3>
