@@ -9,8 +9,8 @@
 X gdImage 
   gdImageAlphaBlending 
   gdImageArc 
-  gdImageBlue 
-  gdImageBoundsSafe 
+X gdImageBlue 
+X gdImageBoundsSafe 
   gdImageChar 
   gdImageCharUp 
 X gdImageColorAllocate 
@@ -67,14 +67,14 @@ X gdImageGd2Ptr
 X gdImageGif
 X gdImageGifPtr
 X gdImageGetInterlaced 
-  gdImageGetPixel 
+X gdImageGetPixel 
 X gdImageGetTransparent 
 X gdImageGreen 
   gdImageInterlace 
 X gdImageJpeg 
 X gdImagePtr
 N gdImageJpegCtx 
-  gdImageLine 
+X gdImageLine 
   gdImageMergeGray 
   gdImagePaletteCopy 
 X gdImagePng 
@@ -92,7 +92,7 @@ X gdImageRed
   gdImageSetAntiAliased 
   gdImageSetAntiAliasedDontBlend 
   gdImageSetBrush 
-  gdImageSetPixel 
+X gdImageSetPixel 
   gdImageSetStyle 
   gdImageSetThickness 
   gdImageSetTile 

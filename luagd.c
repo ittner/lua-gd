@@ -1060,6 +1060,15 @@ static int LgdImageGreen(lua_State *L)
     return 1;
 }
 
+/* int gdImageAlpha(gdImagePtr im, int color) */
+static int LgdImageAlpha(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int c = getint(L, 2);
+    lua_pushnumber(L, gdImageAlpha(im, c));
+    return 1;
+}
+
 /* int gdImageGetInterlaced(gdImagePtr im) */
 static int LgdImageGetInterlaced(lua_State *L)
 {
@@ -1106,6 +1115,63 @@ static int LgdImageColorDeallocate(lua_State *L)
     return 0;
 }
 
+
+/* int gdImageBoundsSafe(gdImagePtr im, int x, int y) */
+static int LgdImageBoundsSafe(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int x = getint(L, 2);
+    int y = getint(L, 3);
+
+    if(gdImageBoundsSafe(im, x, y) != 0)
+        lua_pushnumber(L, 1);
+    else
+        lua_pushnil(L);
+    return 1;
+}
+
+
+/* int gdImageGetPixel(gdImagePtr im, int x, int y) */
+static int LgdImageGetPixel(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int x = getint(L, 2);
+    int y = getint(L, 3);
+
+    if(im)
+        lua_pushnumber(L, gdImageGetPixel(im, x, y));
+    return 1;
+}
+
+
+/* void gdImageSetPixel(gdImagePtr im, int x, int y, int color) */
+static int LgdImageSetPixel(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int x = getint(L, 2);
+    int y = getint(L, 3);
+    int c = getint(L, 4);
+
+    if(im)
+        gdImageSetPixel(im, x, y, c);
+    return 0;
+}
+
+
+/* void gdImageLine(gdImagePtr im, int x1, int y1, int x2, int y2, int c) */
+static int LgdImageLine(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int x1 = getint(L, 2);
+    int y1 = getint(L, 3);
+    int x2 = getint(L, 4);
+    int y2 = getint(L, 5);
+    int c = getint(L, 6);
+
+    if(im)
+        gdImageLine(im, x1, y1, x2, y2, c);
+    return 0;
+}
 
 
 
@@ -1161,12 +1227,17 @@ static const luaL_reg LgdFunctions[] =
     { "ImageRed",                   LgdImageRed },
     { "ImageBlue",                  LgdImageBlue },
     { "ImageGreen",                 LgdImageGreen },
+    { "ImageAlpha",                 LgdImageAlpha },
     { "ImageGetInterlaced",         LgdImageGetInterlaced },
     { "ImageGetTransparent",        LgdImageGetTransparent },
     { "ImageColorTransparent",      LgdImageColorTransparent },
     { "ImageColorDeallocate",       LgdImageColorDeallocate },
 
 
+    { "ImageBoundsSafe",            LgdImageBoundsSafe },
+    { "ImageGetPixel",              LgdImageGetPixel },
+    { "ImageSetPixel",              LgdImageSetPixel },
+    { "ImageLine",                  LgdImageLine },
 
     { NULL, NULL }
 };
