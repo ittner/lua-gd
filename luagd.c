@@ -1116,6 +1116,34 @@ static int LgdImageColorDeallocate(lua_State *L)
 }
 
 
+/* int gdImageSX(gdImagePtr im) */
+static int LgdImageSX(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    lua_pushnumber(L, gdImageSX(im));
+    return 1;
+}
+
+
+/* int gdImageSY(gdImagePtr im) */
+static int LgdImageSY(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    lua_pushnumber(L, gdImageSY(im));
+    return 1;
+}
+
+
+/* Fear the power of the Moon!!  ---   x, y = im:ImageSXY() */
+static int LgdImageSXY(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    lua_pushnumber(L, gdImageSX(im));
+    lua_pushnumber(L, gdImageSY(im));
+    return 2;
+}
+
+
 /* int gdImageBoundsSafe(gdImagePtr im, int x, int y) */
 static int LgdImageBoundsSafe(lua_State *L)
 {
@@ -1191,32 +1219,6 @@ static int LgdImageRectangle(lua_State *L)
 
 
 
-/* int gdImageSX(gdImagePtr im) */
-static int LgdImageSX(lua_State *L)
-{
-    gdImagePtr im = getImagePtr(L, 1);
-    lua_pushnumber(L, gdImageSX(im));
-    return 1;
-}
-
-
-/* int gdImageSY(gdImagePtr im) */
-static int LgdImageSY(lua_State *L)
-{
-    gdImagePtr im = getImagePtr(L, 1);
-    lua_pushnumber(L, gdImageSY(im));
-    return 1;
-}
-
-
-/* Fear the power of the Moon!!  ---   x, y = im:ImageSXY() */
-static int LgdImageSXY(lua_State *L)
-{
-    gdImagePtr im = getImagePtr(L, 1);
-    lua_pushnumber(L, gdImageSX(im));
-    lua_pushnumber(L, gdImageSY(im));
-    return 2;
-}
 
 
 
