@@ -1902,7 +1902,7 @@ static int LgdFontCacheShutdown(lua_State *L)
             ptsize, angle, x, y, string)
 
   Or (to get the points only):
-    llX, llY, lrX, lrY, urX, urY, ulX, ulY = gd:stringFT(nil, fg,
+    llX, llY, lrX, lrY, urX, urY, ulX, ulY = gd.stringFT(nil, fg,
             fontname, ptsize, angle, x, y, string)
 */
 
