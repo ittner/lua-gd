@@ -85,7 +85,7 @@ end
 
 load_posix = loadlib("lposix.so", "luaopen_posix")
 if load_posix == nil then
-  print("Error:  Can't find the POSIX library. Do you have it, no?")
+  print("Error:  Can't find the POSIX library. Do you have it, you don't?")
   os.exit(1)
 end
 load_posix()
