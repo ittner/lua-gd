@@ -19,8 +19,6 @@ for i = 1, size do
       im:setPixel(j, i, black)
       n[j+1] = not n[j+1]
       n[j-1] = not n[j-1]
-    else
-      im:setPixel(j, i, white)
     end
   end
   m = n
