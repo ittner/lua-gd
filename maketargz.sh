@@ -2,6 +2,7 @@
 
 PACKAGE=lua-gd
 VERSION=alpha-2
+
 DIRNAME=$PACKAGE-$VERSION
 TGZNAME=$DIRNAME.tar.gz
 
@@ -12,11 +13,15 @@ cp -r COPYING $DIRNAME
 cp -r Makefile $DIRNAME
 cp -r README $DIRNAME
 cp -r luagd.c $DIRNAME
+cp -r test_features.lua $DIRNAME
+
 cp -r demos $DIRNAME
 rm -rf $DIRNAME/demos/CVS
-rm -f $DIRNAME/demos/out.png
+rm -f $DIRNAME/demos/out.*
+
 cp -r doc $DIRNAME
 rm -rf $DIRNAME/doc/CVS
+
 
 tar -czf $TGZNAME $DIRNAME
 rm -rf $DIRNAME
