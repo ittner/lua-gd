@@ -90,7 +90,6 @@ function makeThumb(fname)
   local thumbname
   local format
 
-  print(tmpname)
   s, e, name = string.find(tmpname, "(.+)%.png")
   if name then
     im = gd.createFromPng(fname)
@@ -113,15 +112,10 @@ function makeThumb(fname)
     print("Error: " .. fname .. " unsuported format")
   end
 
-  print(format)
-
   thumbname = tname .. "_tb.png"
-  print(thumbname)
-
 
   local sx, sy = im:sizeXY()
   local tsy, tsy
-
   if sx <= thumbsize and sy <= thumbsize then
     tsx, tsy = sx, sy
   else
@@ -130,25 +124,25 @@ function makeThumb(fname)
     tsx, tsy = sx/factor, sy/factor
   end
 
-  print(tsx, tsy)
   tim = gd.createTrueColor(tsx, tsy+15)
-  gd.copyResampled(tim, im, 0, 0, 0, 0, tsx, tsy, sx, sy)
+  tim:copyResampled(im, 0, 0, 0, 0, tsx, tsy, sx, sy)
 
   local black = tim:colorExact(0, 0, 0)
   local white = tim:colorExact(255, 255, 255)
   local info = format .. ", " .. sx .. "x" .. sy .. "px"
-  print(info)
-
   tim:filledRectangle(0, tsy, tsx, tsy+15, black)
   tim:string(gd.FONT_SMALL, 2, tsy+1, info, white)
 
-  tim:png(thumbname)
+  if tim:png(thumbname) then
+    return thumbname, tsy, tsy, fname
+  end
 
+  return nil
 end
 
 
 
-makeThumb("./lua-gd.png")
+print(makeThumb("./lua-gd.png"))
 
 -- dirname = arg[1]
 -- filelist = posix.dir(dirname)
