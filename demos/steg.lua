@@ -187,6 +187,8 @@ function mergeMessage(im, msg)
   while i <= len do
     chr = string.byte(string.sub(msg, i, i))
     a = intToBitArray(chr)
+--- está desprezando pixels da imagem aqui
+--- enfileirar os pixels para gravar aqui.
     c = im:getPixel(x, y)
     for p = 7,0,-1 do
       if not rgb.r then
