@@ -102,17 +102,12 @@ pre.wrong
 <center>
  <img src="lua-gd.png" alt="Lua-GD Logo">
  <h1>Lua-GD Reference Manual</h1>
+ <b> by Alexandre Erwin Ittner </b>
 </center>
 
 <h2> Contents </h2>
 <ul>
  <li><a href="#intro">Introduction</a>
-   <ul>
-     <li><a href="#intro.lua">About Lua</a></li>
-     <li><a href="#intro.gd">About gd</a></li>
-     <li><a href="#intro.lua-gd">About Lua-GD</a></li>
-   </ul>
- </li>
  <li><a href="#license">License</a></li>
  <li><a href="#download">Download</a></li>
  <li><a href="#api">Lua-GD API</a>
@@ -147,74 +142,23 @@ pre.wrong
 <a name="intro"></a>
 <h2>Introduction</h2>
 
-<a name="intro.lua"></a>
-<h3>About Lua</h3>
+<p> gd is a C graphics library that allows your code to quickly draw
+complete images with lines, polygons, arcs, text, multiple colors, cut
+and paste from other images and flood fills, write out the result as a
+PNG, JPEG or GIF format. This is particularly useful in World Wide Web
+applications, where PNG and JPEG are two of the formats accepted for
+inline images by most browsers. You can get more information about gd
+from <a href="http://www.boutell.com/gd/">it's homepage</a>. </p>
 
-<p> From the <a href="http://www.lua.org/refman-5.0.2.pdf"> Lua Reference
-Manual</a>:
+<p> Lua-GD is a "binding": A library that exports gd functions to the
+Lua Programing Language, allowing you to use gd from Lua. The API was
+<b>NOT</b> literally exported, but changed in a way that make it familiar
+to Lua users. </p>
 
-<blockquote>
-  <p>Lua is an extension programming language designed to support general
-  procedural programming with data description facilities. It also offers
-  good support for object-oriented programming, functional programming,
-  and data-driven programming. Lua is intended to be used as a powerful,
-  light-weight configuration language for any program that needs one. Lua
-  is implemented as a library, written in clean C (that is, in the common
-  subset of ANSI C and C++).</p>
+<p> Lua-GD is a programming library, not a paint program. If you are
+looking for that or are not familiar to the Lua Programming Language,
+you are in the wrong place. </p>
 
-  <p>Being an extension language, Lua has no notion of a main program:
-  it only works embedded in a host client, called the embedding program
-  or simply the host. This host program can invoke functions to execute a
-  piece of Lua code, can write and read Lua variables, and can register
-  C functions to be called by Lua code. Through the use of C functions,
-  Lua can be augmented to cope with a wide range of different domains,
-  thus creating customized programming languages sharing a syntactical
-  framework.</p>
-
-  <p>The Lua distribution includes a stand-alone embedding program,
-  <code>lua</code>, that uses the Lua library to offer a complete Lua
-  interpreter. </p>
-
-  <p> Lua means "moon" in Portuguese and is pronounced LOO-ah.</p>
-</blockquote>
-
-<p>For more information, please see the <a href="http://www.lua.org/">Lua
-homepage</a>.
-
-
-
-<a name="intro.gd"></a>
-<h3>About gd</h3>
-
-<p> From the <a href="http://www.boutell.com/gd/">gd homepage</a>: </p>
-
-<blockquote>
-  <p>gd is a graphics library. It allows your code to quickly draw images
-  complete with lines, arcs, text, multiple colors, cut and paste from
-  other images, and flood fills, and write out the result as a PNG or
-  JPEG file. This is particularly useful in World Wide Web applications,
-  where PNG and JPEG are two of the formats accepted for inline images
-  by most browsers.</p>
-
-  <p>gd is not a paint program. If you are looking for a paint program,
-  you are looking in the wrong place. If you are not a programmer, you
-  are looking in the wrong place, unless you are installing a required
-  library in order to run an application.</p>
-
-  <p>gd does not provide for every possible desirable graphics
-  operation. It is not necessary or desirable for gd to become a
-  kitchen-sink graphics package, but version 2.0 does include most
-  frequently requested features, including both truecolor and palette
-  images, resampling (smooth resizing of truecolor images) and so
-  forth.</p>
-</blockquote>
-
-<p>For more information, please see the <a
-href="http://www.boutell.com/gd/">gd homepage</a>.
-
-
-<a name="intro.lua-gd"></a>
-<h3>About Lua-GD</h3>
 
 
 <a name="license"></a>
@@ -1725,9 +1669,9 @@ but can also be <code>gd.DISPOSAL_UNKNOWN</code> (not recommended),
 <code>gd.DISPOSAL_RESTORE_BACKGROUND</code> (restores the first allocated
 color of the global palette), or <code>gd.DISPOSAL_RESTORE_PREVIOUS</code>
 (restores the appearance of the affected area before the frame was
-rendered). Only <code>gd.DISPOSAL_NONE</code> is a sensible choice for
-the first frame. If <b>previm</b> is passed, the built-in GIF optimizer
-will always use gd.DISPOSAL_NONE regardless of the <b>disposal</b>
+rendered). Only <code>gd.DISPOSAL_NONE</code> is a sensible choice for the
+first frame. If <b>previm</b> is passed, the built-in GIF optimizer will
+always use <code>gd.DISPOSAL_NONE</code> regardless of the <b>disposal</b>
 parameter. </p>
 
 <p> Setting the <b>localCM</b> flag to <b>true</b> adds a local
@@ -1762,9 +1706,9 @@ but can also be <code>gd.DISPOSAL_UNKNOWN</code> (not recommended),
 <code>gd.DISPOSAL_RESTORE_BACKGROUND</code> (restores the first allocated
 color of the global palette), or <code>gd.DISPOSAL_RESTORE_PREVIOUS</code>
 (restores the appearance of the affected area before the frame was
-rendered). Only <code>gd.DISPOSAL_NONE</code> is a sensible choice for
-the first frame. If <b>previm</b> is passed, the built-in GIF optimizer
-will always use gd.DISPOSAL_NONE regardless of the <b>disposal</b>
+rendered). Only <code>gd.DISPOSAL_NONE</code> is a sensible choice for the
+first frame. If <b>previm</b> is passed, the built-in GIF optimizer will
+always use <code>gd.DISPOSAL_NONE</code> regardless of the <b>disposal</b>
 parameter. </p>
 
 <p> Setting the <b>localCM</b> flag to <b>true</b> adds a local
@@ -1961,14 +1905,15 @@ os.execute("display out.png")
 
 <table border="0">
  <tr>
-  <td width="216"><img src="cat.png" width="216" height="256"> </td>
-  <td width="216"><img src="catmsg.png" width="216" height="256"> </td>
-  <td width="216"><img src="catdiff.png" width="216" height="256"> </td>
+  <td width="216"> <img src="cat.png" width="216" height="256"> </td>
+  <td width="216"> <img src="catmsg.png" width="216" height="256"> </td>
+  <td width="216"> <img src="catdiff.png" width="216" height="256"> </td>
  </tr>
  <tr>
-  <td width="216"> Test image. </td>
-  <td width="216"> Image with a staganographic message (no visible changes).</td>
-  <td width="216"> Resulting image from <code>steg.lua diff</code> showing
+  <td width="216"> Original test image. </td>
+  <td width="216"> Image with a staganographic message (the message cause no
+    visible changes).</td>
+  <td width="216"> Resulting image from <code>"steg.lua diff"</code> showing
     the pixels changed to store the message in color. </td>
  </tr>
 </table>
@@ -1978,7 +1923,7 @@ os.execute("display out.png")
 --[[
 
 Using Lua-GD to write steganographic messages in PNG images.
-(c) 2005 Alexandre Erwin Ittner &lt;aittner@netuno.com.br&gt;
+(c) 2005 Alexandre Erwin Ittner &lt;aittner AT netuno DOT com DOT br&gt;
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the
@@ -2026,7 +1971,7 @@ algorithm are mandatory here: if the image will be compressed by a
 lossy algorithm, the hidden data can be destroyed. The maximum length
 of the message are limited by the image's size (each byte needs 8 color
 channels or 2 pixels and 2 channels from the next pixel). So, image must
-heave at least "ceil((length+1)*8/3)" pixels (the extra byte is the NUL
+have at least "ceil((length+1)*8/3)" pixels (the extra byte is the NUL
 marker for the end of the string). So, if Alice's message is "Meet me
 in the secret place at nine o'clock.", she will encrypt and sign it to
 something like "PyJYDpz5LCOSHPiXDvLHmVzxLV8qS7EFvZnoo1Mxk+BlT+7lMjpQKs"
