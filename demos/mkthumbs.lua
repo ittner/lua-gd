@@ -13,7 +13,8 @@
 -- $Id$
 
 
-thumbsize = 120          -- thumbnail size
+thumbsize = 120         -- thumbnail size
+tablecols = 5           -- columns on table
 
 header = [[
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -99,6 +100,11 @@ function makeThumb(fname)
   local thumbname
   local format
 
+  s, e, name = string.find(tmpname, "(.+)_tb%.png")
+  if name then 
+    return nil
+  end
+
   s, e, name = string.find(tmpname, "(.+)%.png")
   if name then
     im = gd.createFromPng(fname)
@@ -154,7 +160,39 @@ end
 
 
 dirname = arg[1]
+indexname = dirname .. "/index.html"
+
 filelist = posix.dir(dirname)
+if filelist == nil then
+  print("Error: Can't access directory '" .. dirname .. "'")
+  os.exit(1)
+end
 
+fp = io.open(indexname, "w")
+if fp == nil then
+  print("Error: Can't open '" .. indexname .. "' for writting.")
+  os.exit(1)
+end
 
+nheader = string.gsub(header, "{DIRNAME}", dirname)
+fp:write(nheader)
+fp:write("\n    <tr>\n")
+
+cols = 0
+for i, name in ipairs(filelist) do
+  tname, sx, sy, fname = makeThumb(dirname .. "/" .. name)
+  if tname then
+    fp:write("     <td> <a href=\"" .. fname .. "\"> <img src=\""
+        .. tname .."\" width=\"" .. sx .. "\" height=\"" .. sy
+        .."\" border=\"no\"> </a> </td>\n")
+    cols = cols + 1
+    if cols > tablecols then
+      fp:write("    </tr>\n    <tr>\n")
+      cols = 0
+    end
+  end
+end
+fp:write("    </tr>\n")
+fp:write(footer)
+fp:close()
 
