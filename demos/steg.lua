@@ -199,7 +199,7 @@ function mergeMessage(im, msg)
         oim:setPixel(x, y, nc)
         x = x + 1
         if x >= w then
-          x = 1
+          x = 0
           y = y + 1
         end
         rgb.r, rgb.g, rgb.b = nil, nil, nil
@@ -214,7 +214,7 @@ function mergeMessage(im, msg)
     oim:setPixel(x, y, nc)
     x = x + 1
     if x >= w then
-      x = 1
+      x = 0
       y = y + 1
     end
   end
@@ -257,7 +257,7 @@ function getMessage(im)
     e = e + 1
     x = x + 1
     if x >= w then
-      x = 1
+      x = 0
       y = y + 1
     end
   end
