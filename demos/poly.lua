@@ -1,4 +1,4 @@
-load_gd = assert(loadlib("./libluagd.so", "luaopen_gd"))
+load_gd = assert(loadlib("libluagd.so", "luaopen_gd"))
 load_gd()
 
 im = gd.createTrueColor(80, 80)
