@@ -61,7 +61,6 @@ X gdImageDestroy
 X gdImageFill 
 X gdImageFillToBorder 
 X gdImageFilledArc 
-X gdImageEllipse 
 X gdImageFilledEllipse 
 X gdImageFilledPolygon 
 X gdImageOpenPolygon 
