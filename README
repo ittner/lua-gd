@@ -31,6 +31,17 @@ There is no docs for now, but there are some lua scripts with examples.
 
 
 
++ TO DO
+
+    * Freeze the API.
+    * Fix the bugs. :)
+    * Gif animation support.
+    * Better Makefile (Win32 dlls?).
+    * More examples.
+    * Write some documentation.
+
+
+
 + License
 
 This library is free software; you can redistribute it and/or
