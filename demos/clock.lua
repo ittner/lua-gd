@@ -38,16 +38,16 @@ function createClock(size, hours, minutes)
   end
 
   im:setThickness(math.max(1, size/50))
-  im:line(size/2, size/2,
-    size/2 + 0.45 * size * math.sin(math.rad(6*minutes)),
-    size - (size/2 + 0.45 * size * math.cos(math.rad(6*minutes))),
+  im:line(cxy, cxy,
+    cxy + 0.45 * size * math.sin(math.rad(6*minutes)),
+    size - (cxy + 0.45 * size * math.cos(math.rad(6*minutes))),
     blue)
 
   im:setThickness(math.max(1, size/25))
   rang = math.rad(30*hours + minutes/2)
-  im:line(size/2, size/2, 
-    size/2 + 0.25 * size * math.sin(rang),
-    size - (size/2 + 0.25 * size * math.cos(rang)),
+  im:line(cxy, cxy, 
+    cxy + 0.25 * size * math.sin(rang),
+    size - (cxy + 0.25 * size * math.cos(rang)),
     blue)
 
   im:setThickness(1)
