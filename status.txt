@@ -126,3 +126,25 @@ X gdStyled
 X gdStyledBrushed 
 X gdTiled 
 X gdTransparent
+
+  gdImageGifAnimAdd
+  gdImageGifAnimAddCtx
+  gdImageGifAnimAddPtr
+  gdImageGifAnimBegin
+  gdImageGifAnimBeginCtx
+  gdImageGifAnimBeginPtr
+  gdImageGifAnimEnd
+  gdImageGifAnimEndCtx
+  gdImageGifAnimEndPtr
+
+
+void gdImageGifAnimBegin(gdImagePtr im, FILE *out, int GlobalCM, int Loops)
+void gdImageGifAnimBeginCtx(gdImagePtr im, gdIOCtx *out, int GlobalCM, int Loops) (FUNCTION)
+void* gdImageGifAnimBeginPtr(gdImagePtr im, int *size, int GlobalCM, int Loops) (FUNCTION) 
+void gdImageGifAnimAdd(gdImagePtr im, FILE *out, int LocalCM, int LeftOfs, int TopOfs, int Delay, int Disposal, gdImagePtr previm)
+void gdImageGifAnimAddCtx(gdImagePtr im, gdIOCtx *out, int LocalCM, int LeftOfs, int TopOfs, int Delay, int Disposal, gdImagePtr previm) (FUNCTION)
+void* gdImageGifAnimAddPtr(gdImagePtr im, int *size, int LocalCM, int LeftOfs, int TopOfs, int Delay, int Disposal, gdImagePtr previm) (FUNCTION)
+void gdImageGifAnimEnd(FILE *out)
+void gdImageGifAnimEndCtx(gdIOCtx *out) (FUNCTION)
+void* gdImageGifAnimEndPtr(int *size) (FUNCTION)
+

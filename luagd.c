@@ -1974,6 +1974,38 @@ static int LgdImageStringFTCircle(lua_State *L)
 #endif
 
 
+#ifdef GD_GIF
+
+/* *** Gif animation support *** */
+
+/* void gdImageGifAnimBegin(gdImagePtr im, FILE *out, int GlobalCM, int Loops)
+    Changed to:  im:gifAnimBegin(filename, globalCM, loops)
+*/
+
+static int LgdImageGifAnimBegin(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1); 
+    const char *filename = getstring(L, 2);
+    int globalCM = lua_toboolean(L, 3);
+    int loops = getint(L, 4);
+    FILE *fp;
+
+    if((fp = fopen(filename, "wb")) == NULL)
+    {
+        lua_pushnil(L); /* Error */
+        return 1;
+    }
+    gdImageGifAnimBegin(im, fp, globalCM, loops);
+    fclose(fp);
+    lua_pushboolean(L, 1);  /* ok */
+    return 1;
+}
+
+
+#endif
+
+
+
 static const luaL_reg LgdFunctions[] =
 {
 /*  Leave Lua do it!
