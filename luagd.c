@@ -1880,7 +1880,7 @@ static int LgdFTUseFontConfig(lua_State *L)
 /* int gdFontCacheSetup(void) */
 static int LgdFontCacheSetup(lua_State *L)
 {
-    lua_pushboolean(L, gdFontCacheSetup());
+    lua_pushboolean(L, !gdFontCacheSetup());
     return 1;
 }
 
