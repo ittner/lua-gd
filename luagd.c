@@ -1688,7 +1688,7 @@ int luaopen_gd(lua_State *L)
     tblseticons(L, "Tiled", gdTiled);
     tblseticons(L, "Transparent", gdTransparent);
 
-    lua_pushliteral(L, "metatable");		/** metatable */
+    lua_pushliteral(L, "metatable");    /** metatable */
     luaL_newmetatable(L, GD_IMAGE_PTR_TYPENAME);
     lua_pushliteral(L, "__index");
     lua_pushvalue(L, -4);
