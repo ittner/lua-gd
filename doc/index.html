@@ -285,8 +285,15 @@ its <a href="http://www.sourceforge.net/projects/lua-gd/">mirror at
 Sourceforge</a>. There are also pre-compiled binary packages available
 for Linux and some other Unix systems.</p>
 
+<p> After downloading, you need to compile the library. This process
+requires GNU Make, gd and its dependencies (libpng, libjpeg, FreeType2,
+fontconfig, etc.) installed on your system. Some components that may
+be disabled on your gd installation will be disabled in Lua-GD too. To
+compile on Unix, just unpack the distribution package, enter the directory
+and type <code>make</code> in your favourite shell. If the compilation
+was succeful, you will see something like: </p>
 
-<pre>
+<p><pre>
 gcc -o libluagd.so `gdlib-config --features |sed -e "s/GD_/-DGD_/g"` -Wall
 `gdlib-config --cflags` -shared `gdlib-config --ldflags` `gdlib-config --libs`
 -llua -lgd  luagd.c
@@ -299,15 +306,91 @@ Lua-GD features:
     XPM/XBM support ................. Enabled
     FreeType support ................ Enabled
     Fontconfig support .............. Enabled
-</pre>
+</pre></p>
+
+<p> So, just type <code>make install</code> to copy
+<code>libluagd.so</code> to <code>/usr/lib/</code>.  You can also copy
+the file to a diferent directory in your <code>LUA_PATH</code>. </p>
+
+<p> Compiling Lua-GD on Windows systems is almost, but not quite,
+entirely unlike compiling it on Unix. You will need to edit the Makefile
+by yourself. </p>
 
 
 
 <a name="api"></a>
 <h2>Lua-GD API</h2>
 
+<p> The Lua-GD API is not identical to the gd C API: it was
+changed in a way that make it more familiar to Lua users. All the
+functions and constants are stored on a single global table called
+<code>gd</code>. Images are objects and can use the common colon notation
+for it's methods (but you can also use a C-style syntax). Functions, methods
+and constants are described bellow.</p>
+
 <a name="api.load"></a>
 <h3>Library loading and initialisation</h3>
+
+<p> Lua-GD is a shared library that must be loaded by the Lua interpreter
+with the <code>loadlib</code> function. Using Lua 5.0, under Unix and
+with <code>libluagd.so</code> on your <code>LUA_PATH</code> (or also
+your <code>LD_PATH</code>) you can just use:
+
+<pre class="example">
+assert(loadlib("libluagd.so", "luaopen_gd"), "Can't find Lua-GD")()
+</pre>
+
+Under Windows and with <code>libluagd.dll</code> on your path, you can do
+
+<pre class="example">
+assert(loadlib("libluagd.dll", "luaopen_gd"), "Can't find Lua-GD")()
+</pre>
+</p>
+
+
+<p> But none of these solutions are portable enough for some users. A
+more tricky loader, that can load Lua-GD from some common locations
+under Unix and Windows, are shown bellow.
+
+<pre class="example">
+-- Generic loader for Lua-GD.
+local locs = {
+    -- Unices (Linux, FreeBSD, etc.)
+    "libluagd.so",          -- the default, the simple, the perfect :)
+    "./libluagd.so",
+    "/usr/lib/libluagd.so",
+    "/usr/local/lib/libluagd.so",
+    "/usr/local/lib/lua/5.0/lib/libluagd.so",
+    -- Windows
+    "libluagd.dll",
+    "luagd.dll",
+    ".\\luagd.dll",
+    "c:\\lua\\lib\\libluagd.dll"
+}
+
+local loadgd = nil
+local fname, _
+
+for _,fname in ipairs(locs) do
+  loadgd = loadlib(fname, "luaopen_gd")
+  if loadgd then
+    break
+  end
+end
+
+if loadgd then
+  loadgd()
+else
+  error("Can't load Lua-GD")
+end
+</pre>
+
+Just put this code on a file called <code>gd.lua</code> in your
+<code>LUA_PATH</code> and insert a simple
+<pre class="example">require "gd"</pre>
+in your scripts. The examples in this document uses this solution, so,
+they can run unchanged under Unix and Windows.
+</p>
 
 <a name="api.constants"></a>
 <h3>Constants</h3>
