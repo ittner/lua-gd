@@ -1,7 +1,6 @@
 #!/usr/bin/env lua
 
-load_gd = assert(loadlib("libluagd.so", "luaopen_gd"))
-load_gd()
+require "gd"
 
 size = 500
 
@@ -24,6 +23,6 @@ for i = 1, size do
   m = n
 end
 
-im:png("./out.png")
+im:png("out.png")
 os.execute("display out.png")
 

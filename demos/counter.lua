@@ -5,8 +5,7 @@
 
 datafile="counter.txt"
 
-load_gd = assert(loadlib("libluagd.so", "luaopen_gd"))
-load_gd()
+require "gd"
 
 fp = io.open(datafile, "r")
 if fp then

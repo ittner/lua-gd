@@ -1,5 +1,4 @@
-load_gd = assert(loadlib("libluagd.so", "luaopen_gd"))
-load_gd()
+require "gd"
 
 math.randomseed(os.time())
 
@@ -30,5 +29,5 @@ im2:stringFT(blackTr, "./Vera.ttf", 140, 0, 70, 130, "gd")
 im2:stringFT(white, "./Vera.ttf", 45, math.pi/5, 340, 250, "FreeType")
 
 
-im2:png("./out.png")
+im2:png("out.png")
 os.execute("display out.png")

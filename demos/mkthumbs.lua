@@ -12,6 +12,7 @@
 
 -- $Id$
 
+require "gd"
 
 thumbsize = 120         -- thumbnail size
 tablecols = 5           -- columns on table
@@ -89,9 +90,6 @@ if load_posix == nil then
   os.exit(1)
 end
 load_posix()
-
-load_gd = assert(loadlib("libluagd.so", "luaopen_gd"))
-load_gd()
 
 
 

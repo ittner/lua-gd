@@ -1,5 +1,4 @@
-load_gd = assert(loadlib("libluagd.so", "luaopen_gd"))
-load_gd()
+require "gd"
 
 im = gd.createTrueColor(80, 110)
 assert(im)
@@ -13,5 +12,5 @@ im:string(gd.FONT_MEDIUM, 20, 45, "Medium", white)
 im:string(gd.FONT_LARGE, 20, 58, "Large", white)
 im:string(gd.FONT_GIANT, 20, 75, "Giant", white)
 
-im:png("./out.png")
+im:png("out.png")
 os.execute("display out.png")

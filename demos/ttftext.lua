@@ -1,6 +1,4 @@
-load_gd = assert(loadlib("libluagd.so", "luaopen_gd"))
-load_gd()
-
+require "gd"
 
 function boxedtext(im, color, font, size, ang, x, y, text, bcolor)
   font = "./" .. font .. ".ttf"
@@ -26,5 +24,5 @@ boxedtext(im, redt, "Vera", 45, 90, 380, 300, "Lua-GD", bluet)
 boxedtext(im, lbluet, "Vera", 36, 290, 160, 130, "FreeType", bluet)
 boxedtext(im, grayt, "Vera", 26, 180, 390, 360, "Turn 180° before read", bluet)
 
-im:png("./out.png")
+im:png("out.png")
 os.execute("display out.png")

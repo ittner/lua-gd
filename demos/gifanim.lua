@@ -1,5 +1,4 @@
-load_gd = assert(loadlib("libluagd.so", "luaopen_gd"))
-load_gd()
+require "gd"
 
 im = gd.createPalette(80, 80)
 assert(im)

@@ -4,8 +4,7 @@
 -- (c) 2004 Alexandre Erwin Ittner
 -- $Id$
 
-load_gd = assert(loadlib("libluagd.so", "luaopen_gd"))
-load_gd()
+require "gd"
 
 function createClock(size, hours, minutes)
   local im = gd.createTrueColor(size, size)

@@ -1,5 +1,4 @@
-load_gd = assert(loadlib("libluagd.so", "luaopen_gd"))
-load_gd()
+require "gd"
 
 im = gd.createTrueColor(400, 400)
 assert(im)
@@ -15,5 +14,5 @@ im:line(180, 180, 190, 190, gd.BRUSHED)
 im:line(240, 240, 250, 250, gd.BRUSHED)
 im:line(300, 300, 310, 310, gd.BRUSHED)
 
-im:png("./out.png")
+im:png("out.png")
 os.execute("display out.png")
