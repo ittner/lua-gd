@@ -34,6 +34,11 @@
 #define getoint(L, i)       (int) luaL_optnumber(L, i, 0)
 #define getlong             (long) luaL_checknumber
 
+/* Table assumed on top */
+#define tblseticons(L, c, v)    \
+    lua_pushliteral(L, c);      \
+    lua_pushnumber(L, v);       \
+    lua_settable(L, -3);
 
 
 
@@ -1464,57 +1469,19 @@ int luaopen_gd(lua_State *L)
     lua_pushliteral(L, LIB_VERSION);
     lua_settable(L, -3);
 
-    lua_pushliteral(L, "GD2_FMT_RAW");
-    lua_pushnumber(L, GD2_FMT_RAW);
-    lua_settable(L, -3);
-
-    lua_pushliteral(L, "GD2_FMT_COMPRESSED");
-    lua_pushnumber(L, GD2_FMT_COMPRESSED);
-    lua_settable(L, -3);
-
-    lua_pushliteral(L, "Arc");
-    lua_pushnumber(L, gdArc);
-    lua_settable(L, -3);
-
-    lua_pushliteral(L, "Chord");
-    lua_pushnumber(L, gdChord);
-    lua_settable(L, -3);
-
-    lua_pushliteral(L, "Pie");
-    lua_pushnumber(L, gdPie);
-    lua_settable(L, -3);
-
-    lua_pushliteral(L, "NoFill");
-    lua_pushnumber(L, gdNoFill);
-    lua_settable(L, -3);
-
-    lua_pushliteral(L, "Edged");
-    lua_pushnumber(L, gdEdged);
-    lua_settable(L, -3);
-
-    lua_pushliteral(L, "AntiAliased");
-    lua_pushnumber(L, gdAntiAliased);
-    lua_settable(L, -3);
-
-    lua_pushliteral(L, "MaxColors");
-    lua_pushnumber(L, gdMaxColors);
-    lua_settable(L, -3);
-
-    lua_pushliteral(L, "Brushed");
-    lua_pushnumber(L, gdBrushed);
-    lua_settable(L, -3);
-
-    lua_pushliteral(L, "Styled");
-    lua_pushnumber(L, gdStyled);
-    lua_settable(L, -3);
-
-    lua_pushliteral(L, "Tiled");
-    lua_pushnumber(L, gdTiled);
-    lua_settable(L, -3);
-
-    lua_pushliteral(L, "Transparent");
-    lua_pushnumber(L, gdTransparent);
-    lua_settable(L, -3);
+    tblseticons(L, "MaxColors", gdMaxColors);
+    tblseticons(L, "GD2_FMT_RAW", GD2_FMT_RAW);
+    tblseticons(L, "GD2_FMT_COMPRESSED", GD2_FMT_COMPRESSED);
+    tblseticons(L, "Arc", gdArc);
+    tblseticons(L, "Chord", gdChord);
+    tblseticons(L, "Pie", gdPie);
+    tblseticons(L, "NoFill", gdNoFill);
+    tblseticons(L, "Edged", gdEdged);
+    tblseticons(L, "AntiAliased", gdAntiAliased);
+    tblseticons(L, "Brushed", gdBrushed);
+    tblseticons(L, "Styled", gdStyled);
+    tblseticons(L, "Tiled", gdTiled);
+    tblseticons(L, "Transparent", gdTransparent);
 
     lua_pushliteral(L, "metatable");		/** metatable */
     luaL_newmetatable(L, GD_IMAGE_PTR_TYPENAME);

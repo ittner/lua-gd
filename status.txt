@@ -1,5 +1,5 @@
-  gdAntiAliased 
-  gdBrushed 
+X gdAntiAliased 
+X gdBrushed 
   gdDashSize 
   gdFont 
   gdFontCacheSetup 
