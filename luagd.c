@@ -188,7 +188,6 @@ static int LgdImageDestroy(lua_State *L)
     gdImagePtr im = getImagePtr(L, 1);
     if(im)
         gdImageDestroy(im);
-    printf("Clean!\n");
     return 0;
 }
 
