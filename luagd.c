@@ -1343,7 +1343,41 @@ static int LgdImageFilledPolygon(lua_State *L)
 }
 
 
+/* void gdImageArc(gdImagePtr im, int cx, int cy, int w, int h, int s, int e,
+    int color) */
+static int LgdImageArc(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int cx = getint(L, 2);
+    int cy = getint(L, 3);
+    int w = getint(L, 4);
+    int h = getint(L, 5);
+    int s = getint(L, 6);
+    int e = getint(L, 7);
+    int c = getint(L, 8);
 
+    gdImageArc(im, cx, cy, w, h, s, e, c);
+    return 0;
+}
+
+
+/* void gdImageFilledArc(gdImagePtr im, int cx, int cy, int w, int h,
+    int s, int e, int color, int style) */
+static int LgdImageFilledArc(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int cx = getint(L, 2);
+    int cy = getint(L, 3);
+    int w = getint(L, 4);
+    int h = getint(L, 5);
+    int s = getint(L, 6);
+    int e = getint(L, 7);
+    int c = getint(L, 8);
+    int sty = getint(L, 9);
+
+    gdImageFilledArc(im, cx, cy, w, h, s, e, c, sty);
+    return 0;
+}
 
 
 
@@ -1416,7 +1450,8 @@ static const luaL_reg LgdFunctions[] =
     { "ImageFilledRectangle",       LgdImageFilledRectangle },
     { "ImagePolygon",               LgdImagePolygon },
     { "ImageFilledPolygon",         LgdImageFilledPolygon },
-
+    { "ImageArc",                   LgdImageArc },
+    { "ImageFilledArc",             LgdImageFilledArc },
 
     { NULL, NULL }
 };
@@ -1435,6 +1470,26 @@ int luaopen_gd(lua_State *L)
 
     lua_pushliteral(L, "GD2_FMT_COMPRESSED");
     lua_pushnumber(L, GD2_FMT_COMPRESSED);
+    lua_settable(L, -3);
+
+    lua_pushliteral(L, "Arc");
+    lua_pushnumber(L, gdArc);
+    lua_settable(L, -3);
+
+    lua_pushliteral(L, "Chord");
+    lua_pushnumber(L, gdChord);
+    lua_settable(L, -3);
+
+    lua_pushliteral(L, "Pie");
+    lua_pushnumber(L, gdPie);
+    lua_settable(L, -3);
+
+    lua_pushliteral(L, "NoFill");
+    lua_pushnumber(L, gdNoFill);
+    lua_settable(L, -3);
+
+    lua_pushliteral(L, "Edged");
+    lua_pushnumber(L, gdEdged);
     lua_settable(L, -3);
 
     lua_pushliteral(L, "metatable");		/** metatable */

@@ -4,18 +4,14 @@ load_gd()
 im = gd.ImageCreateFromJpeg("./bugs.jpg")
 assert(im)
 white = im:ImageColorAllocate(255, 255, 255)
-path =  {
-    {  5, 10 },
-    { 10, 30 },
-    { 20, 35 },
-    { 30, 30 },
-    { 35, 10 },
-    { 30,  5 },
-    { 15,  5 }
-}
 
-im:ImageFilledPolygon(path, white)
-im:ImageFilledRectangle(50, 50, 60, 60, white)
+im:ImageArc(100, 100, 200, 200,  0, 180, white)
+im:ImageArc(100, 100, 180, 180, 20, 160, white)
+im:ImageArc(100, 100, 160, 160, 40, 140, white)
+im:ImageArc(100, 100, 140, 140, 60, 120, white)
+im:ImageArc(100, 100, 120, 120, 80, 100, white)
+
+im:ImageFilledArc(50, 50, 80, 80, 60, 120, white, gd.Arc)
 
 im:ImagePng("./out.png")
 im:ImageDestroy()

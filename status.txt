@@ -8,7 +8,7 @@
   gdFree 
 X gdImage 
   gdImageAlphaBlending 
-  gdImageArc 
+X gdImageArc 
 X gdImageBlue 
 X gdImageBoundsSafe 
   gdImageChar 
@@ -35,19 +35,19 @@ X gdImageCreateFromGd
 X gdImageCreateFromGdPtr
 X gdImageCreateFromGd2
 X gdImageCreateFromGd2Ptr
-  gdImageCreateFromGd2Ctx 
+N gdImageCreateFromGd2Ctx 
 X gdImageCreateFromGd2Part 
 X gdImageCreateFromGd2PartPtr
-  gdImageCreateFromGd2PartCtx
+N gdImageCreateFromGd2PartCtx
 X ImageCreateFromGif
 X ImageCreateFromGifPtr
 X gdImageCreateFromJpeg
 X gdImageCreateFromJpegPtr
-  gdImageCreateFromJpegCtx 
+N gdImageCreateFromJpegCtx 
 X gdImageCreateFromPng 
 X gdImageCreateFromPngPtr
-  gdImageCreateFromPngCtx 
-  gdImageCreateFromPngSource 
+N gdImageCreateFromPngCtx 
+N gdImageCreateFromPngSource 
 X gdImageCreateFromXbm 
 X gdImageCreateFromXpm 
 X gdImageCreatePalette 
@@ -56,7 +56,7 @@ N gdImageDashedLine (depreciada)
 X gdImageDestroy 
   gdImageFill 
   gdImageFillToBorder 
-  gdImageFilledArc 
+X gdImageFilledArc 
   gdImageFilledEllipse 
 X gdImageFilledPolygon 
 X gdImageFilledRectangle 
