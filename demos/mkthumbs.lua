@@ -62,7 +62,7 @@ TR, TD {
 
  <body>
   <h1>Thumbnails for {DIRNAME}</h1>
-   <table>
+  <table>
 ]]
 
 footer = [[
@@ -93,11 +93,11 @@ load_gd()
 
 
 
-function makeThumb(fname)
+function makeThumb(dirname, fname)
   local im
   local tmpname = string.lower(fname)
-  local s, e, name
-  local thumbname
+  local s, e, name, tname
+  local thumbname, fulltname
   local format
 
   s, e, name = string.find(tmpname, "(.+)_tb%.png")
@@ -129,6 +129,7 @@ function makeThumb(fname)
   end
 
   thumbname = tname .. "_tb.png"
+  fulltname = dirname .. "/" .. thumbname
 
   local sx, sy = im:sizeXY()
   local tsy, tsy, rtsy
@@ -150,7 +151,7 @@ function makeThumb(fname)
   tim:filledRectangle(0, tsy, tsx, rtsy, black)
   tim:string(gd.FONT_SMALL, 2, tsy+1, info, white)
 
-  if tim:png(thumbname) then
+  if tim:png(fulltname) then
     return thumbname, tsx, rtsy, fname
   end
 
@@ -176,23 +177,24 @@ end
 
 nheader = string.gsub(header, "{DIRNAME}", dirname)
 fp:write(nheader)
-fp:write("\n    <tr>\n")
+fp:write("   <tr>\n")
 
 cols = 0
 for i, name in ipairs(filelist) do
-  tname, sx, sy, fname = makeThumb(dirname .. "/" .. name)
+  tname, sx, sy, fname = makeThumb(dirname, name)
   if tname then
-    fp:write("     <td> <a href=\"" .. fname .. "\"> <img src=\""
+    fp:write("    <td> <a href=\"" .. fname .. "\"> <img src=\""
         .. tname .."\" width=\"" .. sx .. "\" height=\"" .. sy
         .."\" border=\"no\"> </a> </td>\n")
     cols = cols + 1
     if cols > tablecols then
-      fp:write("    </tr>\n    <tr>\n")
+      fp:write("   </tr>\n    <tr>\n")
       cols = 0
     end
   end
 end
-fp:write("    </tr>\n")
+
+fp:write("   </tr>\n")
 fp:write(footer)
 fp:close()
 
