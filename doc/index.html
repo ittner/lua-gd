@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
-  <title>Lua-GD</title>
+  <title>Lua-GD Reference Manual</title>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
  </head>
   <style type="text/css">
@@ -100,8 +100,8 @@ pre.wrong
 <body>
 
 <center>
- <h1>Lua-GD</h1>
  <img src="lua-gd.png" alt="Lua-GD Logo">
+ <h1>Lua-GD Reference Manual</h1>
 </center>
 
 <h2> Contents </h2>
@@ -274,24 +274,20 @@ does not apply to truecolor images.</p>
 <h4>gd.EDGED</h4>
 
 <h4>gd.ANTI_ALIASED</h4>
-<p>Used in place of a color when invoking a line-drawing function
-such as gd.line or gd.rectangle. When <code>gd.ANTI_ALIASED</code>
-is used as the color, the foreground color set with
-<a href="#gd.setAntiAliased"><code>gd.setAntiAliased</code></a>
-is used, with antialiasing mechanisms to minimize any
-"jagged" appearance. For more information, see
-<a href="#gd.setAntiAliased"><code>gd.setAntiAliased</code></a>.</p>
+<p>Used in place of a color when invoking a line-drawing function such
+as gd.line or gd.rectangle. When <code>gd.ANTI_ALIASED</code> is used as
+the color, the foreground color set with <code>gd.setAntiAliased</code>
+is used, with antialiasing mechanisms to minimize any "jagged"
+appearance. For more information, see <code>gd.setAntiAliased</code>.</p>
 
 <h4>gd.BRUSHED</h4>
-<dd>Used in place of a color when invoking a line-drawing
-function such as <a href="#gd.line"><code>gd.line</code></a>
-or <a href="#gd.rectangle"><code>gd.rectangle</code></a>. When
-<code>gd.BRUSHED</code> is used as the color, the brush image set with <a
-href="#gd.setBrush"><code>gd.setBrush</code></a> is drawn in place of each
-pixel of the line (the brush is usually larger than one pixel, creating
-the effect of a wide paintbrush). See also <code>gd.STYLED_BRUSHED</code>
-for a way to draw broken lines with a series of distinct copies of an
-image. </dd>
+<p>Used in place of a color when invoking a line-drawing function
+such as <code>gd.line</code> or <code>gd.rectangle</code>. When
+<code>gd.BRUSHED</code> is used as the color, the brush image set with
+<code>gd.setBrush</code> is drawn in place of each pixel of the line
+(the brush is usually larger than one pixel, creating the effect of a
+wide paintbrush). See also <code>gd.STYLED_BRUSHED</code> for a way to
+draw broken lines with a series of distinct copies of an image. </p>
 
 <h4>gd.STYLED</h4>
 <h4>gd.STYLED_BRUSHED</h4>
@@ -301,9 +297,8 @@ image. </dd>
 <h4>gd.FONT_TINY, gd.FONT_SMALL, gd.FONT_MEDIUM, gd.FONT_LARGE and
 gd.FONT_GIANT</h4>
 
-<p> These are standard font sizes used by 
-<a href="#gd.string"><code>gd.string</code></a> and 
-<a href="#gd.stringUp"><code>gd.stringUp</code></a>. </p>
+<p> These are standard font sizes used by <code>gd.string</code> and
+<code>gd.stringUp</code>. </p>
 
 
 <a name="api.create"></a>
@@ -342,10 +337,10 @@ collector that detects when an piece of information becomes useless and
 <h4>gd.createFromXpm(filename)</h4>
 
 <p>These functions creates new images from files on disk. It will return
-a new image, without modifying the files. <code>createFromGd2Part()</code>
+a new image, without modifying the files. <code>createFromGd2Part</code>
 has a special feature: can copy <b>parts</b> of and GD2 image. These
-functions returns <b>nil</b> on error (eg. a non-existing or corrupted file
-or a file in the wrong format).</p>
+functions returns <b>nil</b> on error (eg. a non-existing or corrupted
+file or a file in the wrong format).</p>
 
 <p>Example:</p>
 <pre class="example">
@@ -368,7 +363,7 @@ local im = gd.createFromGd2Part("base.gd2", 0, 0, 20, 20)
 <h4>gd.createFromGd2PartStr(string, x, y, w, h)</h4>
 
 <p>These functions creates new images from strings in memory. It will
-return a new image. <code>createFromGd2PartStr()</code> has a special
+return a new image. <code>createFromGd2PartStr</code> has a special
 feature: can copy <b>parts</b> of and GD2 image. These functions returns
 <b>nil</b> on error (eg. a non-string or a string with an image in the
 wrong format).</p>
@@ -396,17 +391,16 @@ local im = gd.createFromPngStr(str)
 <h4>gdImage:gd2(filename, chunkSize, format)</h4>
 <h4>gdImage:wbmp(filename)</h4>
 
-<p>These functions writes image files to the disk.
-<code>jpeg()</code> allows you to specify the quality of
-the generated JPEG file from 1 (worst quality, small files) to 100
-(best quality, large files). <code>pngEx()</code> allows you to
-specify the compression level of a PNG image, from 1 to 6 (or -1 for
-the default compression level of libpng). <code>gd2()</code>
-must receive the chunk size (an integer, or 0 for the default)
-and the file format, which can be <code>gd.GD2_FMT_RAW</code> or
-<code>gd.GD2_FMT_COMPRESSED</code>. These functions returns <b>nil</b>
-on error (eg. permission denied to overwrite an existing file) and
-<b>true</b> on success. </p>
+<p>These functions writes image files to the disk.  <code>jpeg</code>
+allows you to specify the quality of the generated JPEG file
+from 1 (worst quality, small files) to 100 (best quality, large
+files). <code>pngEx</code> allows you to specify the compression
+level of a PNG image, from 1 to 6 (or -1 for the default compression
+level of libpng). <code>gd2</code> must receive the chunk size
+(an integer, or 0 for the default) and the file format, which can be
+<code>gd.GD2_FMT_RAW</code> or <code>gd.GD2_FMT_COMPRESSED</code>. These
+functions returns <b>nil</b> on error (eg. permission denied to overwrite
+an existing file) and <b>true</b> on success. </p>
 
 <p>Example:</p>
 <pre class="example">
@@ -448,16 +442,15 @@ end
 <h4>gdImage:gd2Str(chunkSize, format)</h4>
 <h4>gdImage:wbmpStr()</h4>
 
-<p>These functions returns images as Lua strings.
-<code>jpegStr()</code> allows you to specify the quality of the
-generated JPEG data from 1 (worst quality, small string) to 100 (best
-quality, large string). <code>pngStrEx()</code> allows you to
-specify the compression level of a PNG image, from 1 to 6 (or -1 for the
-default compression level of libpng). <code>gd2Str()</code>
-must receive the chunk size (an integer, or 0 for the default)
-and the data format, which can be <code>gd.GD2_FMT_RAW</code> or
-<code>gd.GD2_FMT_COMPRESSED</code>. These functions returns <b>nil</b>
-on error (eg. a corrupted image). </p>
+<p>These functions returns images as Lua strings.  <code>jpegStr</code>
+allows you to specify the quality of the generated JPEG data
+from 1 (worst quality, small string) to 100 (best quality, large
+string). <code>pngStrEx</code> allows you to specify the compression
+level of a PNG image, from 1 to 6 (or -1 for the default compression
+level of libpng). <code>gd2Str</code> must receive the chunk size
+(an integer, or 0 for the default) and the data format, which can be
+<code>gd.GD2_FMT_RAW</code> or <code>gd.GD2_FMT_COMPRESSED</code>. These
+functions returns <b>nil</b> on error (eg. a corrupted image). </p>
 
 <p>Example:</p>
 <pre class="example">
@@ -479,10 +472,94 @@ io.write(im:jpegStr(75))
 
 
 <h4>gdImage:colorAllocate(red, green, blue)</h4>
+
+<p><code>colorAllocate()</code> finds the first available color
+index in the image specified, sets its RGB values to those requested
+(255 is the maximum for each), and returns the index of the new color
+table entry, or an RGBA value in the case of a truecolor image; in
+either case you can then use the returned value as a parameter to
+drawing functions. When creating a new palette-based image, the first
+time you invoke this function, you are setting the background color for
+that image.</p>
+
+<p>In the event that all <code>gd.MAX_COLORS</code> colors (256)
+have already been allocated, <code>colorAllocate</code> will
+return -1 to indicate failure. (This is not uncommon when working
+with existing PNG files that already use 256 colors.) Note that
+<code>colorAllocate</code> does not check for existing colors that match
+your request; see <code>colorExact</code>, <code>colorClosest</code>
+and <code>colorClosestHWB</code> for ways to locate existing colors
+that approximate the color desired in situations where a new color is
+not available.</p>
+
+
 <h4>gdImage:colorAllocateAlpha(red, green, blue, alpha)</h4>
+<p><code>colorAllocateAlpha</code> finds the first available color index
+in the image specified, sets its RGBA values to those requested (255 is
+the maximum for red, green and blue, and 127 represents full transparency
+for alpha), and returns the index of the new color table entry, or an RGBA
+value in the case of a truecolor image; in either case you can then use
+the returned value as a parameter to drawing functions. When creating
+a new palette-based image, the first time you invoke this function,
+you are setting the background color for that image.</p>
+
+<p>In the event that all <code>gd.MAX_COLORS</code> colors (256)
+have already been allocated, <code>colorAllocateAlpha</code> will
+return -1 to indicate failure. (This is not uncommon when working with
+existing palette-based PNG files that already use 256 colors.) Note
+that <code>colorAllocateAlpha</code> does not check for existing
+colors that match your request; see <code>colorExactAlpha</code> and
+<code>colorClosestAlpha</code> for ways to locate existing colors that
+approximate the color desired in situations where a new color is not
+available. Also see <code>colorResolveAlpha</code>.</p>
+
+
+
 <h4>gdImage:colorClosest(red, green, blue)</h4>
+
+<p><code>colorClosest</code> searches the colors which have been defined
+thus far in the image specified and returns the index of the color with
+RGB values closest to those of the request. (Closeness is determined
+by Euclidian distance, which is used to determine the distance in
+three-dimensional color space between colors.) </p>
+
+<p>If no colors have yet been allocated in the image,
+<code>colorClosest</code> returns <b>nil</b>.</p>
+
+<p>When applied to a truecolor image, this function always succeeds in
+returning the desired color.</p>
+
+<p>This function is most useful as a backup method for choosing a
+drawing color when an image already contains <code>gd.MAX_COLORS</code>
+(256) colors and no more can be allocated. (This is not uncommon when
+working with existing PNG files that already use many colors.) See
+<code>colorExact</code> for a method of locating exact matches only.</p>
+
+
 <h4>gdImage:colorClosestAlpha(red, green, blue, alpha)</h4>
+
+<p> <code>colorClosestAlpha</code> searches the colors which have been
+defined thus far in the image specified and returns the index of the
+color with RGBA values closest to those of the request. (Closeness is
+determined by Euclidian distance, which is used to determine the distance
+in four-dimensional color/alpha space between colors.) </p>
+
+<p> If no colors have yet been allocated in the image,
+<code>colorClosestAlpha</code> returns <b>nil</b>. </p>
+
+<p> When applied to a truecolor image, this function always succeeds in
+returning the desired color. </p>
+
+<p> This function is most useful as a backup method for
+choosing a drawing color when a palette-based image already
+contains <code>gd.MAX_COLORS</code> (256) colors and no more can be
+allocated. (This is not uncommon when working with existing palette-based
+PNG files that already use many colors.) See <code>colorExactAlpha</code>
+for a method of locating exact matches only.</p>
+
+
 <h4>gdImage:colorClosestHWB(red, green, blue)</h4>
+
 <h4>gdImage:colorExact(red, green, blue)</h4>
 <h4>gdImage:colorExactAlpha(red, green, blue, alpha)</h4>
 <h4>gdImage:colorResolve(red, green, blue)</h4>
