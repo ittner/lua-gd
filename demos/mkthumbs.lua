@@ -12,7 +12,7 @@
 -- $Id$
 
 
-thumbsize = 80          -- thumbnail size
+thumbsize = 120          -- thumbnail size
 
 header = [[
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -115,26 +115,27 @@ function makeThumb(fname)
   thumbname = tname .. "_tb.png"
 
   local sx, sy = im:sizeXY()
-  local tsy, tsy
+  local tsy, tsy, rtsy
   if sx <= thumbsize and sy <= thumbsize then
     tsx, tsy = sx, sy
   else
     local factor
     factor = math.max(1, sx/thumbsize, sy/thumbsize)
-    tsx, tsy = sx/factor, sy/factor
+    tsx, tsy = math.floor(sx/factor), math.floor(sy/factor)
   end
 
-  tim = gd.createTrueColor(tsx, tsy+15)
+  rtsy = tsy + 15
+  tim = gd.createTrueColor(tsx, rtsy)
   tim:copyResampled(im, 0, 0, 0, 0, tsx, tsy, sx, sy)
 
   local black = tim:colorExact(0, 0, 0)
   local white = tim:colorExact(255, 255, 255)
   local info = format .. ", " .. sx .. "x" .. sy .. "px"
-  tim:filledRectangle(0, tsy, tsx, tsy+15, black)
+  tim:filledRectangle(0, tsy, tsx, rtsy, black)
   tim:string(gd.FONT_SMALL, 2, tsy+1, info, white)
 
   if tim:png(thumbname) then
-    return thumbname, tsy, tsy, fname
+    return thumbname, tsx, rtsy, fname
   end
 
   return nil
@@ -142,7 +143,7 @@ end
 
 
 
-print(makeThumb("./lua-gd.png"))
+print(makeThumb("./TN-Turin_Discovers_Nienor_at_the_Mound_of_Finduilas.jpg"))
 
 -- dirname = arg[1]
 -- filelist = posix.dir(dirname)
