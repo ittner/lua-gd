@@ -1528,7 +1528,40 @@ static int LgdImageSetStyle(lua_State *L)
 }
 
 
+/* void gdImageSetThickness(gdImagePtr im, int thickness) */
+static int LgdImageSetThickness(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int t = getint(L, 2);
 
+    gdImageSetThickness(im, t);
+    return 0;
+}
+
+
+/* void gdImageAlphaBlending(gdImagePtr im, int blending) */
+/* Changed to: im:ImageAlphaBlending(true_or_false) */
+static int LgdImageAlphaBlending(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int b = lua_toboolean(L, 2);
+
+    gdImageAlphaBlending(im, b);
+    return 0;
+}
+
+
+/* void gdImageSaveAlpha(gdImagePtr im, int saveFlag) */
+/* Changed to: im:ImageSaveAlpha(true_or_false) */
+
+static int LgdImageSaveAlpha(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int b = lua_toboolean(L, 2);
+
+    gdImageSaveAlpha(im, b);
+    return 0;
+}
 
 
 
@@ -1613,8 +1646,9 @@ static const luaL_reg LgdFunctions[] =
     { "ImageSetBrush",                  LgdImageSetBrush },
     { "ImageSetTile",                   LgdImageSetTile },
     { "ImageSetStyle",                  LgdImageSetStyle },
-
-
+    { "ImageSetThickness",              LgdImageSetThickness },
+    { "ImageAlphaBlending",             LgdImageAlphaBlending },
+    { "ImageSaveAlpha",                 LgdImageSaveAlpha },
 
     { NULL, NULL }
 };

@@ -11,7 +11,7 @@ X gdBrushed
   gdFontPtr 
   gdFree 
 X gdImage 
-  gdImageAlphaBlending 
+X gdImageAlphaBlending 
 X gdImageArc 
 X gdImageBlue 
 X gdImageBoundsSafe 
@@ -93,13 +93,13 @@ X gdImagePolygon
 X gdImagePtr    (tipo)
 X gdImageRectangle 
 X gdImageRed 
-  gdImageSaveAlpha 
+X gdImageSaveAlpha 
 X gdImageSetAntiAliased 
 X gdImageSetAntiAliasedDontBlend 
 X gdImageSetBrush 
 X gdImageSetPixel 
 X gdImageSetStyle 
-  gdImageSetThickness 
+X gdImageSetThickness 
 X gdImageSetTile 
   gdImageSharpen 
   gdImageSquareToCircle 
