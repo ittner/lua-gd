@@ -2,7 +2,7 @@ load_gd = assert(loadlib("libluagd.so", "luaopen_gd"))
 load_gd()
 
 
-function createClock(size, title, hours, minutes)
+function createClock(size, hours, minutes)
   local im = gd.createTrueColor(size, size)
   local white = im:colorAllocate(255, 255, 255)
   local gray = im:colorAllocate(128, 128, 128)
@@ -18,10 +18,6 @@ function createClock(size, title, hours, minutes)
   im:line(0, size/2, 0.1*size, size/2, gray)
   im:line(size/2, size, size/2, 0.9*size, gray)
   im:line(0.9*size, size/2, size, size/2, gray)
-
-  local title = "Lua-GD"
-  im:string(gd.FONT_SMALL, cxy - string.len(title) * 2.5, 0.3 * size,
-    title, gray)  
 
   im:setThickness(math.max(1, size/50))
   im:line(size/2, size/2,
@@ -44,7 +40,7 @@ end
 
 
 s = 520
-im = createClock(s, "Lua", 10, 10)
+im = createClock(s, 10, 10)
 im:png("./out.png")
 os.execute("display out.png")
 
