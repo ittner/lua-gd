@@ -102,14 +102,18 @@ pre.wrong
 <center>
  <img src="lua-gd.png" alt="Lua-GD Logo">
  <h1>Lua-GD Reference Manual</h1>
- <b> by Alexandre Erwin Ittner </b>
 </center>
 
 <h2> Contents </h2>
 <ul>
  <li><a href="#intro">Introduction</a>
- <li><a href="#license">Licensing information</a></li>
- <li><a href="#download">Download</a></li>
+ <li><a href="#license">Licensing information</a>
+   <ul>
+     <li><a href="#license.luagd">Lua-GD License</a></li>
+     <li><a href="#license.gd">gd License</a></li>
+   </ul>
+  </li>
+ <li><a href="#download">Download and installation</a></li>
  <li><a href="#api">Lua-GD API</a>
    <ul>
      <li><a href="#api.load">Library loading and initialisation</a></li>
@@ -177,7 +181,7 @@ with Lua is <b>required</b>.</p>
 application, you need to accept both them. </p>
 
 
-
+<a name="license.luagd"></a>
 <h3>Lua-GD License</h3>
 
 <p>Lua-GD is <em>copyrighted free software</em>, distributed under the
@@ -204,6 +208,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 </blockquote>
 
 
+<a name="license.gd"></a>
 <h3>gd License</h3>
 
 <blockquote>
@@ -271,7 +276,32 @@ their prior contributions. </p>
 
 
 <a name="download"></a>
-<h2>Download</h2>
+<h2>Download and installation</h2>
+
+<p> Lua-GD source code comes in a tar.gz package that can be
+donwloaded from the <a href="http://lua-gd.luaforge.net">Lua-GD project
+page</a> at <a href="http://www.luaforge.net">LuaForge</a> or from
+its <a href="http://www.sourceforge.net/projects/lua-gd/">mirror at
+Sourceforge</a>. There are also pre-compiled binary packages available
+for Linux and some other Unix systems.</p>
+
+
+<pre>
+gcc -o libluagd.so `gdlib-config --features |sed -e "s/GD_/-DGD_/g"` -Wall
+`gdlib-config --cflags` -shared `gdlib-config --ldflags` `gdlib-config --libs`
+-llua -lgd  luagd.c
+lua test_features.lua
+Lua-GD version: lua-gd gd 2.0.33 (c) 2004-2005 Alexandre Erwin Ittner
+Lua-GD features:
+    PNG support ..................... Enabled
+    GIF support ..................... Enabled
+    JPEG support .................... Enabled
+    XPM/XBM support ................. Enabled
+    FreeType support ................ Enabled
+    Fontconfig support .............. Enabled
+</pre>
+
+
 
 <a name="api"></a>
 <h2>Lua-GD API</h2>
