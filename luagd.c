@@ -42,7 +42,7 @@
 #define GD_IMAGE_TYPENAME       "gdImage_handle"
 #define GD_IMAGE_PTR_TYPENAME   "gdImagePtr_handle"
 
-#define LIB_VERSION "lua-gd " MY_GD_VERSION " (c) 2004 Alexandre Erwin Ittner"
+#define LIB_VERSION "lua-gd " MY_GD_VERSION " (c) 2004-2005 Alexandre Erwin Ittner"
 
 
 /* These macros was written by Luiz Henrique de Figueiredo

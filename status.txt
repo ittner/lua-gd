@@ -2,14 +2,39 @@ X - Already done
 N - Will not be done for some (good) reason
 
 
-X gdAntiAliased 
-X gdBrushed 
+  gdImageStringFTEx 
+? gdImageString16 
+? gdImageStringUp16 
 N gdDashSize (deprecated)
 N gdFont 
-X gdFontCacheSetup 
-X gdFontCacheShutdown 
 N gdFontPtr 
 N gdFree 
+N gdImageCreateFromGd2Ctx 
+N gdImageCreateFromGd2PartCtx
+N gdImageCreateFromJpegCtx 
+N gdImageCreateFromPngCtx 
+N gdImageCreateFromPngSource 
+N gdImageDashedLine (depreciada)
+N gdImageGifAnimAddCtx
+N gdImageGifAnimBeginCtx
+N gdImageGifAnimEndCtx
+N gdImageJpegCtx 
+N gdImagePngCtx 
+N gdImagePngCtxEx 
+N gdImagePngToSink
+N gdImageStringTTF  (deprecated)
+N gdImageWBMPCtx 
+N gdPoint  (will use lua tables )
+X ImageCreateFromGif
+X ImageCreateFromGifPtr
+X gdAntiAliased 
+X gdBrushed 
+X gdDisposalNone
+X gdDisposalRestoreBackground
+X gdDisposalRestorePrevious
+X gdDisposalUnknown
+X gdFontCacheSetup 
+X gdFontCacheShutdown 
 X gdImage 
 X gdImageAlphaBlending 
 X gdImageArc 
@@ -22,13 +47,13 @@ X gdImageColorAllocateAlpha
 X gdImageColorClosest 
 X gdImageColorClosestAlpha 
 X gdImageColorClosestHWB 
-X gdImageColorsTotal
 X gdImageColorDeallocate 
 X gdImageColorExact 
 X gdImageColorExactAlpha 
 X gdImageColorResolve 
 X gdImageColorResolveAlpha 
 X gdImageColorTransparent 
+X gdImageColorsTotal
 X gdImageCopy 
 X gdImageCopyMerge 
 X gdImageCopyResampled 
@@ -36,67 +61,66 @@ X gdImageCopyResized
 X gdImageCopyRotated 
 X gdImageCreate 
 X gdImageCreateFromGd 
-X gdImageCreateFromGdPtr
 X gdImageCreateFromGd2
-X gdImageCreateFromGd2Ptr
-N gdImageCreateFromGd2Ctx 
 X gdImageCreateFromGd2Part 
 X gdImageCreateFromGd2PartPtr
-N gdImageCreateFromGd2PartCtx
-X ImageCreateFromGif
-X ImageCreateFromGifPtr
+X gdImageCreateFromGd2Ptr
+X gdImageCreateFromGdPtr
 X gdImageCreateFromJpeg
 X gdImageCreateFromJpegPtr
-N gdImageCreateFromJpegCtx 
 X gdImageCreateFromPng 
 X gdImageCreateFromPngPtr
-N gdImageCreateFromPngCtx 
-N gdImageCreateFromPngSource 
 X gdImageCreateFromXbm 
 X gdImageCreateFromXpm 
 X gdImageCreatePalette 
+X gdImageCreatePaletteFromTrueColor
 X gdImageCreateTrueColor 
-N gdImageDashedLine (depreciada)
 X gdImageDestroy 
 X gdImageFill 
 X gdImageFillToBorder 
 X gdImageFilledArc 
 X gdImageFilledEllipse 
 X gdImageFilledPolygon 
-X gdImageOpenPolygon 
 X gdImageFilledRectangle 
 X gdImageGd 
 X gdImageGd2 
-X gdImageGdPtr
 X gdImageGd2Ptr
-X gdImageGif
-X gdImageGifPtr
+X gdImageGdPtr
+X gdImageGetClip
 X gdImageGetInterlaced 
 X gdImageGetPixel 
 X gdImageGetTransparent 
+X gdImageGif
+X gdImageGifAnimAdd
+X gdImageGifAnimAddPtr
+X gdImageGifAnimBegin
+X gdImageGifAnimBeginPtr
+X gdImageGifAnimEnd
+X gdImageGifAnimEndPtr
+X gdImageGifPtr
 X gdImageGreen 
 X gdImageInterlace 
 X gdImageJpeg 
-X gdImagePtr
-N gdImageJpegCtx 
 X gdImageLine 
 X gdImageMergeGray 
+X gdImageOpenPolygon 
 X gdImagePaletteCopy 
 X gdImagePng 
-N gdImagePngCtx 
-N gdImagePngCtxEx 
 X gdImagePngEx 
 X gdImagePngPtr 
 X gdImagePngPtrEx 
-N gdImagePngToSink
 X gdImagePolygon 
+X gdImagePtr
 X gdImagePtr    (tipo)
 X gdImageRectangle 
 X gdImageRed 
+X gdImageSX
+X gdImageSY
 X gdImageSaveAlpha 
 X gdImageSetAntiAliased 
 X gdImageSetAntiAliasedDontBlend 
 X gdImageSetBrush 
+X gdImageSetClip
 X gdImageSetPixel 
 X gdImageSetStyle 
 X gdImageSetThickness 
@@ -104,41 +128,14 @@ X gdImageSetTile
 X gdImageSharpen 
 X gdImageSquareToCircle 
 X gdImageString
-X gdImageSX
-X gdImageSY
-X gdImageSetClip
-X gdImageGetClip
-? gdImageString16 
-  gdImageStringFT 
+X gdImageStringFT 
 X gdImageStringFTCircle 
-  gdImageStringFTEx 
-N gdImageStringTTF  (deprecated)
 X gdImageStringUp 
-? gdImageStringUp16 
-X gdImageCreatePaletteFromTrueColor
 X gdImageTrueColorToPalette
 X gdImageWBMP 
 X gdImageWBMPtr
-N gdImageWBMPCtx 
 X gdMaxColors 
-N gdPoint  (will use lua tables )
 X gdStyled 
 X gdStyledBrushed 
 X gdTiled 
 X gdTransparent
-
-X gdImageGifAnimAdd
-N gdImageGifAnimAddCtx
-X gdImageGifAnimAddPtr
-X gdImageGifAnimBegin
-N gdImageGifAnimBeginCtx
-X gdImageGifAnimBeginPtr
-X gdImageGifAnimEnd
-N gdImageGifAnimEndCtx
-X gdImageGifAnimEndPtr
-
-X gdDisposalNone
-X gdDisposalUnknown
-X gdDisposalRestoreBackground
-X gdDisposalRestorePrevious
-
