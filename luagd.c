@@ -1964,128 +1964,128 @@ static int LgdImageStringFTCircle(lua_State *L)
 static const luaL_reg LgdFunctions[] =
 {
 /*  Leave Lua do it!
-    { "ImageDestroy",               LgdImageDestroy }, */
+    { "destroy",                LgdImageDestroy }, */
 
-    { "ImageCreate",                LgdImageCreate },
-    { "ImageCreatePalette",         LgdImageCreatePalette },
-    { "ImageCreateTrueColor",       LgdImageCreateTrueColor },
+    { "create",                 LgdImageCreate },
+    { "createPalette",          LgdImageCreatePalette },
+    { "createTrueColor",        LgdImageCreateTrueColor },
 
-    { "ImageCreateFromJpeg",        LgdImageCreateFromJpeg },
-    { "ImageCreateFromJpegPtr",     LgdImageCreateFromJpegPtr },
-    { "ImageCreateFromGif",         LgdImageCreateFromGif },
-    { "ImageCreateFromGifPtr",      LgdImageCreateFromGifPtr },
-    { "ImageCreateFromPng",         LgdImageCreateFromPng },
-    { "ImageCreateFromPngPtr",      LgdImageCreateFromPngPtr },
-    { "ImageCreateFromGd",          LgdImageCreateFromGd },
-    { "ImageCreateFromGdPtr",       LgdImageCreateFromGdPtr },
-    { "ImageCreateFromGd2",         LgdImageCreateFromGd2 },
-    { "ImageCreateFromGd2Ptr",      LgdImageCreateFromGd2Ptr },
-    { "ImageCreateFromGd2Part",     LgdImageCreateFromGd2Part },
-    { "ImageCreateFromGd2PartPtr",  LgdImageCreateFromGd2PartPtr },
+    { "createFromJpeg",         LgdImageCreateFromJpeg },
+    { "createFromJpegPtr",      LgdImageCreateFromJpegPtr },
+    { "createFromGif",          LgdImageCreateFromGif },
+    { "createFromGifPtr",       LgdImageCreateFromGifPtr },
+    { "createFromPng",          LgdImageCreateFromPng },
+    { "createFromPngPtr",       LgdImageCreateFromPngPtr },
+    { "createFromGd",           LgdImageCreateFromGd },
+    { "createFromGdPtr",        LgdImageCreateFromGdPtr },
+    { "createFromGd2",          LgdImageCreateFromGd2 },
+    { "createFromGd2Ptr",       LgdImageCreateFromGd2Ptr },
+    { "createFromGd2Part",      LgdImageCreateFromGd2Part },
+    { "createFromGd2PartPtr",   LgdImageCreateFromGd2PartPtr },
 
 #ifdef USE_XPM
-    { "ImageCreateFromXbm",         LgdImageCreateFromXbm },
-    { "ImageCreateFromXpm",         LgdImageCreateFromXpm },
+    { "createFromXbm",          LgdImageCreateFromXbm },
+    { "createFromXpm",          LgdImageCreateFromXpm },
 #else
-    { "ImageCreateFromXbm",         LgdNull },
-    { "ImageCreateFromXpm",         LgdNull },
+    { "createFromXbm",          LgdNull },
+    { "createFromXpm",          LgdNull },
 #endif
 
-    { "ImageJpeg",                  LgdImageJpeg },
-    { "ImageJpegPtr",               LgdImageJpegPtr },
-    { "ImagePng",                   LgdImagePng },
-    { "ImagePngPtr",                LgdImagePngPtr },
-    { "ImagePngEx",                 LgdImagePngEx },
-    { "ImagePngPtrEx",              LgdImagePngPtrEx },
-    { "ImageGif",                   LgdImageGif },
-    { "ImageGifPtr",                LgdImageGifPtr },
-    { "ImageGd",                    LgdImageGd },
-    { "ImageGdPtr",                 LgdImageGdPtr },
-    { "ImageGd2",                   LgdImageGd2 },
-    { "ImageGd2Ptr",                LgdImageGd2Ptr },
-    { "ImageWBMP",                  LgdImageWBMP },
-    { "ImageWBMPPtr",               LgdImageWBMPPtr },
+    { "jpeg",                   LgdImageJpeg },
+    { "jpegPtr",                LgdImageJpegPtr },
+    { "png",                    LgdImagePng },
+    { "pngPtr",                 LgdImagePngPtr },
+    { "pngEx",                  LgdImagePngEx },
+    { "pngPtrEx",               LgdImagePngPtrEx },
+    { "gif",                    LgdImageGif },
+    { "gifPtr",                 LgdImageGifPtr },
+    { "gd",                     LgdImageGd },
+    { "gdPtr",                  LgdImageGdPtr },
+    { "gd2",                    LgdImageGd2 },
+    { "gd2Ptr",                 LgdImageGd2Ptr },
+    { "wbmp",                   LgdImageWBMP },
+    { "wbmpPtr",                LgdImageWBMPPtr },
 
-    { "ImageColorAllocate",         LgdImageColorAllocate },
-    { "ImageColorAllocateAlpha",    LgdImageColorAllocateAlpha },
-    { "ImageColorClosest",          LgdImageColorClosest },
-    { "ImageColorClosestAlpha",     LgdImageColorClosestAlpha },
-    { "ImageColorClosestHWB",       LgdImageColorClosestHWB },
-    { "ImageColorExact",            LgdImageColorExact },
-    { "ImageColorExactAlpha",       LgdImageColorExactAlpha },
-    { "ImageColorResolve",          LgdImageColorResolve },
-    { "ImageColorResolveAlpha",     LgdImageColorResolveAlpha },
-    { "ImageColorsTotal",           LgdImageColorsTotal },
-    { "ImageRed",                   LgdImageRed },
-    { "ImageBlue",                  LgdImageBlue },
-    { "ImageGreen",                 LgdImageGreen },
-    { "ImageAlpha",                 LgdImageAlpha },
-    { "ImageGetTransparent",        LgdImageGetTransparent },
-    { "ImageColorTransparent",      LgdImageColorTransparent },
-    { "ImageColorDeallocate",       LgdImageColorDeallocate },
+    { "colorAllocate",          LgdImageColorAllocate },
+    { "colorAllocateAlpha",     LgdImageColorAllocateAlpha },
+    { "colorClosest",           LgdImageColorClosest },
+    { "colorClosestAlpha",      LgdImageColorClosestAlpha },
+    { "colorClosestHWB",        LgdImageColorClosestHWB },
+    { "colorExact",             LgdImageColorExact },
+    { "colorExactAlpha",        LgdImageColorExactAlpha },
+    { "colorResolve",           LgdImageColorResolve },
+    { "colorResolveAlpha",      LgdImageColorResolveAlpha },
+    { "colorsTotal",            LgdImageColorsTotal },
+    { "red",                    LgdImageRed },
+    { "blue",                   LgdImageBlue },
+    { "green",                  LgdImageGreen },
+    { "alpha",                  LgdImageAlpha },
+    { "getTransparent",         LgdImageGetTransparent },
+    { "colorTransparent",       LgdImageColorTransparent },
+    { "colorDeallocate",        LgdImageColorDeallocate },
 
-    { "ImageBoundsSafe",            LgdImageBoundsSafe },
-    { "ImageGetPixel",              LgdImageGetPixel },
-    { "ImageSX",                    LgdImageSX },
-    { "ImageSY",                    LgdImageSY },
-    { "ImageSXY",                   LgdImageSXY },
-    { "ImageGetClip",               LgdImageGetClip },
-    { "ImageSetClip",               LgdImageSetClip },
+    { "boundsSafe",             LgdImageBoundsSafe },
+    { "getPixel",               LgdImageGetPixel },
+    { "sizeX",                  LgdImageSX },
+    { "sizeY",                  LgdImageSY },
+    { "sizeXY",                 LgdImageSXY },
+    { "getClip",                LgdImageGetClip },
+    { "setClip",                LgdImageSetClip },
 
-    { "ImageSetPixel",              LgdImageSetPixel },
-    { "ImageLine",                  LgdImageLine },
-    { "ImageRectangle",             LgdImageRectangle },
-    { "ImageFilledRectangle",       LgdImageFilledRectangle },
-    { "ImagePolygon",               LgdImagePolygon },
-    { "ImageFilledPolygon",         LgdImageFilledPolygon },
-    { "ImageArc",                   LgdImageArc },
-    { "ImageFilledArc",             LgdImageFilledArc },
-    { "ImageEllipse",               LgdImageEllipse },
-    { "ImageFilledEllipse",         LgdImageFilledEllipse },
-    { "ImageFill",                  LgdImageFill },
-    { "ImageFillToBorder",          LgdImageFillToBorder },
+    { "setPixel",               LgdImageSetPixel },
+    { "line",                   LgdImageLine },
+    { "rectangle",              LgdImageRectangle },
+    { "filledRectangle",        LgdImageFilledRectangle },
+    { "polygon",                LgdImagePolygon },
+    { "filledPolygon",          LgdImageFilledPolygon },
+    { "arc",                    LgdImageArc },
+    { "filledArc",              LgdImageFilledArc },
+    { "ellipse",                LgdImageEllipse },
+    { "filledEllipse",          LgdImageFilledEllipse },
+    { "fill",                   LgdImageFill },
+    { "fillToBorder",           LgdImageFillToBorder },
 
-    { "ImageSetAntiAliased",            LgdImageSetAntiAliased },
-    { "ImageSetAntiAliasedDontBlend",   LgdImageSetAntiAliasedDontBlend },
-    { "ImageSetBrush",                  LgdImageSetBrush },
-    { "ImageSetTile",                   LgdImageSetTile },
-    { "ImageSetStyle",                  LgdImageSetStyle },
-    { "ImageSetThickness",              LgdImageSetThickness },
-    { "ImageAlphaBlending",             LgdImageAlphaBlending },
-    { "ImageSaveAlpha",                 LgdImageSaveAlpha },
-    { "ImageGetInterlaced",             LgdImageGetInterlaced },
-    { "ImageInterlace",                 LgdImageInterlace },
+    { "setAntiAliased",            LgdImageSetAntiAliased },
+    { "setAntiAliasedDontBlend",   LgdImageSetAntiAliasedDontBlend },
+    { "setBrush",                  LgdImageSetBrush },
+    { "setTile",                   LgdImageSetTile },
+    { "setStyle",                  LgdImageSetStyle },
+    { "setThickness",              LgdImageSetThickness },
+    { "alphaBlending",             LgdImageAlphaBlending },
+    { "saveAlpha",                 LgdImageSaveAlpha },
+    { "getInterlaced",             LgdImageGetInterlaced },
+    { "interlace",                 LgdImageInterlace },
 
-    { "ImageString",                LgdImageString },
-    { "ImageStringUp",              LgdImageStringUp },
-    { "ImageChar",                  LgdImageChar },
-    { "ImageCharUp",                LgdImageCharUp },
+    { "string",                 LgdImageString },
+    { "stringUp",               LgdImageStringUp },
+    { "char",                   LgdImageChar },
+    { "charUp",                 LgdImageCharUp },
 
-    { "ImageCopy",                  LgdImageCopy },
-    { "ImageCopyResized",           LgdImageCopyResized },
-    { "ImageCopyResampled",         LgdImageCopyResampled },
-    { "ImageCopyRotated",           LgdImageCopyRotated },
-    { "ImageCopyMerge",             LgdImageCopyMerge },
-    { "ImageCopyMergeGray",         LgdImageCopyMergeGray },
-    { "ImagePaletteCopy",           LgdImagePaletteCopy },
-    { "ImageSquareToCircle",        LgdImageSquareToCircle },
-    { "ImageSharpen",               LgdImageSharpen },
+    { "copy",                   LgdImageCopy },
+    { "copyResized",            LgdImageCopyResized },
+    { "copyResampled",          LgdImageCopyResampled },
+    { "copyRotated",            LgdImageCopyRotated },
+    { "copyMerge",              LgdImageCopyMerge },
+    { "copyMergeGray",          LgdImageCopyMergeGray },
+    { "paletteCopy",            LgdImagePaletteCopy },
+    { "squareToCircle",         LgdImageSquareToCircle },
+    { "sharpen",                LgdImageSharpen },
 
-    { "ImageStringFT",              LgdImageStringFT },
-    { "ImageStringFTCircle",        LgdImageStringFTCircle },
+    { "stringFT",               LgdImageStringFT },
+    { "stringFTCircle",         LgdImageStringFTCircle },
 
 
-    { "FontCacheSetup",             LgdFontCacheSetup },
-    { "FontCacheShutdown",          LgdFontCacheShutdown },
+    { "fontCacheSetup",         LgdFontCacheSetup },
+    { "fontCacheShutdown",      LgdFontCacheShutdown },
     
 #ifdef USE_FONTCONFIG
-    { "FTUseFontConfig",            LgdFTUseFontConfig },
+    { "useFontConfig",          LgdFTUseFontConfig },
 #else
-    { "FTUseFontConfig",            LgdNull },
+    { "useFontConfig",          LgdNull },
 #endif
 
     /* Avoid boring warnings when compiling */
-    { "Null",                       LgdNull },
+    { "null",                   LgdNull },
     { NULL, NULL }
 };
 
@@ -2101,31 +2101,31 @@ static const luaL_reg LgdMetatable[] =
 int luaopen_gd(lua_State *L)
 {
     luaL_openlib(L, LIB_NAME, LgdFunctions, 0);
-    lua_pushliteral(L, "version");
+    lua_pushliteral(L, "VERSION");
     lua_pushliteral(L, LIB_VERSION);
     lua_settable(L, -3);
 
-    tblseticons(L, "MaxColors", gdMaxColors);
+    tblseticons(L, "MAX_COLORS", gdMaxColors);
     tblseticons(L, "GD2_FMT_RAW", GD2_FMT_RAW);
     tblseticons(L, "GD2_FMT_COMPRESSED", GD2_FMT_COMPRESSED);
-    tblseticons(L, "Arc", gdArc);
-    tblseticons(L, "Chord", gdChord);
-    tblseticons(L, "Pie", gdPie);
-    tblseticons(L, "NoFill", gdNoFill);
-    tblseticons(L, "Edged", gdEdged);
-    tblseticons(L, "AntiAliased", gdAntiAliased);
-    tblseticons(L, "Brushed", gdBrushed);
-    tblseticons(L, "Styled", gdStyled);
-    tblseticons(L, "StyledBrushed", gdStyledBrushed);
-    tblseticons(L, "Tiled", gdTiled);
-    tblseticons(L, "Transparent", gdTransparent);
+    tblseticons(L, "ARC", gdArc);
+    tblseticons(L, "CHORD", gdChord);
+    tblseticons(L, "PIE", gdPie);
+    tblseticons(L, "NO_FILL", gdNoFill);
+    tblseticons(L, "EDGED", gdEdged);
+    tblseticons(L, "ANTI_ALIASED", gdAntiAliased);
+    tblseticons(L, "BRUSHED", gdBrushed);
+    tblseticons(L, "STYLED", gdStyled);
+    tblseticons(L, "STYLED_BRUSHED", gdStyledBrushed);
+    tblseticons(L, "TILED", gdTiled);
+    tblseticons(L, "TRANSPARENT", gdTransparent);
 
     /* Standard gd fonts */
-    tblseticons(L, "FontSmall", MY_GD_FONT_SMALL);
-    tblseticons(L, "FontLarge", MY_GD_FONT_LARGE);
-    tblseticons(L, "FontMedium", MY_GD_FONT_MEDIUM_BOLD);
-    tblseticons(L, "FontGiant", MY_GD_FONT_GIANT);
-    tblseticons(L, "FontTiny", MY_GD_FONT_TINY);
+    tblseticons(L, "FONT_SMALL", MY_GD_FONT_SMALL);
+    tblseticons(L, "FONT_LARGE", MY_GD_FONT_LARGE);
+    tblseticons(L, "FONT_MEDIUM", MY_GD_FONT_MEDIUM_BOLD);
+    tblseticons(L, "FONT_GIANT", MY_GD_FONT_GIANT);
+    tblseticons(L, "FONT_TINY", MY_GD_FONT_TINY);
 
     lua_pushliteral(L, "metatable");    /** metatable */
     luaL_newmetatable(L, GD_IMAGE_PTR_TYPENAME);
