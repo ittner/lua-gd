@@ -65,7 +65,13 @@ TR, TD {
     cell-spacing: 1px;
 }
 
-PRE
+pre
+{
+    font-family: "Courier New", courier, monospace;
+    color: black;
+}
+
+pre.example
 {
     border: gray 1pt solid;
     padding: 2pt;
@@ -75,6 +81,18 @@ PRE
     color: black;
     font-size: small
 }
+
+pre.wrong
+{
+    border: gray 1pt solid;
+    padding: 2pt;
+    display: block;
+    font-family: "Courier New", courier, monospace;
+    background-color: #ee0000;
+    color: black;
+    font-size: small
+}
+
 -->
 </style>
 </head>
@@ -84,9 +102,281 @@ PRE
 <center>
  <h1>Lua-GD</h1>
  <img src="lua-gd.png" alt="Lua-GD Logo">
- <p> Please refer to the <a href="http://www.luaforge.net/projects/lua-gd/">Lua-GD Project Page</a>
- at <a href="http://www.luaforge.net/">LuaForge</a> for more information. </p>
 </center>
+
+<h2> Contents </h2>
+<ul>
+ <li><a href="#intro">Introduction</a>
+   <ul>
+     <li><a href="#intro.lua">About Lua</a></li>
+     <li><a href="#intro.gd">About GD</a></li>
+     <li><a href="#intro.lua-gd">About Lua-GD</a></li>
+   </ul>
+ </li>
+ <li><a href="#license">License</a></li>
+ <li><a href="#download">Download</a></li>
+ <li><a href="#api">Lua-GD API</a>
+   <ul>
+     <li><a href="#api.load">Library loading and initialisation</a></li>
+     <li><a href="#api.constants">Constants</a></li>
+     <li><a href="#api.create">Image creation and destruction</a></li>
+     <li><a href="#api.input">Image input</a></li>
+     <li><a href="#api.output">Image output</a></li>
+     <li><a href="#api.color">Color manipulation</a></li>
+     <li><a href="#api.draw">Drawing</a></li>
+     <li><a href="#api.text">Text drawing</a></li>
+     <li><a href="#api.font">Font configuration</a></li>
+     <li><a href="#api.copy">Copying and Resizing</a></li>
+   </ul>
+ </li>
+ <li><a href="#examples">Examples</a>
+   <ul>
+     <li><a href="#examples.counter">Web Counter</a></li>
+     <li><a href="#examples.clock">CGI Analog Clock</a></li>
+     <li><a href="#examples.fontconfig">Freetype, Fontconfig and TrueType fonts</a></li>
+     <li><a href="#examples.other">Other examples</a></li>
+   </ul>
+ </li>
+ <li><a href="#contact">Contact information</a></li>
+</ul>
+
+
+<a name="intro"></a>
+<h2>Introduction</h2>
+
+<a name="intro.lua"></a>
+<h3>About Lua</h3>
+
+<a name="intro.gd"></a>
+<h3>About GD</h3>
+
+<a name="intro.lua-gd"></a>
+<h3>About Lua-GD</h3>
+
+
+<a name="license"></a>
+<h2>License</h2>
+
+<p>Lua-GD is <em>copyrighted free software</em>, distributed under the
+GNU Lesser General Public License, as follows: </p>
+
+<pre>
+This library is free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation; either version 2.1 of the License, or
+(at your option) any later version.
+
+This library is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
+License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this library; if not, write to the Free Software Foundation,
+Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+</pre>
+
+<a name="download"></a>
+<h2>Download</h2>
+
+<a name="api"></a>
+<h2>Lua-GD API</h2>
+
+<a name="api.load"></a>
+<h3>Library loading and initialisation</h3>
+
+<a name="api.constants"></a>
+<h3>Constants</h3>
+
+<a name="api.create"></a>
+<h3>Image creation and destruction</h3>
+
+<a name="api.input"></a>
+<h3>Image input</h3>
+
+<a name="api.output"></a>
+<h3>Image output</h3>
+
+<a name="api.color"></a>
+<h3>Color manipulation</h3>
+
+<a name="api.draw"></a>
+<h3>Drawing</h3>
+
+<a name="api.text"></a>
+<h3>Text drawing</h3>
+
+<a name="api.font"></a>
+<h3>Font configuration</h3>
+
+<a name="api.copy"></a>
+<h3>Copying and Resizing</h3>
+
+
+
+<a name="examples"></a>
+<h2>Examples</h2>
+
+<a name="examples.counter"></a>
+<h3>Web Counter</h3>
+<pre class="example">
+#!/usr/bin/env lua
+
+-- counter.lua -- a web counter in Lua!
+-- (c) 2004 Alexandre Erwin Ittner
+
+datafile="counter.txt"
+
+load_gd = assert(loadlib("libluagd.so", "luaopen_gd"))
+load_gd()
+
+fp = io.open(datafile, "r")
+if fp then
+  cnt = fp:read("*a")
+  fp:close()
+else
+  cnt = 0
+end
+cnt = cnt + 1
+fp = io.open(datafile, "w")
+if fp then
+  fp:write(cnt)
+  fp:close()
+end
+cnt = cnt + 1
+
+sx = string.len(cnt) * 8
+if sx == 0 then
+ sx = 10
+end
+
+im = gd.create(sx, 15)
+-- first allocated color defines the background.
+white = im:colorAllocate(255, 255, 255)
+im:colorTransparent(white)
+black = im:colorAllocate(0, 0, 0)
+im:string(gd.FONT_MEDIUM, 1, 1, cnt, black)
+
+print("Content-type: image/png\n")
+io.write(im:pngStr())
+</pre>
+
+
+<a name="examples.clock"></a>
+<h3>CGI Analog clock</h3>
+<pre class="example">
+#!/usr/bin/env lua
+
+-- a cgi script that draws an analog clock with lua and lua-gd
+-- (c) 2004 Alexandre Erwin Ittner
+-- $Id$
+
+load_gd = assert(loadlib("libluagd.so", "luaopen_gd"))
+load_gd()
+
+function createClock(size, hours, minutes)
+  local im = gd.createTrueColor(size, size)
+  local white = im:colorAllocate(255, 255, 255)
+  local gray = im:colorAllocate(128, 128, 128)
+  local black = im:colorAllocate(0, 0, 0)
+  local blue = im:colorAllocate(0, 0, 128)
+  local cxy = size/2
+
+  im:filledRectangle(0, 0, size, size, white)
+  im:setThickness(math.max(1, size/100))
+  im:arc(cxy, cxy, size, size, 0, 360, black)
+
+  local ang = 0
+  local rang, gsize
+  while ang &lt; 360 do
+    rang = math.rad(ang)
+    if math.mod(ang, 90) == 0 then
+      gsize = 0.75
+    else
+      gsize = 0.85
+    end
+    im:line(
+      cxy + gsize * cxy * math.sin(rang),
+      size - (cxy + gsize * cxy * math.cos(rang)),
+      cxy + cxy * 0.9 * math.sin(rang),
+      size - (cxy + cxy * 0.9 * math.cos(rang)),
+      gray)
+    ang = ang + 30
+  end
+
+  im:setThickness(math.max(1, size/50))
+  im:line(cxy, cxy,
+    cxy + 0.45 * size * math.sin(math.rad(6*minutes)),
+    size - (cxy + 0.45 * size * math.cos(math.rad(6*minutes))),
+    blue)
+
+  im:setThickness(math.max(1, size/25))
+  rang = math.rad(30*hours + minutes/2)
+  im:line(cxy, cxy, 
+    cxy + 0.25 * size * math.sin(rang),
+    size - (cxy + 0.25 * size * math.cos(rang)),
+    blue)
+
+  im:setThickness(1)
+  local sp = math.max(1, size/20)
+  im:filledArc(cxy, cxy, sp, sp, 0, 360, black, gd.ARC)
+
+  return im
+end
+
+dh = os.date("*t")
+im = createClock(100, dh.hour, dh.min)
+
+print("Content-type: image/png")
+print("Refresh: 60")                -- Reload the image after 60s
+print("Pragma: no-cache")           -- Can mozilla understand this?
+print("Expires: Thu Jan 01 00:00:00 UTC 1970")  -- Marks as expired
+print("")
+
+io.write(im:pngStr())
+</pre>
+
+
+<a name="examples.fontconfig"></a>
+<h3>Freetype, Fontconfig and TrueType fonts</h3>
+
+<pre class="example">
+-- The fonts used in this example comes with Microsoft operating systems 
+-- and can be downloaded from http://corefonts.sourceforge.net
+
+load_gd = assert(loadlib("libluagd.so", "luaopen_gd"))
+load_gd()
+
+im = gd.createTrueColor(220, 190)
+white = im:colorAllocate(255, 255, 255)
+black = im:colorAllocate(0, 0, 0)
+x, y = im:sizeXY()
+im:filledRectangle(0, 0, x, y, white)
+
+gd.useFontConfig(true)
+im:stringFT(black, "Arial", 20, 0, 10, 30, "Standard Arial")
+im:stringFT(black, "Arial:bold", 20, 0, 10, 60, "Bold Arial")
+im:stringFT(black, "Arial:italic", 20, 0, 10, 90, "Italic Arial")
+im:stringFT(black, "Arial:bold:italic", 20, 0, 10, 120, "Italic Bold Arial")
+im:stringFT(black, "Times New Roman", 20, 0, 10, 150, "Times New Roman")
+im:stringFT(black, "Comic Sans MS", 20, 0, 10, 180, "Comic Sans MS")
+
+im:png("./out.png")
+os.execute("display out.png")
+</pre>
+
+
+<a name="examples.other"></a>
+<h3>Other examples</h3>
+<p> There are some useful examples in the <code>demos</code> directory
+within the distribution package. </p>
+
+
+<a name="contact"></a>
+<h2>Contact information</h2>
+
+
+
 
 <hr>
 $Id$
