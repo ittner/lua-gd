@@ -13,6 +13,8 @@ im:ImageArc(100, 100, 120, 120, 80, 100, white)
 
 im:ImageFilledArc(50, 50, 80, 80, 60, 120, white, gd.Arc)
 
+im:ImageFilledEllipse(200, 200, 20, 20, white)
+
 im:ImagePng("./out.png")
 im:ImageDestroy()
 

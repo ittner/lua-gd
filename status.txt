@@ -1,3 +1,7 @@
+X - Already done
+N - Will not be done for some (good) reason
+
+
 X gdAntiAliased 
 X gdBrushed 
   gdDashSize 
@@ -57,7 +61,8 @@ X gdImageDestroy
   gdImageFill 
   gdImageFillToBorder 
 X gdImageFilledArc 
-  gdImageFilledEllipse 
+X gdImageEllipse 
+X gdImageFilledEllipse 
 X gdImageFilledPolygon 
 X gdImageFilledRectangle 
 X gdImageGd 

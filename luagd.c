@@ -1384,6 +1384,38 @@ static int LgdImageFilledArc(lua_State *L)
     return 0;
 }
 
+/* void gdImageEllipse(gdImagePtr im, int cx, int cy, int w, int h,
+        int color) */
+static int LgdImageEllipse(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int cx = getint(L, 2);
+    int cy = getint(L, 3);
+    int w = getint(L, 4);
+    int h = getint(L, 5);
+    int c = getint(L, 6);
+
+    gdImageFilledEllipse(im, cx, cy, w, h, c);
+    return 0;
+}
+
+
+/* void gdImageFilledEllipse(gdImagePtr im, int cx, int cy, int w, int h,
+        int color) */
+static int LgdImageFilledEllipse(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int cx = getint(L, 2);
+    int cy = getint(L, 3);
+    int w = getint(L, 4);
+    int h = getint(L, 5);
+    int c = getint(L, 6);
+
+    gdImageFilledEllipse(im, cx, cy, w, h, c);
+    return 0;
+}
+
+
 
 
 static const luaL_reg LgdFunctions[] =
@@ -1457,6 +1489,8 @@ static const luaL_reg LgdFunctions[] =
     { "ImageFilledPolygon",         LgdImageFilledPolygon },
     { "ImageArc",                   LgdImageArc },
     { "ImageFilledArc",             LgdImageFilledArc },
+    { "ImageEllipse",               LgdImageEllipse },
+    { "ImageFilledEllipse",         LgdImageFilledEllipse },
 
     { NULL, NULL }
 };
