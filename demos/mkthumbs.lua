@@ -90,26 +90,35 @@ function makeThumb(fname)
   local thumbname
   local format
 
+  print(tmpname)
   s, e, name = string.find(tmpname, "(.+)%.png")
   if name then
     im = gd.createFromPng(fname)
     format = "PNG"
+    tname = name
   end
   s, e, name = string.find(tmpname, "(.+)%.jpe?g")
   if name then
     im = gd.createFromJpeg(fname)
     format = "JPEG"
+    tname = name
   end
   s, e, name = string.find(tmpname, "(.+)%.gif")
   if name then
     im = gd.createFromGif(fname)
     format = "GIF"
+    tname = name
   end
   if im == nil then
     print("Error: " .. fname .. " unsuported format")
   end
 
-  thumbname = name .. ".png"
+  print(format)
+
+  thumbname = tname .. "_tb.png"
+  print(thumbname)
+
+
   local sx, sy = im:sizeXY()
   local tsy, tsy
 
@@ -121,16 +130,25 @@ function makeThumb(fname)
     txs, tsy = sx/factor, sy/factor
   end
 
-  tim = gd.CreateTrueColor(tsx, tsy+10)
+  tim = gd.createTrueColor(tsx, tsy+10)
+  tim:copyResampled(im, 0, 0, 0, 0, tsx, tsy, sx, sy)
+
+  local black = tim:colorAllocateExact(0, 0, 0)
+  local white = tim:colorAllocateExact(0, 0, 0)
+  local info = format .. ", " .. sx .. "x" .. sy .. "px"
+  tim:filledRectangle(0, 0, tsx, tsy+10, black)
+  tim:string(gd.FONT_SMALL, 2, tsy+5, info, white)
+
+  tim:png(thumbname)
 
 end
 
 
 
+makeThumb("./lua-gd.png")
 
-
-dirname = arg[1]
-filelist = posix.dir(dirname)
+-- dirname = arg[1]
+-- filelist = posix.dir(dirname)
 
 
 
