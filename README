@@ -20,7 +20,7 @@ stable.
     * No 'Image' prefix.
     * Methods uses camelCase names and begins with lower case letters.
     * Constants uses upper case names, separated by underscores. 
-    * All functions, except gd.create*, gd.copy*, gd.fontCache* and 
+    * All functions, except gd.create*, gd.gifAnimEnd*, gd.fontCache* and
       gd.useFontConfig, can use the colon operator for a more object
       oriented access.
 
@@ -34,8 +34,8 @@ There is no docs for now, but there are some lua scripts with examples.
 + TO DO
 
     * Freeze the API.
+    * Support the new package proposal for Lua 5.1
     * Fix the bugs. :)
-    * Gif animation support.
     * Better Makefile (Win32 dlls?).
     * More examples.
     * Write some documentation.
