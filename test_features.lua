@@ -16,9 +16,9 @@ function printED(res, desc)
   local str = "    " .. desc .. " "
   str = str .. string.rep(".", 37 - string.len(str))
   if res then
-    io.write(str .. " Enabled\n")
+    print(str .. " Enabled")
   else
-    io.write(str .. " Disabled\n")
+    print(str .. " Disabled")
   end
 end
 
