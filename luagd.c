@@ -1946,7 +1946,7 @@ static int LgdImageStringFT(lua_State *L)
                 double textRadius, double fillPortion, char *font,
                 double points, char *top, char *bottom, int fgcolor)
 
-   Changed to: im:ImageStringFTCircle(cx, cy, radius, textRadius,
+   Changed to: im:stringFTCircle(cx, cy, radius, textRadius,
                    fillPortion, fontname, points, top, bottom, color)
 */
 
