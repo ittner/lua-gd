@@ -1,5 +1,6 @@
 -- an analog clock with lua and lua-gd
 -- (c) 2004 Alexandre Erwin Ittner
+-- $Id$
 
 load_gd = assert(loadlib("libluagd.so", "luaopen_gd"))
 load_gd()
