@@ -1658,7 +1658,6 @@ static int LgdImageChar(lua_State *L)
 
 /* void gdImageCharUp(gdImagePtr im, gdFontPtr font, int x, int y,
             int c, int color)  */
-/* Useless? */
 static int LgdImageCharUp(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
