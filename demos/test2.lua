@@ -12,6 +12,7 @@ imlua = gd.ImageCreateFromPng("./lua-gd.png")
 
 sx, sy = imlua:ImageSXY()
 gd.ImageCopy(im, imlua, 10, 25, 0, 0, sx, sy, sx, sy)
+im:ImageString(gd.FontMedium, 10, 330, "http://luaforge.net/projects/lua-gd/", white)
 
 im:ImagePng("./out.png")
 os.execute("display out.png")
