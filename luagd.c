@@ -1673,6 +1673,211 @@ static int LgdImageStringUp(lua_State *L)
 }
 
 
+/* void gdImageChar(gdImagePtr im, gdFontPtr font, int x, int y,
+            int c, int color)  */
+/* Useless? */
+static int LgdImageChar(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    gdFontPtr fnt = getStdFont(L, 2);
+    int x = getint(L, 3);
+    int y = getint(L, 4);
+    char *str = (char*) getstring(L, 5);
+    int c = getint(L, 6);
+    int chr;
+
+    if(str)
+        chr = (int) str[0];
+    else
+    {
+        luaL_typerror(L, 5, "string");
+        return 0;
+    }
+
+    gdImageChar(im, fnt, x, y, chr, c);
+    return 0;
+}
+
+
+/* void gdImageCharUp(gdImagePtr im, gdFontPtr font, int x, int y,
+            int c, int color)  */
+/* Useless? */
+static int LgdImageCharUp(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    gdFontPtr fnt = getStdFont(L, 2);
+    int x = getint(L, 3);
+    int y = getint(L, 4);
+    char *str = (char*) getstring(L, 5);
+    int c = getint(L, 6);
+    int chr;
+
+    if(str)
+        chr = (int) str[0];
+    else
+    {
+        luaL_typerror(L, 5, "string");
+        return 0;
+    }
+
+    gdImageCharUp(im, fnt, x, y, chr, c);
+    return 0;
+}
+
+
+/* void gdImageCopy(gdImagePtr dst, gdImagePtr src, int dstX, int dstY,
+            int srcX, int srcY, int w, int h) */
+static int LgdImageCopy(lua_State *L)
+{
+    gdImagePtr dst = getImagePtr(L, 1);
+    gdImagePtr src = getImagePtr(L, 2);
+    int dstX = getint(L, 3);
+    int dstY = getint(L, 4);
+    int srcX = getint(L, 5);
+    int srcY = getint(L, 6);
+    int w = getint(L, 7);
+    int h = getint(L, 8);
+
+    gdImageCopy(dst, src, dstX, dstY, srcX, srcY, w, h);
+    return 0;
+}
+
+
+
+/* void gdImageCopyResized(gdImagePtr dst, gdImagePtr src, int dstX,
+            int dstY, int srcX, int srcY, int destW, int destH,
+            int srcW, int srcH)  */
+static int LgdImageCopyResized(lua_State *L)
+{
+    gdImagePtr dst = getImagePtr(L, 1);
+    gdImagePtr src = getImagePtr(L, 2);
+    int dstX = getint(L, 3);
+    int dstY = getint(L, 4);
+    int srcX = getint(L, 5);
+    int srcY = getint(L, 6);
+    int dstW = getint(L, 7);
+    int dstH = getint(L, 8);
+    int srcW = getint(L, 9);
+    int srcH = getint(L, 10);
+
+    gdImageCopyResized(dst, src, dstX, dstY, srcX, srcY, dstW, dstH,
+        srcW, srcH);
+    return 0;
+}
+
+
+/* void gdImageCopyResampled(gdImagePtr dst, gdImagePtr src, int dstX,
+        int dstY, int srcX, int srcY, int destW, int destH, int srcW,
+        int srcH)  */
+static int LgdImageCopyResampled(lua_State *L)
+{
+    gdImagePtr dst = getImagePtr(L, 1);
+    gdImagePtr src = getImagePtr(L, 2);
+    int dstX = getint(L, 3);
+    int dstY = getint(L, 4);
+    int srcX = getint(L, 5);
+    int srcY = getint(L, 6);
+    int dstW = getint(L, 7);
+    int dstH = getint(L, 8);
+    int srcW = getint(L, 9);
+    int srcH = getint(L, 10);
+
+    gdImageCopyResampled(dst, src, dstX, dstY, srcX, srcY, dstW, dstH,
+        srcW, srcH);
+    return 0;
+}
+
+
+/* void gdImageCopyRotated(gdImagePtr dst, gdImagePtr src, double dstX,
+        double dstY, int srcX, int srcY, int srcW, int srcH, int angle) */
+static int LgdImageCopyRotated(lua_State *L)
+{
+    gdImagePtr dst = getImagePtr(L, 1);
+    gdImagePtr src = getImagePtr(L, 2);
+    double dstX = (double) lua_tonumber(L, 3);
+    double dstY = (double) lua_tonumber(L, 4);
+    int srcX = getint(L, 5);
+    int srcY = getint(L, 6);
+    int srcW = getint(L, 7);
+    int srcH = getint(L, 8);
+    int ang = getint(L, 9);
+
+    gdImageCopyRotated(dst, src, dstX, dstY, srcX, srcY, srcW, srcH, ang);
+    return 0;
+}
+
+
+/* void gdImageCopyMerge(gdImagePtr dst, gdImagePtr src, int dstX,
+        int dstY, int srcX, int srcY, int w, int h, int pct)  */
+static int LgdImageCopyMerge(lua_State *L)
+{
+    gdImagePtr dst = getImagePtr(L, 1);
+    gdImagePtr src = getImagePtr(L, 2);
+    int dstX = getint(L, 3);
+    int dstY = getint(L, 4);
+    int srcX = getint(L, 5);
+    int srcY = getint(L, 6);
+    int w = getint(L, 7);
+    int h = getint(L, 8);
+    int pct = getint(L, 9);
+
+    gdImageCopyMerge(dst, src, dstX, dstY, srcX, srcY, w, h, pct);
+    return 0;
+}
+
+
+/* void gdImageCopyMergeGray(gdImagePtr dst, gdImagePtr src, int dstX,
+        int dstY, int srcX, int srcY, int w, int h, int pct) */
+static int LgdImageCopyMergeGray(lua_State *L)
+{
+    gdImagePtr dst = getImagePtr(L, 1);
+    gdImagePtr src = getImagePtr(L, 2);
+    int dstX = getint(L, 3);
+    int dstY = getint(L, 4);
+    int srcX = getint(L, 5);
+    int srcY = getint(L, 6);
+    int w = getint(L, 7);
+    int h = getint(L, 8);
+    int pct = getint(L, 9);
+
+    gdImageCopyMergeGray(dst, src, dstX, dstY, srcX, srcY, w, h, pct);
+    return 0;
+}
+
+
+/* void gdImagePaletteCopy(gdImagePtr dst, gdImagePtr src) */
+static int LgdImagePaletteCopy(lua_State *L)
+{
+    gdImagePtr dst = getImagePtr(L, 1);
+    gdImagePtr src = getImagePtr(L, 2);
+
+    gdImagePaletteCopy(dst, src);
+    return 0;
+}
+
+
+/* void gdImageSquareToCircle(gdImagePtr im, int radius) */
+static int LgdImageSquareToCircle(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int r = getint(L, 2);
+
+    gdImageSquareToCircle(im, r);
+    return 0;
+}
+
+
+/* void gdImageSharpen(gdImagePtr im, int pct) */
+static int LgdImageSharpen(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int pct = getint(L, 2);
+
+    gdImageSharpen(im, pct);
+    return 0;
+}
+
+
 
 static const luaL_reg LgdFunctions[] =
 {
@@ -1763,6 +1968,18 @@ static const luaL_reg LgdFunctions[] =
 
     { "ImageString",                LgdImageString },
     { "ImageStringUp",              LgdImageStringUp },
+    { "ImageChar",                  LgdImageChar },
+    { "ImageCharUp",                LgdImageCharUp },
+
+    { "ImageCopy",                  LgdImageCopy },
+    { "ImageCopyResized",           LgdImageCopyResized },
+    { "ImageCopyResampled",         LgdImageCopyResampled },
+    { "ImageCopyRotated",           LgdImageCopyRotated },
+    { "ImageCopyMerge",             LgdImageCopyMerge },
+    { "ImageCopyMergeGray",         LgdImageCopyMergeGray },
+    { "ImagePaletteCopy",           LgdImagePaletteCopy },
+    { "ImageSquareToCircle",        LgdImageSquareToCircle },
+    { "ImageSharpen",               LgdImageSharpen },
 
     { NULL, NULL }
 };
@@ -1794,6 +2011,7 @@ int luaopen_gd(lua_State *L)
     tblseticons(L, "AntiAliased", gdAntiAliased);
     tblseticons(L, "Brushed", gdBrushed);
     tblseticons(L, "Styled", gdStyled);
+    tblseticons(L, "StyledBrushed", gdStyledBrushed);
     tblseticons(L, "Tiled", gdTiled);
     tblseticons(L, "Transparent", gdTransparent);
 

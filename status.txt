@@ -9,14 +9,14 @@ N gdDashSize (deprecated)
   gdFontCacheSetup 
   gdFontCacheShutdown 
   gdFontPtr 
-  gdFree 
+N gdFree 
 X gdImage 
 X gdImageAlphaBlending 
 X gdImageArc 
 X gdImageBlue 
 X gdImageBoundsSafe 
-  gdImageChar 
-  gdImageCharUp 
+X gdImageChar 
+X gdImageCharUp 
 X gdImageColorAllocate 
 X gdImageColorAllocateAlpha 
 X gdImageColorClosest 
@@ -29,11 +29,11 @@ X gdImageColorExactAlpha
 X gdImageColorResolve 
 X gdImageColorResolveAlpha 
 X gdImageColorTransparent 
-  gdImageCopy 
-  gdImageCopyMerge 
-  gdImageCopyResampled 
-  gdImageCopyResized 
-  gdImageCopyRotated 
+X gdImageCopy 
+X gdImageCopyMerge 
+X gdImageCopyResampled 
+X gdImageCopyResized 
+X gdImageCopyRotated 
 X gdImageCreate 
 X gdImageCreateFromGd 
 X gdImageCreateFromGdPtr
@@ -80,8 +80,8 @@ X gdImageJpeg
 X gdImagePtr
 N gdImageJpegCtx 
 X gdImageLine 
-  gdImageMergeGray 
-  gdImagePaletteCopy 
+X gdImageMergeGray 
+X gdImagePaletteCopy 
 X gdImagePng 
 N gdImagePngCtx 
 N gdImagePngCtxEx 
@@ -101,8 +101,8 @@ X gdImageSetPixel
 X gdImageSetStyle 
 X gdImageSetThickness 
 X gdImageSetTile 
-  gdImageSharpen 
-  gdImageSquareToCircle 
+X gdImageSharpen 
+X gdImageSquareToCircle 
 X gdImageString
 X gdImageSX
 X gdImageSY
@@ -118,8 +118,8 @@ X gdImageWBMP
 X gdImageWBMPtr
 N gdImageWBMPCtx 
 X gdMaxColors 
-N gdPoint 
+N gdPoint  (will use lua tables )
 X gdStyled 
-  gdStyledBrushed 
+X gdStyledBrushed 
 X gdTiled 
 X gdTransparent
