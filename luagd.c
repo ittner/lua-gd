@@ -1,5 +1,5 @@
 /*
- * luagd -- GD bindings to Lua.
+ * luagd -- GD bindings for Lua.
  * (c) 2004 Alexandre Erwin Ittner <aittner@netuno.com.br>
  *
  *
