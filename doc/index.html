@@ -1272,11 +1272,42 @@ a proper stack, this is not a problem at all.) </p>
 <a name="api.text"></a>
 <h3>Text drawing functions</h3>
 
-<h4>gdImage:string(font, x, y, string, color);</h4>
-<h4>gdImage:stringUp(font, x, y, string, color);</h4>
-<h4>gdImage:char(font, x, y, char, color);</h4>
-<h4>gdImage:charUp(font, x, y, char, color);</h4>
+<h4>gdImage:string(font, x, y, string, color)</h4>
+
+<p> This function draws the string in the fourth argument on the image
+using one of the standard gd fonts (<code>gd.FONT_TINY</code>,
+<code>gd.FONT_SMALL</code>, <code>gd.FONT_MEDIUM</code>,
+<code>gd.FONT_LARGE</code> or <code>gd.FONT_GIANT</code>) from left
+to right, starting from the (x, y) point and with the color specified
+by the fifth argument. The string must have only ISO-8859-1 characters
+(you should use <code>gd.stringFT</code> and True Type fonts for drawing
+Unicode strings. </p>
+
+<p> Example:
+<pre class="example">
+im = gd.create(140, 80)
+white = im:colorAllocate(255, 255, 255)
+black = im:colorAllocate(0, 0, 0)
+im:string(gd.FONT_TINY, 10, 20, "TINY", black)
+im:string(gd.FONT_SMALL, 10, 30, "SMALL", black)
+im:string(gd.FONT_MEDIUM, 10, 45, "MEDIUM", black)
+im:string(gd.FONT_LARGE, 10, 58, "LARGE", black)
+im:string(gd.FONT_GIANT, 10, 75, "GIANT", black)
+im:png("out.png")
+</pre>
+
+
+<h4>gdImage:stringUp(font, x, y, string, color)</h4>
+
+<p> Similar to <code>gd.string</code> but the string will be drawn
+vertically (rotated 90 degrees), from bottom to up, starting from the
+(x, y) point.  The string must have only ISO-8859-1 characters. If you
+want use Unicode characters or other rotations than 90°, you should
+use <code>gd.stringFT</code> and True Type fonts. </p>
+
+
 <h4>gdImage:stringFT(color, fontname, size, angle, x, y, string)</h4>
+
 <h4>gdImage:stringFTCircle(cx, cy, radius, textRadius, fillPortion, fontname, points, top, bottom, color)</h4>
 
 
