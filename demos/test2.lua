@@ -5,13 +5,13 @@ im = gd.ImageCreateFromJpeg("./bugs.jpg")
 assert(im)
 
 white = im:ImageColorAllocate(255, 255, 255)
-gray = im:ImageColorAllocate(128, 128, 128)
-x, y = im:ImageSXY()
+im:ImageString(gd.FontMedium, 10, 10, "Powered by", white)
 
-im:ImageString(gd.FontMedium, 10, 10, "Powered by Lua-GD", white)
+imlua = gd.ImageCreateFromPng("./lua-gd.png")
+-- imlua:ImageColorTransparent(imlua:ImageGetPixel(0, 0))
 
-print(im:ImageStringFT(gray, "./tolkien.ttf", 16, 0, 150, 150, "Teste"))
-
+sx, sy = imlua:ImageSXY()
+gd.ImageCopy(im, imlua, 10, 25, 0, 0, sx, sy, sx, sy)
 
 im:ImagePng("./out.png")
 os.execute("display out.png")
