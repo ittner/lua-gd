@@ -58,8 +58,8 @@ X gdImageDestroy
   gdImageFillToBorder 
   gdImageFilledArc 
   gdImageFilledEllipse 
-  gdImageFilledPolygon 
-  gdImageFilledRectangle 
+X gdImageFilledPolygon 
+X gdImageFilledRectangle 
 X gdImageGd 
 X gdImageGd2 
 X gdImageGdPtr
@@ -84,7 +84,7 @@ X gdImagePngEx
 X gdImagePngPtr 
 X gdImagePngPtrEx 
 N gdImagePngToSink
-  gdImagePolygon 
+X gdImagePolygon 
 X gdImagePtr    (tipo)
 X gdImageRectangle 
 X gdImageRed 

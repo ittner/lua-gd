@@ -14,7 +14,8 @@ path =  {
     { 15,  5 }
 }
 
-im:ImagePolygon(path, white) 
+im:ImageFilledPolygon(path, white)
+im:ImageFilledRectangle(50, 50, 60, 60, white)
 
 im:ImagePng("./out.png")
 im:ImageDestroy()

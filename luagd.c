@@ -1219,6 +1219,23 @@ static int LgdImageRectangle(lua_State *L)
 }
 
 
+/* void gdImageFilledRectangle(gdImagePtr im, int x1, int y1, int x2, int y2,
+        int c) */
+static int LgdImageFilledRectangle(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int x1 = getint(L, 2);
+    int y1 = getint(L, 3);
+    int x2 = getint(L, 4);
+    int y2 = getint(L, 5);
+    int c = getint(L, 6);
+
+    if(im)
+        gdImageFilledRectangle(im, x1, y1, x2, y2, c);
+    return 0;
+}
+
+
 /* void gdImagePolygon(gdImagePtr im, gdPointPtr points, int pointsTotal,
         int color)
   Changed to: ImagePolygon(im, { { x1, y1 }, { x2, y2 } ... }, color)  */
@@ -1267,6 +1284,60 @@ static int LgdImagePolygon(lua_State *L)
     }
 
     gdImagePolygon(im, plist, size, c);
+    free(plist);
+    return 0;
+}
+
+
+
+/* void gdImageFilledPolygon(gdImagePtr im, gdPointPtr points,
+        int pointsTotal, int color)
+  Changed to: ImageFilledPolygon(im, { { x1, y1 }, { x2, y2 } ... }, color) */
+static int LgdImageFilledPolygon(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    gdPoint *plist;
+    int size;
+    int i;
+    int c;
+
+    c = getint(L, 3);
+    lua_remove(L, 3); /* Get and drop color */
+    lua_remove(L, 1); /* Drop image from the stack */
+
+    luaL_checktype(L, -1, LUA_TTABLE);
+    size = luaL_getn(L, -1);
+    plist = (gdPoint*) malloc(size * sizeof(gdPoint));
+
+    for(i = 0; i < size; i++)
+    {
+        /* Stack: T */
+        lua_rawgeti(L, 1, i + 1);
+
+        /* Stack:  T, T'  */
+        if(lua_type(L, 2) != LUA_TTABLE)
+        {
+            free(plist);
+            luaL_typerror(L, 2, "Point");
+        }
+
+        lua_rawgeti(L, 2, 1);
+        /* Stack:  T, T', X  */
+        plist[i].x = getint(L, -1);
+        lua_remove(L, -1);
+
+        /* Stack:  T, T', Y  */
+        lua_rawgeti(L, 2, 2);
+        plist[i].y = getint(L, -1);
+        lua_remove(L, -1);
+
+        /* Stack:  T, T' */
+        lua_remove(L, -1);
+
+        /* Stack: T */
+    }
+
+    gdImageFilledPolygon(im, plist, size, c);
     free(plist);
     return 0;
 }
@@ -1342,7 +1413,9 @@ static const luaL_reg LgdFunctions[] =
     { "ImageSetPixel",              LgdImageSetPixel },
     { "ImageLine",                  LgdImageLine },
     { "ImageRectangle",             LgdImageRectangle },
+    { "ImageFilledRectangle",       LgdImageFilledRectangle },
     { "ImagePolygon",               LgdImagePolygon },
+    { "ImageFilledPolygon",         LgdImageFilledPolygon },
 
 
     { NULL, NULL }
