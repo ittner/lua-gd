@@ -1,5 +1,7 @@
 #!/usr/bin/env lua
 
+-- $Id$
+
 load_gd = loadlib("./libluagd.so", "luaopen_gd")        -- Unix
 if load_gd == nil then
   load_gd = loadlib("./libluagd.dll", "luaopen_gd")     -- Windows
@@ -35,12 +37,6 @@ if gd.createFromXpm then
   print("    XPM/XBM support:       Enabled")
 else
   print("    XPM/XBM support:       Disabled")
-end
-
-if gd.png then
-  print("    PNG support:           Enabled")
-else
-  print("    PNG support:           Disabled")
 end
 
 if gd.stringFT then
