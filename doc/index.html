@@ -1305,11 +1305,75 @@ vertically (rotated 90 degrees), from bottom to up, starting from the
 want use Unicode characters or other rotations than 90°, you should
 use <code>gd.stringFT</code> and True Type fonts. </p>
 
+<h4>gdImage:stringFT(color, fontname, ptsize, angle, x, y, string)</h4>
 
-<h4>gdImage:stringFT(color, fontname, size, angle, x, y, string)</h4>
+<p> <code>stringFT</code> draws a string of anti-aliased characters on the
+image using the FreeType library to render user-supplied TrueType fonts.
+The string is anti-aliased, meaning that there should be fewer "jaggies"
+visible. The fontname is the full pathname to a TrueType font file, or
+a font face name if the <code>GDFONTPATH</code> environment variable
+have been set intelligently. In the absence of a full path, the font
+face name may be presented with or without extension. </p>
+
+<p> The string argument is considered to be encoded via the UTF-8
+standard; also, HTML entities are supported, including decimal,
+hexadecimal, and named entities. Those who are passing ordinary
+ASCII strings may have difficulty with the &amp; character unless
+encoded correctly as <code>&amp;amp;</code> but should have no other
+difficulties.</p>
+
+<p> The string may be arbitrarily scaled (ptsize) and rotated (angle in
+radians). The direction of rotation is counter-clockwise, with 0 radians
+(0 degrees) at 3 o'clock and PI/2 radians (90 degrees) at 12 o'clock
+(you can use <code>math.rad</code> to convert degrees to radians).
+The string is rendered in the color indicated by the color index. Use
+the negative of the desired color index to disable anti-aliasing.  </p>
+
+<p> This function return eight values with the limits of the rendered
+text on sucess or <b>nil</b> on failure. The following code show how to
+use them to draw a bounding rectangle arround the text.
+
+<pre class="example">
+im = gd.createTrueColor(100, 100)
+black = im:colorAllocate(0, 0, 0)
+white = im:colorAllocate(255, 255, 255)
+blue  = im:colorAllocate(0, 0, 240)
+im:filledRectangle(0, 0, 100, 100, black)
+llx, lly, lrx, lry, urx, ury, ulx, uly = im:stringFT(white, "Vera.ttf", 20, math.rad(45), 20, 90, "Lua-GD")
+im:polygon({ {llx, lly}, {lrx, lry}, {urx, ury}, {ulx, uly} }, blue)
+</pre>
+
+Variables used above can be translated as follows. The points are relative
+to the text regardless of the angle, so "upper left" means in the top
+left-hand corner seeing the text horizontally.
+
+<table>
+ <tr> <td>#</td> <td>Name</td> <td>Meaning</td> </tr>
+ <tr> <td>1</td> <td>llx</td> <td>lower left corner, X position</td> </tr>
+ <tr> <td>2</td> <td>lly</td> <td>lower left corner, Y position</td> </tr>
+ <tr> <td>3</td> <td>lrx</td> <td>lower right corner, X position</td> </tr>
+ <tr> <td>4</td> <td>lry</td> <td>lower right corner, Y position</td> </tr>
+ <tr> <td>5</td> <td>urx</td> <td>upper right corner, X position</td> </tr>
+ <tr> <td>6</td> <td>ury</td> <td>upper right corner, Y position</td> </tr>
+ <tr> <td>7</td> <td>ulx</td> <td>upper left corner, X position</td> </tr>
+ <tr> <td>8</td> <td>uly</td> <td>upper left corner, Y position</td> </tr>
+</table>
+
+Also, there is a way to get these values before drawing on the image
+passing <b>nil</b> as the first argument of <code>gd.stringFT</code> (note
+the absence of the colon notation!), as follows. This is a relatively
+cheap operation if followed by a rendering of the same string, because
+of the caching of the partial rendering during bounding rectangle
+calculation.
+
+<pre class="example">
+llx, lly, lrx, lry, urx, ury, ulx, uly = gd.stringFT(nil, white, "Vera.ttf", 20, math.rad(45), 20, 90, "Lua-GD")
+</pre>
+</p>
+
+
 
 <h4>gdImage:stringFTCircle(cx, cy, radius, textRadius, fillPortion, fontname, points, top, bottom, color)</h4>
-
 
 <a name="api.font"></a>
 <h3>Font configuration functions</h3>
