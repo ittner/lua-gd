@@ -324,6 +324,9 @@ X and Y size. </p>
 local im = gd.createTrueColor(20, 20)
 </pre>
 
+<p>You don't need to destroy an image by yourself.  Lua has a garbage
+collector that detects when an piece of information becomes useless and
+"automagically" deletes it from memory. </p>
 
 <a name="api.input"></a>
 <h3>Image input</h3>
@@ -338,7 +341,7 @@ local im = gd.createTrueColor(20, 20)
 <h4>gd.createFromXpm(filename)</h4>
 
 <p>These functions creates new images from files on disk. It will return
-a new image, without modifying the files. <code>gd.createFromGd2Part()</code>
+a new image, without modifying the files. <code>createFromGd2Part()</code>
 has a special feature: can copy <b>parts</b> of and GD2 image. These
 functions returns <b>nil</b> on error (eg. a non-existing or corrupted file
 or a file in the wrong format).</p>
@@ -364,7 +367,7 @@ local im = gd.createFromGd2Part("base.gd2", 0, 0, 20, 20)
 <h4>gd.createFromGd2PartStr(string, x, y, w, h)</h4>
 
 <p>These functions creates new images from strings in memory. It will
-return a new image. <code>gd.createFromGd2PartStr()</code> has a special
+return a new image. <code>createFromGd2PartStr()</code> has a special
 feature: can copy <b>parts</b> of and GD2 image. These functions returns
 <b>nil</b> on error (eg. a non-string or a string with an image in the
 wrong format).</p>
@@ -393,11 +396,11 @@ local im = gd.createFromPngStr(str)
 <h4>gdImage:wbmp(filename)</h4>
 
 <p>These functions writes image files to the disk.
-<code>gdImage:jpeg()</code> allows you to specify the quality of
+<code>jpeg()</code> allows you to specify the quality of
 the generated JPEG file from 1 (worst quality, small files) to 100
-(best quality, large files). <code>gdImage:pngEx()</code> allows you to
+(best quality, large files). <code>pngEx()</code> allows you to
 specify the compression level of a PNG image, from 1 to 6 (or -1 for
-the default compression level of libpng). <code>gdImage:gd2()</code>
+the default compression level of libpng). <code>gd2()</code>
 must receive the chunk size (an integer, or 0 for the default)
 and the file format, which can be <code>gd.GD2_FMT_RAW</code> or
 <code>gd.GD2_FMT_COMPRESSED</code>. These functions returns <b>nil</b>
@@ -445,19 +448,52 @@ end
 <h4>gdImage:wbmpStr()</h4>
 
 <p>These functions returns images as Lua strings.
-<code>gdImage:jpegStr()</code> allows you to specify the quality of the
+<code>jpegStr()</code> allows you to specify the quality of the
 generated JPEG data from 1 (worst quality, small string) to 100 (best
-quality, large string). <code>gdImage:pngStrEx()</code> allows you to
+quality, large string). <code>pngStrEx()</code> allows you to
 specify the compression level of a PNG image, from 1 to 6 (or -1 for the
-default compression level of libpng). <code>gdImage:gd2Str()</code>
+default compression level of libpng). <code>gd2Str()</code>
 must receive the chunk size (an integer, or 0 for the default)
 and the data format, which can be <code>gd.GD2_FMT_RAW</code> or
 <code>gd.GD2_FMT_COMPRESSED</code>. These functions returns <b>nil</b>
 on error (eg. a corrupted image). </p>
 
+<p>Example:</p>
+<pre class="example">
+-- creates a new image
+local im = gd.createTrueColor(20, 20)
+
+-- ** DO SOME ART HERE **
+
+-- writes the image to a PNG file.
+im:png("picture.png")
+
+-- writes the image to stdout in the JPEG format
+io.write(im:jpegStr(75))
+</pre>
+
 
 <a name="api.color"></a>
 <h3>Color manipulation</h3>
+
+
+<h4>gdImage:colorAllocate(red, green, blue)</h4>
+<h4>gdImage:colorAllocateAlpha(red, green, blue, alpha)</h4>
+<h4>gdImage:colorClosest(red, green, blue)</h4>
+<h4>gdImage:colorClosestAlpha(red, green, blue, alpha)</h4>
+<h4>gdImage:colorClosestHWB</h4>
+<h4>gdImage:colorExact(red, green, blue)</h4>
+<h4>gdImage:colorExactAlpha(red, green, blue, alpha)</h4>
+<h4>gdImage:colorResolve(red, green, blue)</h4>
+<h4>gdImage:colorResolveAlpha(red, green, blue, alpha)</h4>
+<h4>gdImage:colorsTotal()</h4>
+<h4>gdImage:red</h4>
+<h4>gdImage:blue</h4>
+<h4>gdImage:green</h4>
+<h4>gdImage:alpha</h4>
+<h4>gdImage:getTransparent</h4>
+<h4>gdImage:colorTransparent</h4>
+<h4>gdImage:colorDeallocate</h4>
 
 <a name="api.draw"></a>
 <h3>Drawing</h3>
