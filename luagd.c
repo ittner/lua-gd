@@ -96,7 +96,8 @@ static int LgdImageCreateTrueColor(lua_State *L)
 static int LgdImageDestroy(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
-    gdImageDestroy(im);
+    if(im)
+        gdImageDestroy(im);
     return 0;
 }
 
@@ -172,13 +173,6 @@ static int LgdImageJpeg(lua_State *L)
     
 
 
-static const luaL_reg LImagePtrMT[] =
-{
-	{ "__gc", LgdImageDestroy},
-	{ NULL, NULL }
-};
-
-    
 static const luaL_reg LgdFunctions[] =
 {
 	{ "ImageCreate",            LgdImageCreate },
@@ -198,11 +192,9 @@ int luaopen_gd(lua_State *L)
     lua_settable(L, -3);
 
     lua_pushliteral(L, "metatable");		/** metatable */
-    luaL_newmetatable(L, GD_IMAGE_TYPENAME);
+    luaL_newmetatable(L, GD_IMAGE_PTR_TYPENAME);
     lua_pushliteral(L, "__index");
     lua_pushvalue(L, -4);
-    lua_settable(L, -3);
-    luaL_openlib(L ,NULL, LImagePtrMT, 0);
     lua_settable(L, -3);
 
     return 0;

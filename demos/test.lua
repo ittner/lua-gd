@@ -10,3 +10,8 @@ else
   print("Error")
 end
 gd.ImageDestroy(im)
+
+
+
+
+print("Namárië")
