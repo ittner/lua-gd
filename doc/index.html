@@ -105,7 +105,7 @@ pre.wrong
 
 <center>
  <a href="http://lua-gd.luaforge.net"
-  ><img src="lua-gd.png" alt="Lua-GD Logo" border="0"></a>
+  ><img src="lua-gd.png" alt="Lua-GD Logo" title="Lua-GD Logo" border="0"></a>
  <h1>Lua-GD Reference Manual</h1>
 </center>
 
@@ -390,7 +390,7 @@ in your scripts. The examples in this document uses this solution, so,
 they can run unchanged under Unix and Windows. 
 </p>
 
-<p> On the upcoming Lua 5.1, Lua-GD will use new package model. </p>
+<p> On the upcoming Lua 5.1, Lua-GD will use new package system. </p>
 
 
 
@@ -539,8 +539,10 @@ gd.FONT_GIANT </h4>
 
 <p> These are the standard gd fonts used by <code>gd.string</code> and
 <code>gd.stringUp</code>. Sizes and styles are shown bellow: <br>
+
 <img src="stdfonts.png" width="140" height="110" alt="Standard GD fonts"
   title="Standard GD fonts"> 
+
 <br> If you need another fonts, you should use TrueType fonts with
 <code>gd.stringFT</code>.
 </p>
@@ -1411,7 +1413,7 @@ transparent. If the image you wish to fill with has a transparent color
 index, call <code>setTransparent</code> on the tile image and set the
 transparent color index to <b>nil</b> to turn off its transparency. </p>
 
-<h4>gdImage:fillToBorder( x, y, border_color, color)</h4>
+<h4>gdImage:fillToBorder(x, y, border_color, color)</h4>
 
 <p> <code>fillToBorder</code> floods a portion of the image with the
 specified color, beginning at the specified point and stopping at the
@@ -2009,7 +2011,9 @@ io.write(im:pngStr())
 <a name="examples.clock"></a>
 <h3>CGI Analog clock</h3>
 
-<img src="clock-example.png" alt="Clock Example output">
+<img src="clock-example.png" alt="Clock Example output"
+title="Clock Example output">
+
 <pre class="example">
 #!/usr/bin/env lua
 
@@ -2085,7 +2089,8 @@ io.write(im:pngStr())
 <a name="examples.fractal"></a>
 <h3>The Sierpinski triangle</h3>
 
-<img src="sierpinski.png" width="250" height="250" alt="The Sierpinski triangle">
+<img src="sierpinski.png" width="250" height="250"
+ alt="The Sierpinski triangle" title="The Sierpinski triangle">
 
 <pre class="example">
 #!/usr/bin/env lua
@@ -2122,7 +2127,9 @@ im:png("sierpinski.png")
 <a name="examples.fontconfig"></a>
 <h3>Using Freetype, Fontconfig and TrueType fonts</h3>
 
-<img src="fontconfig-example.png" alt="Fontconfig Example output">
+<img src="fontconfig-example.png" alt="Fontconfig Example output"
+ title="Fontconfig Example output">
+
 <pre class="example">
 -- The fonts used in this example comes with Microsoft operating systems 
 -- and can be downloaded from http://corefonts.sourceforge.net
@@ -2162,7 +2169,7 @@ im:png("out.png")
   <td width="216"> Image with a staganographic message (the message cause no
     visible changes).</td>
   <td width="216"> Resulting image from <code>"steg.lua diff"</code>
-    showing, in color, the pixels that was changed to store the message. </td>
+    showing, in color, the pixels changed to store the message. </td>
  </tr>
 </table>
 

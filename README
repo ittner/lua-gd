@@ -1,8 +1,5 @@
-Lua-GD -- GD bindings for Lua
+Lua-GD, the gd bindings for the Lua Programming Language
 (c) 2004-05 Alexandre Erwin Ittner <aittner@netuno.com.br>
-
-
-               --- CAUTION: ALPHA RELEASE ---
 
 
 + Introduction
@@ -12,29 +9,16 @@ GD library from Lua. It's BETA software and it continues under
 test. 
 
 
-+ Naming convention
-
-    * All functions are loaded on a single table called 'gd'.
-    * No 'Image' prefix.
-    * Methods uses camelCase names and begins with lower case letters.
-    * Constants uses upper case names, separated by underscores. 
-    * All functions, except gd.create*, gd.gifAnimEnd*, gd.fontCache* and
-      gd.useFontConfig, can use the colon operator for a more object
-      oriented access.
-
-
 + Documentation
 
-There is no docs for now, but there are some lua scripts with examples.
+See doc/index.html for installation instructions and API documentation.
 
 
 
 + TO DO
 
-    * Freeze the API.
     * Support the new package proposal for Lua 5.1
-    * Fix the bugs. :)
-    * Better Makefile (Win32 dlls?).
+    * Better Makefiles (Win32 dlls?).
     * Write some documentation.
 
 

@@ -12,7 +12,7 @@ if load_gd == nil then
 end
 load_gd()
 
-function printED(res, desc)
+function enabled(res, desc)
   local str = "    " .. desc .. " "
   str = str .. string.rep(".", 37 - string.len(str))
   if res then
@@ -25,9 +25,9 @@ end
 print("Lua-GD version: " .. gd.VERSION)
 print("Lua-GD features:")
 
-printED(gd.png, "PNG support")
-printED(gd.gif, "GIF support")
-printED(gd.jpeg, "JPEG support")
-printED(gd.createFromXpm, "XPM/XBM support")
-printED(gd.stringFT, "FreeType support")
-printED(gd.useFontConfig, "Fontconfig support")
+enabled(gd.png, "PNG support")
+enabled(gd.gif, "GIF support")
+enabled(gd.jpeg, "JPEG support")
+enabled(gd.createFromXpm, "XPM/XBM support")
+enabled(gd.stringFT, "FreeType support")
+enabled(gd.useFontConfig, "Fontconfig support")
