@@ -94,6 +94,13 @@ static void pushImagePtr(lua_State *L, gdImagePtr im)
 }
 
 
+/* For not implemented functions */
+static int LgdNull(lua_State *L)
+{
+    return 0;
+}
+
+
 static gdFontPtr getStdFont(lua_State *L, int i)
 {
     int size;
@@ -499,6 +506,7 @@ static int LgdImageCreateFromGd2PartPtr(lua_State *L)
 
 /* gdImageCreateFromXbm(FILE *in) */
 /* Changed to: gdImageCreateFromXbm(char *filename) */
+#ifdef USE_XPM
 static int LgdImageCreateFromXbm(lua_State *L)
 {
     gdImagePtr im;
@@ -523,8 +531,9 @@ static int LgdImageCreateFromXbm(lua_State *L)
         lua_pushnil(L); /* Error */
     return 1;
 }
+#endif
 
-
+#ifdef USE_XPM
 /* gdImageCreateFromXpm(char *filename) */
 static int LgdImageCreateFromXpm(lua_State *L)
 {
@@ -543,7 +552,7 @@ static int LgdImageCreateFromXpm(lua_State *L)
         lua_pushnil(L); /* Error */
     return 1;
 }
-
+#endif
 
 
 
@@ -1908,6 +1917,18 @@ static int LgdImageGetClip(lua_State *L)
 }
 
 
+/* int gdFTUseFontConfig(int flag) */
+/* Changed to: gd.FTUseFontConfig(true_or_false) */
+#ifdef USE_FONTCONFIG
+static int LgdFTUseFontConfig(lua_State *L)
+{
+    int b = lua_toboolean(L, 1);
+    lua_pushboolean(L, gdFTUseFontConfig(b));
+    return 1;
+}
+#endif
+
+
 
 static const luaL_reg LgdFunctions[] =
 {
@@ -1930,8 +1951,14 @@ static const luaL_reg LgdFunctions[] =
     { "ImageCreateFromGd2Ptr",      LgdImageCreateFromGd2Ptr },
     { "ImageCreateFromGd2Part",     LgdImageCreateFromGd2Part },
     { "ImageCreateFromGd2PartPtr",  LgdImageCreateFromGd2PartPtr },
+
+#ifdef USE_XPM
     { "ImageCreateFromXbm",         LgdImageCreateFromXbm },
     { "ImageCreateFromXpm",         LgdImageCreateFromXpm },
+#else
+    { "ImageCreateFromXbm",         LgdNull },
+    { "ImageCreateFromXpm",         LgdNull },
+#endif
 
     { "ImageJpeg",                  LgdImageJpeg },
     { "ImageJpegPtr",               LgdImageJpegPtr },
@@ -2013,6 +2040,14 @@ static const luaL_reg LgdFunctions[] =
     { "ImageSquareToCircle",        LgdImageSquareToCircle },
     { "ImageSharpen",               LgdImageSharpen },
 
+#ifdef USE_FONTCONFIG
+    { "FTUseFontConfig",            LgdFTUseFontConfig },
+#else
+    { "FTUseFontConfig",            LgdNull },
+#endif
+
+    /* Avoid boring warnings when compiling */
+    { "Null",                       LgdNull },
     { NULL, NULL }
 };
 
