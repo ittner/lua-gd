@@ -1,5 +1,48 @@
+
+--[[
+
+Steganography
+
+Steganography is technique of writing hidden messages in such a way that
+no one apart from the intended recipient knows of the existence of the
+message; this is in contrast to cryptography, where the existence of the
+message is clear, but the meaning is obscured. Generally a steganographic
+message will appear to be something else, like a shopping list, an
+article, a picture, or some other "cover" message. In the digital age,
+steganography works by replacing bits of useless or unused data in regular
+computer files (such as graphics, sound, text, HTML, or even floppy disks)
+with bits of different, invisible information. This hidden information
+can be plain text, cipher text or even images.
+
+An Simple Example
+
+If Alice wants to send a secret message to Bob through an insecure
+channel, she can use some encryption software (like GnuPG) to encrypt
+the message with Bob's public key. It's a good solution because no
+one unless Bob will be able to read the message. She can also sign the
+message and Bob will know that the message really comes from her. BUT,
+an potential attacker will know that a ciphered message was sent. If the
+attacker has control over the communication channel, he can block the
+message in some way that Bob will never receive it. If Alice also HIDES
+the ciphertext in a unsuspected piece of information (like a photo of her
+cat) the attacker will not detect it and the message will arrive to Bob.
+
+This program will help Alice to hide some arbitrary text in a PNG image by
+replacing the least significant bits of each color channel of some pixels
+with bits from the encrypted message. PNG or other loseless compression
+algorithm are mandatory here: If the image will be compressed by a lossy
+algorithm, the hidden data can be destroyed. If Alice's message is "Meet
+me in the secret place at nine o'clock.", she will encrypt and sign it to
+something like "PyJYDpz5LCOSHPiXDvLHmVzxLV8qS7EFvZnoo1Mxk+BlT+7lMjpQKs"
+(imagine Alice's cat walking in you keyboard :)
+
+
+
+--]]
+
+
 -- 
--- Plaintext Message: Meet me int the secret place at nine o'clock.
+-- Plaintext Message: Meet me in the secret place at nine o'clock.
 -- Encrypted Message: PyJYDpz5LCOSHPiXDvLHmVzxLV8qS7EFvZnoo1Mxk+BlT+7lMjpQKs
 -- 
 -- 
@@ -42,7 +85,7 @@ function getLSB(n)
 end
 
 
--- Stupid way to do some bit-level operations without bitlib.
+-- Bizarre way to do some bit-level operations without bitlib.
 function setLSB(n, b)
   if type(b) == "number" then
     if b == 0 then
@@ -102,7 +145,7 @@ function mergeMessage(im, msg)
   local len = string.len(msg)
 
   -- TRICK: if message bit length is multiple of 3*8, the code will
-  -- not leave broken bit sequences.
+  -- not leave "broken" bit sequences.
   if math.mod(len, 3) ~= 0 then
     msg = msg .. string.rep(string.char(0), math.mod(len, 3))
     len = string.len(msg)
@@ -250,9 +293,4 @@ end
 
 usage()
 os.exit(1)
-
-
-  
-
-
 
