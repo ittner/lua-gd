@@ -424,22 +424,20 @@ collector that detects when an piece of information becomes useless and
 
 <h4>gdImage:createPaletteFromTrueColor(dither, colorsWanted)</h4>
 
-<p> The function creates a new palette-based image from a truecolor image
-using a high-quality two-pass quantization routine. If the dither flag
-is set to <b>true</b>, the image will be dithered to approximate colors
-better, at the expense of some obvious "speckling." colorsWanted, an
-integer value, can be anything up to 256. If the original source image
-includes photographic information or anything that came out of a JPEG,
-256 is strongly recommended. 100% transparency of a single transparent
-color in the original truecolor image will be preserved. There is no
-other support for preservation of alpha channel or transparency in
-the destination image. For best results, don't use this function --
-write real truecolor PNGs and JPEGs. The disk space gain of conversion
-to palette is not great (for small images it can be negative) and the
-quality loss is ugly. </p>
+<p> The function creates a new palette-based image from a truecolor
+image using a high-quality two-pass quantization routine. If
+the <b>dither</b> flag is set to <b>true</b>, the image will be
+dithered to approximate colors better, at the expense of some obvious
+"speckling". <b>colorsWanted</b>, an integer value, can be anything up
+to 256. If the original source image includes photographic information
+or anything that came out of a JPEG, 256 is strongly recommended. 100%
+transparency of a single transparent color in the original truecolor
+image will be preserved. There is no other support for preservation of
+alpha channel or transparency in the destination image. </p>
 
-
-
+<p> For best results, don't use this function -- write real truecolor
+PNGs and JPEGs. The disk space gain of conversion to palette is not great
+(for small images it can be negative) and the quality loss is ugly. </p>
 
 
 
@@ -1602,15 +1600,58 @@ merging a solid color with pct = 50.</p>
 <h4>gd.copyMergeGray(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h, pct)<br>
 dstImage:copyMergeGray(srcImage, dstX, dstY, srcX, srcY, w, h, pct)</h4>
 
+<p> <code>gd.copyMergeGray</code> is almost identical to
+<code>gd.copyMerge</code>, except that when merging images it preserves
+the hue of the source by converting the destination pixels to grey scale
+before the copy operation. <p>
+
 
 
 <h4>gd.paletteCopy(dstImage, srcImage)<br>
 dstImage:paletteCopy(srcImage)</h4>
 
+<p> <code>gd.paletteCopy</code> copies a palette from one image to another,
+attempting to match the colors in the target image to the colors in the
+source palette. </p>
+
+
 
 <h4>gdImage:squareToCircle(radius)</h4>
+
+<p> Returns a new image of width and height radius * 2, in which the X
+axis of the original has been remapped to <em>theta</em> (angle) and the
+Y axis of the original has been remapped to <em>rho</em> (distance from
+center). This is known as a "polar coordinate transform".  The image
+<b>MUST</b> be square, but can have any size. </p>
+
+
+
 <h4>gdImage:sharpen(pct)</h4>
-<h4>gd.trueColorToPalette(sx, sy)</h4>
+
+<p> Sharpens the specified image. <b>pct</b> is a sharpening percentage,
+and can be greater than 100. Silently does nothing to non-truecolor
+images. Silently does nothing for <b>pct</b> < 0. Transparency/alpha
+channel are not altered. </p>
+
+
+
+<h4>gdImage:trueColorToPalette(dither, colorsWanted)</h4>
+
+<p> This function converts a truecolor image to a palette-based image,
+using a high-quality two-pass quantization routine. If <b>dither</b>
+is set to <b>true</b>, the image will be dithered to approximate colors
+better, at the expense of some obvious "speckling". <b>colorsWanted</b>,
+an integer value, can be anything up to 256. If the original source image
+includes photographic information or anything that came out of a JPEG,
+256 is strongly recommended. 100% transparency of a single transparent
+color in the original truecolor image will be preserved. There is no
+other support for preservation of alpha channel or transparency in the
+destination image. </p>
+
+<p> For best results, don't use this function -- write real truecolor
+PNGs and JPEGs. The disk space gain of conversion to palette is not great
+(for small images it can be negative) and the quality loss is ugly. </p>
+
 
 
 
