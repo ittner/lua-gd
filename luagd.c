@@ -1173,6 +1173,23 @@ static int LgdImageLine(lua_State *L)
     return 0;
 }
 
+/* void gdImageRectangle(gdImagePtr im, int x1, int y1, int x2, int y2,
+        int c) */
+static int LgdImageRectangle(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int x1 = getint(L, 2);
+    int y1 = getint(L, 3);
+    int x2 = getint(L, 4);
+    int y2 = getint(L, 5);
+    int c = getint(L, 6);
+
+    if(im)
+        gdImageRectangle(im, x1, y1, x2, y2, c);
+    return 0;
+}
+
+
 
 /* int gdImageSX(gdImagePtr im) */
 static int LgdImageSX(lua_State *L)
@@ -1270,6 +1287,8 @@ static const luaL_reg LgdFunctions[] =
 
     { "ImageSetPixel",              LgdImageSetPixel },
     { "ImageLine",                  LgdImageLine },
+    { "ImageRectangle",             LgdImageRectangle },
+
 
     { NULL, NULL }
 };

@@ -52,7 +52,7 @@ X gdImageCreateFromXbm
 X gdImageCreateFromXpm 
 X gdImageCreatePalette 
 X gdImageCreateTrueColor 
-  gdImageDashedLine 
+N gdImageDashedLine (depreciada)
 X gdImageDestroy 
   gdImageFill 
   gdImageFillToBorder 
@@ -85,8 +85,8 @@ X gdImagePngPtr
 X gdImagePngPtrEx 
 N gdImagePngToSink
   gdImagePolygon 
-  gdImagePtr 
-  gdImageRectangle 
+X gdImagePtr    (tipo)
+X gdImageRectangle 
 X gdImageRed 
   gdImageSaveAlpha 
   gdImageSetAntiAliased 
