@@ -36,13 +36,12 @@
 #include <gdfontg.h>
 #include <gdfontt.h>
 
-
 #define LIB_NAME                "gd"
-#define MY_GD_VERSION           "gd 2.0.33"
+#define GD_VERSION              "gd 2.0.33"
 #define GD_IMAGE_TYPENAME       "gdImage_handle"
 #define GD_IMAGE_PTR_TYPENAME   "gdImagePtr_handle"
 
-#define LIB_VERSION "lua-gd " MY_GD_VERSION " (c) 2004-2005 Alexandre Erwin Ittner"
+#define LIB_VERSION "lua-gd (c) 2004-05 Alexandre Erwin Ittner, " GD_VERSION
 
 
 /* These macros was written by Luiz Henrique de Figueiredo
