@@ -189,6 +189,37 @@ static int LgdImageCreateTrueColor(lua_State *L)
     return 1;
 }
 
+/* gdImagePtr gdImageCreatePaletteFromTrueColor(gdImagePtr im, int ditherFlag,
+    int colorsWanted) */
+static int LgdImageCreatePaletteFromTrueColor(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int dither = lua_toboolean(L, 2);
+    int colors = getint(L, 3);
+    gdImagePtr nim = gdImageCreatePaletteFromTrueColor(im, dither, colors);
+    
+    if(nim)
+        pushImagePtr(L, nim);
+    else
+        lua_pushnil(L);
+    return 1;
+}
+
+
+/* void gdImageTrueColorToPalette(gdImagePtr im, int ditherFlag,
+    int colorsWanted) */
+static int LgdImageTrueColorToPalette(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int dither = lua_toboolean(L, 2);
+    int colors = getint(L, 3);
+
+    gdImageTrueColorToPalette(im, dither, colors);
+    return 0;
+}
+
+
+
 /* gdImageDestroy(gdImagePtr im) */
 static int LgdImageDestroy(lua_State *L)
 {
@@ -1950,9 +1981,11 @@ static const luaL_reg LgdFunctions[] =
 /*  Leave Lua do it!
     { "destroy",                LgdImageDestroy }, */
 
-    { "create",                 LgdImageCreate },
-    { "createPalette",          LgdImageCreatePalette },
-    { "createTrueColor",        LgdImageCreateTrueColor },
+    { "create",                     LgdImageCreate },
+    { "createPalette",              LgdImageCreatePalette },
+    { "createTrueColor",            LgdImageCreateTrueColor },
+    { "createPaletteFromTrueColor", LgdImageCreatePaletteFromTrueColor },
+    { "trueColorToPalette",         LgdImageTrueColorToPalette },
 
     { "createFromJpeg",         LgdImageCreateFromJpeg },
     { "createFromJpegStr",      LgdImageCreateFromJpegPtr },

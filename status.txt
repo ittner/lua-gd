@@ -115,8 +115,8 @@ X gdImageStringFTCircle
 N gdImageStringTTF  (deprecated)
 X gdImageStringUp 
 ? gdImageStringUp16 
-  gdImageCreatePaletteFromTrueColor
-  gdImageTrueColorToPalette
+X gdImageCreatePaletteFromTrueColor
+X gdImageTrueColorToPalette
 X gdImageWBMP 
 X gdImageWBMPtr
 N gdImageWBMPCtx 
