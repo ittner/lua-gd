@@ -1,20 +1,36 @@
-
+#/usr/bin/env lua
 --[[
 
-Steganography
+Using Lua-GD to write steganographic messages in PNG images.
+(c) 2005 Alexandre Erwin Ittner <aittner@netuno.com.br>
 
-Steganography is technique of writing hidden messages in such a way that
-no one apart from the intended recipient knows of the existence of the
-message; this is in contrast to cryptography, where the existence of the
-message is clear, but the meaning is obscured. Generally a steganographic
-message will appear to be something else, like a shopping list, an
-article, a picture, or some other "cover" message. In the digital age,
-steganography works by replacing bits of useless or unused data in regular
-computer files (such as graphics, sound, text, HTML, or even floppy disks)
-with bits of different, invisible information. This hidden information
-can be plain text, cipher text or even images.
+This program is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation; either version 2 of the License, or (at your
+option) any later version.
 
-An Simple Example
+This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+for more details.
+
+
+
+                      Steganography with Lua-GD
+
+Steganography is the technique of writing hidden messages in such a way
+that no one apart from the intended recipient knows of the existence of
+the message; this is in contrast to cryptography, where the existence
+of the message is clear, but the meaning is obscured. Generally a
+steganographic message will appear to be something else, like a shopping
+list, an article, a picture, or some other "cover" message. In the
+digital age, steganography works by replacing bits of useless or unused
+data in regular computer files (such as graphics, sound, text, HTML, or
+even floppy disks) with bits of different, invisible information. This
+hidden information can be plain text, cipher text or even images.
+
+
+                           A Simple Example
 
 If Alice wants to send a secret message to Bob through an insecure
 channel, she can use some encryption software (like GnuPG) to encrypt
@@ -34,48 +50,55 @@ algorithm are mandatory here: If the image will be compressed by a lossy
 algorithm, the hidden data can be destroyed. If Alice's message is "Meet
 me in the secret place at nine o'clock.", she will encrypt and sign it to
 something like "PyJYDpz5LCOSHPiXDvLHmVzxLV8qS7EFvZnoo1Mxk+BlT+7lMjpQKs"
-(imagine Alice's cat walking in you keyboard :)
+(imagine Alice's cat walking in you keyboard :). This is the ciphertext
+that will be sent to Bob through the image.
+
+The following table shows what happens to the first eight pixels of the
+image when mixed to the first three bytes of the encrypted massage:
 
 
+         +-----+---+----------+-----------------+----------+
+         | Pix | C | Orig img |     Message     | New img  |
+         |  #  |   |   bits   | Chr | Dec | Bin |   bits   |
+         +-----+---+----------+-----+-----+-----+----------+
+         |     | R | 01010010 |     |     |  0  | 01010010 |
+         |  1  | G | 00101010 |     |     |  1  | 00101011 |
+         |_____| B | 00010101 |     |     |  0  | 00010100 |
+         |     | R | 11100100 |  P  | 080 |  1  | 11100101 |
+         |  2  | G | 00100100 |     |     |  0  | 00100100 |
+         |_____| B | 01001111 |     |     |  0  | 01001110 |
+         |     | R | 01010010 |     |     |  0  | 01010010 |
+         |  3  | G | 00101110 |_____|_____|__0__| 00101110 |
+         |_____| B | 00111001 |     |     |  0  | 00111000 |
+         |     | R | 10010110 |     |     |  1  | 10010111 |
+         |  4  | G | 01011101 |     |     |  1  | 01011101 |
+         |_____| B | 00100101 |  y  | 121 |  1  | 00100101 |
+         |     | R | 01001001 |     |     |  1  | 01001001 |
+         |  5  | G | 10110110 |     |     |  0  | 10110110 |
+         |_____| B | 00010101 |     |     |  0  | 00010100 |
+         |     | R | 00110100 |_____|_____|__1__| 00110101 |
+         |  6  | G | 01000111 |     |     |  0  | 01000110 |
+         |_____| B | 01001000 |     |     |  1  | 01001001 |
+         |     | R | 01010110 |     |     |  0  | 01010110 |
+         |  7  | G | 00011001 |     |     |  0  | 00011000 |
+         |_____| B | 10010100 |  J  | 074 |  1  | 10010101 |
+         |     | R | 00010101 |     |     |  0  | 00010100 |
+         |  8  | G | 01011010 |     |     |  1  | 01011011 |
+         |     | B | 01010001 |     |     |  0  | 01010000 |
+         +-----+---+----------+-----+-----+-----+----------+
+
+
+When Bob wants to read the message he will extract the least significant
+bit (LSB) from each color channel from some pixels of the image and
+join them to get the original ciphertext. A NULL character (ASCII #0)
+will mark the end of the message within the image, so will know when
+stop. Of course, this program will also do this boring process for Bob.
+
+
+$Id$
 
 --]]
 
-
--- 
--- Plaintext Message: Meet me in the secret place at nine o'clock.
--- Encrypted Message: PyJYDpz5LCOSHPiXDvLHmVzxLV8qS7EFvZnoo1Mxk+BlT+7lMjpQKs
--- 
--- 
--- +-----+---+----------+-----------------+----------+
--- | Pix | C | Orig img |     Message     | New img  |
--- |  #  |   |   bits   | Chr | Dec | Bin |   bits   |
--- +-----+---+----------+-----+-----+-----+----------+
--- |     | R | 01010010 |     |     |  0  | 01010010 |
--- |  1  | G | 00101010 |     |     |  1  | 00101011 |
--- |_____| B | 00010101 |     |     |  0  | 00010100 |
--- |     | R | 11100100 |  P  | 080 |  1  | 11100101 |
--- |  2  | G | 00100100 |     |     |  0  | 00100100 |
--- |_____| B | 01001111 |     |     |  0  | 01001110 |
--- |     | R | 01010010 |     |     |  0  | 01010010 |
--- |  3  | G | 00101110 |_____|_____|__0__| 00101110 |
--- |_____| B | 00111001 |     |     |  0  | 00111000 |
--- |     | R | 10010110 |     |     |  1  | 10010111 |
--- |  4  | G | 01011101 |     |     |  1  | 01011101 |
--- |_____| B | 00100101 |  y  | 121 |  1  | 00100101 |
--- |     | R | 01001001 |     |     |  1  | 01001001 |
--- |  5  | G | 10110110 |     |     |  0  | 10110110 |
--- |_____| B | 00010101 |     |     |  0  | 00010100 |
--- |     | R | 00110100 |_____|_____|__1__| 00110101 |
--- |  6  | G | 01000111 |     |     |  0  | 01000110 |
--- |_____| B | 01001000 |     |     |  1  | 01001001 |
--- |     | R | 01010110 |     |     |  0  | 01010110 |
--- |  7  | G | 00011001 |     |     |  0  | 00011000 |
--- |_____| B | 10010100 |  J  | 074 |  1  | 10010101 |
--- |     | R | 00010101 |     |     |  0  | 00010100 |
--- |  8  | G | 01011010 |     |     |  1  | 01011011 |
--- |     | B | 01010001 |     |     |  0  | 01010000 |
--- +-----+---+----------+-----+-----+-----+----------+
--- 
 
 require "gd"
 
