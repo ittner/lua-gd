@@ -155,6 +155,32 @@ static int LgdImageCreateFromJpeg(lua_State *L)
 }
 
 
+/* gdImageCreateFromJpegPtr(int size, void *data) */
+static int LgdImageCreateFromJpegPtr(lua_State *L)
+{
+    gdImagePtr im;
+    int size = lua_strlen(L, 1);
+    void *str = (void*) getstring(L, 1);
+
+    if(str == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    im = gdImageCreateFromJpegPtr(size, str);
+    if(im != NULL)
+    {
+        lua_boxpointer(L, im);
+        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
+        lua_setmetatable(L, -2);    /* Done */
+    }
+    else
+        lua_pushnil(L); /* Error */
+    return 1;
+}
+
+
+
 /* gdImageCreateFromGif(FILE *in) */
 /* Changed to: gdImageCreateFromGif(char *filename) */
 static int LgdImageCreateFromGif(lua_State *L)
@@ -713,6 +739,7 @@ static const luaL_reg LgdFunctions[] =
     { "ImageCreateTrueColor",   LgdImageCreateTrueColor },
     { "ImageDestroy",           LgdImageDestroy },
     { "ImageCreateFromJpeg",    LgdImageCreateFromJpeg },
+    { "ImageCreateFromJpegPtr", LgdImageCreateFromJpegPtr },
     { "ImageCreateFromGif",     LgdImageCreateFromGif },
     { "ImageCreateFromPng",     LgdImageCreateFromPng },
     { "ImageCreateFromGd",      LgdImageCreateFromGd },
