@@ -1,5 +1,5 @@
 Lua-GD -- GD bindings for Lua
-(c) 2004 Alexandre Erwin Ittner <aittner@netuno.com.br>
+(c) 2004-05 Alexandre Erwin Ittner <aittner@netuno.com.br>
 
 
                --- CAUTION: ALPHA RELEASE ---
@@ -8,10 +8,8 @@ Lua-GD -- GD bindings for Lua
 + Introduction
 
 Lua-GD is a library that provides access to the Thomas Boutell's
-GD library from Lua. It's ALPHA software and it continues under
-development. DON'T USE THIS RELEASE FOR ANYTHING EXCEPT TESTING!
-THE API STILLS SUBJECT TO CHANGES. Future releases will be more
-stable.
+GD library from Lua. It's BETA software and it continues under
+test. 
 
 
 + Naming convention
@@ -37,7 +35,6 @@ There is no docs for now, but there are some lua scripts with examples.
     * Support the new package proposal for Lua 5.1
     * Fix the bugs. :)
     * Better Makefile (Win32 dlls?).
-    * More examples.
     * Write some documentation.
 
 
