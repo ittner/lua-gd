@@ -2118,14 +2118,14 @@ static const luaL_reg LgdFunctions[] =
     { "ImageSquareToCircle",        LgdImageSquareToCircle },
     { "ImageSharpen",               LgdImageSharpen },
 
+    { "ImageStringFT",              LgdImageStringFT },
+    { "ImageStringFTCircle",        LgdImageStringFTCircle },
+
 #ifdef USE_FONTCONFIG
     { "FTUseFontConfig",            LgdFTUseFontConfig },
 #else
     { "FTUseFontConfig",            LgdNull },
 #endif
-
-    { "ImageStringFT",              LgdImageStringFT },
-    { "ImageStringFTCircle",        LgdImageStringFTCircle },
 
     /* Avoid boring warnings when compiling */
     { "Null",                       LgdNull },
