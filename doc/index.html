@@ -388,6 +388,18 @@ of the desired image to return the new image or <b>nil</b>
 on error. <code>gd.createPalette</code> is a synomym for
 <code>gd.create</code>. </p>
 
+<p>Example:
+<pre class="example">
+-- creates a 20x20px palette-based image
+local im = gd.create(20, 20)
+</pre>
+</p>
+
+
+<p>You don't need to destroy an image by yourself.  Lua has a garbage
+collector that detects when an piece of information becomes useless and
+"automagically" deletes it from memory. </p>
+
 
 <h4>gd.createTrueColor(x, y)</h4>
 
@@ -397,32 +409,107 @@ y dimensions of the desired image to return the new image or <b>nil</b>
 on error. Truecolor images are always filled with black at creation
 time. There is no concept of a "background" color index. </p>
 
-
-<h4>gd.createPaletteFromTrueColor(sx, sy)</h4>
-<h4>gd.trueColorToPalette(sx, sy)</h4>
-
-<p> These function will create and return a new image with the specified
-X and Y size. </p>
-
-<p>Example:</p>
+<p>Example:
 <pre class="example">
 -- creates a 20x20px true color image
 local im = gd.createTrueColor(20, 20)
 </pre>
+</p>
 
 <p>You don't need to destroy an image by yourself.  Lua has a garbage
 collector that detects when an piece of information becomes useless and
 "automagically" deletes it from memory. </p>
 
+
+
+<h4>gdImage:createPaletteFromTrueColor(dither, colorsWanted)</h4>
+
+<p> The function creates a new palette-based image from a truecolor image
+using a high-quality two-pass quantization routine. If the dither flag
+is set to <b>true</b>, the image will be dithered to approximate colors
+better, at the expense of some obvious "speckling." colorsWanted, an
+integer value, can be anything up to 256. If the original source image
+includes photographic information or anything that came out of a JPEG,
+256 is strongly recommended. 100% transparency of a single transparent
+color in the original truecolor image will be preserved. There is no
+other support for preservation of alpha channel or transparency in
+the destination image. For best results, don't use this function --
+write real truecolor PNGs and JPEGs. The disk space gain of conversion
+to palette is not great (for small images it can be negative) and the
+quality loss is ugly. </p>
+
+
+
+
+
+
+
 <a name="api.input"></a>
 <h3>Image input functions</h3>
 
+
+
 <h4>gd.createFromJpeg(filename)</h4>
-<h4>gd.createFromGif(filename)</h4>
+
+<p> <code>gd.createFromJpeg</code> is called to load truecolor images from
+JPEG format files. Invoke <code>gd.createFromJpeg</code> with a string
+pointing to an existing file containing the desired image to return a new
+truecolor image or <b>nil</b> if unable to load the image (most often
+because the file is corrupt or does not contain a JPEG image). You can
+determine the size of the image with <code>gd.sizeXY</code>. The returned
+image is always a truecolor image. </p>
+
+
+
 <h4>gd.createFromPng(filename)</h4>
+
+<p> <code>gd.createFromPng</code> is called to load images from PNG format
+files. Invoke <code>gd.createFromPng</code> with a string pointing to
+an existing file containing the desired image to return a new image or
+<b>nil</b> if unable to load the image (most often because the file is
+corrupt or does not contain a PNG image). You can determine the size of
+the image with <code>gd.sizeXY</code>. </p>
+
+<p> If the PNG image being loaded is a truecolor image, the resulting
+value will refer to a truecolor image. If the PNG image being loaded
+is a palette or grayscale image, the resulting data will refer to a
+palette image. gd retains only 8 bits of resolution for each of the red,
+green and blue channels, and only 7 bits of resolution for the alpha
+channel. The former restriction affects only a handful of very rare
+48-bit color and 16-bit grayscale PNG images. The second restriction
+affects all semitransparent PNG images, but the difference is essentially
+invisible to the eye. 7 bits of alpha channel resolution is, in practice,
+quite a lot. </p>
+
+
+
+<h4>gd.createFromGif(filename)</h4>
+
+<p> <code>gd.createFromGif</code> is called to load images from GIF format
+files. Invoke <code>gd.createFromGif</code> with a string pointing to
+an existing file containing the desired image to return a new image or
+<b>nil</b> if unable to load the image (most often because the file is
+corrupt or does not contain a GIF image). You can determine the size of
+the image with <code>gd.sizeXY</code>. </p>
+
+
 <h4>gd.createFromGd(filename)</h4>
+
+<p> <code>gd.createFromGd</code> is called to load images from gd format
+files. Invoke <code>gd.createFromGd</code> with a string pointing to
+an existing file containing the desired image to return a new image or
+<b>nil</b> if unable to load the image (most often because the file is
+corrupt or does not contain a gd image). You can determine the size of
+the image with <code>gd.sizeXY</code>. This format is not intended for
+general purpose use and should never be used to distribute images. Its
+purpose is solely to allow very fast loading of images. </p>
+
+
+
 <h4>gd.createFromGd2(filename)</h4>
 <h4>gd.createFromGd2Part(filename, x, y, w, h)</h4>
+
+
 <h4>gd.createFromXbm(filename)</h4>
 <h4>gd.createFromXpm(filename)</h4>
 
@@ -1062,6 +1149,7 @@ a proper stack, this is not a problem at all.) </p>
 <h4>gdImage:squareToCircle(radius)</h4>
 <h4>gdImage:sharpen(pct)</h4>
 
+<h4>gd.trueColorToPalette(sx, sy)</h4>
 
 
 
