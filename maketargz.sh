@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PACKAGE=lua-gd
-VERSION=alpha-2
+VERSION=beta-1
 
 DIRNAME=$PACKAGE-$VERSION
 TGZNAME=$DIRNAME.tar.gz
