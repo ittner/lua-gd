@@ -25,8 +25,17 @@
 
 #include <lua.h>
 #include <lauxlib.h>
-#include <gd.h>
 #include <stdlib.h>
+
+#include <gd.h>
+
+/* Standard gd fonts */
+#include <gdfonts.h>
+#include <gdfontl.h>
+#include <gdfontmb.h>
+#include <gdfontg.h>
+#include <gdfontt.h>
+
 
 #define LIB_NAME                "gd"
 #define MY_GD_VERSION           "gd 2.0.33"
@@ -55,7 +64,12 @@
     lua_pushnumber(L, v);       \
     lua_settable(L, -3);
 
-
+/* Standard gd fonts */
+#define MY_GD_FONT_SMALL            0
+#define MY_GD_FONT_LARGE            1
+#define MY_GD_FONT_MEDIUM_BOLD      2
+#define MY_GD_FONT_GIANT            3
+#define MY_GD_FONT_TINY             4
 
 
 static gdImagePtr getImagePtr(lua_State *L, int i)
@@ -77,6 +91,43 @@ static void pushImagePtr(lua_State *L, gdImagePtr im)
     lua_boxpointer(L, im);
     luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
     lua_setmetatable(L, -2);    /* Done */
+}
+
+
+static gdFontPtr getStdFont(lua_State *L, int i)
+{
+    int size;
+
+    if(lua_isnumber(L, i) == 0)
+    {
+        luaL_typerror(L, i, "Standard GD Font");
+        return gdFontGetSmall();
+    }
+
+    size = getint(L, i);
+    switch(size)
+    {
+        case MY_GD_FONT_SMALL:
+            return gdFontGetSmall();
+
+        case MY_GD_FONT_LARGE:
+            return gdFontGetLarge();
+
+        case MY_GD_FONT_MEDIUM_BOLD:
+            return gdFontGetMediumBold();
+
+        case MY_GD_FONT_GIANT:
+            return gdFontGetGiant();
+
+        case MY_GD_FONT_TINY:
+            return gdFontGetTiny();
+
+        default:
+            luaL_typerror(L, i, "Standard GD Font");
+            return gdFontGetSmall();
+    }
+
+    return gdFontGetSmall(); /* Not reached */
 }
 
 
@@ -137,6 +188,7 @@ static int LgdImageDestroy(lua_State *L)
     gdImagePtr im = getImagePtr(L, 1);
     if(im)
         gdImageDestroy(im);
+    printf("Clean!\n");
     return 0;
 }
 
@@ -1590,11 +1642,43 @@ static int LgdImageInterlace(lua_State *L)
 }
 
 
+/* void gdImageString(gdImagePtr im, gdFontPtr font, int x, int y,
+        unsigned char *s, int color) */
+static int LgdImageString(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    gdFontPtr fnt = getStdFont(L, 2);
+    int x = getint(L, 3);
+    int y = getint(L, 4);
+    char *str = (char*) getstring(L, 5);
+    int c = getint(L, 6);
+
+    gdImageString(im, fnt, x, y, str, c);
+    return 0;
+}
+
+
+/* void gdImageStringUp(gdImagePtr im, gdFontPtr font, int x, int y,
+        unsigned char *s, int color)  */
+static int LgdImageStringUp(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    gdFontPtr fnt = getStdFont(L, 2);
+    int x = getint(L, 3);
+    int y = getint(L, 4);
+    char *str = (char*) getstring(L, 5);
+    int c = getint(L, 6);
+
+    gdImageStringUp(im, fnt, x, y, str, c);
+    return 0;
+}
+
 
 
 static const luaL_reg LgdFunctions[] =
 {
-    { "ImageDestroy",               LgdImageDestroy },
+/*  Leave Lua do it!
+    { "ImageDestroy",               LgdImageDestroy }, */
 
     { "ImageCreate",                LgdImageCreate },
     { "ImageCreatePalette",         LgdImageCreatePalette },
@@ -1678,6 +1762,17 @@ static const luaL_reg LgdFunctions[] =
     { "ImageGetInterlaced",             LgdImageGetInterlaced },
     { "ImageInterlace",                 LgdImageInterlace },
 
+    { "ImageString",                LgdImageString },
+    { "ImageStringUp",              LgdImageStringUp },
+
+    { NULL, NULL }
+};
+
+
+/* Thanks, LHF! */
+static const luaL_reg LgdMetatable[] =
+{
+    { "__gc", LgdImageDestroy },
     { NULL, NULL }
 };
 
@@ -1703,10 +1798,19 @@ int luaopen_gd(lua_State *L)
     tblseticons(L, "Tiled", gdTiled);
     tblseticons(L, "Transparent", gdTransparent);
 
+    /* Standard gd fonts */
+    tblseticons(L, "FontSmall", MY_GD_FONT_SMALL);
+    tblseticons(L, "FontLarge", MY_GD_FONT_LARGE);
+    tblseticons(L, "FontMedium", MY_GD_FONT_MEDIUM_BOLD);
+    tblseticons(L, "FontGiant", MY_GD_FONT_GIANT);
+    tblseticons(L, "FontTiny", MY_GD_FONT_TINY);
+
     lua_pushliteral(L, "metatable");    /** metatable */
     luaL_newmetatable(L, GD_IMAGE_PTR_TYPENAME);
     lua_pushliteral(L, "__index");
     lua_pushvalue(L, -4);
+    lua_settable(L, -3);
+    luaL_openlib(L, NULL, LgdMetatable, 0);
     lua_settable(L, -3);
 
     return 0;

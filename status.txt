@@ -103,7 +103,7 @@ X gdImageSetThickness
 X gdImageSetTile 
   gdImageSharpen 
   gdImageSquareToCircle 
-  gdImageString 
+X gdImageString
 X gdImageSX
 X gdImageSY
   gdImageString16 
@@ -111,7 +111,7 @@ X gdImageSY
   gdImageStringFTCircle 
   gdImageStringFTEx 
   gdImageStringTTF 
-  gdImageStringUp 
+X gdImageStringUp 
   gdImageStringUp16 
   gdImageToPalette 
 X gdImageWBMP 

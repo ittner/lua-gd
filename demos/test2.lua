@@ -5,11 +5,14 @@ im = gd.ImageCreateFromJpeg("./bugs.jpg")
 assert(im)
 
 white = im:ImageColorAllocate(255, 255, 255)
-im:ImageSetStyle({ white, white, white, white, gd.Transparent })
+gray = im:ImageColorAllocate(128, 128, 128)
 x, y = im:ImageSXY()
-im:ImageLine(0, 0, x, y, gd.Styled)
+
+im:ImageString(gd.FontMedium, 10, 10, "Powered by Lua-GD", white)
+
+for i = 0, 15 do
+    im:ImageStringUp(gd.FontGiant, 5+20*i, y-20, "Lua-GD", gray)
+end
 
 im:ImagePng("./out.png")
-im:ImageDestroy()
-
 os.execute("display out.png")
