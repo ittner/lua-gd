@@ -99,6 +99,8 @@ X gdImageSetPixel
   gdImageSharpen 
   gdImageSquareToCircle 
   gdImageString 
+X gdImageSX
+X gdImageSY
   gdImageString16 
   gdImageStringFT 
   gdImageStringFTCircle 

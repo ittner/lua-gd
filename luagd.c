@@ -1174,6 +1174,35 @@ static int LgdImageLine(lua_State *L)
 }
 
 
+/* int gdImageSX(gdImagePtr im) */
+static int LgdImageSX(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    lua_pushnumber(L, gdImageSX(im));
+    return 1;
+}
+
+
+/* int gdImageSY(gdImagePtr im) */
+static int LgdImageSY(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    lua_pushnumber(L, gdImageSY(im));
+    return 1;
+}
+
+
+/* Fear the power of the Moon!!  ---   x, y = im:ImageSXY() */
+static int LgdImageSXY(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    lua_pushnumber(L, gdImageSX(im));
+    lua_pushnumber(L, gdImageSY(im));
+    return 2;
+}
+
+
+
 
 
 static const luaL_reg LgdFunctions[] =
@@ -1233,9 +1262,12 @@ static const luaL_reg LgdFunctions[] =
     { "ImageColorTransparent",      LgdImageColorTransparent },
     { "ImageColorDeallocate",       LgdImageColorDeallocate },
 
-
     { "ImageBoundsSafe",            LgdImageBoundsSafe },
     { "ImageGetPixel",              LgdImageGetPixel },
+    { "ImageSX",                    LgdImageSX },
+    { "ImageSY",                    LgdImageSY },
+    { "ImageSXY",                   LgdImageSXY },
+
     { "ImageSetPixel",              LgdImageSetPixel },
     { "ImageLine",                  LgdImageLine },
 
