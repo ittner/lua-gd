@@ -7,7 +7,7 @@ assert(im)
 black = im:colorAllocate(0, 0, 0)
 blue = {}
 for i = 1, 20 do
-  blue[i] = im:colorAllocate(0, 0, 120 + 6 * i)
+  blue[i] = im:colorAllocate(0, 0, 120+6*i)
 end
 
 im:gifAnimBegin("out.gif", true, 0)
