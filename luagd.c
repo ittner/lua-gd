@@ -1930,6 +1930,56 @@ static int LgdFTUseFontConfig(lua_State *L)
 
 
 
+/* char *gdImageStringFT(gdImagePtr im, int *brect, int fg, char *fontname,
+        double ptsize, double angle, int x, int y, char *string)
+
+ Changed To:
+    llX, llY, lrX, lrY, urX, urY, ulX, ulY = im:ImageStringFT(fg, fontname,
+            ptsize, angle, x, y, string)
+
+  Or (to get the points only):
+    llX, llY, lrX, lrY, urX, urY, ulX, ulY = gd:ImageStringFT(nil, fg,
+            fontname, ptsize, angle, x, y, string)
+*/
+ 
+static int LgdImageStringFT(lua_State *L)
+{
+    gdImagePtr im;
+    int fg = getint(L, 2);
+    char *font = (char*) getstring(L, 3);
+    double size = (double) lua_tonumber(L, 4);
+    double ang = (double) lua_tonumber(L, 5);
+    int x = getint(L, 6);
+    int y = getint(L, 7);
+    char *str = (char*) getstring(L, 8);
+    int brect[8];
+
+    if(lua_isnil(L, 1))
+        im = NULL;
+    else
+        im = getImagePtr(L, 1);
+
+    if(gdImageStringFT(im, brect, fg, font, size, ang, x, y, str) == NULL)
+    {
+        lua_pushnumber(L, brect[0]);
+        lua_pushnumber(L, brect[1]);
+        lua_pushnumber(L, brect[2]);
+        lua_pushnumber(L, brect[3]);
+        lua_pushnumber(L, brect[4]);
+        lua_pushnumber(L, brect[5]);
+        lua_pushnumber(L, brect[6]);
+        lua_pushnumber(L, brect[7]);
+        return 8;
+    }
+
+    lua_pushnil(L);
+    return 1;
+}
+            
+
+
+
+
 static const luaL_reg LgdFunctions[] =
 {
 /*  Leave Lua do it!
@@ -2045,6 +2095,10 @@ static const luaL_reg LgdFunctions[] =
 #else
     { "FTUseFontConfig",            LgdNull },
 #endif
+
+    { "ImageStringFT",              LgdImageStringFT },
+
+
 
     /* Avoid boring warnings when compiling */
     { "Null",                       LgdNull },
