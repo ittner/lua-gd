@@ -51,6 +51,14 @@ static gdImagePtr getImagePtr(lua_State *L, int i)
 }
 
 
+static void pushImagePtr(lua_State *L, gdImagePtr im)
+{
+    lua_boxpointer(L, im);
+    luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
+    lua_setmetatable(L, -2);    /* Done */
+}
+
+
 /* gdImageCreate(int sx, int sy) */
 static int LgdImageCreate(lua_State *L)
 {
@@ -61,11 +69,7 @@ static int LgdImageCreate(lua_State *L)
     sy = getint(L, 2);
     im = gdImageCreate(sx, sy);
     if(im != NULL)
-    {
-        lua_boxpointer(L, im);
-        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        lua_setmetatable(L, -2);    /* Done */
-    }
+        pushImagePtr(L, im);
     else
         lua_pushnil(L); /* Error */
     return 1;
@@ -82,11 +86,7 @@ static int LgdImageCreatePalette(lua_State *L)
     sy = getint(L, 2);
     im = gdImageCreatePalette(sx, sy);
     if(im != NULL)
-    {
-        lua_boxpointer(L, im);
-        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        lua_setmetatable(L, -2);    /* Done */
-    }
+        pushImagePtr(L, im);
     else
         lua_pushnil(L); /* Error */
     return 1;
@@ -104,11 +104,7 @@ static int LgdImageCreateTrueColor(lua_State *L)
     sy = getint(L, 2);
     im = gdImageCreateTrueColor(sx, sy);
     if(im != NULL)
-    {
-        lua_boxpointer(L, im);
-        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        lua_setmetatable(L, -2);    /* Done */
-    }
+        pushImagePtr(L, im);
     else
         lua_pushnil(L); /* Error */
     return 1;
@@ -144,11 +140,7 @@ static int LgdImageCreateFromJpeg(lua_State *L)
     im = gdImageCreateFromJpeg(fp);
     fclose(fp);
     if(im != NULL)
-    {
-        lua_boxpointer(L, im);
-        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        lua_setmetatable(L, -2);    /* Done */
-    }
+        pushImagePtr(L, im);
     else
         lua_pushnil(L); /* Error */
     return 1;
@@ -169,11 +161,7 @@ static int LgdImageCreateFromJpegPtr(lua_State *L)
     }
     im = gdImageCreateFromJpegPtr(size, str);
     if(im != NULL)
-    {
-        lua_boxpointer(L, im);
-        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        lua_setmetatable(L, -2);    /* Done */
-    }
+        pushImagePtr(L, im);
     else
         lua_pushnil(L); /* Error */
     return 1;
@@ -202,11 +190,7 @@ static int LgdImageCreateFromGif(lua_State *L)
     im = gdImageCreateFromGif(fp);
     fclose(fp);
     if(im != NULL)
-    {
-        lua_boxpointer(L, im);
-        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        lua_setmetatable(L, -2);    /* Done */
-    }
+        pushImagePtr(L, im);
     else
         lua_pushnil(L); /* Error */
     return 1;
@@ -227,11 +211,7 @@ static int LgdImageCreateFromGifPtr(lua_State *L)
     }
     im = gdImageCreateFromGifPtr(size, str);
     if(im != NULL)
-    {
-        lua_boxpointer(L, im);
-        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        lua_setmetatable(L, -2);    /* Done */
-    }
+        pushImagePtr(L, im);
     else
         lua_pushnil(L); /* Error */
     return 1;
@@ -260,11 +240,7 @@ static int LgdImageCreateFromPng(lua_State *L)
     im = gdImageCreateFromPng(fp);
     fclose(fp);
     if(im != NULL)
-    {
-        lua_boxpointer(L, im);
-        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        lua_setmetatable(L, -2);    /* Done */
-    }
+        pushImagePtr(L, im);
     else
         lua_pushnil(L); /* Error */
     return 1;
@@ -285,11 +261,7 @@ static int LgdImageCreateFromPngPtr(lua_State *L)
     }
     im = gdImageCreateFromPngPtr(size, str);
     if(im != NULL)
-    {
-        lua_boxpointer(L, im);
-        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        lua_setmetatable(L, -2);    /* Done */
-    }
+        pushImagePtr(L, im);
     else
         lua_pushnil(L); /* Error */
     return 1;
@@ -317,11 +289,7 @@ static int LgdImageCreateFromGd(lua_State *L)
     im = gdImageCreateFromGd(fp);
     fclose(fp);
     if(im != NULL)
-    {
-        lua_boxpointer(L, im);
-        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        lua_setmetatable(L, -2);    /* Done */
-    }
+        pushImagePtr(L, im);
     else
         lua_pushnil(L); /* Error */
     return 1;
@@ -342,11 +310,7 @@ static int LgdImageCreateFromGdPtr(lua_State *L)
     }
     im = gdImageCreateFromGdPtr(size, str);
     if(im != NULL)
-    {
-        lua_boxpointer(L, im);
-        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        lua_setmetatable(L, -2);    /* Done */
-    }
+        pushImagePtr(L, im);
     else
         lua_pushnil(L); /* Error */
     return 1;
@@ -374,11 +338,7 @@ static int LgdImageCreateFromGd2(lua_State *L)
     im = gdImageCreateFromGd2(fp);
     fclose(fp);
     if(im != NULL)
-    {
-        lua_boxpointer(L, im);
-        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        lua_setmetatable(L, -2);    /* Done */
-    }
+        pushImagePtr(L, im);
     else
         lua_pushnil(L); /* Error */
     return 1;
@@ -399,11 +359,7 @@ static int LgdImageCreateFromGd2Ptr(lua_State *L)
     }
     im = gdImageCreateFromGd2Ptr(size, str);
     if(im != NULL)
-    {
-        lua_boxpointer(L, im);
-        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        lua_setmetatable(L, -2);    /* Done */
-    }
+        pushImagePtr(L, im);
     else
         lua_pushnil(L); /* Error */
     return 1;
@@ -436,11 +392,7 @@ static int LgdImageCreateFromGd2Part(lua_State *L)
     im = gdImageCreateFromGd2Part(fp, x, y, w, h);
     fclose(fp);
     if(im != NULL)
-    {
-        lua_boxpointer(L, im);
-        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        lua_setmetatable(L, -2);    /* Done */
-    }
+        pushImagePtr(L, im);
     else
         lua_pushnil(L); /* Error */
     return 1;
@@ -466,11 +418,7 @@ static int LgdImageCreateFromGd2PartPtr(lua_State *L)
     }
     im = gdImageCreateFromGd2PartPtr(size, str, x, y, w, h);
     if(im != NULL)
-    {
-        lua_boxpointer(L, im);
-        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        lua_setmetatable(L, -2);    /* Done */
-    }
+        pushImagePtr(L, im);
     else
         lua_pushnil(L); /* Error */
     return 1;
@@ -498,11 +446,7 @@ static int LgdImageCreateFromXbm(lua_State *L)
     im = gdImageCreateFromXbm(fp);
     fclose(fp);
     if(im != NULL)
-    {
-        lua_boxpointer(L, im);
-        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        lua_setmetatable(L, -2);    /* Done */
-    }
+        pushImagePtr(L, im);
     else
         lua_pushnil(L); /* Error */
     return 1;
@@ -522,11 +466,7 @@ static int LgdImageCreateFromXpm(lua_State *L)
     }
     im = gdImageCreateFromXpm(fname);
     if(im != NULL)
-    {
-        lua_boxpointer(L, im);
-        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        lua_setmetatable(L, -2);    /* Done */
-    }
+        pushImagePtr(L, im);
     else
         lua_pushnil(L); /* Error */
     return 1;

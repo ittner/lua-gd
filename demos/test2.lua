@@ -6,5 +6,6 @@ str = gd.ImageJpegPtr(im, 75)
 gd.ImageDestroy(im)
 
 im = gd.ImageCreateFromJpegPtr(str);
-gd.ImageJpeg(im, "./blerg.jpg", 75);
+im:ImageJpeg("./blerg.jpg", 75);
+-- gd.ImageJpeg(im, "./blerg.jpg", 75);
 gd.ImageDestroy(im)
