@@ -1441,23 +1441,168 @@ return value. </p>
 <a name="api.copy"></a>
 <h3>Image copying, resizing and transformation functions</h3>
 
+
 <h4>gd.copy(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h) <br>
 dstImage:copy(srcImage, dstX, dstY, srcX, srcY, w, h)</h4>
+
+<p> <code>gd.copy</code> is used to copy a rectangular portion of one
+image to another image (For a way of stretching or shrinking the image
+in the process, see <code>gd.copyResized</code>). </p>
+
+<p> The <b>dstImage</b> argument is the destination image to which
+the region will be copied (you can use the colon notation for it). The
+<b>srcImage</b> argument is the source image from which the region is
+copied. The <b>dstX</b> and <b>dstY</b> arguments specify the point in
+the destination image to which the region will be copied. The <b>srcX</b>
+and <b>srcY</b> arguments specify the upper left corner of the region
+in the source image. The <b>w</b> and <b>h</b> arguments specify the
+width and height of the region. </p>
+
+<p> When you copy a region from one location in an image to another
+location in the same image, <code>gd.copy</code> will perform as
+expected unless the regions overlap, in which case the result is
+<b>unpredictable</b>. </p>
+
+<p> <b>Important note on copying between images:</b> since different
+images do not necessarily have the same color tables, pixels are
+not simply set to the same color index values to copy them.  If the
+destination image is a palette image, this function will use the
+<code>gd.colorResolve</code> function to determine the best color
+available. </p>
+
+
 
 <h4>gd.copyResized(dstImage, srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)<br>
 dstImage:copyResized(srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)</h4>
 
+
+<p> <code>gd.copyResized</code> is used to copy a rectangular portion of
+one image to another image. The X and Y dimensions of the original region
+and the destination region can vary, resulting in stretching or shrinking
+of the region as appropriate (For a simpler version of this function
+which does not deal with resizing, see <code>gd.copy</code>). </p>
+
+<p> The <b>dstImage</b> argument is the destination image to which the
+region will be copied. The <code>srcImage</code> argument is the source
+image from which the region is copied. The <b>dstX</b> and <b>dstY</b>
+arguments specify the point in the destination image to which the region
+will be copied. The <b>srcX</b> and <b>srcY</b> arguments specify the
+upper left corner of the region in the source image. The <b>dstW</b>
+and <b>dstH</b> arguments specify the width and height of the destination
+region. The <b>srcW</b> and <b>srcH</b> arguments specify the width and
+height of the source region and can differ from the destination size,
+allowing a region to be scaled during the copying process. </p>
+
+<p> When you copy a region from one location in an image to another
+location in the same image, <code>gd.copyResized</code> will perform
+as expected unless the regions overlap, in which case the result is
+<b>unpredictable</b>. </p>
+
+<p> <b>Important note on copying between images:</b> since different
+images do not necessarily have the same color tables, pixels are
+not simply set to the same color index values to copy them.  If the
+destination image is a palette image, this function will use the
+<code>gd.colorResolve</code> function to determine the best color
+available. </p>
+
+
+
+
 <h4>gd.copyResampled(dstImage, srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)<br>
 dstImage:copyResampled(srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)</h4>
+
+<p> <code>gd.copyResampled</code> is used to copy a rectangular portion
+of one image to another image, smoothly interpolating pixel values so
+that, in particular, reducing the size of an image still retains a great
+deal of clarity. The X and Y dimensions of the original region and the
+destination region can vary, resulting in stretching or shrinking of the
+region as appropriate. (For a simpler version of this function which does
+not deal with resizing, see <code>gd.copy</code>. For a version which
+does not interpolate pixel values, see <code>gd.copyResized</code>). </p>
+
+<p> Pixel values are only interpolated if the destination image is a
+truecolor image. Otherwise, <code>gd.copyResized</code> is automatically
+invoked.</p>
+
+<p> The <b>dstImage</b> argument is the destination image to which
+the region will be copied. The <b>srcImage</b> argument is the source
+image from which the region is copied. The <b>dstX</b> and <b>dstY</b>
+arguments specify the point in the destination image to which the region
+will be copied. The <b>srcX</b> and <b>srcY</b> arguments specify the
+upper left corner of the region in the source image. The <b>dstW</b>
+and <b>dstH</b> arguments specify the width and height of the destination
+region. The <b>srcW</b> and <b>srcH</b> arguments specify the width and
+height of the source region and can differ from the destination size,
+allowing a region to be scaled during the copying process.</p>
+
+<p> When you copy a region from one location in an image to another
+location in the same image, <code>gd.copyResampled</code> will perform
+as expected unless the regions overlap, in which case the result is
+<b>unpredictable</b>. If this presents a problem, create a scratch image
+in which to keep intermediate results.</p>
+
+<p> <b>Important note on copying between images:</b> since different
+images do not necessarily have the same color tables, pixels are
+not simply set to the same color index values to copy them.  If the
+destination image is a palette image, this function will use the
+<code>gd.colorResolve</code> function to determine the best color
+available. </p>
+
+
+
 
 <h4>gd.copyRotated(dstImage, srcImage, dstX, dstY, srcX, srcY, srcW, srcH, ang)<br>
 dstImage:copyRotated(srcImage, dstX, dstY, srcX, srcY, srcW, srcH, ang)</h4>
 
+<p> <code>gd.copyRotated</code> is used to copy a rectangular portion of
+one image to another image, or to another region of the same image. The
+<b>srcX</b> and <b>srcY</b> coordinates specify the upper left corner of
+the source area; however, the <b>dstX</b> and <b>dstY</b> coordinates
+specify the <b>center</b> of the destination area.  This important
+distinction is made because the rotated rectangle may may or may not be
+parallel to the X and Y axes. The destination coordinates may be floating
+point, as the center of the desired destination area may lie at the
+center of a pixel (0.5 pixels) rather than its upper left corner. The
+angle specified is an integer number of degrees, between 0 and 360,
+with 0 degrees causing no change, and counterclockwise rotation as the
+angle increases.</p>
+
+<p>When you copy a region from one location in an image to another
+location in the same image, <code>gd.copyRotated</code> will perform
+as expected unless the regions overlap, in which case the result is
+<b>unpredictable</b>. If this presents a problem, create a scratch image
+in which to keep intermediate results.</p>
+
+<p> <b>Important note on copying between images:</b> since different
+images do not necessarily have the same color tables, pixels are
+not simply set to the same color index values to copy them.  If the
+destination image is a palette image, this function will use the
+<code>gd.colorRotated</code> function to determine the best color
+available. </p>
+
+
+
 <h4>gd.copyMerge(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h, pct)<br>
 dstImage:copyMerge(srcImage, dstX, dstY, srcX, srcY, w, h, pct)</h4>
 
+<p> <code>gd.copyMerge</code> is almost identical to <code>gd.copy</code>,
+except that it 'merges' the two images by an amount specified in the
+last parameter. If the last parameter is 100, then it will function
+identically to <code>gd.copy</code> - the source image replaces the
+pixels in the destination.</p>
+
+<p> If, however, the pct parameter is less than 100, then the two images
+are merged. With pct = 0, no action is taken. </p>
+
+<p> This feature is most useful to 'highlight' sections of an image by
+merging a solid color with pct = 50.</p>
+
+
+
 <h4>gd.copyMergeGray(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h, pct)<br>
 dstImage:copyMergeGray(srcImage, dstX, dstY, srcX, srcY, w, h, pct)</h4>
+
+
 
 <h4>gd.paletteCopy(dstImage, srcImage)<br>
 dstImage:paletteCopy(srcImage)</h4>
