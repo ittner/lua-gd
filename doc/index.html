@@ -763,12 +763,86 @@ between 25,25 and 75,75. </p>
 <h3>Drawing functions</h3>
 
 <h4>gdImage:setPixel(x, y, color)</h4>
+<p> <code>setPixel</code> sets a pixel to a particular color index. </p>
+
 <h4>gdImage:line(x1, y1, x2, y2, color)</h4>
+
+<p> <code>line</code> is used to draw a line between two endpoints
+(x1,y1 and x2, y2). The line is drawn using the color index
+specified. Note that the color index can be an actual color returned
+by <code>colorAllocate</code> or one of <code>gd.STYLED</code>,
+<code>gd.BRUSHED</code> or <code>gd.STYLED_BRUSHED</code>. </p>
+
+
 <h4>gdImage:rectangle(x1, y1, x2, y2, color)</h4>
+
+<p> <code>rectangle</code> is used to draw a rectangle with the two
+corners (upper left first, then lower right) specified, using the color
+index specified. </p>
+
+
 <h4>gdImage:filledRectangle(x1, y1, x2, y2, color)</h4>
+
+<p> <code>filledRectangle</code> is used to draw a rectangle with the
+two corners (upper left first, then lower right) specified, filled using
+the color index specified. </p>
+
+
 <h4>gdImage:polygon({ { x1, y1 }, { x2, y2 } ... }, color)</h4>
+
+<p> <code>polygon</code> is used to draw a polygon with the verticies
+(at least 3) specified in the table, using the color index specified </p>
+
+<p>Example: 
+<pre class="example">
+im = assert(gd.createTrueColor(80, 80))
+black = im:colorAllocate(0, 0, 0)
+white = im:colorAllocate(255, 255, 255)
+im:polygon( { { 10, 10 }, { 10, 20 }, { 20, 20 }, { 20, 10 } }, white)
+im:png("out.png")
+</pre>
+</p>
+
+
+
 <h4>gdImage:filledPolygon({ { x1, y1 }, { x2, y2 } ... }, color)</h4>
+
+<p> <code>polygon</code> is used to fill a polygon with the verticies
+(at least 3) specified in the table, using the color index specified </p>
+
+<p>Example: 
+<pre class="example">
+im = assert(gd.createTrueColor(80, 80))
+black = im:colorAllocate(0, 0, 0)
+white = im:colorAllocate(255, 255, 255)
+im:filledPolygon( { { 30, 30 }, { 30, 40 }, { 40, 40 }, { 40, 30 } }, white)
+im:png("out.png")
+</pre>
+</p>
+
+
+
+
 <h4>gdImage:openPolygon({ { x1, y1 }, { x2, y2 } ... }, color)</h4>
+
+<p> <code>openPolygon</code> is used to draw a sequence of lines with the
+verticies (at least 3) specified, using the color index specified. Unlike
+<code>polygon</code>, the enpoints of the line sequence are not connected to
+a closed polygon. </p>
+
+<p>Example: 
+<pre class="example">
+im = assert(gd.createTrueColor(80, 80))
+black = im:colorAllocate(0, 0, 0)
+white = im:colorAllocate(255, 255, 255)
+im:openPolygon( { { 50, 50 }, { 50, 60 }, { 60, 60 }, { 60, 50 } }, white)
+im:png("out.png")
+</pre>
+</p>
+
+
+
+
 <h4>gdImage:arc(cx,  cy,  w,  h,  s,  e, color)</h4>
 <h4>gdImage:filledArc(cx,  cy,  w,  h,  s,  e, color, style)</h4>
 <h4>gdImage:filledEllipse(cx, cy, w, h, color)</h4>
