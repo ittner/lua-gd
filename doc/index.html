@@ -842,12 +842,89 @@ im:png("out.png")
 
 
 
-
 <h4>gdImage:arc(cx,  cy,  w,  h,  s,  e, color)</h4>
+
+<p> <code>arc</code> is used to draw a partial ellipse centered at the
+given point, with the specified width and height in pixels. The arc
+begins at the position in degrees specified by <b>s</b> and ends at the
+position specified by <b>e</b>. The arc is drawn in the color specified
+by the last argument. A circle can be drawn by beginning from 0 degrees
+and ending at 360 degrees, with width and height being equal. <b>e</b>
+must be greater than <b>s</b>. Values greater than 360 are interpreted
+modulo 360. </p>
+
+
 <h4>gdImage:filledArc(cx,  cy,  w,  h,  s,  e, color, style)</h4>
+
+<p> <code>arc</code> is used to draw a partial ellipse centered at the
+given point, with the specified width and height in pixels. The arc
+begins at the position in degrees specified by <b>s</b> and ends at the
+position specified by <b>e</b>. The arc is filled in the color specified
+by <b>color</b>. A circle can be drawn by beginning from 0 degrees
+and ending at 360 degrees, with width and height being equal. <b>e</b>
+must be greater than <b>s</b>. Values greater than 360 are interpreted
+modulo 360. The last argument is a sum of the following possibilities:
+<code>gd.ARC</code>, <code>gd.CHORD</code>, <code>gd.PIE</code>
+(synonym for <code>gd.CHORD</code>), <code>gd.NO_FILL</code> and
+<code>gd.EDGED</code>. <code>gd.ARC</code> and <code>gd.CHORD</code> are
+mutually exclusive; <code>gd.CHORD</code> just connects the starting
+and ending angles with a straight line, while <code>gd.ARC</code>
+produces a rounded edge. <code>gd.PIE</code> is a synonym for
+<code>gd.ARC</code>. <code>gd.NO_FILL</code> indicates that the arc
+or chord should be outlined, not filled. <code>gd.EDGED</code>, used
+together with <code>gd.NO_FILL</code>, indicates that the beginning and
+ending angles should be connected to the center; this is a good way to
+outline (rather than fill) a 'pie slice'.
+</p>
+
+
 <h4>gdImage:filledEllipse(cx, cy, w, h, color)</h4>
+
+<p> <code>filledEllipse</code> is used to draw an ellipse centered at the
+given point, with the specified width and height in pixels. The ellipse
+is filled in the color specified by the last argument.</p>
+
+
 <h4>gdImage:fill(x, y, c)</h4>
-<h4>gdImage:fillToBorder( x, y, b, c)</h4>
+
+<p> <code>fill</code> floods a portion of the image with the specified
+color, beginning at the specified point and flooding the surrounding
+region of the same color as the starting point. For a way of flooding
+a region defined by a specific border color rather than by its interior
+color, see <code>fillToBorder</code>. </p>
+
+<p>The fill color can be <code>gd.TILED</code>, resulting in a tile
+fill using another image as the tile. However, the tile image cannot be
+transparent. If the image you wish to fill with has a transparent color
+index, call <code>setTransparent</code> on the tile image and set the
+transparent color index to <b>nil</b> to turn off its transparency. </p>
+
+<p> Note that <code>fill</code> is recursive. It is not the most
+naive implementation possible, and the implementation is expected to
+improve, but there will always be degenerate cases in which the stack
+can become very deep. This can be a problem in MSDOS and MS Windows 3.1
+environments. (Of course, in a Unix or Windows 95/98/NT environment with
+a proper stack, this is not a problem at all.) </p>
+
+
+<h4>gdImage:fillToBorder( x, y, border_color, color)</h4>
+
+<p> <code>fillToBorder</code> floods a portion of the image with the
+specified color, beginning at the specified point and stopping at the
+specified border color. For a way of flooding an area defined by the
+color of the starting point, see <code>fill</code>. </p>
+
+<p> The border color cannot be a special color such as
+<code>gd.TILED</code>; it must be a proper solid color. The fill color
+can be, however. </p>
+
+<p> Note that <code>fillToBorder</code> is recursive. It is not the most
+naive implementation possible, and the implementation is expected to
+improve, but there will always be degenerate cases in which the stack
+can become very deep. This can be a problem in MSDOS and MS Windows 3.1
+environments. (Of course, in a Unix or Windows 95/98/NT environment with
+a proper stack, this is not a problem at all.) </p>
+
 
 <a name="api.text"></a>
 <h3>Text drawing functions</h3>
