@@ -170,13 +170,6 @@ function mergeMessage(im, msg)
   local w, h = im:sizeXY()
   msg = msg .. string.char(0)
   local len = string.len(msg)
-
-  -- TRICK: if message bit length is multiple of 3*8, the code will
-  -- not leave "broken" bit sequences.
-  if math.mod(len, 3) ~= 0 then
-    msg = msg .. string.rep(string.char(0), math.mod(len, 3))
-    len = string.len(msg)
-  end
   if h * w < len * 8 then
     return nil
   end
@@ -193,7 +186,7 @@ function mergeMessage(im, msg)
     rgb.r = im:red(c)
     rgb.g = im:green(c)
     rgb.b = im:blue(c)
-    if i < len and  e - s < 3 then
+    if i <= len and  e - s < 3 then
       a2 = intToBitArray(string.byte(string.sub(msg, i, i)))
       for cnt = 7,0,-1 do
         a[e+7-cnt] = a2[cnt]
@@ -301,7 +294,7 @@ function compare(fimg1, fimg2)
       oc = oim:colorResolve(im2:red(c2), im2:green(c2), im2:blue(c2))
       oim:setPixel(x, y, oc)
     else
-      f = math.floor((im1:red(c1) + im1:green(c1) + im2:blue(c2))/6.0)
+      f = math.floor((im1:red(c1) + im1:green(c1) + im1:blue(c1))/6.0)
       fc = oim:colorResolve(f,f,f)
       oim:setPixel(x, y, fc)
     end
