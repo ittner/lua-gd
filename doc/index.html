@@ -274,14 +274,19 @@ does not apply to truecolor images.</p>
 <h4>gd.NO_FILL</h4>
 <h4>gd.EDGED</h4>
 
+
 <h4>gd.ANTI_ALIASED</h4>
-<p>Used in place of a color when invoking a line-drawing function such
-as gd.line or gd.rectangle. When <code>gd.ANTI_ALIASED</code> is used as
-the color, the foreground color set with <code>gd.setAntiAliased</code>
-is used, with antialiasing mechanisms to minimize any "jagged"
-appearance. For more information, see <code>gd.setAntiAliased</code>.</p>
+
+<p>Used in place of a color when invoking a line-drawing function
+such as <code>gd.line</code> or <code>gd.rectangle</code>. When
+<code>gd.ANTI_ALIASED</code> is used as the color, the foreground color
+set with <code>gd.setAntiAliased</code> is used, with antialiasing
+mechanisms to minimize any "jagged" appearance. For more information,
+see <code>gd.setAntiAliased</code>.</p>
+
 
 <h4>gd.BRUSHED</h4>
+
 <p>Used in place of a color when invoking a line-drawing function
 such as <code>gd.line</code> or <code>gd.rectangle</code>. When
 <code>gd.BRUSHED</code> is used as the color, the brush image set with
@@ -290,16 +295,65 @@ such as <code>gd.line</code> or <code>gd.rectangle</code>. When
 wide paintbrush). See also <code>gd.STYLED_BRUSHED</code> for a way to
 draw broken lines with a series of distinct copies of an image. </p>
 
+
 <h4>gd.STYLED</h4>
+
+<p> Used in place of a color when invoking a line-drawing function
+such as <code>gd.line</code> or <code>gd.rectangle</code>. When
+<code>gd.STYLED</code> is used as the color, the colors of the
+pixels are drawn successively from the style that has been set
+with <code>gd.setStyle</code>. If the color of a pixel is equal to
+<code>gd.TRANSPARENT</code>, that pixel is not altered. (This mechanism
+is completely unrelated to the "transparent color" of the image itself;
+see <code>gd.colorTransparent</code> for that mechanism). </p>
+
+
 <h4>gd.STYLED_BRUSHED</h4>
+
+<p> Used in place of a color when invoking a line-drawing function
+such as <code>gd.line</code> or <code>gd.rectangle</code>. When
+<code>gd.STYLED_BRUSHED</code> is used as the color, the brush image
+set with <code>gd.setBrush</code> is drawn at each pixel of the line,
+providing that the style set with <code>gd.setStyle</code> contains
+a nonzero value (OR <code>gd.TRANSPARENT</code>, which does not equal
+zero but is supported for consistency) for the current pixel. (Pixels
+are drawn successively from the style as the line is drawn, returning to
+the beginning when the available pixels in the style are exhausted.) Note
+that this differs from the behavior of <code>gd.STYLED</code>, in which
+the values in the style are used as actual pixel colors, except for
+<code>gd.TRANSPARENT</code>. </p>
+
+
 <h4>gd.TILED</h4>
+
+<p> Used in place of a normal color in <code>gd.filledRectangle</code>,
+<code>gd.filledPolygon</code>, <code>gd.fill</code>, and
+ <code>gd.fillToBorder</code>. <code>gd.TILED</code>
+selects a pixel from the tile image set with <code>gd.setTile</code>
+in such a way as to ensure that the filled area will be tiled with
+copies of the tile image. See the discussions of <code>gd.fill</code>
+and <code>gd.fillToBorder</code> for special restrictions regarding
+those functions. </p>
+
+
 <h4>gd.TRANSPARENT</h4>
+
+<p> Used in place of a normal color in a style to be set with
+<code>gd.setStyle</code>. <code>gd.TRANSPARENT</code> is not the
+transparent color index of the image; for that functionality please see
+<code>gd.colorTransparent</code>. </p>
+
 
 <h4>gd.FONT_TINY, gd.FONT_SMALL, gd.FONT_MEDIUM, gd.FONT_LARGE and
 gd.FONT_GIANT</h4>
 
-<p> These are standard font sizes used by <code>gd.string</code> and
-<code>gd.stringUp</code>. </p>
+<p> These are the standard gd fonts used by <code>gd.string</code> and
+<code>gd.stringUp</code>. Sizes and styles are shown bellow: <br>
+<center>
+ <img src="stdfonts.png" width="140" height="110" alt="Standard GD fonts"
+  title="Standard GD fonts">
+</center>
+</p>
 
 
 <a name="api.create"></a>
