@@ -26,8 +26,8 @@ end
 im2:string(gd.FONT_GIANT, sx+80, 10, "Powered by Lua", white)
 
 blackTr = im2:colorAllocateAlpha(0, 0, 0, 80)
-im2:stringFT(blackTr, "./tolkien.ttf", 140, 0, 70, 130, "gd")
-im2:stringFT(white, "./tolkien.ttf", 50, math.pi/5, 340, 250, "FreeType")
+im2:stringFT(blackTr, "./Vera.ttf", 140, 0, 70, 130, "gd")
+im2:stringFT(white, "./Vera.ttf", 45, math.pi/5, 340, 250, "FreeType")
 
 
 im2:png("./out.png")
