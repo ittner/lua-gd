@@ -20,13 +20,14 @@
 
 
 CC=gcc
-CFLAGS=-DUSE_XPM -DUSE_FONTCONFIG
-LFLAGS=-shared -llua -lgd
+CFLAGS=`gdlib-config --cflags`
+LFLAGS=-shared -llua -lgd `gdlib-config --ldflags`
+GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
 
 all: libluagd.so
 
 libluagd.so: luagd.c
-	$(CC) -o libluagd.so $(CFLAGS) $(LFLAGS) luagd.c  -Wall
+	$(CC) -o libluagd.so $(CFLAGS) $(LFLAGS) luagd.c -Wall $(GDFEATURES)
 
 install: libluagd.so
 	cp libluagd.so /usr/lib/

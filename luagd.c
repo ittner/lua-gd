@@ -229,6 +229,7 @@ static int LgdImageDestroy(lua_State *L)
     return 0;
 }
 
+#ifdef GD_JPEG
 /* gdImageCreateFromJpeg(FILE *in) */
 /* Changed to: gd.createFromJpeg(char *filename) */
 static int LgdImageCreateFromJpeg(lua_State *L)
@@ -276,9 +277,10 @@ static int LgdImageCreateFromJpegPtr(lua_State *L)
         lua_pushnil(L); /* Error */
     return 1;
 }
+#endif
 
 
-
+#ifdef GD_GIF
 /* gdImageCreateFromGif(FILE *in) */
 /* Changed to: gd.createFromGif(filename) */
 static int LgdImageCreateFromGif(lua_State *L)
@@ -306,7 +308,6 @@ static int LgdImageCreateFromGif(lua_State *L)
     return 1;
 }
 
-
 /* gdImageCreateFromGifPtr(int size, void *data) */
 static int LgdImageCreateFromGifPtr(lua_State *L)
 {
@@ -326,9 +327,10 @@ static int LgdImageCreateFromGifPtr(lua_State *L)
         lua_pushnil(L); /* Error */
     return 1;
 }
+#endif
 
 
-
+#ifdef GD_PNG
 /* gdImageCreateFromPng(FILE *in) */
 /* Changed to: gd.createFromPng(filename) */
 static int LgdImageCreateFromPng(lua_State *L)
@@ -376,6 +378,7 @@ static int LgdImageCreateFromPngPtr(lua_State *L)
         lua_pushnil(L); /* Error */
     return 1;
 }
+#endif
 
 
 /* gdImageCreateFromGd(FILE *in) */
@@ -534,9 +537,9 @@ static int LgdImageCreateFromGd2PartPtr(lua_State *L)
 }
 
 
+#ifdef GD_XPM
 /* gdImageCreateFromXbm(FILE *in) */
 /* Changed to: gd.createFromXbm(filename) */
-#ifdef USE_XPM
 static int LgdImageCreateFromXbm(lua_State *L)
 {
     gdImagePtr im;
@@ -561,9 +564,8 @@ static int LgdImageCreateFromXbm(lua_State *L)
         lua_pushnil(L); /* Error */
     return 1;
 }
-#endif
 
-#ifdef USE_XPM
+
 /* gdImageCreateFromXpm(char *filename) */
 static int LgdImageCreateFromXpm(lua_State *L)
 {
@@ -586,7 +588,7 @@ static int LgdImageCreateFromXpm(lua_State *L)
 
 
 
-
+#ifdef GD_JPEG
 /* gdImageJpeg(gdImagePtr im, FILE *out, int quality) */
 /* Changed to: gd.jpeg(im, fname, quality) */
 static int LgdImageJpeg(lua_State *L)
@@ -631,8 +633,9 @@ static int LgdImageJpegPtr(lua_State *L)
         lua_pushnil(L);  /* Error */
     return 1;
 }
+#endif
 
-
+#ifdef GD_PNG
 /* gdImagePng(gdImagePtr im, FILE *out) */
 /* Changed to: gd.png(im, fname) */
 static int LgdImagePng(lua_State *L)
@@ -721,9 +724,10 @@ static int LgdImagePngPtrEx(lua_State *L)
         lua_pushnil(L);  /* Error */
     return 1;
 }
+#endif
 
 
-
+#ifdef GD_GIF
 /* gdImageGif(gdImagePtr im, FILE *out) */
 /* Changed to: gd.gif(im, fname) */
 static int LgdImageGif(lua_State *L)
@@ -747,8 +751,9 @@ static int LgdImageGif(lua_State *L)
     lua_pushnumber(L, 1);
     return 1;
 }
+#endif
 
-
+#ifdef GD_GIF
 /* void *gdImageGifPtr(gdImagePtr im) */
 static int LgdImageGifPtr(lua_State *L)
 {
@@ -766,7 +771,7 @@ static int LgdImageGifPtr(lua_State *L)
         lua_pushnil(L);  /* Error */
     return 1;
 }
-
+#endif
 
 
 /* gdImageGd(gdImagePtr im, FILE *out) */
@@ -1869,9 +1874,9 @@ static int LgdImageGetClip(lua_State *L)
 }
 
 
+#ifdef GD_FONTCONFIG
 /* int gdFTUseFontConfig(int flag) */
 /* Changed to: gd.useFontConfig(true_or_false) */
-#ifdef USE_FONTCONFIG
 static int LgdFTUseFontConfig(lua_State *L)
 {
     int b = lua_toboolean(L, 1);
@@ -1881,6 +1886,7 @@ static int LgdFTUseFontConfig(lua_State *L)
 #endif
 
 
+#ifdef GD_FREETYPE 
 /* int gdFontCacheSetup(void) */
 static int LgdFontCacheSetup(lua_State *L)
 {
@@ -1895,7 +1901,7 @@ static int LgdFontCacheShutdown(lua_State *L)
     gdFontCacheShutdown();
     return 0;
 }
-
+#endif
 
 
 /* char *gdImageStringFT(gdImagePtr im, int *brect, int fg, char *fontname,
@@ -1909,7 +1915,8 @@ static int LgdFontCacheShutdown(lua_State *L)
     llX, llY, lrX, lrY, urX, urY, ulX, ulY = gd:stringFT(nil, fg,
             fontname, ptsize, angle, x, y, string)
 */
- 
+
+#ifdef GD_FREETYPE 
 static int LgdImageStringFT(lua_State *L)
 {
     gdImagePtr im;
@@ -1974,6 +1981,7 @@ static int LgdImageStringFTCircle(lua_State *L)
         lua_pushboolean(L, 1);
     return 1;
 }
+#endif
 
 
 static const luaL_reg LgdFunctions[] =
@@ -1987,10 +1995,14 @@ static const luaL_reg LgdFunctions[] =
     { "createPaletteFromTrueColor", LgdImageCreatePaletteFromTrueColor },
     { "trueColorToPalette",         LgdImageTrueColorToPalette },
 
+#ifdef GD_JPEG
     { "createFromJpeg",         LgdImageCreateFromJpeg },
     { "createFromJpegStr",      LgdImageCreateFromJpegPtr },
+#endif
+#ifdef GD_GIF
     { "createFromGif",          LgdImageCreateFromGif },
     { "createFromGifStr",       LgdImageCreateFromGifPtr },
+#endif
     { "createFromPng",          LgdImageCreateFromPng },
     { "createFromPngStr",       LgdImageCreateFromPngPtr },
     { "createFromGd",           LgdImageCreateFromGd },
@@ -2000,19 +2012,25 @@ static const luaL_reg LgdFunctions[] =
     { "createFromGd2Part",      LgdImageCreateFromGd2Part },
     { "createFromGd2PartStr",   LgdImageCreateFromGd2PartPtr },
 
-#ifdef USE_XPM
+#ifdef GD_XPM
     { "createFromXbm",          LgdImageCreateFromXbm },
     { "createFromXpm",          LgdImageCreateFromXpm },
 #endif
 
+#ifdef GD_JPEG
     { "jpeg",                   LgdImageJpeg },
     { "jpegStr",                LgdImageJpegPtr },
+#endif
+#ifdef GD_PNG
     { "png",                    LgdImagePng },
     { "pngStr",                 LgdImagePngPtr },
     { "pngEx",                  LgdImagePngEx },
     { "pngStrEx",               LgdImagePngPtrEx },
+#endif
+#ifdef GD_GIF
     { "gif",                    LgdImageGif },
     { "gifStr",                 LgdImageGifPtr },
+#endif
     { "gd",                     LgdImageGd },
     { "gdStr",                  LgdImageGdPtr },
     { "gd2",                    LgdImageGd2 },
@@ -2085,14 +2103,14 @@ static const luaL_reg LgdFunctions[] =
     { "squareToCircle",         LgdImageSquareToCircle },
     { "sharpen",                LgdImageSharpen },
 
+#ifdef GD_FREETYPE
     { "stringFT",               LgdImageStringFT },
     { "stringFTCircle",         LgdImageStringFTCircle },
-
-
     { "fontCacheSetup",         LgdFontCacheSetup },
     { "fontCacheShutdown",      LgdFontCacheShutdown },
+#endif
     
-#ifdef USE_FONTCONFIG
+#ifdef GD_FONTCONFIG
     { "useFontConfig",          LgdFTUseFontConfig },
 #endif
 
