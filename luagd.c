@@ -2002,6 +2002,8 @@ static int LgdImageGifAnimBegin(lua_State *L)
 }
 
 
+
+
 #endif
 
 
