@@ -25,7 +25,7 @@ H3 {
     font-family: Verdana, Arial, helvetica, sans-serif;
     font-size: 14px;
     color: black;
-    background-color: white;
+    background-color: #EAEAEA;
 }    
 
 BODY  {
@@ -540,7 +540,7 @@ io.write(im:jpegStr(75))
 
 
 <a name="api.copy"></a>
-<h3>Copying and resizing functions</h3>
+<h3>Image copying, resizing and transformation functions</h3>
 
 <h4>gd.copy(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h)</h4>
 <h4>dstImage:copy(srcImage, dstX, dstY, srcX, srcY, w, h)</h4>
@@ -560,12 +560,13 @@ io.write(im:jpegStr(75))
 <h4>gd.copyMergeGray(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h, pct)</h4>
 <h4>dstImage:copyMergeGray(srcImage, dstX, dstY, srcX, srcY, w, h, pct)</h4>
 
-
 <h4>gd.paletteCopy(dstImage, srcImage)</h4>
 <h4>dstImage:paletteCopy(srcImage)</h4>
 
-{ "squareToCircle
-{ "sharpen
+
+<h4>gdImage:squareToCircle(radius)</h4>
+<h4>gdImage:sharpen(pct)</h4>
+
 
 
 
