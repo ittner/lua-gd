@@ -1553,7 +1553,6 @@ static int LgdImageAlphaBlending(lua_State *L)
 
 /* void gdImageSaveAlpha(gdImagePtr im, int saveFlag) */
 /* Changed to: im:ImageSaveAlpha(true_or_false) */
-
 static int LgdImageSaveAlpha(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
