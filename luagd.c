@@ -1970,9 +1970,6 @@ static const luaL_reg LgdFunctions[] =
 #ifdef USE_XPM
     { "createFromXbm",          LgdImageCreateFromXbm },
     { "createFromXpm",          LgdImageCreateFromXpm },
-#else
-    { "createFromXbm",          LgdNull },
-    { "createFromXpm",          LgdNull },
 #endif
 
     { "jpeg",                   LgdImageJpeg },
@@ -2064,8 +2061,6 @@ static const luaL_reg LgdFunctions[] =
     
 #ifdef USE_FONTCONFIG
     { "useFontConfig",          LgdFTUseFontConfig },
-#else
-    { "useFontConfig",          LgdNull },
 #endif
 
     /* Avoid boring warnings when compiling */
