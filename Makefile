@@ -9,7 +9,7 @@ CC=gcc
 all: libluagd.so
 
 libluagd.so: luagd.c
-	$(CC) -o libluagd.so -shared luagd.c -llua -lgd2 -Wall
+	$(CC) -o libluagd.so -shared luagd.c -llua -lgd -Wall
 
 install: libluagd.so
 	cp libluagd.so /usr/lib/
