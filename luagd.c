@@ -2140,11 +2140,11 @@ int luaopen_gd(lua_State *L)
     tblseticons(L, "TRANSPARENT", gdTransparent);
 
     /* Standard gd fonts */
-    tblseticons(L, "FONT_SMALL", MY_GD_FONT_SMALL);
-    tblseticons(L, "FONT_LARGE", MY_GD_FONT_LARGE);
-    tblseticons(L, "FONT_MEDIUM", MY_GD_FONT_MEDIUM_BOLD);
-    tblseticons(L, "FONT_GIANT", MY_GD_FONT_GIANT);
     tblseticons(L, "FONT_TINY", MY_GD_FONT_TINY);
+    tblseticons(L, "FONT_SMALL", MY_GD_FONT_SMALL);
+    tblseticons(L, "FONT_MEDIUM", MY_GD_FONT_MEDIUM_BOLD);
+    tblseticons(L, "FONT_LARGE", MY_GD_FONT_LARGE);
+    tblseticons(L, "FONT_GIANT", MY_GD_FONT_GIANT);
 
     lua_pushliteral(L, "metatable");    /* metatable */
     luaL_newmetatable(L, GD_IMAGE_PTR_TYPENAME);
