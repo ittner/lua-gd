@@ -34,6 +34,8 @@
 -- +-----+---+----------+-----+-----+-----+----------+
 -- 
 
+require "gd"
+
 
 function getLSB(n)
   return math.mod(n, 2) ~= 0
@@ -95,7 +97,7 @@ end
 
 
 function mergeMessage(im, msg)
-  local w, h = im:sizeSY()
+  local w, h = im:sizeXY()
   msg = msg .. string.char(0)
   local len = string.len(msg)
 
@@ -117,13 +119,13 @@ function mergeMessage(im, msg)
   local rgb = {}
 
   while i <= len do
-    chr = string.byte(string.sub(str, i, i))
+    chr = string.byte(string.sub(msg, i, i))
     a = intToBitArray(chr)
     c = im:getPixel(x, y)
     for p = 7,0,-1 do
       if not rgb.r then
         rgb.r = setLSB(im:red(c), a[p])
-      else if not rbg.g then
+      elseif not rgb.g then
         rgb.g = setLSB(im:green(c), a[p])
       else
         rgb.b = setLSB(im:blue(c), a[p])
@@ -137,6 +139,7 @@ function mergeMessage(im, msg)
         rgb.r, rgb.g, rgb.b = nil, nil, nil
       end
     end
+    i = i + 1
   end
 
   while y <= h do
@@ -156,7 +159,7 @@ end
 
 function getMessage(im)
   local msg = ""
-  local w, h = im:sizeSY()
+  local w, h = im:sizeXY()
   local x, y = 1, 1
   local a = {}
   local s, e = 1, 1
@@ -171,7 +174,7 @@ function getMessage(im)
     e = e + 3
     if e - s >= 7 then
       b = 0
-      for p = s, s+7 then
+      for p = s, s+7 do
         b = b * 2
         if a[p] then
           b = b + 1
@@ -215,7 +218,7 @@ if arg[1] == "show" then
     print("ERROR: Bad image data.")
     os.exit(1)
   end
-  io.write(getMessage(im)
+  io.write(getMessage(im))
   os.exit(0)
 end
 
