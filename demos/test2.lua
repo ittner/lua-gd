@@ -4,6 +4,8 @@ load_gd()
 im = gd.ImageCreateFromJpeg("./bugs.jpg")
 assert(im)
 white = im:ImageColorAllocate(255, 255, 255)
+gray = im:ImageColorAllocate(180, 180, 180)
+
 
 im:ImageArc(100, 100, 200, 200,  0, 180, white)
 im:ImageArc(100, 100, 180, 180, 20, 160, white)
@@ -14,6 +16,8 @@ im:ImageArc(100, 100, 120, 120, 80, 100, white)
 im:ImageFilledArc(50, 50, 80, 80, 60, 120, white, gd.Arc)
 
 im:ImageFilledEllipse(200, 200, 20, 20, white)
+im:ImageFilledEllipse(205, 205, 20, 20, gray)
+
 
 im:ImagePng("./out.png")
 im:ImageDestroy()
