@@ -94,13 +94,6 @@ static void pushImagePtr(lua_State *L, gdImagePtr im)
 }
 
 
-/* For not implemented functions */
-static int LgdNull(lua_State *L)
-{
-    return 0;
-}
-
-
 static gdFontPtr getStdFont(lua_State *L, int i)
 {
     int size;
@@ -2114,8 +2107,6 @@ static const luaL_reg LgdFunctions[] =
     { "useFontConfig",          LgdFTUseFontConfig },
 #endif
 
-    /* Avoid boring warnings when compiling */
-    { "null",                   LgdNull },
     { NULL, NULL }
 };
 

@@ -28,6 +28,7 @@ all: libluagd.so
 
 libluagd.so: luagd.c
 	$(CC) -o libluagd.so $(CFLAGS) $(LFLAGS) luagd.c -Wall $(GDFEATURES)
+	lua test_features.lua
 
 install: libluagd.so
 	cp libluagd.so /usr/lib/

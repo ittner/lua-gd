@@ -14,45 +14,45 @@ print("Lua-GD version: " .. gd.VERSION)
 print("Lua-GD features:")
 
 if gd.png then
-  print("PNG support:           Enabled")
+  print("    PNG support:           Enabled")
 else
-  print("PNG support:           Disabled")
+  print("    PNG support:           Disabled")
 end
 
 if gd.gif then
-  print("GIF support:           Enabled")
+  print("    GIF support:           Enabled")
 else
-  print("GIF support:           Disabled")
+  print("    GIF support:           Disabled")
 end
 
 if gd.jpeg then
-  print("JPEG support:          Enabled")
+  print("    JPEG support:          Enabled")
 else
-  print("JPEG support:          Disabled")
+  print("    JPEG support:          Disabled")
 end
 
 if gd.createFromXpm then
-  print("XPM/XBM support:       Enabled")
+  print("    XPM/XBM support:       Enabled")
 else
-  print("XPM/XBM support:       Disabled")
+  print("    XPM/XBM support:       Disabled")
 end
 
 if gd.png then
-  print("PNG support:           Enabled")
+  print("    PNG support:           Enabled")
 else
-  print("PNG support:           Disabled")
+  print("    PNG support:           Disabled")
 end
 
 if gd.stringFT then
-  print("FreeType support:      Enabled")
+  print("    FreeType support:      Enabled")
 else
-  print("FreeType support:      Disabled")
+  print("    FreeType support:      Disabled")
 end
 
 if gd.useFontConfig then
-  print("Fontconfig support:    Enabled")
+  print("    Fontconfig support:    Enabled")
 else
-  print("Fontconfig support:    Disabled")
+  print("    Fontconfig support:    Disabled")
 end
 
 
