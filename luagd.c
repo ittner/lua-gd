@@ -1470,7 +1470,7 @@ static int LgdImageSetAntiAliasedDontBlend(lua_State *L)
 static int LgdImageSetBrush(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
-    gdImagePtr b = getImagePtr(L, 1);
+    gdImagePtr b = getImagePtr(L, 2);
 
     gdImageSetBrush(im, b);
     return 0;
@@ -1486,6 +1486,49 @@ static int LgdImageSetTile(lua_State *L)
     gdImageSetTile(im, t);
     return 0;
 }
+
+
+/* void gdImageSetStyle(gdImagePtr im, int *style, int styleLength)  */
+/* Changed To: im:ImageSetStyle( { c1, c2, c3,  ...  } ) */
+
+static int LgdImageSetStyle(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int *slist;
+    int size;
+    int i;
+
+    /* Stack: Im, T */
+    luaL_checktype(L, -1, LUA_TTABLE);
+    size = luaL_getn(L, -1);
+    slist = (int*) malloc(size * sizeof(int));
+
+    for(i = 0; i < size; i++)
+    {
+        /* Stack: Im, T */
+        lua_rawgeti(L, 2, i + 1);
+
+        /* Stack:  Im, T, num */
+        if(lua_type(L, -1) != LUA_TNUMBER)
+        {
+            free(slist);
+            luaL_typerror(L, -1, "Number");
+        }
+
+        slist[i] = getint(L, -1);
+        lua_remove(L, -1);
+
+        /* Stack: Im, T */
+    }
+
+    gdImageSetStyle(im, slist, size);
+    free(slist);
+
+    return 0;
+}
+
+
+
 
 
 
@@ -1569,6 +1612,8 @@ static const luaL_reg LgdFunctions[] =
     { "ImageSetAntiAliasedDontBlend",   LgdImageSetAntiAliasedDontBlend },
     { "ImageSetBrush",                  LgdImageSetBrush },
     { "ImageSetTile",                   LgdImageSetTile },
+    { "ImageSetStyle",                  LgdImageSetStyle },
+
 
 
     { NULL, NULL }

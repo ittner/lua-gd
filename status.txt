@@ -98,7 +98,7 @@ X gdImageSetAntiAliased
 X gdImageSetAntiAliasedDontBlend 
 X gdImageSetBrush 
 X gdImageSetPixel 
-  gdImageSetStyle 
+X gdImageSetStyle 
   gdImageSetThickness 
 X gdImageSetTile 
   gdImageSharpen 
