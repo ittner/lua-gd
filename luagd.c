@@ -1416,6 +1416,77 @@ static int LgdImageFilledEllipse(lua_State *L)
 }
 
 
+/* void gdImageFill(gdImagePtr im, int x, int y, int color) */
+static int LgdImageFill(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int x = getint(L, 2);
+    int y = getint(L, 3);
+    int c = getint(L, 4);
+
+    gdImageFill(im, x, y, c);
+    return 0;
+}
+
+
+/* void gdImageFillToBorder(gdImagePtr im, int x, int y, int border,
+        int color) */
+static int LgdImageFillToBorder(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int x = getint(L, 2);
+    int y = getint(L, 3);
+    int b = getint(L, 4);
+    int c = getint(L, 5);
+
+    gdImageFillToBorder(im, x, y, b, c);
+    return 0;
+}
+
+
+/* void gdImageSetAntiAliased(gdImagePtr im, int c) */
+static int LgdImageSetAntiAliased(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int c = getint(L, 2);
+
+    gdImageSetAntiAliased(im, c);
+    return 0;
+}
+
+
+/* void gdImageSetAntiAliasedDontBlend(gdImagePtr im, int c) */
+static int LgdImageSetAntiAliasedDontBlend(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int c = getint(L, 2);
+
+    gdImageSetAntiAliasedDontBlend(im, c, 1);
+    return 0;
+}
+
+
+/* void gdImageSetBrush(gdImagePtr im, gdImagePtr brush) */
+static int LgdImageSetBrush(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    gdImagePtr b = getImagePtr(L, 1);
+
+    gdImageSetBrush(im, b);
+    return 0;
+}
+
+
+/* void gdImageSetTile(gdImagePtr im, gdImagePtr tile) */
+static int LgdImageSetTile(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    gdImagePtr t = getImagePtr(L, 1);
+
+    gdImageSetTile(im, t);
+    return 0;
+}
+
 
 
 static const luaL_reg LgdFunctions[] =
@@ -1491,6 +1562,14 @@ static const luaL_reg LgdFunctions[] =
     { "ImageFilledArc",             LgdImageFilledArc },
     { "ImageEllipse",               LgdImageEllipse },
     { "ImageFilledEllipse",         LgdImageFilledEllipse },
+    { "ImageFill",                  LgdImageFill },
+    { "ImageFillToBorder",          LgdImageFillToBorder },
+
+    { "ImageSetAntiAliased",            LgdImageSetAntiAliased },
+    { "ImageSetAntiAliasedDontBlend",   LgdImageSetAntiAliasedDontBlend },
+    { "ImageSetBrush",                  LgdImageSetBrush },
+    { "ImageSetTile",                   LgdImageSetTile },
+
 
     { NULL, NULL }
 };

@@ -58,8 +58,8 @@ X gdImageCreatePalette
 X gdImageCreateTrueColor 
 N gdImageDashedLine (depreciada)
 X gdImageDestroy 
-  gdImageFill 
-  gdImageFillToBorder 
+X gdImageFill 
+X gdImageFillToBorder 
 X gdImageFilledArc 
 X gdImageEllipse 
 X gdImageFilledEllipse 
@@ -94,13 +94,13 @@ X gdImagePtr    (tipo)
 X gdImageRectangle 
 X gdImageRed 
   gdImageSaveAlpha 
-  gdImageSetAntiAliased 
-  gdImageSetAntiAliasedDontBlend 
-  gdImageSetBrush 
+X gdImageSetAntiAliased 
+X gdImageSetAntiAliasedDontBlend 
+X gdImageSetBrush 
 X gdImageSetPixel 
   gdImageSetStyle 
   gdImageSetThickness 
-  gdImageSetTile 
+X gdImageSetTile 
   gdImageSharpen 
   gdImageSquareToCircle 
   gdImageString 
