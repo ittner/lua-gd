@@ -112,7 +112,7 @@ function mergeMessage(im, msg)
     return nil
   end
 
-  local x, y = 1, 1
+  local x, y = 0, 0
   local oim = gd.createTrueColor(w, h)
   local i = 1
   local a, p, c, nc, chr
@@ -132,7 +132,7 @@ function mergeMessage(im, msg)
         nc = oim:colorResolve(rgb.r, rgb.g, rgb.b)
         oim:setPixel(x, y, nc)
         x = x + 1
-        if x > w then
+        if x >= w then
           x = 1
           y = y + 1
         end
@@ -147,20 +147,20 @@ function mergeMessage(im, msg)
     nc = oim:colorResolve(im:red(c), im:green(c), im:blue(c))
     oim:setPixel(x, y, nc)
     x = x + 1
-    if x > w then
+    if x >= w then
       x = 1
       y = y + 1
     end
   end
 
-  return oim, i-1, w*h
+  return oim, (i-1)*8, w*h
 end
 
 
 function getMessage(im)
   local msg = ""
   local w, h = im:sizeXY()
-  local x, y = 1, 1
+  local x, y = 0, 0
   local a = {}
   local s, e = 1, 1
   local b = 0
@@ -190,7 +190,7 @@ function getMessage(im)
     end
     e = e + 1
     x = x + 1
-    if x > w then
+    if x >= w then
       x = 1
       y = y + 1
     end
