@@ -6,8 +6,8 @@ X gdAntiAliased
 X gdBrushed 
 N gdDashSize (deprecated)
 N gdFont 
-  gdFontCacheSetup 
-  gdFontCacheShutdown 
+X gdFontCacheSetup 
+X gdFontCacheShutdown 
 N gdFontPtr 
 N gdFree 
 X gdImage 
@@ -110,7 +110,7 @@ X gdImageSetClip
 X gdImageGetClip
 ? gdImageString16 
   gdImageStringFT 
-  gdImageStringFTCircle 
+X gdImageStringFTCircle 
   gdImageStringFTEx 
 N gdImageStringTTF  (deprecated)
 X gdImageStringUp 

@@ -1929,6 +1929,22 @@ static int LgdFTUseFontConfig(lua_State *L)
 #endif
 
 
+/* int gdFontCacheSetup(void) */
+static int LgdFontCacheSetup(lua_State *L)
+{
+    lua_pushboolean(L, gdFontCacheSetup());
+    return 1;
+}
+
+
+/* void gdFontCacheShutdown(void) */
+static int LgdFontCacheShutdown(lua_State *L)
+{
+    gdFontCacheShutdown();
+    return 0;
+}
+
+
 
 /* char *gdImageStringFT(gdImagePtr im, int *brect, int fg, char *fontname,
         double ptsize, double angle, int x, int y, char *string)
@@ -2121,6 +2137,10 @@ static const luaL_reg LgdFunctions[] =
     { "ImageStringFT",              LgdImageStringFT },
     { "ImageStringFTCircle",        LgdImageStringFTCircle },
 
+
+    { "FontCacheSetup",             LgdFontCacheSetup },
+    { "FontCacheShutdown",          LgdFontCacheShutdown },
+    
 #ifdef USE_FONTCONFIG
     { "FTUseFontConfig",            LgdFTUseFontConfig },
 #else
