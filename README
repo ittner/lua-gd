@@ -16,12 +16,13 @@ stable.
 
 + Naming convention
 
-   * All functions are loaded on a single table called 'gd'.
-   * Methods uses camelCase names and begins with lower case letters.
-   * Constants uses upper case names, separated by underscores. 
-   * All functions, except gd.create*, gd.copy*, gd.fontCache* and 
-     gd.useFontConfig, can use the colon operator for a more object
-     oriented access.
+    * All functions are loaded on a single table called 'gd'.
+    * No 'Image' prefix.
+    * Methods uses camelCase names and begins with lower case letters.
+    * Constants uses upper case names, separated by underscores. 
+    * All functions, except gd.create*, gd.copy*, gd.fontCache* and 
+      gd.useFontConfig, can use the colon operator for a more object
+      oriented access.
 
 
 + Documentation

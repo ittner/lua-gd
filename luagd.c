@@ -199,7 +199,7 @@ static int LgdImageDestroy(lua_State *L)
 }
 
 /* gdImageCreateFromJpeg(FILE *in) */
-/* Changed to: gdImageCreateFromJpeg(char *filename) */
+/* Changed to: gd.createFromJpeg(char *filename) */
 static int LgdImageCreateFromJpeg(lua_State *L)
 {
     gdImagePtr im;
@@ -249,7 +249,7 @@ static int LgdImageCreateFromJpegPtr(lua_State *L)
 
 
 /* gdImageCreateFromGif(FILE *in) */
-/* Changed to: gdImageCreateFromGif(char *filename) */
+/* Changed to: gd.createFromGif(filename) */
 static int LgdImageCreateFromGif(lua_State *L)
 {
     gdImagePtr im;
@@ -299,7 +299,7 @@ static int LgdImageCreateFromGifPtr(lua_State *L)
 
 
 /* gdImageCreateFromPng(FILE *in) */
-/* Changed to: gdImageCreateFromPng(char *filename) */
+/* Changed to: gd.createFromPng(filename) */
 static int LgdImageCreateFromPng(lua_State *L)
 {
     gdImagePtr im;
@@ -348,7 +348,7 @@ static int LgdImageCreateFromPngPtr(lua_State *L)
 
 
 /* gdImageCreateFromGd(FILE *in) */
-/* Changed to: gdImageCreateFromGd(char *filename) */
+/* Changed to: gd.createFromGd(filename) */
 static int LgdImageCreateFromGd(lua_State *L)
 {
     gdImagePtr im;
@@ -397,7 +397,7 @@ static int LgdImageCreateFromGdPtr(lua_State *L)
 
 
 /* gdImageCreateFromGd2(FILE *in) */
-/* Changed to: gdImageCreateFromGd2(char *filename) */
+/* Changed to: gd.createFromGd2(filename) */
 static int LgdImageCreateFromGd2(lua_State *L)
 {
     gdImagePtr im;
@@ -446,8 +446,7 @@ static int LgdImageCreateFromGd2Ptr(lua_State *L)
 
 
 /* gdImageCreateFromGd2Part(FILE *in, int x, int y, int w, int h) */
-/* Changed to: gdImageCreateFromGd2Part(char *filename, int x, int y,
-                    int w, int h)) */
+/* Changed to: gd.createFromGd2Part(filename, x, y, w, h)) */
 static int LgdImageCreateFromGd2Part(lua_State *L)
 {
     gdImagePtr im;
@@ -505,7 +504,7 @@ static int LgdImageCreateFromGd2PartPtr(lua_State *L)
 
 
 /* gdImageCreateFromXbm(FILE *in) */
-/* Changed to: gdImageCreateFromXbm(char *filename) */
+/* Changed to: gd.createFromXbm(filename) */
 #ifdef USE_XPM
 static int LgdImageCreateFromXbm(lua_State *L)
 {
@@ -558,7 +557,7 @@ static int LgdImageCreateFromXpm(lua_State *L)
 
 
 /* gdImageJpeg(gdImagePtr im, FILE *out, int quality) */
-/* Changed to: gdImageJpeg(gdImagePtr im, char *fname, int quality) */
+/* Changed to: gd.jpeg(im, fname, quality) */
 static int LgdImageJpeg(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
@@ -604,7 +603,7 @@ static int LgdImageJpegPtr(lua_State *L)
 
 
 /* gdImagePng(gdImagePtr im, FILE *out) */
-/* Changed to: gdImagePng(gdImagePtr im, char *fname) */
+/* Changed to: gd.png(im, fname) */
 static int LgdImagePng(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
@@ -648,7 +647,7 @@ static int LgdImagePngPtr(lua_State *L)
 
 
 /* gdImagePngEx(gdImagePtr im, FILE *out, int compression_level) */
-/* Changed to: gdImagePngEx(gdImagePtr im, char *fname, int compr_level) */
+/* Changed to: gd.pngEx(im, fname, compression_level) */
 static int LgdImagePngEx(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
@@ -695,7 +694,7 @@ static int LgdImagePngPtrEx(lua_State *L)
 
 
 /* gdImageGif(gdImagePtr im, FILE *out) */
-/* Changed to: gdImageGif(gdImagePtr im, char *fname) */
+/* Changed to: gd.gif(im, fname) */
 static int LgdImageGif(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
@@ -740,7 +739,7 @@ static int LgdImageGifPtr(lua_State *L)
 
 
 /* gdImageGd(gdImagePtr im, FILE *out) */
-/* Changed to: gdImageGd(gdImagePtr im, char *fname) */
+/* Changed to: gd.gd(im, fname) */
 static int LgdImageGd(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
@@ -785,7 +784,7 @@ static int LgdImageGdPtr(lua_State *L)
 
 
 /* gdImageGd2(gdImagePtr im, FILE *out, int chunkSize, int fmt) */
-/* Changed to: gdImageGd2(gdImagePtr im, char *fname, int cs, int fmt) */
+/* Changed to: gd.gd2(im, fname, chunkSize, fmt) */
 static int LgdImageGd2(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
@@ -833,7 +832,7 @@ static int LgdImageGd2Ptr(lua_State *L)
 
 
 /* void gdImageWBMP(gdImagePtr im, int fg, FILE *out) */
-/* Changed to: gdImageWBMP(gdImagePtr im, int fg, char *fname) */
+/* Changed to: gd.wbmp(im, int fg, filename) */
 static int LgdImageWBMP(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
@@ -1158,7 +1157,7 @@ static int LgdImageSY(lua_State *L)
 }
 
 
-/* Fear the power of the Moon!!  ---   x, y = im:ImageSXY() */
+/* Fear the power of the Moon!!  ---   x, y = im:sizeXY() */
 static int LgdImageSXY(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
@@ -1256,7 +1255,7 @@ static int LgdImageFilledRectangle(lua_State *L)
 
 /* void gdImagePolygon(gdImagePtr im, gdPointPtr points, int pointsTotal,
         int color)
-  Changed to: ImagePolygon(im, { { x1, y1 }, { x2, y2 } ... }, color)  */
+  Changed to: gd.polygon(im, { { x1, y1 }, { x2, y2 } ... }, color)  */
 static int LgdImagePolygon(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
@@ -1310,7 +1309,7 @@ static int LgdImagePolygon(lua_State *L)
 
 /* void gdImageFilledPolygon(gdImagePtr im, gdPointPtr points,
         int pointsTotal, int color)
-  Changed to: ImageFilledPolygon(im, { { x1, y1 }, { x2, y2 } ... }, color) */
+  Changed to: gd.filledPolygon(im, { { x1, y1 }, { x2, y2 } ... }, color) */
 static int LgdImageFilledPolygon(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
@@ -1502,8 +1501,7 @@ static int LgdImageSetTile(lua_State *L)
 
 
 /* void gdImageSetStyle(gdImagePtr im, int *style, int styleLength)  */
-/* Changed To: im:ImageSetStyle( { c1, c2, c3,  ...  } ) */
-
+/* Changed To: gd.setStyle(im, { c1, c2, c3,  ...  } ) */
 static int LgdImageSetStyle(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
@@ -1552,7 +1550,7 @@ static int LgdImageSetThickness(lua_State *L)
 
 
 /* void gdImageAlphaBlending(gdImagePtr im, int blending) */
-/* Changed to: im:ImageAlphaBlending(true_or_false) */
+/* Changed to: im:alphaBlending(true_or_false) */
 static int LgdImageAlphaBlending(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
@@ -1564,7 +1562,7 @@ static int LgdImageAlphaBlending(lua_State *L)
 
 
 /* void gdImageSaveAlpha(gdImagePtr im, int saveFlag) */
-/* Changed to: im:ImageSaveAlpha(true_or_false) */
+/* Changed to: im:saveAlpha(true_or_false) */
 static int LgdImageSaveAlpha(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
@@ -1576,7 +1574,7 @@ static int LgdImageSaveAlpha(lua_State *L)
 
 
 /* gdImageInterlace(gdImagePtr im, int interlace) */
-/* Changed to: im:ImageInterlace(true_or_false) */
+/* Changed to: im:interlace(true_or_false) */
 static int LgdImageInterlace(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
@@ -1839,7 +1837,7 @@ static int LgdImageSetClip(lua_State *L)
 
 
 /* void gdImageGetClip(gdImagePtr im, int *x1, int *y1, int *x2, int *y2) */
-/* Changed to:  x1p, y1p, x2p, y2p = im:ImageGetClip() */
+/* Changed to:  x1p, y1p, x2p, y2p = im:getClip() */
 static int LgdImageGetClip(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
@@ -1855,7 +1853,7 @@ static int LgdImageGetClip(lua_State *L)
 
 
 /* int gdFTUseFontConfig(int flag) */
-/* Changed to: gd.FTUseFontConfig(true_or_false) */
+/* Changed to: gd.useFontConfig(true_or_false) */
 #ifdef USE_FONTCONFIG
 static int LgdFTUseFontConfig(lua_State *L)
 {
@@ -1887,11 +1885,11 @@ static int LgdFontCacheShutdown(lua_State *L)
         double ptsize, double angle, int x, int y, char *string)
 
  Changed To:
-    llX, llY, lrX, lrY, urX, urY, ulX, ulY = im:ImageStringFT(fg, fontname,
+    llX, llY, lrX, lrY, urX, urY, ulX, ulY = im:stringFT(fg, fontname,
             ptsize, angle, x, y, string)
 
   Or (to get the points only):
-    llX, llY, lrX, lrY, urX, urY, ulX, ulY = gd:ImageStringFT(nil, fg,
+    llX, llY, lrX, lrY, urX, urY, ulX, ulY = gd:stringFT(nil, fg,
             fontname, ptsize, angle, x, y, string)
 */
  
@@ -2127,7 +2125,7 @@ int luaopen_gd(lua_State *L)
     tblseticons(L, "FONT_GIANT", MY_GD_FONT_GIANT);
     tblseticons(L, "FONT_TINY", MY_GD_FONT_TINY);
 
-    lua_pushliteral(L, "metatable");    /** metatable */
+    lua_pushliteral(L, "metatable");    /* metatable */
     luaL_newmetatable(L, GD_IMAGE_PTR_TYPENAME);
     lua_pushliteral(L, "__index");
     lua_pushvalue(L, -4);
