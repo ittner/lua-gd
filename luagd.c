@@ -2055,6 +2055,87 @@ static int LgdImageGifAnimEnd(lua_State *L)
     return 1;
 }
 
+
+/* void* gdImageGifAnimBeginPtr(gdImagePtr im, int *size, int GlobalCM,
+        int Loops)
+    Changed to:  im:gifAnimBeginStr(globalCM, loops)
+*/
+
+static int LgdImageGifAnimBeginPtr(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1); 
+    int globalCM = lua_toboolean(L, 2);
+    int loops = getint(L, 3);
+    char *str;
+    int size;
+
+    str = gdImageGifAnimBeginPtr(im, &size, globalCM, loops);
+    if(str != NULL)
+    {
+        lua_pushlstring(L, str, size);
+        gdFree(str);
+    }
+    else
+        lua_pushnil(L);
+    return 1;
+}
+
+
+/* void* gdImageGifAnimAddPtr(gdImagePtr im, int *size, int LocalCM,
+    int LeftOfs, int TopOfs, int Delay, int Disposal, gdImagePtr previm)
+
+    Changed to: im:gifAnimAddStr(localCM, leftOfs, topOfs, delay,
+                    disposal [, previm])
+*/
+
+static int LgdImageGifAnimAddPtr(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1); 
+    int localCM = lua_toboolean(L, 2);
+    int leftOfs = getint(L, 3);
+    int topOfs = getint(L, 4);
+    int delay = getint(L, 5);
+    int disp = getint(L, 6);
+    gdImagePtr previm = NULL;
+    int size;
+    char *str;
+
+    if(lua_gettop(L) >= 7)
+        previm = getImagePtr(L, 7);
+
+    str = gdImageGifAnimAddPtr(im, &size, localCM, leftOfs, topOfs, delay,
+            disp, previm);
+    if(str != NULL)
+    {
+        lua_pushlstring(L, str, size);
+        gdFree(str);
+    }
+    else
+        lua_pushnil(L);
+    return 1;
+}
+
+
+/* void* gdImageGifAnimEndPtr(int *size)
+    Changed to:  gd.gifAnimEndStr()
+*/
+
+static int LgdImageGifAnimEndPtr(lua_State *L)
+{
+    int size;
+    char *str;
+
+    str = gdImageGifAnimEndPtr(&size);
+    if(str != NULL)
+    {
+        lua_pushlstring(L, str, size);
+        gdFree(str);
+    }
+    else
+        lua_pushnil(L);
+    return 1;
+}
+
 #endif
 
 
@@ -2193,6 +2274,9 @@ static const luaL_reg LgdFunctions[] =
     { "gifAnimBegin",           LgdImageGifAnimBegin },
     { "gifAnimAdd",             LgdImageGifAnimAdd },
     { "gifAnimEnd",             LgdImageGifAnimEnd },
+    { "gifAnimBeginStr",        LgdImageGifAnimBeginPtr },
+    { "gifAnimAddStr",          LgdImageGifAnimAddPtr },
+    { "gifAnimEndStr",          LgdImageGifAnimEndPtr },
 #endif
 
     { NULL, NULL }
