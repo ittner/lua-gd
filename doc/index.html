@@ -436,13 +436,24 @@ end
 
 
 
-<h4>gdImage:jpegStr(string, quality)</h4>
-<h4>gdImage:pngStr(string)</h4>
-<h4>gdImage:pngStrEx(string, compression_level)</h4>
-<h4>gdImage:gifStr(string)</h4>
-<h4>gdImage:gdStr(string)</h4>
-<h4>gdImage:gd2Str(string, chunkSize, format)</h4>
-<h4>gdImage:wbmpStr(string)</h4>
+<h4>gdImage:jpegStr(quality)</h4>
+<h4>gdImage:pngStr()</h4>
+<h4>gdImage:pngStrEx(compression_level)</h4>
+<h4>gdImage:gifStr()</h4>
+<h4>gdImage:gdStr()</h4>
+<h4>gdImage:gd2Str(chunkSize, format)</h4>
+<h4>gdImage:wbmpStr()</h4>
+
+<p>These functions returns images as Lua strings.
+<code>gdImage:jpegStr()</code> allows you to specify the quality of the
+generated JPEG data from 1 (worst quality, small string) to 100 (best
+quality, large string). <code>gdImage:pngStrEx()</code> allows you to
+specify the compression level of a PNG image, from 1 to 6 (or -1 for the
+default compression level of libpng). <code>gdImage:gd2Str()</code>
+must receive the chunk size (an integer, or 0 for the default)
+and the data format, which can be <code>gd.GD2_FMT_RAW</code> or
+<code>gd.GD2_FMT_COMPRESSED</code>. These functions returns <b>nil</b>
+on error (eg. a corrupted image). </p>
 
 
 <a name="api.color"></a>
