@@ -797,7 +797,314 @@ static int LgdImageWBMPPtr(lua_State *L)
 }
 
 
+/* int gdImageColorAllocate(gdImagePtr im, int r, int g, int b) */
+static int LgdImageColorAllocate(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int r = getint(L, 2);
+    int g = getint(L, 3);
+    int b = getint(L, 4);
+    int c;
 
+    if(im)
+    {
+        c = gdImageColorAllocate(im, r, g, b);
+        if(c > 0)
+            lua_pushnumber(L, c);  /* ok */
+        else
+            lua_pushnil(L); /* Can not allocate color */
+    }
+    else
+        lua_pushnil(L);  /* Error reading the image */
+    return 1;
+}
+
+
+/* int gdImageColorAllocateAlpha(gdImagePtr im, int r, int g, int b, int a) */
+static int LgdImageColorAllocateAlpha(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int r = getint(L, 2);
+    int g = getint(L, 3);
+    int b = getint(L, 4);
+    int a = getint(L, 5);
+    int c;
+
+    if(im)
+    {
+        c = gdImageColorAllocateAlpha(im, r, g, b, a);
+        if(c > 0)
+            lua_pushnumber(L, c);  /* ok */
+        else
+            lua_pushnil(L); /* Can not allocate color */
+    }
+    else
+        lua_pushnil(L);  /* Error reading the image */
+    return 1;
+}
+
+
+/* int gdImageColorClosest(gdImagePtr im, int r, int g, int b) */
+static int LgdImageColorClosest(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int r = getint(L, 2);
+    int g = getint(L, 3);
+    int b = getint(L, 4);
+    int c;
+
+    if(im)
+    {
+        c = gdImageColorClosest(im, r, g, b);
+        if(c > 0)
+            lua_pushnumber(L, c);  /* ok */
+        else
+            lua_pushnil(L); /* Can not allocate color */
+    }
+    else
+        lua_pushnil(L);  /* Error reading the image */
+    return 1;
+}
+
+
+/* int gdImageColorClosestAlpha(gdImagePtr im, int r, int g, int b, int a) */
+static int LgdImageColorClosestAlpha(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int r = getint(L, 2);
+    int g = getint(L, 3);
+    int b = getint(L, 4);
+    int a = getint(L, 5);
+    int c;
+
+    if(im)
+    {
+        c = gdImageColorClosestAlpha(im, r, g, b, a);
+        if(c > 0)
+            lua_pushnumber(L, c);  /* ok */
+        else
+            lua_pushnil(L); /* Can not allocate color */
+    }
+    else
+        lua_pushnil(L);  /* Error reading the image */
+    return 1;
+}
+
+
+/* int gdImageColorClosestHWB(gdImagePtr im, int r, int g, int b) */
+static int LgdImageColorClosestHWB(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int r = getint(L, 2);
+    int g = getint(L, 3);
+    int b = getint(L, 4);
+    int c;
+
+    if(im)
+    {
+        c = gdImageColorClosestHWB(im, r, g, b);
+        if(c > 0)
+            lua_pushnumber(L, c);  /* ok */
+        else
+            lua_pushnil(L); /* Can not allocate color */
+    }
+    else
+        lua_pushnil(L);  /* Error reading the image */
+    return 1;
+}
+
+
+/* int gdImageColorExact(gdImagePtr im, int r, int g, int b) */
+static int LgdImageColorExact(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int r = getint(L, 2);
+    int g = getint(L, 3);
+    int b = getint(L, 4);
+    int c;
+
+    if(im)
+    {
+        c = gdImageColorExact(im, r, g, b);
+        if(c > 0)
+            lua_pushnumber(L, c);  /* ok */
+        else
+            lua_pushnil(L); /* Can not allocate color */
+    }
+    else
+        lua_pushnil(L);  /* Error reading the image */
+    return 1;
+}
+
+
+/* int gdImageColorExactAlpha(gdImagePtr im, int r, int g, int b, int a) */
+static int LgdImageColorExactAlpha(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int r = getint(L, 2);
+    int g = getint(L, 3);
+    int b = getint(L, 4);
+    int a = getint(L, 5);
+    int c;
+
+    if(im)
+    {
+        c = gdImageColorExactAlpha(im, r, g, b, a);
+        if(c > 0)
+            lua_pushnumber(L, c);  /* ok */
+        else
+            lua_pushnil(L); /* Can not allocate color */
+    }
+    else
+        lua_pushnil(L);  /* Error reading the image */
+    return 1;
+}
+
+
+/* int gdImageColorResolve(gdImagePtr im, int r, int g, int b) */
+static int LgdImageColorResolve(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int r = getint(L, 2);
+    int g = getint(L, 3);
+    int b = getint(L, 4);
+    int c;
+
+    if(im)
+    {
+        c = gdImageColorResolve(im, r, g, b);
+        if(c > 0)
+            lua_pushnumber(L, c);  /* ok */
+        else
+            lua_pushnil(L); /* Can not allocate color */
+    }
+    else
+        lua_pushnil(L);  /* Error reading the image */
+    return 1;
+}
+
+
+/* int gdImageColorResolveAlpha(gdImagePtr im, int r, int g, int b, int a) */
+static int LgdImageColorResolveAlpha(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int r = getint(L, 2);
+    int g = getint(L, 3);
+    int b = getint(L, 4);
+    int a = getint(L, 5);
+    int c;
+
+    if(im)
+    {
+        c = gdImageColorResolveAlpha(im, r, g, b, a);
+        if(c > 0)
+            lua_pushnumber(L, c);  /* ok */
+        else
+            lua_pushnil(L); /* Can not allocate color */
+    }
+    else
+        lua_pushnil(L);  /* Error reading the image */
+    return 1;
+}
+
+
+/* int gdImageColorsTotal(gdImagePtr im) */
+static int LgdImageColorsTotal(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+
+    if(im)
+        lua_pushnumber(L, gdImageColorsTotal(im));  /* ok */
+    else
+        lua_pushnil(L);  /* Error reading the image */
+    return 1;
+}
+
+
+/* int gdImageRed(gdImagePtr im, int c) */
+static int LgdImageRed(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int c = getint(L, 2);
+
+    if(im)
+        lua_pushnumber(L, gdImageRed(im, c));  /* ok */
+    else
+        lua_pushnil(L);  /* Error reading the image */
+    return 1;
+}
+
+/* int gdImageBlue(gdImagePtr im, int c) */
+static int LgdImageBlue(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int c = getint(L, 2);
+
+    if(im)
+        lua_pushnumber(L, gdImageBlue(im, c));  /* ok */
+    else
+        lua_pushnil(L);  /* Error reading the image */
+    return 1;
+}
+
+/* int gdImageBlue(gdImagePtr im, int c) */
+static int LgdImageGreen(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int c = getint(L, 2);
+
+    if(im)
+        lua_pushnumber(L, gdImageGreen(im, c));  /* ok */
+    else
+        lua_pushnil(L);  /* Error reading the image */
+    return 1;
+}
+
+/* int gdImageGetInterlaced(gdImagePtr im) */
+static int LgdImageGetInterlaced(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int ret = gdImageGetInterlaced(im);
+
+    if(ret != 0)
+        lua_pushnumber(L, ret);
+    else
+        lua_pushnil(L);
+    return 1;
+}
+
+/* int gdImageGetTransparent(gdImagePtr im) */
+static int LgdImageGetTransparent(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int ret = gdImageGetTransparent(im);
+
+    if(ret != -1)
+        lua_pushnumber(L, ret);
+    else
+        lua_pushnil(L);
+    return 1;
+}
+
+
+/* void gdImageColorTransparent(gdImagePtr im, int c) */
+static int LgdImageColorTransparent(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int c = getint(L, 2);
+    gdImageColorTransparent(im, c);
+    return 0;
+}
+
+
+/* void gdImageColorDeallocate(gdImagePtr im, int c) */
+static int LgdImageColorDeallocate(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int c = getint(L, 2);
+    gdImageColorDeallocate(im, c);
+    return 0;
+}
 
 
 
@@ -805,10 +1112,12 @@ static int LgdImageWBMPPtr(lua_State *L)
 
 static const luaL_reg LgdFunctions[] =
 {
+    { "ImageDestroy",               LgdImageDestroy },
+
     { "ImageCreate",                LgdImageCreate },
     { "ImageCreatePalette",         LgdImageCreatePalette },
     { "ImageCreateTrueColor",       LgdImageCreateTrueColor },
-    { "ImageDestroy",               LgdImageDestroy },
+
     { "ImageCreateFromJpeg",        LgdImageCreateFromJpeg },
     { "ImageCreateFromJpegPtr",     LgdImageCreateFromJpegPtr },
     { "ImageCreateFromGif",         LgdImageCreateFromGif },
@@ -823,6 +1132,7 @@ static const luaL_reg LgdFunctions[] =
     { "ImageCreateFromGd2PartPtr",  LgdImageCreateFromGd2PartPtr },
     { "ImageCreateFromXbm",         LgdImageCreateFromXbm },
     { "ImageCreateFromXpm",         LgdImageCreateFromXpm },
+
     { "ImageJpeg",                  LgdImageJpeg },
     { "ImageJpegPtr",               LgdImageJpegPtr },
     { "ImagePng",                   LgdImagePng },
@@ -837,6 +1147,26 @@ static const luaL_reg LgdFunctions[] =
     { "ImageGd2Ptr",                LgdImageGd2Ptr },
     { "ImageWBMP",                  LgdImageWBMP },
     { "ImageWBMPPtr",               LgdImageWBMPPtr },
+
+    { "ImageColorAllocate",         LgdImageColorAllocate },
+    { "ImageColorAllocateAlpha",    LgdImageColorAllocateAlpha },
+    { "ImageColorClosest",          LgdImageColorClosest },
+    { "ImageColorClosestAlpha",     LgdImageColorClosestAlpha },
+    { "ImageColorClosestHWB",       LgdImageColorClosestHWB },
+    { "ImageColorExact",            LgdImageColorExact },
+    { "ImageColorExactAlpha",       LgdImageColorExactAlpha },
+    { "ImageColorResolve",          LgdImageColorResolve },
+    { "ImageColorResolveAlpha",     LgdImageColorResolveAlpha },
+    { "ImageColorsTotal",           LgdImageColorsTotal },
+    { "ImageRed",                   LgdImageRed },
+    { "ImageBlue",                  LgdImageBlue },
+    { "ImageGreen",                 LgdImageGreen },
+    { "ImageGetInterlaced",         LgdImageGetInterlaced },
+    { "ImageGetTransparent",        LgdImageGetTransparent },
+    { "ImageColorTransparent",      LgdImageColorTransparent },
+    { "ImageColorDeallocate",       LgdImageColorDeallocate },
+
+
 
     { NULL, NULL }
 };

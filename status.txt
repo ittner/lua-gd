@@ -13,16 +13,17 @@ X gdImage
   gdImageBoundsSafe 
   gdImageChar 
   gdImageCharUp 
-  gdImageColorAllocate 
-  gdImageColorAllocateAlpha 
-  gdImageColorClosest 
-  gdImageColorClosestAlpha 
-  gdImageColorClosestHWB 
-  gdImageColorDeallocate 
-  gdImageColorExact 
-  gdImageColorExactAlpha 
-  gdImageColorResolve 
-  gdImageColorResolveAlpha 
+X gdImageColorAllocate 
+X gdImageColorAllocateAlpha 
+X gdImageColorClosest 
+X gdImageColorClosestAlpha 
+X gdImageColorClosestHWB 
+X gdImageColorsTotal
+X gdImageColorDeallocate 
+X gdImageColorExact 
+X gdImageColorExactAlpha 
+X gdImageColorResolve 
+X gdImageColorResolveAlpha 
   gdImageColorTransparent 
   gdImageCopy 
   gdImageCopyMerge 
@@ -65,10 +66,10 @@ X gdImageGdPtr
 X gdImageGd2Ptr
 X gdImageGif
 X gdImageGifPtr
-  gdImageGetInterlaced 
+X gdImageGetInterlaced 
   gdImageGetPixel 
-  gdImageGetTransparent 
-  gdImageGreen 
+X gdImageGetTransparent 
+X gdImageGreen 
   gdImageInterlace 
 X gdImageJpeg 
 X gdImagePtr
@@ -86,7 +87,7 @@ N gdImagePngToSink
   gdImagePolygon 
   gdImagePtr 
   gdImageRectangle 
-  gdImageRed 
+X gdImageRed 
   gdImageSaveAlpha 
   gdImageSetAntiAliased 
   gdImageSetAntiAliasedDontBlend 
