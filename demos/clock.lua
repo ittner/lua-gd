@@ -1,3 +1,6 @@
+-- an analog clock with lua and lua-gd
+-- (c) 2004 Alexandre Erwin Ittner
+
 load_gd = assert(loadlib("libluagd.so", "luaopen_gd"))
 load_gd()
 
@@ -39,8 +42,8 @@ function createClock(size, hours, minutes)
 end
 
 
-s = 520
-im = createClock(s, 10, 10)
+dh = os.date("*t")
+im = createClock(120, dh.hour, dh.min)
 im:png("./out.png")
 os.execute("display out.png")
 
