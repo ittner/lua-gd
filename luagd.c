@@ -1149,7 +1149,9 @@ static int LgdImageGetTransparent(lua_State *L)
 static int LgdImageColorTransparent(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
-    int c = getint(L, 2);
+    int c = -1;
+    if(!lua_isnil(L, 2))
+      c = getint(L, 2);
     gdImageColorTransparent(im, c);
     return 0;
 }
