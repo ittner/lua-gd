@@ -64,6 +64,7 @@ X gdImageFilledArc
 X gdImageEllipse 
 X gdImageFilledEllipse 
 X gdImageFilledPolygon 
+X gdImageOpenPolygon 
 X gdImageFilledRectangle 
 X gdImageGd 
 X gdImageGd2 

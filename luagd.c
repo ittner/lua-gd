@@ -1253,26 +1253,17 @@ static int LgdImageFilledRectangle(lua_State *L)
 }
 
 
-/* void gdImagePolygon(gdImagePtr im, gdPointPtr points, int pointsTotal,
-        int color)
-  Changed to: gd.polygon(im, { { x1, y1 }, { x2, y2 } ... }, color)  */
-static int LgdImagePolygon(lua_State *L)
+/* Stack must have ONLY the table of points */
+static gdPoint *getPointList(lua_State *L, int *size)
 {
-    gdImagePtr im = getImagePtr(L, 1);
     gdPoint *plist;
-    int size;
     int i;
-    int c;
-
-    c = getint(L, 3);
-    lua_remove(L, 3); /* Get and drop color */
-    lua_remove(L, 1); /* Drop image from the stack */
 
     luaL_checktype(L, -1, LUA_TTABLE);
-    size = luaL_getn(L, -1);
-    plist = (gdPoint*) malloc(size * sizeof(gdPoint));
+    *size = luaL_getn(L, -1);
+    plist = (gdPoint*) malloc(*size * sizeof(gdPoint));
 
-    for(i = 0; i < size; i++)
+    for(i = 0; i < *size; i++)
     {
         /* Stack: T */
         lua_rawgeti(L, 1, i + 1);
@@ -1289,8 +1280,8 @@ static int LgdImagePolygon(lua_State *L)
         plist[i].x = getint(L, -1);
         lua_remove(L, -1);
 
-        /* Stack:  T, T', Y  */
         lua_rawgeti(L, 2, 2);
+        /* Stack:  T, T', Y  */
         plist[i].y = getint(L, -1);
         lua_remove(L, -1);
 
@@ -1300,6 +1291,26 @@ static int LgdImagePolygon(lua_State *L)
         /* Stack: T */
     }
 
+    lua_remove(L, -1);
+    return plist;
+}
+
+
+
+/* void gdImagePolygon(gdImagePtr im, gdPointPtr points, int pointsTotal,
+        int color)
+  Changed to: gd.polygon(im, { { x1, y1 }, { x2, y2 } ... }, color)  */
+static int LgdImagePolygon(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    gdPoint *plist;
+    int size;
+    int c;
+
+    c = getint(L, 3);
+    lua_remove(L, 3); /* Get and drop color */
+    lua_remove(L, 1); /* Drop image from the stack */
+    plist = getPointList(L, &size);
     gdImagePolygon(im, plist, size, c);
     free(plist);
     return 0;
@@ -1315,49 +1326,39 @@ static int LgdImageFilledPolygon(lua_State *L)
     gdImagePtr im = getImagePtr(L, 1);
     gdPoint *plist;
     int size;
-    int i;
     int c;
 
     c = getint(L, 3);
     lua_remove(L, 3); /* Get and drop color */
     lua_remove(L, 1); /* Drop image from the stack */
 
-    luaL_checktype(L, -1, LUA_TTABLE);
-    size = luaL_getn(L, -1);
-    plist = (gdPoint*) malloc(size * sizeof(gdPoint));
-
-    for(i = 0; i < size; i++)
-    {
-        /* Stack: T */
-        lua_rawgeti(L, 1, i + 1);
-
-        /* Stack:  T, T'  */
-        if(lua_type(L, 2) != LUA_TTABLE)
-        {
-            free(plist);
-            luaL_typerror(L, 2, "Point");
-        }
-
-        lua_rawgeti(L, 2, 1);
-        /* Stack:  T, T', X  */
-        plist[i].x = getint(L, -1);
-        lua_remove(L, -1);
-
-        /* Stack:  T, T', Y  */
-        lua_rawgeti(L, 2, 2);
-        plist[i].y = getint(L, -1);
-        lua_remove(L, -1);
-
-        /* Stack:  T, T' */
-        lua_remove(L, -1);
-
-        /* Stack: T */
-    }
-
+    plist = getPointList(L, &size);
     gdImageFilledPolygon(im, plist, size, c);
     free(plist);
     return 0;
 }
+
+
+/* void gdImageOpenPolygon(gdImagePtr im, gdPointPtr points,
+        int pointsTotal, int color)
+  Changed to: gd.openPolygon(im, { { x1, y1 }, { x2, y2 } ... }, color) */
+static int LgdImageOpenPolygon(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    gdPoint *plist;
+    int size;
+    int c;
+
+    c = getint(L, 3);
+    lua_remove(L, 3); /* Get and drop color */
+    lua_remove(L, 1); /* Drop image from the stack */
+
+    plist = getPointList(L, &size);
+    gdImageOpenPolygon(im, plist, size, c);
+    free(plist);
+    return 0;
+}
+
 
 
 /* void gdImageArc(gdImagePtr im, int cx, int cy, int w, int h, int s, int e,
@@ -2036,6 +2037,7 @@ static const luaL_reg LgdFunctions[] =
     { "filledRectangle",        LgdImageFilledRectangle },
     { "polygon",                LgdImagePolygon },
     { "filledPolygon",          LgdImageFilledPolygon },
+    { "openPolygon",            LgdImageOpenPolygon },
     { "arc",                    LgdImageArc },
     { "filledArc",              LgdImageFilledArc },
     { "ellipse",                LgdImageEllipse },
