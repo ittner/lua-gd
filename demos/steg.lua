@@ -121,6 +121,7 @@ function mergeMessage(im, msg)
   while i <= len do
     chr = string.byte(string.sub(msg, i, i))
     a = intToBitArray(chr)
+    io.write(chr .. " ")
     c = im:getPixel(x, y)
     for p = 7,0,-1 do
       if not rgb.r then
@@ -171,7 +172,7 @@ function getMessage(im)
     a[e] = getLSB(im:red(c))
     a[e+1] = getLSB(im:green(c))
     a[e+2] = getLSB(im:blue(c))
-    e = e + 3
+    e = e + 2
     if e - s >= 7 then
       b = 0
       for p = s, s+7 do
@@ -182,12 +183,14 @@ function getMessage(im)
         a[p] = nil
       end
       s = s + 8
+      io.write(b .. " ")
       if b == 0 then
         return msg
       else
         msg = msg .. string.char(b)
       end
     end
+    e = e + 1
     x = x + 1
     if x > w then
       x = 1
