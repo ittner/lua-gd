@@ -103,7 +103,6 @@ function makeThumb(dirname, fname)
   local format
   local fullname = dirname .. "/" .. fname
 
-
   s, e, name = string.find(tmpname, "thumb_(.+)%.png")
   if name then 
     return nil
