@@ -1492,6 +1492,30 @@ int luaopen_gd(lua_State *L)
     lua_pushnumber(L, gdEdged);
     lua_settable(L, -3);
 
+    lua_pushliteral(L, "AntiAliased");
+    lua_pushnumber(L, gdAntiAliased);
+    lua_settable(L, -3);
+
+    lua_pushliteral(L, "MaxColors");
+    lua_pushnumber(L, gdMaxColors);
+    lua_settable(L, -3);
+
+    lua_pushliteral(L, "Brushed");
+    lua_pushnumber(L, gdBrushed);
+    lua_settable(L, -3);
+
+    lua_pushliteral(L, "Styled");
+    lua_pushnumber(L, gdStyled);
+    lua_settable(L, -3);
+
+    lua_pushliteral(L, "Tiled");
+    lua_pushnumber(L, gdTiled);
+    lua_settable(L, -3);
+
+    lua_pushliteral(L, "Transparent");
+    lua_pushnumber(L, gdTransparent);
+    lua_settable(L, -3);
+
     lua_pushliteral(L, "metatable");		/** metatable */
     luaL_newmetatable(L, GD_IMAGE_PTR_TYPENAME);
     lua_pushliteral(L, "__index");

@@ -112,9 +112,9 @@ X gdImageSY
 X gdImageWBMP 
 X gdImageWBMPtr
 N gdImageWBMPCtx 
-  gdMaxColors 
-  gdPoint 
-  gdStyled 
+X gdMaxColors 
+N gdPoint 
+X gdStyled 
   gdStyledBrushed 
-  gdTiled 
-  gdTransparent
+X gdTiled 
+X gdTransparent
