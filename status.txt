@@ -30,18 +30,18 @@ X gdImage
   gdImageCopyResized 
   gdImageCopyRotated 
 X gdImageCreate 
-  gdImageCreateFromGd 
-  gdImageCreateFromGd2 
+X gdImageCreateFromGd 
+X gdImageCreateFromGd2 
   gdImageCreateFromGd2Ctx 
-  gdImageCreateFromGd2Part 
+X gdImageCreateFromGd2Part 
   gdImageCreateFromGd2PartCtx 
 X gdImageCreateFromJpeg
   gdImageCreateFromJpegCtx 
-  gdImageCreateFromPng 
+X gdImageCreateFromPng 
   gdImageCreateFromPngCtx 
   gdImageCreateFromPngSource 
-  gdImageCreateFromXbm 
-  gdImageCreateFromXpm 
+X gdImageCreateFromXbm 
+X gdImageCreateFromXpm 
   gdImageCreatePalette 
 X gdImageCreateTrueColor 
   gdImageDashedLine 
@@ -52,8 +52,10 @@ X gdImageDestroy
   gdImageFilledEllipse 
   gdImageFilledPolygon 
   gdImageFilledRectangle 
-  gdImageGd 
-  gdImageGd2 
+X gdImageGd 
+X gdImageGd2 
+X gdImageGdPtr
+X gdImageGd2Ptr
   gdImageGetInterlaced 
   gdImageGetPixel 
   gdImageGetTransparent 

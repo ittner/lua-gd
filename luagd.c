@@ -133,16 +133,195 @@ static int LgdImageCreateFromJpeg(lua_State *L)
 }
 
 
+/* gdImageCreateFromPng(FILE *in) */
+/* Changed to: gdImageCreateFromPng(char *filename) */
+static int LgdImageCreateFromPng(lua_State *L)
+{
+    gdImagePtr im;
+    FILE *fp;
+    const char *fname = getstring(L, 1);
 
-/* gdImageCreateFromJpegCtx(gdIOCtx *in) 
+    if(fname == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    if((fp = fopen(fname, "rb")) == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    im = gdImageCreateFromPng(fp);
+    fclose(fp);
+    if(im != NULL)
+    {
+        lua_boxpointer(L, im);
+        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
+        lua_setmetatable(L, -2);    /* Done */
+    }
+    else
+        lua_pushnil(L); /* Error */
+    return 1;
+}
 
-gdImageCreateFromPng(FILE *in) (FUNCTION)
-gdImageCreateFromPngCtx(gdIOCtx *in) (FUNCTION)
 
-gdImageCreateFromGd(FILE *in) (FUNCTION)
-gdImageCreateFromGdCtx(gdIOCtx *in) (FUNCTION)
+/* gdImageCreateFromGd(FILE *in) */
+/* Changed to: gdImageCreateFromGd(char *filename) */
+static int LgdImageCreateFromGd(lua_State *L)
+{
+    gdImagePtr im;
+    FILE *fp;
+    const char *fname = getstring(L, 1);
 
-*/
+    if(fname == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    if((fp = fopen(fname, "rb")) == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    im = gdImageCreateFromGd(fp);
+    fclose(fp);
+    if(im != NULL)
+    {
+        lua_boxpointer(L, im);
+        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
+        lua_setmetatable(L, -2);    /* Done */
+    }
+    else
+        lua_pushnil(L); /* Error */
+    return 1;
+}
+
+/* gdImageCreateFromGd2(FILE *in) */
+/* Changed to: gdImageCreateFromGd2(char *filename) */
+static int LgdImageCreateFromGd2(lua_State *L)
+{
+    gdImagePtr im;
+    FILE *fp;
+    const char *fname = getstring(L, 1);
+
+    if(fname == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    if((fp = fopen(fname, "rb")) == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    im = gdImageCreateFromGd2(fp);
+    fclose(fp);
+    if(im != NULL)
+    {
+        lua_boxpointer(L, im);
+        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
+        lua_setmetatable(L, -2);    /* Done */
+    }
+    else
+        lua_pushnil(L); /* Error */
+    return 1;
+}
+
+
+
+/* gdImageCreateFromGd2Part(FILE *in, int x, int y, int w, int h) */
+/* Changed to: gdImageCreateFromGd2Part(char *filename, int x, int y,
+                    int w, int h)) */
+static int LgdImageCreateFromGd2Part(lua_State *L)
+{
+    gdImagePtr im;
+    FILE *fp;
+    const char *fname = getstring(L, 1);
+    const int x = getint(L, 2);
+    const int y = getint(L, 3);
+    const int w = getint(L, 4);
+    const int h = getint(L, 5);
+
+    if(fname == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    if((fp = fopen(fname, "rb")) == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    im = gdImageCreateFromGd2Part(fp, x, y, w, h);
+    fclose(fp);
+    if(im != NULL)
+    {
+        lua_boxpointer(L, im);
+        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
+        lua_setmetatable(L, -2);    /* Done */
+    }
+    else
+        lua_pushnil(L); /* Error */
+    return 1;
+}
+
+
+/* gdImageCreateFromXbm(FILE *in) */
+/* Changed to: gdImageCreateFromXbm(char *filename) */
+static int LgdImageCreateFromXbm(lua_State *L)
+{
+    gdImagePtr im;
+    FILE *fp;
+    const char *fname = getstring(L, 1);
+
+    if(fname == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    if((fp = fopen(fname, "rb")) == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    im = gdImageCreateFromXbm(fp);
+    fclose(fp);
+    if(im != NULL)
+    {
+        lua_boxpointer(L, im);
+        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
+        lua_setmetatable(L, -2);    /* Done */
+    }
+    else
+        lua_pushnil(L); /* Error */
+    return 1;
+}
+
+
+/* gdImageCreateFromXpm(char *filename) */
+static int LgdImageCreateFromXpm(lua_State *L)
+{
+    gdImagePtr im;
+    char *fname = (char*) getstring(L, 1);
+
+    if(fname == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    im = gdImageCreateFromXpm(fname);
+    if(im != NULL)
+    {
+        lua_boxpointer(L, im);
+        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
+        lua_setmetatable(L, -2);    /* Done */
+    }
+    else
+        lua_pushnil(L); /* Error */
+    return 1;
+}
+
+
 
 
 
@@ -192,7 +371,7 @@ static int LgdImageJpegPtr(lua_State *L)
 }
 
 
-/* gdImagePng(gdImagePtr im, FILE *out, int quality) */
+/* gdImagePng(gdImagePtr im, FILE *out) */
 /* Changed to: gdImagePng(gdImagePtr im, char *fname) */
 static int LgdImagePng(lua_State *L)
 {
@@ -284,6 +463,97 @@ static int LgdImagePngPtrEx(lua_State *L)
 
 
 
+/* gdImageGd(gdImagePtr im, FILE *out) */
+/* Changed to: gdImageGd(gdImagePtr im, char *fname) */
+static int LgdImageGd(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    const char *fname = getstring(L, 2);
+    FILE *fp;
+
+    if(fname == NULL)
+    {
+        lua_pushnil(L);
+        return 1;
+    }
+    if((fp = fopen(fname, "wb")) == NULL)
+    {
+        lua_pushnil(L);
+        return 1;
+    }
+    gdImageGd(im, fp);
+    fclose(fp);
+    lua_pushnumber(L, 1);
+    return 1;
+}
+
+
+/* void *gdImageGdPtr(gdImagePtr im) */
+static int LgdImageGdPtr(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    char *str;
+    int size;
+
+    str = gdImageGdPtr(im, &size);
+    if(str != NULL)
+    {
+        lua_pushlstring(L, str, size);
+        gdFree(str);
+    }
+    else
+        lua_pushnil(L);  /* Error */
+    return 1;
+}
+
+
+
+/* gdImageGd2(gdImagePtr im, FILE *out, int chunkSize, int fmt) */
+/* Changed to: gdImageGd2(gdImagePtr im, char *fname, int cs, int fmt) */
+static int LgdImageGd2(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    const char *fname = getstring(L, 2);
+    int cs = getint(L, 3);
+    int fmt = getint(L, 4);
+    FILE *fp;
+
+    if(fname == NULL)
+    {
+        lua_pushnil(L);
+        return 1;
+    }
+    if((fp = fopen(fname, "wb")) == NULL)
+    {
+        lua_pushnil(L);
+        return 1;
+    }
+    gdImageGd2(im, fp, cs, fmt);
+    fclose(fp);
+    lua_pushnumber(L, 1);
+    return 1;
+}
+
+
+/* void* gdImageGd2Ptr(gdImagePtr im, int chunkSize, int fmt, int *size) */
+static int LgdImageGd2Ptr(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int cs = getint(L, 2);
+    int fmt = getint(L, 3);
+    char *str;
+    int size;
+
+    str = gdImageGd2Ptr(im, cs, fmt, &size);
+    if(str != NULL)
+    {
+        lua_pushlstring(L, str, size);
+        gdFree(str);
+    }
+    else
+        lua_pushnil(L);  /* Error */
+    return 1;
+}
 
 
 
@@ -296,12 +566,22 @@ static const luaL_reg LgdFunctions[] =
     { "ImageCreateTrueColor",   LgdImageCreateTrueColor },
     { "ImageDestroy",           LgdImageDestroy },
     { "ImageCreateFromJpeg",    LgdImageCreateFromJpeg },
+    { "ImageCreateFromPng",     LgdImageCreateFromPng },
+    { "ImageCreateFromGd",      LgdImageCreateFromGd },
+    { "ImageCreateFromGd2",     LgdImageCreateFromGd2 },
+    { "ImageCreateFromGd2Part", LgdImageCreateFromGd2Part },
+    { "ImageCreateFromXbm",     LgdImageCreateFromXbm },
+    { "ImageCreateFromXpm",     LgdImageCreateFromXpm },
     { "ImageJpeg",              LgdImageJpeg },
     { "ImageJpegPtr",           LgdImageJpegPtr },
     { "ImagePng",               LgdImagePng },
     { "ImagePngPtr",            LgdImagePngPtr },
     { "ImagePngEx",             LgdImagePngEx },
     { "ImagePngPtrEx",          LgdImagePngPtrEx },
+    { "ImageGd",                LgdImageGd },
+    { "ImageGdPtr",             LgdImageGdPtr },
+    { "ImageGd2",               LgdImageGd2 },
+    { "ImageGd2Ptr",            LgdImageGd2Ptr },
 
     { NULL, NULL }
 };
@@ -310,8 +590,16 @@ static const luaL_reg LgdFunctions[] =
 int luaopen_gd(lua_State *L)
 {
     luaL_openlib(L, LIB_NAME, LgdFunctions, 0);
-    lua_pushliteral(L, "version");			/** version */
+    lua_pushliteral(L, "version");
     lua_pushliteral(L, LIB_VERSION);
+    lua_settable(L, -3);
+
+    lua_pushliteral(L, "GD2_FMT_RAW");
+    lua_pushnumber(L, GD2_FMT_RAW);
+    lua_settable(L, -3);
+
+    lua_pushliteral(L, "GD2_FMT_COMPRESSED");
+    lua_pushnumber(L, GD2_FMT_COMPRESSED);
     lua_settable(L, -3);
 
     lua_pushliteral(L, "metatable");		/** metatable */
