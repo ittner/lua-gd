@@ -14,16 +14,10 @@ function createClock(size, title, hours, minutes)
   im:setThickness(math.max(1, size/100))
   im:arc(cxy, cxy, size, size, 0, 360, gray)
 
-  local ang = 0
-  while ang <= 360 do
-    im:line(
-      size/2 + 0.9 * size * math.sin(math.rad(ang)),
-      size - (size/2 + 0.9 * size * math.cos(math.rad(ang))),
-      size/2 + 0.95 * size * math.sin(math.rad(ang)),
-      size - (size/2 + 0.95 * size * math.cos(math.rad(ang))),
-      gray)
-    ang = ang + 30
-  end
+  im:line(size/2, 0, size/2, 0.1*size, gray)
+  im:line(0, size/2, 0.1*size, size/2, gray)
+  im:line(size/2, size, size/2, 0.9*size, gray)
+  im:line(0.9*size, size/2, size, size/2, gray)
 
   im:setThickness(math.max(1, size/50))
   im:line(size/2, size/2,
