@@ -127,15 +127,17 @@ function makeThumb(fname)
   else
     local factor
     factor = math.max(1, sx/thumbsize, sy/thumbsize)
-    txs, tsy = sx/factor, sy/factor
+    tsx, tsy = sx/factor, sy/factor
   end
 
   tim = gd.createTrueColor(tsx, tsy+10)
   tim:copyResampled(im, 0, 0, 0, 0, tsx, tsy, sx, sy)
 
-  local black = tim:colorAllocateExact(0, 0, 0)
-  local white = tim:colorAllocateExact(0, 0, 0)
+  local black = tim:colorExact(0, 0, 0)
+  local white = tim:colorExact(0, 0, 0)
   local info = format .. ", " .. sx .. "x" .. sy .. "px"
+  print(info)
+
   tim:filledRectangle(0, 0, tsx, tsy+10, black)
   tim:string(gd.FONT_SMALL, 2, tsy+5, info, white)
 
