@@ -5,10 +5,10 @@ N - Will not be done for some (good) reason
 X gdAntiAliased 
 X gdBrushed 
 N gdDashSize (deprecated)
-  gdFont 
+N gdFont 
   gdFontCacheSetup 
   gdFontCacheShutdown 
-  gdFontPtr 
+N gdFontPtr 
 N gdFree 
 X gdImage 
 X gdImageAlphaBlending 
@@ -106,14 +106,17 @@ X gdImageSquareToCircle
 X gdImageString
 X gdImageSX
 X gdImageSY
-  gdImageString16 
+X gdImageSetClip
+X gdImageGetClip
+? gdImageString16 
   gdImageStringFT 
   gdImageStringFTCircle 
   gdImageStringFTEx 
-  gdImageStringTTF 
+N gdImageStringTTF  (deprecated)
 X gdImageStringUp 
-  gdImageStringUp16 
-  gdImageToPalette 
+? gdImageStringUp16 
+  gdImageCreatePaletteFromTrueColor
+  gdImageTrueColorToPalette
 X gdImageWBMP 
 X gdImageWBMPtr
 N gdImageWBMPCtx 

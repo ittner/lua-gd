@@ -1878,6 +1878,36 @@ static int LgdImageSharpen(lua_State *L)
 }
 
 
+/* void gdImageSetClip(gdImagePtr im, int x1, int y1, int x2, int y2) */
+static int LgdImageSetClip(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int x1 = getint(L, 2);
+    int y1 = getint(L, 3);
+    int x2 = getint(L, 4);
+    int y2 = getint(L, 5);
+
+    gdImageSetClip(im, x1, y1, x2, y2);
+    return 0;
+}
+
+
+/* void gdImageGetClip(gdImagePtr im, int *x1, int *y1, int *x2, int *y2) */
+/* Changed to:  x1p, y1p, x2p, y2p = im:ImageGetClip() */
+static int LgdImageGetClip(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int *x1, *y1, *x2, *y2;
+
+    gdImageGetClip(im, x1, y1, x2, y2);
+    lua_pushnumber(L, *x1);
+    lua_pushnumber(L, *y1);
+    lua_pushnumber(L, *x2);
+    lua_pushnumber(L, *y2);
+    return 4;
+}
+
+
 
 static const luaL_reg LgdFunctions[] =
 {
@@ -1941,6 +1971,8 @@ static const luaL_reg LgdFunctions[] =
     { "ImageSX",                    LgdImageSX },
     { "ImageSY",                    LgdImageSY },
     { "ImageSXY",                   LgdImageSXY },
+    { "ImageGetClip",               LgdImageGetClip },
+    { "ImageSetClip",               LgdImageSetClip },
 
     { "ImageSetPixel",              LgdImageSetPixel },
     { "ImageLine",                  LgdImageLine },
