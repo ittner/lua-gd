@@ -1150,15 +1150,15 @@ os.execute("display out.png")
 
 <table border="0">
  <tr>
-  <td width="256"><img src="lena.png" width="256" height="256"> </td>
-  <td width="256"><img src="lena_msg.png" width="256" height="256"> </td>
-  <td width="256"><img src="lena_diff.png" width="256" height="256"> </td>
+  <td width="216"><img src="cat.png" width="216" height="256"> </td>
+  <td width="216"><img src="catmsg.png" width="216" height="256"> </td>
+  <td width="216"><img src="catdiff.png" width="216" height="256"> </td>
  </tr>
  <tr>
-  <td width="256"> The standard "Lena" test image. </td>
-  <td width="256"> Image with a staganographic message (no visible changes).</td>
-  <td width="256"> Resulting image from <code>steg.lua diff</code> showing
-    the pixels changed to store the message. </td>
+  <td width="216"> Test image. </td>
+  <td width="216"> Image with a staganographic message (no visible changes).</td>
+  <td width="216"> Resulting image from <code>steg.lua diff</code> showing
+    the pixels changed to store the message in color. </td>
  </tr>
 </table>
 
@@ -1178,6 +1178,7 @@ This program is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
 for more details.
+
 
 
                       Steganography with Lua-GD
@@ -1214,7 +1215,7 @@ algorithm are mandatory here: if the image will be compressed by a
 lossy algorithm, the hidden data can be destroyed. The maximum length
 of the message are limited by the image's size (each byte needs 8 color
 channels or 2 pixels and 2 channels from the next pixel). So, image must
-have at least "ceil((length+1)*8/3)" pixels (the extra byte is the NUL
+heave at least "ceil((length+1)*8/3)" pixels (the extra byte is the NUL
 marker for the end of the string). So, if Alice's message is "Meet me
 in the secret place at nine o'clock.", she will encrypt and sign it to
 something like "PyJYDpz5LCOSHPiXDvLHmVzxLV8qS7EFvZnoo1Mxk+BlT+7lMjpQKs"
@@ -1261,6 +1262,7 @@ bit (LSB) from each color channel from some pixels of the image and
 join them to get the original ciphertext. A NULL character (ASCII #0)
 will mark the end of the message within the image, so will know when
 stop. Of course, this program will also do this boring job for Bob.
+
 
 --]]
 
@@ -1378,8 +1380,7 @@ function mergeMessage(im, msg)
       y = y + 1
     end
   end
-
-  return oim, (i-1)*8, w*h
+  return oim, len*8, w*h
 end
 
 
@@ -1391,7 +1392,6 @@ function getMessage(im)
   local s, e = 1, 1
   local b = 0
   local c
-
   while y &lt;= h do
     c = im:getPixel(x, y)
     a[e] = getLSB(im:red(c))
@@ -1421,7 +1421,6 @@ function getMessage(im)
       y = y + 1
     end
   end
-
   return msg
 end
 
@@ -1440,7 +1439,7 @@ function compare(fimg1, fimg2)
   local w1, h1 = im1:sizeXY()
   local w2, h2 = im2:sizeXY()
   if w1 ~= w2 or h1 ~= h2 then
-    print("ERROR: Images with different sizes.")
+    print("ERROR: Images have different sizes.")
     os.exit(1)
   end
   local oim = gd.createTrueColor(w1, h1)
@@ -1456,7 +1455,7 @@ function compare(fimg1, fimg2)
       oim:setPixel(x, y, oc)
     else
       f = math.floor((im1:red(c1) + im1:green(c1) + im1:blue(c1))/6.0)
-      fc = oim:colorResolve(f,f,f)
+      fc = oim:colorResolve(f, f, f)
       oim:setPixel(x, y, fc)
     end
     x = x + 1
@@ -1519,8 +1518,8 @@ if arg[1] == "hide" then
     print("ERROR: Failed to write output file.")
     os.exit(1)
   end
-  print(string.format("DONE: %2.2f%% of the image used to store the message.",
-    l/t*100.0))
+  print(string.format("DONE: %2.1f%% of the image used to store the message.",
+    100.0*l/t))
   os.exit(0)
 end
 
