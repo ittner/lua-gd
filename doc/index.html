@@ -649,26 +649,13 @@ the source (x, y) and width/height of the desired image. </p>
 <a name="api.output"></a>
 <h3>Image output functions</h3>
 
-<h4>gdImage:jpeg(filename, quality)</h4>
 <h4>gdImage:png(filename)</h4>
-<h4>gdImage:pngEx(filename, compression_level)</h4>
-<h4>gdImage:gif(filename)</h4>
-<h4>gdImage:gd(filename)</h4>
-<h4>gdImage:gd2(filename, chunkSize, format)</h4>
-<h4>gdImage:wbmp(filename)</h4>
 
-<p>These functions writes image files to the disk.  <code>jpeg</code>
-allows you to specify the quality of the generated JPEG file
-from 1 (worst quality, small files) to 100 (best quality, large
-files). <code>pngEx</code> allows you to specify the compression
-level of a PNG image, from 1 to 6 (or -1 for the default compression
-level of libpng). <code>gd2</code> must receive the chunk size
-(an integer, or 0 for the default) and the file format, which can be
-<code>gd.GD2_FMT_RAW</code> or <code>gd.GD2_FMT_COMPRESSED</code>. These
-functions returns <b>nil</b> on error (eg. permission denied to overwrite
-an existing file) and <b>true</b> on success. </p>
+<p> Outputs the image to a PNG file with the specified name (overwriting
+existing files). This function returns <b>nil</b> on error (eg. permission
+denied to overwrite an existing file) and <b>true</b> on success. </p>
 
-<p>Example:</p>
+<p> Example:
 <pre class="example">
 -- creates a new image
 local im = gd.createTrueColor(20, 20)
@@ -677,13 +664,10 @@ local im = gd.createTrueColor(20, 20)
 
 -- writes the image to a PNG file.
 im:png("picture.png")
-
--- writes the image to a JPEG file.
-im:jpeg("picture.jpg", 75)
 </pre>
+</p>
 
-
-<p>To check if the writting was succeful:</p>
+<p> If you want to check if the writting was succeful:
 <pre class="example">
 -- creates a new image
 local im = gd.createTrueColor(20, 20)
@@ -696,41 +680,135 @@ else
   print("Oops, an error...")
 end
 </pre>
+</p>
 
 
+<h4>gdImage:pngEx(filename, compression_level)</h4>
+
+<p> Similiar to <code>gd.png</code>, but allows you to specify the
+compression level of a PNG image, from 1 to 6 (or -1 for the default
+compression level of libpng). This function returns <b>nil</b> on error
+(eg. permission denied to overwrite an existing file) and <b>true</b>
+on success. </p>
+
+
+<h4>gdImage:jpeg(filename, quality)</h4>
+
+<p> Outputs the image to a JPEG file with the specified name (overwriting
+existing files). You must specify the quality of the generated JPEG
+file from 1 (worst quality, small files) to 100 (best quality, large
+files). This function returns <b>nil</b> on error (eg. permission denied
+to overwrite an existing file) and <b>true</b> on success. </p>
+
+
+
+<h4>gdImage:gif(filename)</h4>
+
+<p> Outputs the image to a GIF file with the specified name (overwriting
+existing files). This function returns <b>nil</b> on error (eg. permission
+denied to overwrite an existing file) and <b>true</b> on success. </p>
+
+
+<h4>gdImage:gd(filename)</h4>
+
+<p> Outputs the image to a gd file with the specified name (overwriting
+existing files). This function returns <b>nil</b> on error (eg. permission
+denied to overwrite an existing file) and <b>true</b> on success. This
+format is not intended for general purpose use and should never be used
+to distribute images. Its purpose is solely to allow very fast loading
+of images. </p>
+
+
+<h4>gdImage:gd2(filename, chunkSize, format)</h4>
+
+<p> Outputs the image to a gd file with the specified name (overwriting
+existing files). This function returns <b>nil</b> on error (eg. permission
+denied to overwrite an existing file) and <b>true</b> on success. You
+must specify the chunk size (an integer, or 0 for the default)
+and the file format, which can be <code>gd.GD2_FMT_RAW</code> or
+<code>gd.GD2_FMT_COMPRESSED</code>. This format is not intended for
+general purpose use and should never be used to distribute images. Its
+purpose is solely to allow very fast loading of images. </p>
+
+
+<h4>gdImage:wbmp(filename, fg)</h4>
+
+<p> Outputs the image to a WBMP file with the specified name (overwriting
+existing files). WBMP file support is black and white only. The color
+index specified by the fg argument is the "foreground", and only pixels
+of this color will be set in the WBMP file. All other pixels will be
+considered "background". This function returns <b>nil</b> on error
+(eg. permission denied to overwrite an existing file) and <b>true</b>
+on success. </p>
+
+
+<h4>gdImage:pngStr()</h4>
+
+<p> This function returns the image in the PNG format as a Lua string
+or <b>nil</b> on error (eg. a corrupted image).</p>
+
+
+<h4>gdImage:pngStrEx(compression_level)</h4>
+
+<p> Similiar to <code>gd.pngStr</code>, but allows you to specify the
+compression level of a PNG image, from 1 to 6 (or -1 for the default
+compression level of libpng). This function returns <b>nil</b> on
+error. </p>
 
 
 <h4>gdImage:jpegStr(quality)</h4>
-<h4>gdImage:pngStr()</h4>
-<h4>gdImage:pngStrEx(compression_level)</h4>
-<h4>gdImage:gifStr()</h4>
-<h4>gdImage:gdStr()</h4>
-<h4>gdImage:gd2Str(chunkSize, format)</h4>
-<h4>gdImage:wbmpStr()</h4>
 
-<p>These functions returns images as Lua strings.  <code>jpegStr</code>
-allows you to specify the quality of the generated JPEG data
-from 1 (worst quality, small string) to 100 (best quality, large
-string). <code>pngStrEx</code> allows you to specify the compression
-level of a PNG image, from 1 to 6 (or -1 for the default compression
-level of libpng). <code>gd2Str</code> must receive the chunk size
-(an integer, or 0 for the default) and the data format, which can be
-<code>gd.GD2_FMT_RAW</code> or <code>gd.GD2_FMT_COMPRESSED</code>. These
-functions returns <b>nil</b> on error (eg. a corrupted image). </p>
+<p> This function returns the image in the JPEG format as a Lua string
+or <b>nil</b> on error (eg. a corrupted image).  You must specify the
+quality of the generated JPEG data from 1 (worst quality, small string)
+to 100 (best quality, large string).  </p>
 
-<p>Example:</p>
+<p> Example:
 <pre class="example">
 -- creates a new image
 local im = gd.createTrueColor(20, 20)
 
 -- ** DO SOME ART HERE **
-
 -- writes the image to a PNG file.
 im:png("picture.png")
 
 -- writes the image to stdout in the JPEG format
 io.write(im:jpegStr(75))
 </pre>
+</p>
+
+
+<h4>gdImage:gifStr()</h4>
+
+<p> This function returns the image in the GIF format as a Lua string
+or <b>nil</b> on error (eg. a corrupted image).</p>
+
+
+<h4>gdImage:gdStr()</h4>
+
+<p> This function returns the image in the gd format as a Lua string
+or <b>nil</b> on error (eg. a corrupted image).</p>
+
+
+<h4>gdImage:gd2Str(chunkSize, format)</h4>
+
+<p> This function returns the image in the gd2 format as a Lua string or
+<b>nil</b> on error (eg. a corrupted image).  You must specify the chunk
+size (an integer, or 0 for the default) and the data format, which can be
+<code>gd.GD2_FMT_RAW</code> or <code>gd.GD2_FMT_COMPRESSED</code>. This
+format is not intended for general purpose use and should never be used
+to distribute images. Its purpose is solely to allow very fast loading
+of images. </p>
+
+
+<h4>gdImage:wbmpStr(fg)</h4>
+
+<p> This function returns the image in the WBMP format as a Lua string
+or <b>nil</b> on error (eg. a corrupted image). WBMP format support is
+black and white only. The color index specified by the fg argument is
+the "foreground", and only pixels of this color will be set in the WBMP
+string. All other pixels will be considered "background". </p>
+
 
 
 <a name="api.color"></a>
