@@ -121,7 +121,6 @@ function mergeMessage(im, msg)
   while i <= len do
     chr = string.byte(string.sub(msg, i, i))
     a = intToBitArray(chr)
-    io.write(chr .. " ")
     c = im:getPixel(x, y)
     for p = 7,0,-1 do
       if not rgb.r then
@@ -154,7 +153,7 @@ function mergeMessage(im, msg)
     end
   end
 
-  return oim
+  return oim, i-1, w*h
 end
 
 
@@ -183,7 +182,6 @@ function getMessage(im)
         a[p] = nil
       end
       s = s + 8
-      io.write(b .. " ")
       if b == 0 then
         return msg
       else
@@ -204,10 +202,9 @@ end
 
 function usage()
   print("Usage:")
-  print("lua lsteg.lua hide <input.png> <output.png> (reads data from stdin)")
-  print("lua lsteg.lua show <input.png>              (writes data to stdout)")
+  print("  lua steg.lua hide input.png output.png   (reads data from stdin)")
+  print("  lua steg.lua show input.png              (writes data to stdout)")
 end
-
 
 
 if not arg[1] or not arg[2] then
@@ -235,9 +232,9 @@ if arg[1] == "hide" then
     print("ERROR: Bad image data.")
     os.exit(1)
   end
-  print("Type your message and print CTRL+D to finish.")
+  print("Type your message and press CTRL+D to finish.")
   msg = io.read("*a")
-  oim = mergeMessage(im, msg)
+  oim, l, t = mergeMessage(im, msg)
   if not oim then
     print("ERROR: Image is too small for the message.")
     os.exit(1)
@@ -246,6 +243,8 @@ if arg[1] == "hide" then
     print("ERROR: Failed to write output file.")
     os.exit(1)
   end
+  print(string.format("DONE: %2.2f%% of the image used to store the message.",
+    l/t*100.0))
   os.exit(0)
 end
 
