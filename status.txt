@@ -129,27 +129,16 @@ X gdTransparent
 
 X gdImageGifAnimAdd
 N gdImageGifAnimAddCtx
-  gdImageGifAnimAddPtr
+X gdImageGifAnimAddPtr
 X gdImageGifAnimBegin
 N gdImageGifAnimBeginCtx
-  gdImageGifAnimBeginPtr
+X gdImageGifAnimBeginPtr
 X gdImageGifAnimEnd
 N gdImageGifAnimEndCtx
-  gdImageGifAnimEndPtr
+X gdImageGifAnimEndPtr
 
 X gdDisposalNone
 X gdDisposalUnknown
 X gdDisposalRestoreBackground
 X gdDisposalRestorePrevious
-
-
-void gdImageGifAnimBegin(gdImagePtr im, FILE *out, int GlobalCM, int Loops)
-void gdImageGifAnimBeginCtx(gdImagePtr im, gdIOCtx *out, int GlobalCM, int Loops) (FUNCTION)
-void* gdImageGifAnimBeginPtr(gdImagePtr im, int *size, int GlobalCM, int Loops) (FUNCTION) 
-void gdImageGifAnimAdd(gdImagePtr im, FILE *out, int LocalCM, int LeftOfs, int TopOfs, int Delay, int Disposal, gdImagePtr previm)
-void gdImageGifAnimAddCtx(gdImagePtr im, gdIOCtx *out, int LocalCM, int LeftOfs, int TopOfs, int Delay, int Disposal, gdImagePtr previm) (FUNCTION)
-void* gdImageGifAnimAddPtr(gdImagePtr im, int *size, int LocalCM, int LeftOfs, int TopOfs, int Delay, int Disposal, gdImagePtr previm) (FUNCTION)
-void gdImageGifAnimEnd(FILE *out)
-void gdImageGifAnimEndCtx(gdIOCtx *out) (FUNCTION)
-void* gdImageGifAnimEndPtr(int *size) (FUNCTION)
 
