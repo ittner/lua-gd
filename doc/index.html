@@ -8,43 +8,49 @@
 <!--
 H1 {
     font-family: Verdana, Arial, helvetica, sans-serif;
-    font-size: 18px;
-    color: black;
-    background-color: white;
+    font-size: 20px;
+    color: #000000;
+    background-color: #FFFFFF;
     text-align: center;
 }    
 
 H2 {
     font-family: Verdana, Arial, helvetica, sans-serif;
-    font-size: 16px;
-    color: black;
+    font-size: 18px;
+    color: #000000;
     background-color: #EAEAEA;
 }    
 
 H3 {
     font-family: Verdana, Arial, helvetica, sans-serif;
-    font-size: 14px;
-    color: black;
+    font-size: 16px;
+    color: #000000;
     background-color: #EAEAEA;
+}    
+
+H4 {
+    font-family: Verdana, Arial, helvetica, sans-serif;
+    font-size: 14px;
+    color: #000000;
 }    
 
 BODY  {
     font-family: Verdana, Arial, helvetica, sans-serif;
-    font-size: 11px;
-    color: black;
-    background : white;
+    font-size: 12px;
+    color: #000000;
+    background: #FFFFFF;
 }
 
 A {
     font-family: Verdana, Arial, helvetica, sans-serif;
-    font-size: 11px;
-    color: navy;
+    font-size: 12px;
+    color: #000088;
     text-decoration: none;
 }
 
 A:HOVER {
     text-decoration: underline;
-    color: red;
+    color: #FF0000;
     background-color: #EAEAEA;
 }
 
@@ -58,9 +64,9 @@ TABLE {
 
 TR, TD {
     font-family: Verdana, Arial, helvetica, sans-serif;
-    font-size: 11px;
+    font-size: 12px;
     border: 1px solid #EAEAEA;
-    background-color: white;
+    background-color: #FFFFFF;
     padding: 0px;
     cell-spacing: 1px;
 }
@@ -77,9 +83,8 @@ pre.example
     padding: 2pt;
     display: block;
     font-family: "Courier New", courier, monospace;
-    background-color: #eeeeee;
-    color: black;
-    font-size: small
+    background-color: #EEEEEE;
+    color: #000000;
 }
 
 pre.wrong
@@ -88,9 +93,8 @@ pre.wrong
     padding: 2pt;
     display: block;
     font-family: "Courier New", courier, monospace;
-    background-color: #ee0000;
+    background-color: #FF0000;
     color: black;
-    font-size: small
 }
 
 -->
@@ -100,7 +104,8 @@ pre.wrong
 <body>
 
 <center>
- <img src="lua-gd.png" alt="Lua-GD Logo">
+ <a href="http://lua-gd.luaforge.net"
+  ><img src="lua-gd.png" alt="Lua-GD Logo" border="0"></a>
  <h1>Lua-GD Reference Manual</h1>
 </center>
 
@@ -134,7 +139,8 @@ pre.wrong
    <ul>
      <li><a href="#examples.counter">Web Counter</a></li>
      <li><a href="#examples.clock">CGI Analog Clock</a></li>
-     <li><a href="#examples.fontconfig">Freetype, Fontconfig and TrueType fonts</a></li>
+     <li><a name="#examples.fractal">The Sierpinski triangle</a></li>
+     <li><a href="#examples.fontconfig">Using Freetype, Fontconfig and TrueType fonts</a></li>
      <li><a href="#examples.steg">A Steganography Application</a></li>
      <li><a href="#examples.other">Other examples</a></li>
    </ul>
@@ -161,7 +167,7 @@ images) and so forth.  You can get more information about gd from <a
 href="http://www.boutell.com/gd/">it's homepage</a>. </p>
 
 <p> Lua-GD is a "binding": A library that exports gd functions to the <a
-href="http://www.lua.org">Lua Programing Language</a>, allowing you to
+href="http://www.lua.org">Lua Programming Language</a>, allowing you to
 use gd from Lua. The API was <b>NOT</b> literally exported, but changed
 in a way that make it familiar to Lua users. </p>
 
@@ -177,7 +183,7 @@ with Lua is <b>required</b>.</p>
 <a name="license"></a>
 <h2>Licensing information</h2>
 
-<p> Lua-GD and gd have diferent licenses. In order to use Lua-GD your
+<p> Lua-GD and gd have diferent licenses. In order to use Lua-GD in your
 application, you need to accept both them. </p>
 
 
@@ -185,11 +191,13 @@ application, you need to accept both them. </p>
 <h3>Lua-GD License</h3>
 
 <p>Lua-GD is <em>copyrighted free software</em>, distributed under the
-<b>GNU Lesser General Public License</b>, as follows: </p>
+<b>GNU Lesser General Public License</b> and it can be used at no cost
+for both academic and commercial purposes. Or, more precisely: </p>
 
 <blockquote>
 <pre>
-Lua-GD is (c) 2004-2005 Alexandre Erwin Ittner
+Lua-GD, an gd binding to the Lua Programming Language
+(c) 2004-2005 Alexandre Erwin Ittner
 
 This library is free software; you can redistribute it and/or modify it
 under the terms of the GNU Lesser General Public License as published
@@ -278,16 +286,16 @@ their prior contributions. </p>
 <a name="download"></a>
 <h2>Download and installation</h2>
 
-<p> Lua-GD source code comes in a tar.gz package that can be
-donwloaded from the <a href="http://lua-gd.luaforge.net">Lua-GD project
+<p> Lua-GD source code comes in a tar.gz package that can be donwloaded
+from the <a href="http://luaforge.net/projects/lua-gd/">Lua-GD project
 page</a> at <a href="http://www.luaforge.net">LuaForge</a> or from
 its <a href="http://www.sourceforge.net/projects/lua-gd/">mirror at
-Sourceforge</a>. There are also pre-compiled binary packages available
-for Linux and some other Unix systems.</p>
+Sourceforge</a>. There are also some pre-compiled binary packages
+available for Linux and some other Unix systems.</p>
 
 <p> After downloading, you need to compile the library. This process
 requires GNU Make, gd and its dependencies (libpng, libjpeg, FreeType2,
-fontconfig, etc.) installed on your system. Some components that may
+fontconfig, etc). installed on your system. Some components that may
 be disabled on your gd installation will be disabled in Lua-GD too. To
 compile on Unix, just unpack the distribution package, enter the directory
 and type <code>make</code> in your favourite shell. If the compilation
@@ -298,7 +306,7 @@ gcc -o libluagd.so `gdlib-config --features |sed -e "s/GD_/-DGD_/g"` -Wall
 `gdlib-config --cflags` -shared `gdlib-config --ldflags` `gdlib-config --libs`
 -llua -lgd  luagd.c
 lua test_features.lua
-Lua-GD version: lua-gd gd 2.0.33 (c) 2004-2005 Alexandre Erwin Ittner
+Lua-GD version: lua-gd (c) 2004-05 Alexandre Erwin Ittner, gd 2.0.33
 Lua-GD features:
     PNG support ..................... Enabled
     GIF support ..................... Enabled
@@ -321,16 +329,18 @@ by yourself. </p>
 <a name="load"></a>
 <h2>Library loading and initialisation</h2>
 
-<p> Lua-GD is a shared library that must be loaded by the Lua interpreter
-with the <code>loadlib</code> function. Using Lua 5.0, under Unix and
-with <code>libluagd.so</code> on your <code>LUA_PATH</code> (or also
-your <code>LD_PATH</code>) you can just use:
+<p> Lua-GD is a shared library that exports a single function called
+<code>luaopen_gd</code> that must be called by the Lua interpreter.
+You must use <code>loadlib</code> function to for that. Using Lua 5.0,
+under Unix and with <code>libluagd.so</code> on your <code>LUA_PATH</code>
+(or also your <code>LD_PATH</code>) you can just do:
 
 <pre class="example">
 assert(loadlib("libluagd.so", "luaopen_gd"), "Can't find Lua-GD")()
 </pre>
 
-Under Windows and with <code>libluagd.dll</code> on your path, you can do
+And, under Windows and with <code>libluagd.dll</code> on your path,
+you can do
 
 <pre class="example">
 assert(loadlib("libluagd.dll", "luaopen_gd"), "Can't find Lua-GD")()
@@ -343,9 +353,11 @@ under Unix and Windows, are shown bellow.
 
 <pre class="example">
 -- Generic loader for Lua-GD.
+
+-- Common locations (add new ones if needed).
 local locs = {
-    -- Unices (Linux, FreeBSD, etc.)
-    "libluagd.so",          -- the default, the simple, the perfect :)
+    -- Unices
+    "libluagd.so",
     "./libluagd.so",
     "/usr/lib/libluagd.so",
     "/usr/local/lib/libluagd.so",
@@ -354,44 +366,56 @@ local locs = {
     "libluagd.dll",
     "luagd.dll",
     ".\\luagd.dll",
+    ".\\libluagd.dll",
     "c:\\lua\\lib\\libluagd.dll"
 }
 
-local loadgd = nil
-local fname, _
-
-for _,fname in ipairs(locs) do
+local loadgd, fname, ndx
+for ndx, fname in ipairs(locs) do
   loadgd = loadlib(fname, "luaopen_gd")
   if loadgd then
     break
   end
 end
-
-if loadgd then
-  loadgd()
-else
-  error("Can't load Lua-GD")
-end
+assert(loadgd, "Can't load Lua-GD")
+loadgd()
 </pre>
 
-Just put this code on a file called <code>gd.lua</code> in your
+So, just put this code on a file called <code>gd.lua</code> in your
 <code>LUA_PATH</code> and insert a simple
+
 <pre class="example">require "gd"</pre>
+
 in your scripts. The examples in this document uses this solution, so,
-they can run unchanged under Unix and Windows.
+they can run unchanged under Unix and Windows. 
 </p>
+
+<p> On the upcoming Lua 5.1, Lua-GD will use new package model. </p>
+
 
 
 
 <a name="api"></a>
 <h2>Lua-GD API</h2>
 
-<p> The Lua-GD API is not identical to the gd C API: it was
-changed in a way that make it more familiar to Lua users. All the
-functions and constants are stored on a single global table called
-<code>gd</code>. Images are objects and can use the common colon notation
-for it's methods (but you can also use a C-style syntax). Functions, methods
-and constants are described bellow.</p>
+<p> The Lua-GD API is not identical to the gd C API: it was changed in
+a way that make it more familiar to Lua users and use the extra power
+provided by Lua, at cost of some learning for those that already use
+gd. </p>
+
+<p> All the functions and constants are stored on a single global
+table called <code>gd</code>. Images are objects and they can use the
+common colon notation for it's methods, but you can also use a C-style
+syntax. So, the following two lines are equivalent:
+<pre class="example">
+local gray1 = im:colorResolve(128, 128, 128)        -- Using the colon notation
+local gray2 = gd.colorResolve(im, 128, 128, 128)    -- Using a C-style notation
+</pre>
+</p>
+
+<p> Constants, functions and methods are described bellow. </p>
+
+
 
 <a name="api.constants"></a>
 <h3>Constants</h3>
@@ -399,14 +423,14 @@ and constants are described bellow.</p>
 <h4>gd.VERSION</h4>
 <p>A string with library's version information.</p>
 
-<h4>gd.MAX_COLORS</h4>
+<h4> gd.MAX_COLORS </h4>
 <p>The constant 256. This is the maximum number of colors in a
 palette-based PNG file according to the PNG standard, and is also the
 maximum number of colors in a palette-based gd image. This of course
 does not apply to truecolor images.</p>
 
-
-<h4>gd.GD2_FMT_RAW and gd.GD2_FMT_COMPRESSED</h4>
+<h4> gd.GD2_FMT_RAW <br>
+gd.GD2_FMT_COMPRESSED</h4>
 
 <p> Used in the functions <code>gd.gd2</code> and <code>gd.gd2Str</code>
 to indicate the image file format. This format is not intended for general
@@ -417,20 +441,24 @@ use <code>GD2_FMT_RAW</code> for faster loading (and bigger files)
 or GD2_FMT_COMPRESSED for smaller files (and slower loading). </p>
 
 
-<h4>gd.ARC, gd.CHORD, gd.PIE, gd.NO_FILL and gd.EDGED</h4>
+<h4> gd.ARC <br>
+gd.CHORD <br>
+gd.PIE <br>
+gd.NO_FILL <br>
+gd.EDGED </h4>
 
 <p> These constants are used with the function <code>gd.filledArc</code>
 and can be added together. <code>gd.ARC</code>, <code>gd.CHORD</code>,
 <code>gd.PIE</code> (synonym for <code>gd.CHORD</code>),
-<code>gd.NO_FILL</code> and <code>gd.EDGED</code>. <code>gd.ARC</code>
-and <code>gd.CHORD</code> are mutually exclusive; <code>gd.CHORD</code>
-just connects the starting and ending angles with a straight line, while
-<code>gd.ARC</code> produces a rounded edge. <code>gd.PIE</code> is a
-synonym for <code>gd.ARC</code>. <code>gd.NO_FILL</code> indicates that
-the arc or chord should be outlined, not filled. <code>gd.EDGED</code>,
-used together with <code>gd.NO_FILL</code>, indicates that the beginning
-and ending angles should be connected to the center; this is a good way
-to outline (rather than fill) a 'pie slice'. See <code>gd.filledArc</code>
+<code>gd.NO_FILL</code> and <code>gd.EDGED</code> are mutually
+exclusive; <code>gd.CHORD</code> just connects the starting and
+ending angles with a straight line, while <code>gd.ARC</code>
+produces a rounded edge. <code>gd.PIE</code> is a synonym for
+<code>gd.ARC</code>. <code>gd.NO_FILL</code> indicates that the arc
+or chord should be outlined, not filled. <code>gd.EDGED</code>, used
+together with <code>gd.NO_FILL</code>, indicates that the beginning and
+ending angles should be connected to the center; this is a good way to
+outline (rather than fill) a 'pie slice'. See <code>gd.filledArc</code>
 for details.</p>
 
 
@@ -477,7 +505,7 @@ providing that the style set with <code>gd.setStyle</code> contains
 a nonzero value (OR <code>gd.TRANSPARENT</code>, which does not equal
 zero but is supported for consistency) for the current pixel. (Pixels
 are drawn successively from the style as the line is drawn, returning to
-the beginning when the available pixels in the style are exhausted.) Note
+the beginning when the available pixels in the style are exhausted). Note
 that this differs from the behavior of <code>gd.STYLED</code>, in which
 the values in the style are used as actual pixel colors, except for
 <code>gd.TRANSPARENT</code>. </p>
@@ -498,13 +526,16 @@ those functions. </p>
 <h4>gd.TRANSPARENT</h4>
 
 <p> Used in place of a normal color in a style to be set with
-<code>gd.setStyle</code>. <code>gd.TRANSPARENT</code> is not the
-transparent color index of the image; for that functionality please see
-<code>gd.colorTransparent</code>. </p>
+<code>gd.setStyle</code>. <code>gd.TRANSPARENT</code> <b>is not</b>
+the transparent color index of the image; for that functionality please
+see <code>gd.colorTransparent</code>. </p>
 
 
-<h4>gd.FONT_TINY, gd.FONT_SMALL, gd.FONT_MEDIUM, gd.FONT_LARGE and
-gd.FONT_GIANT</h4>
+<h4> gd.FONT_TINY <br>
+gd.FONT_SMALL <br>
+gd.FONT_MEDIUM <br>
+gd.FONT_LARGE <br>
+gd.FONT_GIANT </h4>
 
 <p> These are the standard gd fonts used by <code>gd.string</code> and
 <code>gd.stringUp</code>. Sizes and styles are shown bellow: <br>
@@ -519,13 +550,13 @@ gd.FONT_GIANT</h4>
 <h3>Image creation and destruction functions</h3>
 
 
-<h4>gd.create(x, sy)</h4>
-<h4>gd.createPalette(x, y)</h4>
+<h4> gd.create(x, sy) <br>
+gd.createPalette(x, y) </h4>
 
-<p> Used to create palette-based images, with no more than 256
-colors. Invoke <code>gd.create</code> with the x and y dimensions
-of the desired image to return the new image or <b>nil</b>
-on error. <code>gd.createPalette</code> is a synomym for
+<p> These functions are used to create palette-based images, with
+no more than 256 colors. Invoke <code>gd.create</code> with the x
+and y dimensions of the desired image to return the new image or
+<b>nil</b> on error. <code>gd.createPalette</code> is a synomym for
 <code>gd.create</code>. </p>
 
 <p>Example:
@@ -679,12 +710,12 @@ local im = gd.createFromGd2Part("base.gd2", 0, 0, 20, 20)
 
 <h4>gd.createFromXbm(filename)</h4>
 
-<p> <code>gd.createFromXbm</code> is called to load images from monochrome
-X bitmap format files. Invoke <code>gd.createFromXbm</code> with a string
-pointing to an existing file containing the desired image to return a
-new image or <b>nil</b> if unable to load the image (most often because
-the file is corrupt or does not contain a XBM image). You can determine
-the size of the image with <code>gd.sizeXY</code>. </p>
+<p> <code>gd.createFromXbm</code> is called to load images from
+monochromatic X bitmap format files. Invoke <code>gd.createFromXbm</code>
+with a string pointing to an existing file containing the desired image
+to return a new image or <b>nil</b> if unable to load the image (most
+often because the file is corrupt or does not contain a XBM image). You
+can determine the size of the image with <code>gd.sizeXY</code>. </p>
 
 
 <h4>gd.createFromXpm(filename)</h4>
@@ -849,22 +880,22 @@ denied to overwrite an existing file) and <b>true</b> on success. </p>
 
 <h4>gdImage:gd(filename)</h4>
 
-<p> Outputs the image to a gd file with the specified name (overwriting
-existing files). This function returns <b>nil</b> on error (eg. permission
-denied to overwrite an existing file) and <b>true</b> on success. This
-format is not intended for general purpose use and should never be used
-to distribute images. Its purpose is solely to allow very fast loading
-of images. </p>
+<p> Outputs the image to a gd format file with the specified name
+(overwriting existing files). This function returns <b>nil</b> on error
+(eg. permission denied to overwrite an existing file) and <b>true</b>
+on success. This format is not intended for general purpose use and
+should never be used to distribute images. Its purpose is solely to
+allow very fast loading of images. </p>
 
 
 <h4>gdImage:gd2(filename, chunkSize, format)</h4>
 
-<p> Outputs the image to a gd file with the specified name (overwriting
-existing files). This function returns <b>nil</b> on error (eg. permission
-denied to overwrite an existing file) and <b>true</b> on success. You
-must specify the chunk size (an integer, or 0 for the default)
-and the file format, which can be <code>gd.GD2_FMT_RAW</code> or
-<code>gd.GD2_FMT_COMPRESSED</code>. This format is not intended for
+<p> Outputs the image to a gd2 format file with the specified name
+(overwriting existing files). This function returns <b>nil</b> on error
+(eg. permission denied to overwrite an existing file) and <b>true</b>
+on success. You must specify the chunk size (an integer, or 0 for the
+default) and the file format, which can be <code>gd.GD2_FMT_RAW</code>
+or <code>gd.GD2_FMT_COMPRESSED</code>. This format is not intended for
 general purpose use and should never be used to distribute images. Its
 purpose is solely to allow very fast loading of images. </p>
 
@@ -967,7 +998,7 @@ that image.</p>
 <p>In the event that all <code>gd.MAX_COLORS</code> colors (256)
 have already been allocated, <code>colorAllocate</code> will
 return <b>nil</b> to indicate failure. (This is not uncommon when working
-with existing PNG files that already use 256 colors.) Note that
+with existing PNG files that already use 256 colors). Note that
 <code>colorAllocate</code> does not check for existing colors that match
 your request; see <code>colorExact</code>, <code>colorClosest</code>
 and <code>colorClosestHWB</code> for ways to locate existing colors
@@ -989,7 +1020,7 @@ you are setting the background color for that image.</p>
 <p>In the event that all <code>gd.MAX_COLORS</code> colors (256) have
 already been allocated, <code>colorAllocateAlpha</code> will return
 <b>nil</b> to indicate failure. (This is not uncommon when working with
-existing palette-based PNG files that already use 256 colors.) Note
+existing palette-based PNG files that already use 256 colors). Note
 that <code>colorAllocateAlpha</code> does not check for existing
 colors that match your request; see <code>colorExactAlpha</code> and
 <code>colorClosestAlpha</code> for ways to locate existing colors that
@@ -1004,7 +1035,7 @@ available. Also see <code>colorResolveAlpha</code>.</p>
 thus far in the image specified and returns the index of the color with
 RGB values closest to those of the request. (Closeness is determined
 by Euclidian distance, which is used to determine the distance in
-three-dimensional color space between colors.) </p>
+three-dimensional color space between colors). </p>
 
 <p>If no colors have yet been allocated in the image,
 <code>colorClosest</code> returns <b>nil</b>.</p>
@@ -1015,7 +1046,7 @@ returning the desired color.</p>
 <p>This function is most useful as a backup method for choosing a
 drawing color when an image already contains <code>gd.MAX_COLORS</code>
 (256) colors and no more can be allocated. (This is not uncommon when
-working with existing PNG files that already use many colors.) See
+working with existing PNG files that already use many colors). See
 <code>colorExact</code> for a method of locating exact matches only.</p>
 
 
@@ -1025,7 +1056,7 @@ working with existing PNG files that already use many colors.) See
 defined thus far in the image specified and returns the index of the
 color with RGBA values closest to those of the request. (Closeness is
 determined by Euclidian distance, which is used to determine the distance
-in four-dimensional color/alpha space between colors.) </p>
+in four-dimensional color/alpha space between colors). </p>
 
 <p> If no colors have yet been allocated in the image,
 <code>colorClosestAlpha</code> returns <b>nil</b>. </p>
@@ -1037,7 +1068,7 @@ returning the desired color. </p>
 choosing a drawing color when a palette-based image already
 contains <code>gd.MAX_COLORS</code> (256) colors and no more can be
 allocated. (This is not uncommon when working with existing palette-based
-PNG files that already use many colors.) See <code>colorExactAlpha</code>
+PNG files that already use many colors). See <code>colorExactAlpha</code>
 for a method of locating exact matches only.</p>
 
 
@@ -1058,7 +1089,7 @@ returning the desired color. </p>
 <p> This function is most useful as a backup method for choosing a
 drawing color when an image already contains <code>gd.MAX_COLORS</code>
 (256) colors and no more can be allocated. (This is not uncommon when
-working with existing PNG files that already use many colors.) See
+working with existing PNG files that already use many colors). See
 <code>colorExact</code> for a method of locating exact matches only. </p>
 
 
@@ -1380,14 +1411,6 @@ transparent. If the image you wish to fill with has a transparent color
 index, call <code>setTransparent</code> on the tile image and set the
 transparent color index to <b>nil</b> to turn off its transparency. </p>
 
-<p> Note that <code>fill</code> is recursive. It is not the most
-naive implementation possible, and the implementation is expected to
-improve, but there will always be degenerate cases in which the stack
-can become very deep. This can be a problem in MSDOS and MS Windows 3.1
-environments. (Of course, in a Unix or Windows 95/98/NT environment with
-a proper stack, this is not a problem at all.) </p>
-
-
 <h4>gdImage:fillToBorder( x, y, border_color, color)</h4>
 
 <p> <code>fillToBorder</code> floods a portion of the image with the
@@ -1398,13 +1421,6 @@ color of the starting point, see <code>fill</code>. </p>
 <p> The border color cannot be a special color such as
 <code>gd.TILED</code>; it must be a proper solid color. The fill color
 can be, however. </p>
-
-<p> Note that <code>fillToBorder</code> is recursive. It is not the most
-naive implementation possible, and the implementation is expected to
-improve, but there will always be degenerate cases in which the stack
-can become very deep. This can be a problem in MSDOS and MS Windows 3.1
-environments. (Of course, in a Unix or Windows 95/98/NT environment with
-a proper stack, this is not a problem at all.) </p>
 
 
 <a name="api.text"></a>
@@ -2066,8 +2082,45 @@ io.write(im:pngStr())
 </pre>
 
 
+<a name="examples.fractal"></a>
+<h3>The Sierpinski triangle</h3>
+
+<img src="sierpinski.png" width="250" height="250" alt="The Sierpinski triangle">
+
+<pre class="example">
+#!/usr/bin/env lua
+-- Draws the famous fractal called the Sierpinski triangle with lua-gd
+
+require "gd"
+
+size = 250
+im = gd.createPalette(size, size)
+white = im:colorAllocate(255, 255, 255)
+black = im:colorAllocate(0, 0, 0)
+
+m = {}
+m[math.floor(size/2)] = true
+
+for i = 1, size do
+  n = {}
+  for j = 1, size do
+    if m[j] then
+      im:setPixel(j, i, black)
+      n[j+1] = not n[j+1]
+      n[j-1] = not n[j-1]
+    end
+  end
+  m = n
+end
+
+im:png("sierpinski.png")
+</pre>
+
+
+
+
 <a name="examples.fontconfig"></a>
-<h3>Freetype, Fontconfig and TrueType fonts</h3>
+<h3>Using Freetype, Fontconfig and TrueType fonts</h3>
 
 <img src="fontconfig-example.png" alt="Fontconfig Example output">
 <pre class="example">
@@ -2091,8 +2144,7 @@ im:stringFT(black, "Arial:bold:italic", 20, 0, 10, 120, "Italic Bold Arial")
 im:stringFT(black, "Times New Roman", 20, 0, 10, 150, "Times New Roman")
 im:stringFT(black, "Comic Sans MS", 20, 0, 10, 180, "Comic Sans MS")
 
-im:png("./out.png")
-os.execute("display out.png")
+im:png("out.png")
 </pre>
 
 
@@ -2109,8 +2161,8 @@ os.execute("display out.png")
   <td width="216"> Original test image. </td>
   <td width="216"> Image with a staganographic message (the message cause no
     visible changes).</td>
-  <td width="216"> Resulting image from <code>"steg.lua diff"</code> showing
-    the pixels changed to store the message in color. </td>
+  <td width="216"> Resulting image from <code>"steg.lua diff"</code>
+    showing, in color, the pixels that was changed to store the message. </td>
  </tr>
 </table>
 
@@ -2155,9 +2207,9 @@ the message with Bob's public key. It's a good solution because no
 one unless Bob will be able to read the message. She can also sign the
 message so Bob will know that the message really comes from her. BUT,
 a potential attacker will know that a ciphered message was sent. If the
-attacker has control over the communication channel, he can block the
+attacker has control over the communication channel, he might block the
 message in some way that Bob will never receive it. If Alice also HIDES
-the ciphertext in a unsuspected piece of information (like a photo of her
+the ciphertext in an unsuspected piece of information (like a photo of her
 cat) the attacker will not detect it and the message will arrive to Bob.
 
 This program will help Alice to hide some arbitrary text in a PNG image by
@@ -2165,17 +2217,17 @@ replacing the least significant bits of each color channel of some pixels
 with bits from the encrypted message. PNG or other loseless compression
 algorithm are mandatory here: if the image will be compressed by a
 lossy algorithm, the hidden data can be destroyed. The maximum length
-of the message are limited by the image's size (each byte needs 8 color
-channels or 2 pixels and 2 channels from the next pixel). So, image must
-have at least "ceil((length+1)*8/3)" pixels (the extra byte is the NUL
-marker for the end of the string). So, if Alice's message is "Meet me
+of the message is limited by the image's size (each byte needs 8 color
+channels or 2 pixels and 2 channels from the next pixel). So, the image
+must have at least "ceil((length+1)*8/3)" pixels (the extra byte is the
+NUL marker for the end of the string). So, if Alice's message is "Meet me
 in the secret place at nine o'clock.", she will encrypt and sign it to
 something like "PyJYDpz5LCOSHPiXDvLHmVzxLV8qS7EFvZnoo1Mxk+BlT+7lMjpQKs"
 (imagine Alice's cat walking in you keyboard :). This is the ciphertext
 that will be sent to Bob through the image.
 
 The following table shows what happens to the first eight pixels from
-the image when mixed to the first three bytes from the encrypted massage:
+the image when mixed to the first three bytes from the encrypted message:
 
 
          +-----+---+----------+-----------------+----------+
@@ -2212,8 +2264,8 @@ the image when mixed to the first three bytes from the encrypted massage:
 When Bob wants to read the message he will extract the least significant
 bit (LSB) from each color channel from some pixels of the image and
 join them to get the original ciphertext. A NULL character (ASCII #0)
-will mark the end of the message within the image, so will know when
-stop. Of course, this program will also do this boring job for Bob.
+will mark the end of the message within the image, so he will know when
+to stop. Of course, this program will also do this boring job for Bob.
 
 
 --]]
@@ -2500,16 +2552,15 @@ os.exit(1)
 within the distribution package. </p>
 
 
-<a name="contact"></a>
 
+<a name="contact"></a>
 <h2>Contact information</h2>
 
 <p>
 Author: <b>Alexandre Erwin Ittner</b>
-<br> E-mail: <a href="mailto:aittner AT netuno DOT com DOT br">aittner
- <em>AT</em> netuno <em>DOT</em> com <em>DOT</em> br</a> (e-mail obfuscated
- to avoid spam-bots. Please replace <em>AT</em> with "@" and <em>DOT</em>
- with ".").
+<br> E-mail: <a href="mailto:aittner#netuno.com.br">aittner<b>#</b>netuno.com.br</a>
+(e-mail obfuscated to avoid spam-bots. Please replace the "#" with and "@").
+
 <br> GnuPG/PGP Key: <a href="http://users.netuno.com.br/aittner/AlexandreErwinIttner.pub.asc">0x0041A1FB</a>
  (key fingerprint: <code>9B49 FCE2 E6B9 D1AD 6101  29AD 4F6D F114 0041 A1FB</code>).
 <br> Homepage: <a href="http://users.netuno.com.br/aittner/">http://users.netuno.com.br/aittner/</a>.
