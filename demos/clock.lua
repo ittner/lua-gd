@@ -19,8 +19,9 @@ function createClock(size, title, hours, minutes)
   im:line(size/2, size, size/2, 0.9*size, gray)
   im:line(0.9*size, size/2, size, size/2, gray)
 
-  
-  im:string(gd.FONT_SMALL, cxy - string.len(title) * 2.5, 0.6 * size, title, blue)  
+  local title = "Lua-GD"
+  im:string(gd.FONT_SMALL, cxy - string.len(title) * 2.5, 0.3 * size,
+    title, gray)  
 
   im:setThickness(math.max(1, size/50))
   im:line(size/2, size/2,
@@ -42,8 +43,8 @@ function createClock(size, title, hours, minutes)
 end
 
 
-s = 120
-im = createClock(s, "Brasil", 10, 10)
+s = 520
+im = createClock(s, "Lua", 10, 10)
 im:png("./out.png")
 os.execute("display out.png")
 
