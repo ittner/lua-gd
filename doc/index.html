@@ -1297,7 +1297,7 @@ im:png("out.png")
 </pre>
 
 
-<h4>gdImage:stringUp(font, x, y, string, color)</h4>
+<h4>gdImage:stringUp(fontname, x, y, string, color)</h4>
 
 <p> Similar to <code>gd.string</code> but the string will be drawn
 vertically (rotated 90 degrees), from bottom to up, starting from the
@@ -1310,10 +1310,13 @@ use <code>gd.stringFT</code> and True Type fonts. </p>
 <p> <code>stringFT</code> draws a string of anti-aliased characters on the
 image using the FreeType library to render user-supplied TrueType fonts.
 The string is anti-aliased, meaning that there should be fewer "jaggies"
-visible. The fontname is the full pathname to a TrueType font file, or
-a font face name if the <code>GDFONTPATH</code> environment variable
-have been set intelligently. In the absence of a full path, the font
-face name may be presented with or without extension. </p>
+visible. The fontname is the full pathname to a TrueType font file,
+or a font face name if the <code>GDFONTPATH</code> environment variable
+have been set intelligently. In the absence of a full path, the font face
+name may be presented with or without extension. Font names can also be
+<a href="http://fontconfig.org/fontconfig-user.html#AEN36">fontconfig
+patterns</a> (see <code>gd.useFontConfig</code>) so, the library will
+automatically use fonts from your operating system.</p>
 
 <p> The string argument is considered to be encoded via the UTF-8
 standard; also, HTML entities are supported, including decimal,
@@ -1331,7 +1334,7 @@ the negative of the desired color index to disable anti-aliasing.  </p>
 
 <p> This function return eight values with the limits of the rendered
 text on sucess or <b>nil</b> on failure. The following code show how to
-use them to draw a bounding rectangle arround the text.
+use them to draw a bounding rectangle arround the text. </p>
 
 <pre class="example">
 im = gd.createTrueColor(100, 100)
@@ -1343,9 +1346,9 @@ llx, lly, lrx, lry, urx, ury, ulx, uly = im:stringFT(white, "Vera.ttf", 20, math
 im:polygon({ {llx, lly}, {lrx, lry}, {urx, ury}, {ulx, uly} }, blue)
 </pre>
 
-Variables used above can be translated as follows. The points are relative
+<p> Variables used above can be translated as follows. The points are relative
 to the text regardless of the angle, so "upper left" means in the top
-left-hand corner seeing the text horizontally.
+left-hand corner seeing the text horizontally. </p>
 
 <table>
  <tr> <td>#</td> <td>Name</td> <td>Meaning</td> </tr>
@@ -1359,12 +1362,12 @@ left-hand corner seeing the text horizontally.
  <tr> <td>8</td> <td>uly</td> <td>upper left corner, Y position</td> </tr>
 </table>
 
-Also, there is a way to get these values before drawing on the image
+<p> Also, there is a way to get these values before drawing on the image
 passing <b>nil</b> as the first argument of <code>gd.stringFT</code> (note
 the absence of the colon notation!), as follows. This is a relatively
 cheap operation if followed by a rendering of the same string, because
 of the caching of the partial rendering during bounding rectangle
-calculation.
+calculation. </p> 
 
 <pre class="example">
 llx, lly, lrx, lry, urx, ury, ulx, uly = gd.stringFT(nil, white, "Vera.ttf", 20, math.rad(45), 20, 90, "Lua-GD")
@@ -1375,42 +1378,93 @@ llx, lly, lrx, lry, urx, ury, ulx, uly = gd.stringFT(nil, white, "Vera.ttf", 20,
 
 <h4>gdImage:stringFTCircle(cx, cy, radius, textRadius, fillPortion, fontname, points, top, bottom, color)</h4>
 
+<p> Draws the text strings specified by <b>top</b> and <b>bottom</b> on
+the image, curved along the edge of a circle of radius <b>radius</b>,
+with its center at <b>cx</b> and <b>cy</b>. <b>top</b> is written
+clockwise along the top; <b>bottom</b> is written counterclockwise along
+the bottom. <b>textRadius</b> determines the "height" of each character;
+if <b>textRadius</b> is 1/2 of <b>radius</b>, characters extend halfway
+from the edge to the center. <b>fillPortion</b> varies from 0 to 1.0,
+with useful values from about 0.4 to 0.9, and determines how much of the
+180 degrees of arc assigned to each section of text is actually occupied
+by text; 0.9 looks better than 1.0 which is rather crowded. <b>fontname</b>
+is a freetype font; see <code>gd.stringFT</code>. <b>points</b> is
+passed to the freetype engine and has an effect on hinting; although
+the size of the text is determined by <b>radius</b>, <b>textRadius</b>,
+and <b>fillPortion</b>, you should pass a point size that "hints"
+appropriately -- if you know the text will be large, pass a large point
+size such as 24.0 to get the best results. <b>color</b> can be any color,
+and may have an alpha component, do blending, etc. </p>
+
+
 <a name="api.font"></a>
 <h3>Font configuration functions</h3>
 
-<h4>gd.fontCacheSetup()</h4>
-<h4>gd.fontCacheShutdown()</h4>
 <h4>gd.useFontConfig(bool)</h4>
+<p> GD has the ability to use
+<a href="http://fontconfig.org/fontconfig-user.html#AEN36">fontconfig
+patterns</a> rather than font file names as parameters to
+<code>gd.stringFT</code> and <code>gd.stringFTCircle</code>. For
+backwards compatibility reasons, the fontlist parameter to those
+functions is still expected to be a full or partial font file path
+name or list thereof by default. However, as a convenience, a single
+call to <code>gd.useFontConfig</code> with a <b>true</b> parameter
+configures Lua-GD to expect the fontlist parameter to be a fontconfig
+pattern. Otherwise, calling <code>gd.useFontConfig</code> with a
+<b>false</b> parameter will disable the fontconfig patters. </p>
+
+
+<h4>gd.fontCacheSetup()</h4>
+
+<p> This function initializes the font cache for freetype text
+output functions such as <code>gd.stringFT</code>. If this function
+is not called by the programmer, it is invoked automatically on the
+first truetype text output call, which is perfectly safe unless the
+application is multithreaded (either using LuaThreads or running Lua from
+a different thread in your host program which also uses gd from the C API)
+. Multithreaded applications should directly invoke this function before
+allowing any thread to use freetype text output. You don't need to call
+this functions if you are using Lua coroutines because any calls from
+Lua to C API ara atomic. This function returns <b>true</b> on success
+or <b>false</b> if the freetype library fails to initialize.  </p>
+
+
+<h4>gd.fontCacheShutdown()</h4>
+
+<p> This function releases the memory used by the freetype font cache
+and the text output mutex. Applications that use Lua-GD for their entire
+lifetime, then exit, need not call this function. This function has no
+return value. </p>
+
 
 
 <a name="api.copy"></a>
 <h3>Image copying, resizing and transformation functions</h3>
 
-<h4>gd.copy(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h)</h4>
-<h4>dstImage:copy(srcImage, dstX, dstY, srcX, srcY, w, h)</h4>
+<h4>gd.copy(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h) <br>
+dstImage:copy(srcImage, dstX, dstY, srcX, srcY, w, h)</h4>
 
-<h4>gd.copyResized(dstImage, srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)</h4>
-<h4>dstImage:copyResized(srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)</h4>
+<h4>gd.copyResized(dstImage, srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)<br>
+dstImage:copyResized(srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)</h4>
 
-<h4>gd.copyResampled(dstImage, srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)</h4>
-<h4>dstImage:copyResampled(srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)</h4>
+<h4>gd.copyResampled(dstImage, srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)<br>
+dstImage:copyResampled(srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)</h4>
 
-<h4>gd.copyRotated(dstImage, srcImage, dstX, dstY, srcX, srcY, srcW, srcH, ang)</h4>
-<h4>dstImage:copyRotated(srcImage, dstX, dstY, srcX, srcY, srcW, srcH, ang)</h4>
+<h4>gd.copyRotated(dstImage, srcImage, dstX, dstY, srcX, srcY, srcW, srcH, ang)<br>
+dstImage:copyRotated(srcImage, dstX, dstY, srcX, srcY, srcW, srcH, ang)</h4>
 
-<h4>gd.copyMerge(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h, pct)</h4>
-<h4>dstImage:copyMerge(srcImage, dstX, dstY, srcX, srcY, w, h, pct)</h4>
+<h4>gd.copyMerge(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h, pct)<br>
+dstImage:copyMerge(srcImage, dstX, dstY, srcX, srcY, w, h, pct)</h4>
 
-<h4>gd.copyMergeGray(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h, pct)</h4>
-<h4>dstImage:copyMergeGray(srcImage, dstX, dstY, srcX, srcY, w, h, pct)</h4>
+<h4>gd.copyMergeGray(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h, pct)<br>
+dstImage:copyMergeGray(srcImage, dstX, dstY, srcX, srcY, w, h, pct)</h4>
 
-<h4>gd.paletteCopy(dstImage, srcImage)</h4>
-<h4>dstImage:paletteCopy(srcImage)</h4>
+<h4>gd.paletteCopy(dstImage, srcImage)<br>
+dstImage:paletteCopy(srcImage)</h4>
 
 
 <h4>gdImage:squareToCircle(radius)</h4>
 <h4>gdImage:sharpen(pct)</h4>
-
 <h4>gd.trueColorToPalette(sx, sy)</h4>
 
 
