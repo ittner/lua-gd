@@ -170,7 +170,9 @@ static int LgdImageJpeg(lua_State *L)
     lua_pushnumber(L, 1);
     return 1;
 }
-    
+
+
+/* void *gdImageJpegPtr(gdImagePtr im, int quality) */
 static int LgdImageJpegPtr(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
@@ -190,16 +192,117 @@ static int LgdImageJpegPtr(lua_State *L)
 }
 
 
+/* gdImagePng(gdImagePtr im, FILE *out, int quality) */
+/* Changed to: gdImagePng(gdImagePtr im, char *fname) */
+static int LgdImagePng(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    const char *fname = getstring(L, 2);
+    FILE *fp;
+
+    if(fname == NULL)
+    {
+        lua_pushnil(L);
+        return 1;
+    }
+    if((fp = fopen(fname, "wb")) == NULL)
+    {
+        lua_pushnil(L);
+        return 1;
+    }
+    gdImagePng(im, fp);
+    fclose(fp);
+    lua_pushnumber(L, 1);
+    return 1;
+}
+
+
+/* void *gdImagePngPtr(gdImagePtr im) */
+static int LgdImagePngPtr(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    char *str;
+    int size;
+
+    str = gdImagePngPtr(im, &size);
+    if(str != NULL)
+    {
+        lua_pushlstring(L, str, size);
+        gdFree(str);
+    }
+    else
+        lua_pushnil(L);  /* Error */
+    return 1;
+}
+
+
+/* gdImagePngEx(gdImagePtr im, FILE *out, int compression_level) */
+/* Changed to: gdImagePngEx(gdImagePtr im, char *fname, int compr_level) */
+static int LgdImagePngEx(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    const char *fname = getstring(L, 2);
+    int level = getint(L, 3);
+    FILE *fp;
+
+    if(fname == NULL)
+    {
+        lua_pushnil(L);
+        return 1;
+    }
+    if((fp = fopen(fname, "wb")) == NULL)
+    {
+        lua_pushnil(L);
+        return 1;
+    }
+    gdImagePngEx(im, fp, level);
+    fclose(fp);
+    lua_pushnumber(L, 1);
+    return 1;
+}
+
+
+/* void *gdImagePngPtrEx(gdImagePtr im, int compression_level) */
+static int LgdImagePngPtrEx(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int level = getint(L, 2);
+    char *str;
+    int size;
+
+    str = gdImagePngPtrEx(im, &size, level);
+    if(str != NULL)
+    {
+        lua_pushlstring(L, str, size);
+        gdFree(str);
+    }
+    else
+        lua_pushnil(L);  /* Error */
+    return 1;
+}
+
+
+
+
+
+
+
+
 
 
 static const luaL_reg LgdFunctions[] =
 {
-	{ "ImageCreate",            LgdImageCreate },
-	{ "ImageCreateTrueColor",   LgdImageCreateTrueColor },
-	{ "ImageDestroy",           LgdImageDestroy },
-	{ "ImageCreateFromJpeg",    LgdImageCreateFromJpeg },
-	{ "ImageJpeg",              LgdImageJpeg },
+    { "ImageCreate",            LgdImageCreate },
+    { "ImageCreateTrueColor",   LgdImageCreateTrueColor },
+    { "ImageDestroy",           LgdImageDestroy },
+    { "ImageCreateFromJpeg",    LgdImageCreateFromJpeg },
+    { "ImageJpeg",              LgdImageJpeg },
     { "ImageJpegPtr",           LgdImageJpegPtr },
+    { "ImagePng",               LgdImagePng },
+    { "ImagePngPtr",            LgdImagePngPtr },
+    { "ImagePngEx",             LgdImagePngEx },
+    { "ImagePngPtrEx",          LgdImagePngPtrEx },
+
     { NULL, NULL }
 };
 

@@ -60,16 +60,17 @@ X gdImageDestroy
   gdImageGreen 
   gdImageInterlace 
 X gdImageJpeg 
-  gdImageJpegCtx 
+X gdImagePtr
+N gdImageJpegCtx 
   gdImageLine 
   gdImageMergeGray 
   gdImagePaletteCopy 
-  gdImagePng 
-  gdImagePngCtx 
-  gdImagePngCtxEx 
-  gdImagePngEx 
-  gdImagePngPtr 
-  gdImagePngPtrEx 
+X gdImagePng 
+N gdImagePngCtx 
+N gdImagePngCtxEx 
+X gdImagePngEx 
+X gdImagePngPtr 
+X gdImagePngPtrEx 
   gdImagePngToSink 
   gdImagePolygon 
   gdImagePtr 
