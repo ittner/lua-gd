@@ -13,14 +13,13 @@
 #include <gd.h>
 
 #define LIB_NAME                "gd"
-#define MY_GD_VERSION           "2.17"
+#define MY_GD_VERSION           "gd 2.0.33"
 #define GD_IMAGE_TYPENAME       "gdImage_handle"
 #define GD_IMAGE_PTR_TYPENAME   "gdImagePtr_handle"
 #define GD_FONT_TYPENAME        "gdFont_handle"
 #define GD_FONT_PTR_TYPENAME    "gdFontPtr_handle"
 
-#define LIB_VERSION "lua-gd (c) 2004 Alexandre Erwin Ittner, based on " \
-    "gd " MY_GD_VERSION
+#define LIB_VERSION "lua-gd " MY_GD_VERSION " (c) 2004 Alexandre Erwin Ittner"
 
 
 /* These macros was written by Luiz Henrique de Figueiredo
@@ -143,6 +142,38 @@ static int LgdImageCreateFromJpeg(lua_State *L)
         return 1;  /* Error */
     }
     im = gdImageCreateFromJpeg(fp);
+    fclose(fp);
+    if(im != NULL)
+    {
+        lua_boxpointer(L, im);
+        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
+        lua_setmetatable(L, -2);    /* Done */
+    }
+    else
+        lua_pushnil(L); /* Error */
+    return 1;
+}
+
+
+/* gdImageCreateFromGif(FILE *in) */
+/* Changed to: gdImageCreateFromGif(char *filename) */
+static int LgdImageCreateFromGif(lua_State *L)
+{
+    gdImagePtr im;
+    FILE *fp;
+    const char *fname = getstring(L, 1);
+
+    if(fname == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    if((fp = fopen(fname, "rb")) == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    im = gdImageCreateFromGif(fp);
     fclose(fp);
     if(im != NULL)
     {
@@ -485,6 +516,50 @@ static int LgdImagePngPtrEx(lua_State *L)
 
 
 
+/* gdImageGif(gdImagePtr im, FILE *out) */
+/* Changed to: gdImageGif(gdImagePtr im, char *fname) */
+static int LgdImageGif(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    const char *fname = getstring(L, 2);
+    FILE *fp;
+
+    if(fname == NULL)
+    {
+        lua_pushnil(L);
+        return 1;
+    }
+    if((fp = fopen(fname, "wb")) == NULL)
+    {
+        lua_pushnil(L);
+        return 1;
+    }
+    gdImageGif(im, fp);
+    fclose(fp);
+    lua_pushnumber(L, 1);
+    return 1;
+}
+
+
+/* void *gdImageGifPtr(gdImagePtr im) */
+static int LgdImageGifPtr(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    char *str;
+    int size;
+
+    str = gdImageGifPtr(im, &size);
+    if(str != NULL)
+    {
+        lua_pushlstring(L, str, size);
+        gdFree(str);
+    }
+    else
+        lua_pushnil(L);  /* Error */
+    return 1;
+}
+
+
 
 /* gdImageGd(gdImagePtr im, FILE *out) */
 /* Changed to: gdImageGd(gdImagePtr im, char *fname) */
@@ -638,6 +713,7 @@ static const luaL_reg LgdFunctions[] =
     { "ImageCreateTrueColor",   LgdImageCreateTrueColor },
     { "ImageDestroy",           LgdImageDestroy },
     { "ImageCreateFromJpeg",    LgdImageCreateFromJpeg },
+    { "ImageCreateFromGif",     LgdImageCreateFromGif },
     { "ImageCreateFromPng",     LgdImageCreateFromPng },
     { "ImageCreateFromGd",      LgdImageCreateFromGd },
     { "ImageCreateFromGd2",     LgdImageCreateFromGd2 },
@@ -650,6 +726,8 @@ static const luaL_reg LgdFunctions[] =
     { "ImagePngPtr",            LgdImagePngPtr },
     { "ImagePngEx",             LgdImagePngEx },
     { "ImagePngPtrEx",          LgdImagePngPtrEx },
+    { "ImageGif",               LgdImageGif },
+    { "ImageGifPtr",            LgdImageGifPtr },
     { "ImageGd",                LgdImageGd },
     { "ImageGdPtr",             LgdImageGdPtr },
     { "ImageGd2",               LgdImageGd2 },

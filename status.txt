@@ -34,7 +34,8 @@ X gdImageCreateFromGd
 X gdImageCreateFromGd2 
   gdImageCreateFromGd2Ctx 
 X gdImageCreateFromGd2Part 
-  gdImageCreateFromGd2PartCtx 
+  gdImageCreateFromGd2PartCtx
+X ImageCreateFromGif
 X gdImageCreateFromJpeg
   gdImageCreateFromJpegCtx 
 X gdImageCreateFromPng 
@@ -56,6 +57,8 @@ X gdImageGd
 X gdImageGd2 
 X gdImageGdPtr
 X gdImageGd2Ptr
+X gdImageGif
+X gdImageGifPtr
   gdImageGetInterlaced 
   gdImageGetPixel 
   gdImageGetTransparent 
