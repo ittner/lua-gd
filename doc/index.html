@@ -484,7 +484,7 @@ that image.</p>
 
 <p>In the event that all <code>gd.MAX_COLORS</code> colors (256)
 have already been allocated, <code>colorAllocate</code> will
-return -1 to indicate failure. (This is not uncommon when working
+return <b>nil</b> to indicate failure. (This is not uncommon when working
 with existing PNG files that already use 256 colors.) Note that
 <code>colorAllocate</code> does not check for existing colors that match
 your request; see <code>colorExact</code>, <code>colorClosest</code>
@@ -494,6 +494,7 @@ not available.</p>
 
 
 <h4>gdImage:colorAllocateAlpha(red, green, blue, alpha)</h4>
+
 <p><code>colorAllocateAlpha</code> finds the first available color index
 in the image specified, sets its RGBA values to those requested (255 is
 the maximum for red, green and blue, and 127 represents full transparency
@@ -503,9 +504,9 @@ the returned value as a parameter to drawing functions. When creating
 a new palette-based image, the first time you invoke this function,
 you are setting the background color for that image.</p>
 
-<p>In the event that all <code>gd.MAX_COLORS</code> colors (256)
-have already been allocated, <code>colorAllocateAlpha</code> will
-return -1 to indicate failure. (This is not uncommon when working with
+<p>In the event that all <code>gd.MAX_COLORS</code> colors (256) have
+already been allocated, <code>colorAllocateAlpha</code> will return
+<b>nil</b> to indicate failure. (This is not uncommon when working with
 existing palette-based PNG files that already use 256 colors.) Note
 that <code>colorAllocateAlpha</code> does not check for existing
 colors that match your request; see <code>colorExactAlpha</code> and
@@ -560,31 +561,203 @@ for a method of locating exact matches only.</p>
 
 <h4>gdImage:colorClosestHWB(red, green, blue)</h4>
 
+<p> <code>colorClosestHWB</code> searches the colors which have been
+defined thus far in the image specified and returns the index of the color
+with hue, whiteness and blackness closest to the requested color. This
+scheme is typically superior to the Euclidian distance scheme used by
+<code>colorClosest</code>. </p>
+
+<p> If no colors have yet been allocated in the image,
+<code>colorClosestHWB</code> returns <b>nil</b>. </p>
+
+<p> When applied to a truecolor image, this function always succeeds in
+returning the desired color. </p>
+
+<p> This function is most useful as a backup method for choosing a
+drawing color when an image already contains <code>gd.MAX_COLORS</code>
+(256) colors and no more can be allocated. (This is not uncommon when
+working with existing PNG files that already use many colors.) See
+<code>colorExact</code> for a method of locating exact matches only. </p>
+
+
 <h4>gdImage:colorExact(red, green, blue)</h4>
+
+<p> <code>colorExact</code> searches the colors which have been defined
+thus far in the image specified and returns the index of the first
+color with RGB values which exactly match those of the request. If no
+allocated color matches the request precisely, <code>colorExact</code>
+returns <b>nil</b>. See <code>colorClosest</code> for a way to find the
+color closest to the color requested.</p>
+
+<p> When applied to a truecolor image, this function always succeeds in
+returning the desired color. </p>
+
+
 <h4>gdImage:colorExactAlpha(red, green, blue, alpha)</h4>
+
+<p> <code>colorExactAlpha</code> searches the colors which have
+been defined thus far in the image specified and returns the
+index of the first color with RGBA values which exactly match
+those of the request. If no allocated color matches the request
+precisely, <code>colorExactAlpha</code> returns <b>nil</b>. See
+<code>colorClosestAlpha</code> for a way to find the color closest to
+the color requested.</p>
+
+<p> When applied to a truecolor image, this function always succeeds in
+returning the desired color. </p>
+
 <h4>gdImage:colorResolve(red, green, blue)</h4>
+
+<p> <code>colorResolve</code> searches the colors which have been defined
+thus far in the image specified and returns the index of the first color
+with RGB values which exactly match those of the request. If no allocated
+color matches the request precisely, then <code>colorResolve</code>
+tries to allocate the exact color. If there is no space left in
+the color table then ColorResolve returns the closest color (as in
+<code>colorClosest</code>). This function always returns an index of a
+color. </p>
+
+<p> When applied to a truecolor image, this function always succeeds in
+returning the desired color. </p>
+
+
 <h4>gdImage:colorResolveAlpha(red, green, blue, alpha)</h4>
+
+<p> <code>colorResolveAlpha</code> searches the colors which have
+been defined thus far in the image specified and returns the index
+of the first color with RGBA values which exactly match those of the
+request. If no allocated color matches the request precisely, then
+<code>colorResolveAlpha</code> tries to allocate the exact color. If there
+is no space left in the color table then <code>colorResolveAlpha</code>
+returns the closest color (as in <code>colorClosestAlpha</code>). This
+function always returns an index of a color. </p>
+
+<p> When applied to a truecolor image, this function always succeeds in
+returning the desired color. </p>
+
+
 <h4>gdImage:colorsTotal()</h4>
+<p> This function returns the number of colors currently allocated in a
+palette image. For truecolor images, the result of this call is undefined
+and should not be used. </p>
+
+
 <h4>gdImage:red(color)</h4>
+<p> This function returns the red portion of the specified color in the
+image. This macro works for both palette and truecolor images. </p>
+
+
 <h4>gdImage:blue(color)</h4>
+<p> This function returns the blue portion of the specified color in the
+image. This macro works for both palette and truecolor images. </p>
+
+
 <h4>gdImage:green(color)</h4>
+<p> This function returns the green portion of the specified color in the
+image. This macro works for both palette and truecolor images. </p>
+
+
 <h4>gdImage:alpha(color)</h4>
+
+<p> This function returns the alpha portion of the specified color in the
+image. This macro works for both palette and truecolor images. </p>
+
+
 <h4>gdImage:getTransparent()</h4>
+<p> This function returns the current transparent color index in
+the image. If there is no transparent color, <code>getTransparent</code>
+returns <b>nil</b>. </p>
+
+
 <h4>gdImage:colorTransparent(color)</h4>
+
+<p><code>colorTransparent</code> sets the transparent color index for
+the specified image to the specified index. To indicate that there
+should be no transparent color, invoke <code>colorTransparent</code>
+with a color index of <b>nil</b> (or passing no color index). Note that
+JPEG images do not support transparency, so this setting has no effect
+when writing JPEG images.</p>
+
+<p>The color index used should be an index allocated by
+<code>colorAllocate</code>, whether explicitly invoked by your code or
+implicitly invoked by loading an image. In order to ensure that your
+image has a reasonable appearance when viewed by users who do not
+have transparent background capabilities (or when you are writing a
+JPEG-format file, which does not support transparency), be sure to give
+reasonable RGB values to the color you allocate for use as a transparent
+color, even though it will be transparent on systems that support PNG
+transparency.</p>
+
+
 <h4>gdImage:colorDeallocate(color)</h4>
+
+<p> <code>colorDeallocate</code> marks the specified color as being
+available for reuse. It does not attempt to determine whether the
+color index is still in use in the image. After a call to this
+function, the next call to <code>colorAllocate</code> for the same
+image will set new RGB values for that color index, changing the color
+of any pixels which have that index as a result. If multiple calls to
+<code>colorDeallocate</code> are made consecutively, the lowest-numbered
+index among them will be reused by the next <code>colorAllocate</code>
+call.<p>
+
 
 <a name="api.query"></a>
 <h3>Query functions</h3>
 
 <h4>gdImage:boundsSafe(x, y)</h4>
+
+<p> <code>boundsSafe</code> returns <b>true</b> if the specified point
+is within the current clipping rectangle, <b>false</b> if not. The
+clipping rectangle is set by <code>setClip</code> and defaults to the
+entire image. This function is intended primarily for use by those who
+wish to add functions to Lua-GD. All of the drawing functions already
+clip safely. </p>
+
+
 <h4>gdImage:getPixel(x, y)</h4>
+<p><code>getPixel</code> returns the color index of a particular pixel.</p>
+
 <h4>gdImage:sizeX()</h4>
+<p><code>sizeX</code> returns the width of the image in pixels.</p>
+
+
 <h4>gdImage:sizeY()</h4>
+<p><code>sizeY</code> returns the height of the image in pixels.</p>
+
+
 <h4>gdImage:sizeXY()</h4>
+<p><code>sizeXY</code> returns the width and the height of the image
+in pixels. This function has no C equivalent because, unlike Lua,
+C functions cannot return multiple values.</p>
+
+<p>Example: 
+<pre class="example">
+local x, y = im:sizeXY()
+</pre>
+</p>
+
+
 <h4>gdImage:getClip()</h4>
+<p>Fetches the boundaries of the current clipping rectangle. This function
+returns four numbers.</p>
+
+<p>Example: 
+<pre class="example">
+local x1, y1, x2, y2 = im:getClip()
+</pre>
+</p>
+
+
 <h4>gdImage:setClip(x1, y1, x2, y2)</h4>
 
- x1p, y1p, x2p, y2p = im:getClip() 
+<p> Establishes a clipping rectangle. Once <code>setClip</code> has been
+called, all future drawing operations will remain within the specified
+clipping area, until a new <code>setClip</code> call takes place. For
+instance, if a clipping rectangle of 25, 25, 75, 75 has been set within
+a 100x100 image, a diagonal line from 0,0 to 99,99 will appear only
+between 25,25 and 75,75. </p>
+
 
 <a name="api.draw"></a>
 <h3>Drawing functions</h3>
