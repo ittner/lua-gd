@@ -217,8 +217,7 @@ function mergeMessage(im, msg)
       y = y + 1
     end
   end
-
-  return oim, (i-1)*8, w*h
+  return oim, len*8, w*h
 end
 
 
@@ -230,7 +229,6 @@ function getMessage(im)
   local s, e = 1, 1
   local b = 0
   local c
-
   while y <= h do
     c = im:getPixel(x, y)
     a[e] = getLSB(im:red(c))
@@ -260,7 +258,6 @@ function getMessage(im)
       y = y + 1
     end
   end
-
   return msg
 end
 
@@ -279,7 +276,7 @@ function compare(fimg1, fimg2)
   local w1, h1 = im1:sizeXY()
   local w2, h2 = im2:sizeXY()
   if w1 ~= w2 or h1 ~= h2 then
-    print("ERROR: Images with different sizes.")
+    print("ERROR: Images have different sizes.")
     os.exit(1)
   end
   local oim = gd.createTrueColor(w1, h1)
@@ -295,7 +292,7 @@ function compare(fimg1, fimg2)
       oim:setPixel(x, y, oc)
     else
       f = math.floor((im1:red(c1) + im1:green(c1) + im1:blue(c1))/6.0)
-      fc = oim:colorResolve(f,f,f)
+      fc = oim:colorResolve(f, f, f)
       oim:setPixel(x, y, fc)
     end
     x = x + 1
@@ -358,8 +355,8 @@ if arg[1] == "hide" then
     print("ERROR: Failed to write output file.")
     os.exit(1)
   end
-  print(string.format("DONE: %2.2f%% of the image used to store the message.",
-    l/t*100.0))
+  print(string.format("DONE: %2.1f%% of the image used to store the message.",
+    100.0*l/t))
   os.exit(0)
 end
 
