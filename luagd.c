@@ -890,7 +890,7 @@ static int LgdImageColorAllocate(lua_State *L)
     if(im)
     {
         c = gdImageColorAllocate(im, r, g, b);
-        if(c > 0)
+        if(c >= 0)
             lua_pushnumber(L, c);  /* ok */
         else
             lua_pushnil(L); /* Can not allocate color */
@@ -914,7 +914,7 @@ static int LgdImageColorAllocateAlpha(lua_State *L)
     if(im)
     {
         c = gdImageColorAllocateAlpha(im, r, g, b, a);
-        if(c > 0)
+        if(c >= 0)
             lua_pushnumber(L, c);  /* ok */
         else
             lua_pushnil(L); /* Can not allocate color */
@@ -937,7 +937,7 @@ static int LgdImageColorClosest(lua_State *L)
     if(im)
     {
         c = gdImageColorClosest(im, r, g, b);
-        if(c > 0)
+        if(c >= 0)
             lua_pushnumber(L, c);  /* ok */
         else
             lua_pushnil(L); /* Can not allocate color */
@@ -984,7 +984,7 @@ static int LgdImageColorClosestHWB(lua_State *L)
     if(im)
     {
         c = gdImageColorClosestHWB(im, r, g, b);
-        if(c > 0)
+        if(c >= 0)
             lua_pushnumber(L, c);  /* ok */
         else
             lua_pushnil(L); /* Can not allocate color */
@@ -1007,7 +1007,7 @@ static int LgdImageColorExact(lua_State *L)
     if(im)
     {
         c = gdImageColorExact(im, r, g, b);
-        if(c > 0)
+        if(c >= 0)
             lua_pushnumber(L, c);  /* ok */
         else
             lua_pushnil(L); /* Can not allocate color */
@@ -1031,7 +1031,7 @@ static int LgdImageColorExactAlpha(lua_State *L)
     if(im)
     {
         c = gdImageColorExactAlpha(im, r, g, b, a);
-        if(c > 0)
+        if(c >= 0)
             lua_pushnumber(L, c);  /* ok */
         else
             lua_pushnil(L); /* Can not allocate color */
@@ -1054,7 +1054,7 @@ static int LgdImageColorResolve(lua_State *L)
     if(im)
     {
         c = gdImageColorResolve(im, r, g, b);
-        if(c > 0)
+        if(c >= 0)
             lua_pushnumber(L, c);  /* ok */
         else
             lua_pushnil(L); /* Can not allocate color */
@@ -1078,7 +1078,7 @@ static int LgdImageColorResolveAlpha(lua_State *L)
     if(im)
     {
         c = gdImageColorResolveAlpha(im, r, g, b, a);
-        if(c > 0)
+        if(c >= 0)
             lua_pushnumber(L, c);  /* ok */
         else
             lua_pushnil(L); /* Can not allocate color */
@@ -1975,9 +1975,37 @@ static int LgdImageStringFT(lua_State *L)
     lua_pushnil(L);
     return 1;
 }
-            
 
 
+/* char *gdImageStringFTCircle(gdImagePtr im, int cx, int cy, double radius,
+                double textRadius, double fillPortion, char *font,
+                double points, char *top, char *bottom, int fgcolor)
+
+   Changed to: im:ImageStringFTCircle(cx, cy, radius, textRadius,
+                   fillPortion, fontname, points, top, bottom, color)
+*/
+
+static int LgdImageStringFTCircle(lua_State *L)
+{
+    gdImagePtr im;
+    int cx = getint(L, 2);
+    int cy = getint(L, 3);
+    double radius = (double) lua_tonumber(L, 4);
+    double textRadius = (double) lua_tonumber(L, 5);
+    double fillPortion = (double) lua_tonumber(L, 6);
+    char *font = (char*) getstring(L, 7);
+    double points = (double) lua_tonumber(L, 8);
+    char *top = (char*) getstring(L, 9);
+    char *bottom = (char*) getstring(L, 10);
+    int color = getint(L, 11);
+
+    if(gdImageStringFTCircle(im, cx, cy, radius, textRadius, fillPortion,
+        font, points, top, bottom, color))
+        lua_pushnil(L);  /* Error */
+    else
+        lua_pushboolean(L, 1);
+    return 1;
+}
 
 
 static const luaL_reg LgdFunctions[] =
@@ -2097,8 +2125,7 @@ static const luaL_reg LgdFunctions[] =
 #endif
 
     { "ImageStringFT",              LgdImageStringFT },
-
-
+    { "ImageStringFTCircle",        LgdImageStringFTCircle },
 
     /* Avoid boring warnings when compiling */
     { "Null",                       LgdNull },
