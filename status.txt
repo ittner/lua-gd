@@ -127,15 +127,20 @@ X gdStyledBrushed
 X gdTiled 
 X gdTransparent
 
-  gdImageGifAnimAdd
-  gdImageGifAnimAddCtx
+X gdImageGifAnimAdd
+N gdImageGifAnimAddCtx
   gdImageGifAnimAddPtr
-  gdImageGifAnimBegin
-  gdImageGifAnimBeginCtx
+X gdImageGifAnimBegin
+N gdImageGifAnimBeginCtx
   gdImageGifAnimBeginPtr
-  gdImageGifAnimEnd
-  gdImageGifAnimEndCtx
+X gdImageGifAnimEnd
+N gdImageGifAnimEndCtx
   gdImageGifAnimEndPtr
+
+X gdDisposalNone
+X gdDisposalUnknown
+X gdDisposalRestoreBackground
+X gdDisposalRestorePrevious
 
 
 void gdImageGifAnimBegin(gdImagePtr im, FILE *out, int GlobalCM, int Loops)

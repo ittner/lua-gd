@@ -1975,9 +1975,6 @@ static int LgdImageStringFTCircle(lua_State *L)
 
 
 #ifdef GD_GIF
-
-/* *** Gif animation support *** */
-
 /* void gdImageGifAnimBegin(gdImagePtr im, FILE *out, int GlobalCM, int Loops)
     Changed to:  im:gifAnimBegin(filename, globalCM, loops)
 */
@@ -1985,16 +1982,17 @@ static int LgdImageStringFTCircle(lua_State *L)
 static int LgdImageGifAnimBegin(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1); 
-    const char *filename = getstring(L, 2);
+    const char *fname = getstring(L, 2);
     int globalCM = lua_toboolean(L, 3);
     int loops = getint(L, 4);
     FILE *fp;
 
-    if((fp = fopen(filename, "wb")) == NULL)
+    if((fp = fopen(fname, "wb")) == NULL)
     {
         lua_pushnil(L); /* Error */
         return 1;
     }
+
     gdImageGifAnimBegin(im, fp, globalCM, loops);
     fclose(fp);
     lua_pushboolean(L, 1);  /* ok */
@@ -2002,7 +2000,60 @@ static int LgdImageGifAnimBegin(lua_State *L)
 }
 
 
+/* void gdImageGifAnimAdd(gdImagePtr im, FILE *out, int LocalCM, int LeftOfs,
+            int TopOfs, int Delay, int Disposal, gdImagePtr previm)
+    Changed to:  im:gifAnimAdd(filename, localCM, leftOfs, topOfs, delay,
+                    disposal [, previm])
+*/
 
+static int LgdImageGifAnimAdd(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1); 
+    const char *fname = getstring(L, 2);
+    int localCM = lua_toboolean(L, 3);
+    int leftOfs = getint(L, 4);
+    int topOfs = getint(L, 5);
+    int delay = getint(L, 6);
+    int disp = getint(L, 7);
+    gdImagePtr previm = NULL;
+    FILE *fp;
+
+    if(lua_gettop(L) >= 8)
+        previm = getImagePtr(L, 8);
+
+    if((fp = fopen(fname, "ab")) == NULL)
+    {
+        lua_pushnil(L); /* Error */
+        return 1;
+    }
+
+    gdImageGifAnimAdd(im, fp, localCM, leftOfs, topOfs, delay, disp, previm);
+    fclose(fp);
+    lua_pushboolean(L, 1);  /* ok */
+    return 1;
+}
+
+
+/*  void gdImageGifAnimEnd(FILE *out)
+    Changed to:  gd.gifAnimEnd(filename)
+*/
+
+static int LgdImageGifAnimEnd(lua_State *L)
+{
+    const char *fname = getstring(L, 1);
+    FILE *fp;
+
+    if((fp = fopen(fname, "ab")) == NULL)
+    {
+        lua_pushnil(L); /* Error */
+        return 1;
+    }
+
+    gdImageGifAnimEnd(fp);
+    fclose(fp);
+    lua_pushboolean(L, 1);  /* ok */
+    return 1;
+}
 
 #endif
 
@@ -2138,6 +2189,12 @@ static const luaL_reg LgdFunctions[] =
     { "useFontConfig",          LgdFTUseFontConfig },
 #endif
 
+#ifdef GD_GIF  /* Gif animation */
+    { "gifAnimBegin",           LgdImageGifAnimBegin },
+    { "gifAnimAdd",             LgdImageGifAnimAdd },
+    { "gifAnimEnd",             LgdImageGifAnimEnd },
+#endif
+
     { NULL, NULL }
 };
 
@@ -2171,6 +2228,14 @@ int luaopen_gd(lua_State *L)
     tblseticons(L, "STYLED_BRUSHED", gdStyledBrushed);
     tblseticons(L, "TILED", gdTiled);
     tblseticons(L, "TRANSPARENT", gdTransparent);
+
+#ifdef GD_GIF
+    /* For gif animation */
+    tblseticons(L, "DISPOSAL_NONE", gdDisposalNone);
+    tblseticons(L, "DISPOSAL_UNKNOWN", gdDisposalUnknown);
+    tblseticons(L, "DISPOSAL_RESTORE_BACKGROUND", gdDisposalRestoreBackground);
+    tblseticons(L, "DISPOSAL_RESTORE_PREVIUOUS", gdDisposalRestorePrevious);
+#endif
 
     /* Standard gd fonts */
     tblseticons(L, "FONT_TINY", MY_GD_FONT_TINY);
