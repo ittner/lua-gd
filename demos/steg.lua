@@ -198,7 +198,7 @@ function mergeMessage(im, msg)
         nc = oim:colorResolve(rgb.r, rgb.g, rgb.b)
         oim:setPixel(x, y, nc)
         x = x + 1
-        if x >= w then
+        if x == w then
           x = 0
           y = y + 1
         end
@@ -208,12 +208,12 @@ function mergeMessage(im, msg)
     i = i + 1
   end
 
-  while y <= h do
+  while y < h do
     c = im:getPixel(x, y)
     nc = oim:colorResolve(im:red(c), im:green(c), im:blue(c))
     oim:setPixel(x, y, nc)
     x = x + 1
-    if x >= w then
+    if x == w then
       x = 0
       y = y + 1
     end
@@ -256,7 +256,7 @@ function getMessage(im)
     end
     e = e + 1
     x = x + 1
-    if x >= w then
+    if x == w then
       x = 0
       y = y + 1
     end
