@@ -272,10 +272,54 @@ function getMessage(im)
 end
 
 
+function compare(fimg1, fimg2)
+  local im1 = gd.createFromPng(fimg1)
+  if not im1 then
+    print("ERROR: " .. fimg1 .. " bad PNG data.")
+    os.exit(1)
+  end
+  local im2 = gd.createFromPng(fimg2)
+  if not im2 then
+    print("ERROR: " .. fimg2 .. " bad PNG data.")
+    os.exit(1)
+  end
+  local w1, h1 = im1:sizeXY()
+  local w2, h2 = im2:sizeXY()
+  if w1 ~= w2 or h1 ~= h2 then
+    print("ERROR: Images with different sizes.")
+    os.exit(1)
+  end
+  local oim = gd.createTrueColor(w1, h1)
+  local x, y = 0, 0
+  local c1, c2, oc
+  local black = oim:colorResolve(0, 0, 0)
+  while y < h1 do
+    c1 = im1:getPixel(x, y)
+    c2 = im2:getPixel(x, y)
+    if im1:red(c1) ~= im2:red(c2)
+    or im1:green(c1) ~= im2:green(c2)
+    or im1:blue(c1) ~= im2:blue(c2) then
+      oc = oim:colorResolve(im2:red(c2), im2:green(c2), im2:blue(c2))
+      oim:setPixel(x, y, oc)
+    else
+      oim:setPixel(x, y, black)
+    end
+    x = x + 1
+    if x == w1 then
+      x = 0
+      y = y + 1
+    end
+  end
+  return oim
+end
+    
+
+
 function usage()
   print("Usage:")
   print("  lua steg.lua hide input.png output.png   (reads data from stdin)")
   print("  lua steg.lua show input.png              (writes data to stdout)")
+  print("  lua steg.lua comp img1.png img2.png result.png")
 end
 
 
@@ -319,6 +363,20 @@ if arg[1] == "hide" then
     l/t*100.0))
   os.exit(0)
 end
+
+if arg[1] == "comp" then
+  if not arg[3] and arg[4] then
+    usage()
+    os.exit(1)
+  end
+  oim = compare(arg[2], arg[3])
+  if not oim:png(arg[4]) then
+    print("ERROR: Failed to write output file.")
+    os.exit(1)
+  end
+  os.exit(0)
+end
+
 
 usage()
 os.exit(1)
