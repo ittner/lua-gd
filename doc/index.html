@@ -108,7 +108,7 @@ pre.wrong
 <h2> Contents </h2>
 <ul>
  <li><a href="#intro">Introduction</a>
- <li><a href="#license">License</a></li>
+ <li><a href="#license">Licensing information</a></li>
  <li><a href="#download">Download</a></li>
  <li><a href="#api">Lua-GD API</a>
    <ul>
@@ -142,34 +142,51 @@ pre.wrong
 <a name="intro"></a>
 <h2>Introduction</h2>
 
-<p> gd is a C graphics library that allows your code to quickly draw
-complete images with lines, polygons, arcs, text, multiple colors, cut
-and paste from other images and flood fills, write out the result as a
-PNG, JPEG or GIF format. This is particularly useful in World Wide Web
-applications, where PNG and JPEG are two of the formats accepted for
-inline images by most browsers. You can get more information about gd
-from <a href="http://www.boutell.com/gd/">it's homepage</a>. </p>
+<p> "gd" is a C graphics library created by
+<a href="http://www.boutell.com/contact">Thomas Boutell</a> that allows
+your code to quickly draw complete images with lines, polygons, arcs,
+text, multiple colors, cut and paste from other images, flood fills,
+read in or write out images in the PNG, JPEG or GIF format. This is
+particularly useful in World Wide Web applications, where PNG and JPEG are
+two of the formats accepted for inline images by most browsers. gd does
+not provide for every possible desirable graphics operation. It is not
+necessary or desirable for gd to become a kitchen-sink graphics package,
+but it does include most frequently requested features, including both
+truecolor and palette images, resampling (smooth resizing of truecolor
+images) and so forth.  You can get more information about gd from <a
+href="http://www.boutell.com/gd/">it's homepage</a>. </p>
 
-<p> Lua-GD is a "binding": A library that exports gd functions to the
-Lua Programing Language, allowing you to use gd from Lua. The API was
-<b>NOT</b> literally exported, but changed in a way that make it familiar
-to Lua users. </p>
+<p> Lua-GD is a "binding": A library that exports gd functions to the <a
+href="http://www.lua.org">Lua Programing Language</a>, allowing you to
+use gd from Lua. The API was <b>NOT</b> literally exported, but changed
+in a way that make it familiar to Lua users. </p>
 
 <p> Lua-GD is a programming library, not a paint program. If you are
 looking for that or are not familiar to the Lua Programming Language,
 you are in the wrong place. </p>
 
+<p> This document, which was heavly based on gd manual, describes the API
+and provides the information needed to use the library. Some experience
+with Lua is <b>required</b>.</p>
 
 
 <a name="license"></a>
-<h2>License</h2>
+<h2>Licensing information</h2>
+
+<p> Lua-GD and gd have diferent licenses. In order to use Lua-GD your
+application, you need to accept both them. </p>
+
+
 
 <h3>Lua-GD License</h3>
 
 <p>Lua-GD is <em>copyrighted free software</em>, distributed under the
-GNU Lesser General Public License, as follows: </p>
+<b>GNU Lesser General Public License</b>, as follows: </p>
 
+<blockquote>
 <pre>
+Lua-GD is (c) 2004-2005 Alexandre Erwin Ittner
+
 This library is free software; you can redistribute it and/or modify it
 under the terms of the GNU Lesser General Public License as published
 by the Free Software Foundation; either version 2.1 of the License, or
@@ -184,8 +201,73 @@ You should have received a copy of the GNU Lesser General Public License
 along with this library; if not, write to the Free Software Foundation,
 Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 </pre>
+</blockquote>
 
-<h3>Lua-GD License</h3>
+
+<h3>gd License</h3>
+
+<blockquote>
+<p>Portions copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
+2002, 2003, 2004 by Cold Spring Harbor Laboratory. Funded under Grant
+P41-RR02188 by the National Institutes of Health.</p>
+
+<p>Portions copyright 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003,
+2004 by Boutell.Com, Inc.</p>
+
+<p>Portions relating to GD2 format copyright 1999, 2000, 2001, 2002,
+2003, 2004 Philip Warner.</p>
+
+<p>Portions relating to PNG copyright 1999, 2000, 2001, 2002, 2003,
+2004 Greg Roelofs.</p>
+
+<p>Portions relating to gdttf.c copyright 1999, 2000, 2001, 2002, 2003,
+2004 John Ellson (ellson@graphviz.org).</p>
+
+<p>Portions relating to gdft.c copyright 2001, 2002, 2003, 2004 John
+Ellson (ellson@graphviz.org).</p>
+
+<p>Portions relating to JPEG and to color quantization copyright 2000,
+2001, 2002, 2003, 2004, Doug Becker and copyright (C) 1994, 1995, 1996,
+1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004 Thomas G. Lane. This
+software is based in part on the work of the Independent JPEG Group. See
+the file README-JPEG.TXT for more information.</p>
+
+<p>Portions relating to GIF compression copyright 1989 by Jef Poskanzer
+and David Rowley, with modifications for thread safety by Thomas
+Boutell.</p>
+
+<p>Portions relating to GIF decompression copyright 1990, 1991, 1993 by
+David Koblas, with modifications for thread safety by Thomas Boutell.</p>
+
+<p>Portions relating to WBMP copyright 2000, 2001, 2002, 2003, 2004
+Maurice Szmurlo and Johan Van den Brande.</p>
+
+<p>Portions relating to GIF animations copyright 2004 Jaakko Hyvätti
+(jaakko.hyvatti@iki.fi)</p>
+
+<p>Permission has been granted to copy, distribute and modify gd in any
+context without fee, including a commercial application, provided that
+this notice is present in user-accessible supporting documentation.</p>
+
+<p>This does not affect your ownership of the derived work itself, and the
+intent is to assure proper credit for the authors of gd, not to interfere
+with your productive use of gd. If you have questions, ask. "Derived
+works" includes all programs that utilize the library. Credit must be
+given in user-accessible documentation.</p>
+
+<p>This software is provided "AS IS." The copyright holders disclaim
+all warranties, either express or implied, including but not limited
+to implied warranties of merchantability and fitness for a particular
+purpose, with respect to this code and accompanying documentation.</p>
+
+<p>Although their code does not appear in the current release, the
+authors also wish to thank Hutchison Avenue Software Corporation for
+their prior contributions. </p>
+
+</blockquote>
+
+
+
 
 
 <a name="download"></a>
@@ -2308,18 +2390,17 @@ within the distribution package. </p>
 
 <h2>Contact information</h2>
 
-<p>Author: <b>Alexandre Erwin Ittner</b> </p>
-
-<p>E-mail: <a href="mailto:aittner AT netuno DOT com DOT br">aittner
-<em>AT</em> netuno <em>DOT</em> com <em>DOT</em> br</a> (e-mail obfuscated
-to avoid spam-bots. Please replace <em>AT</em> with "@" and <em>DOT</em>
-with ".").</p>
-
-<p>GnuPG/PGP Key: <a href="http://users.netuno.com.br/aittner/AlexandreErwinIttner.pub.asc">0x0041A1FB</a> (key fingerprint: <code>9B49 FCE2 E6B9 D1AD 6101  29AD 4F6D F114 0041 A1FB</code>).</p>
-
-<p>Homepage: <a href="http://users.netuno.com.br/aittner/">http://users.netuno.com.br/aittner/</a>.</p>
-
-<p>Real-world location: Jaraguá do Sul, Santa Catarina, Brazil.</p>
+<p>
+Author: <b>Alexandre Erwin Ittner</b>
+<br> E-mail: <a href="mailto:aittner AT netuno DOT com DOT br">aittner
+ <em>AT</em> netuno <em>DOT</em> com <em>DOT</em> br</a> (e-mail obfuscated
+ to avoid spam-bots. Please replace <em>AT</em> with "@" and <em>DOT</em>
+ with ".").
+<br> GnuPG/PGP Key: <a href="http://users.netuno.com.br/aittner/AlexandreErwinIttner.pub.asc">0x0041A1FB</a>
+ (key fingerprint: <code>9B49 FCE2 E6B9 D1AD 6101  29AD 4F6D F114 0041 A1FB</code>).
+<br> Homepage: <a href="http://users.netuno.com.br/aittner/">http://users.netuno.com.br/aittner/</a>.
+<br> Location: Jaraguá do Sul, Santa Catarina, Brazil.
+</p>
 
 
 <hr>
