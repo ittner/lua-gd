@@ -114,9 +114,9 @@ pre.wrong
    </ul>
   </li>
  <li><a href="#download">Download and installation</a></li>
+ <li><a href="#api.load">Library loading and initialisation</a></li>
  <li><a href="#api">Lua-GD API</a>
    <ul>
-     <li><a href="#api.load">Library loading and initialisation</a></li>
      <li><a href="#api.constants">Constants</a></li>
      <li><a href="#api.create">Image creation and destruction functions</a></li>
      <li><a href="#api.input">Image input functions</a></li>
@@ -318,18 +318,8 @@ by yourself. </p>
 
 
 
-<a name="api"></a>
-<h2>Lua-GD API</h2>
-
-<p> The Lua-GD API is not identical to the gd C API: it was
-changed in a way that make it more familiar to Lua users. All the
-functions and constants are stored on a single global table called
-<code>gd</code>. Images are objects and can use the common colon notation
-for it's methods (but you can also use a C-style syntax). Functions, methods
-and constants are described bellow.</p>
-
-<a name="api.load"></a>
-<h3>Library loading and initialisation</h3>
+<a name="load"></a>
+<h2>Library loading and initialisation</h2>
 
 <p> Lua-GD is a shared library that must be loaded by the Lua interpreter
 with the <code>loadlib</code> function. Using Lua 5.0, under Unix and
@@ -346,7 +336,6 @@ Under Windows and with <code>libluagd.dll</code> on your path, you can do
 assert(loadlib("libluagd.dll", "luaopen_gd"), "Can't find Lua-GD")()
 </pre>
 </p>
-
 
 <p> But none of these solutions are portable enough for some users. A
 more tricky loader, that can load Lua-GD from some common locations
@@ -391,6 +380,18 @@ Just put this code on a file called <code>gd.lua</code> in your
 in your scripts. The examples in this document uses this solution, so,
 they can run unchanged under Unix and Windows.
 </p>
+
+
+
+<a name="api"></a>
+<h2>Lua-GD API</h2>
+
+<p> The Lua-GD API is not identical to the gd C API: it was
+changed in a way that make it more familiar to Lua users. All the
+functions and constants are stored on a single global table called
+<code>gd</code>. Images are objects and can use the common colon notation
+for it's methods (but you can also use a C-style syntax). Functions, methods
+and constants are described bellow.</p>
 
 <a name="api.constants"></a>
 <h3>Constants</h3>
