@@ -887,16 +887,11 @@ static int LgdImageColorAllocate(lua_State *L)
     int b = getint(L, 4);
     int c;
 
-    if(im)
-    {
-        c = gdImageColorAllocate(im, r, g, b);
-        if(c >= 0)
-            lua_pushnumber(L, c);  /* ok */
-        else
-            lua_pushnil(L); /* Can not allocate color */
-    }
+    c = gdImageColorAllocate(im, r, g, b);
+    if(c >= 0)
+        lua_pushnumber(L, c);  /* ok */
     else
-        lua_pushnil(L);  /* Error reading the image */
+        lua_pushnil(L); /* Can not allocate color */
     return 1;
 }
 
@@ -911,16 +906,11 @@ static int LgdImageColorAllocateAlpha(lua_State *L)
     int a = getint(L, 5);
     int c;
 
-    if(im)
-    {
-        c = gdImageColorAllocateAlpha(im, r, g, b, a);
-        if(c >= 0)
-            lua_pushnumber(L, c);  /* ok */
-        else
-            lua_pushnil(L); /* Can not allocate color */
-    }
+    c = gdImageColorAllocateAlpha(im, r, g, b, a);
+    if(c >= 0)
+        lua_pushnumber(L, c);  /* ok */
     else
-        lua_pushnil(L);  /* Error reading the image */
+        lua_pushnil(L); /* Can not allocate color */
     return 1;
 }
 
@@ -934,16 +924,11 @@ static int LgdImageColorClosest(lua_State *L)
     int b = getint(L, 4);
     int c;
 
-    if(im)
-    {
-        c = gdImageColorClosest(im, r, g, b);
-        if(c >= 0)
-            lua_pushnumber(L, c);  /* ok */
-        else
-            lua_pushnil(L); /* Can not allocate color */
-    }
+    c = gdImageColorClosest(im, r, g, b);
+    if(c >= 0)
+        lua_pushnumber(L, c);  /* ok */
     else
-        lua_pushnil(L);  /* Error reading the image */
+        lua_pushnil(L); /* Can not allocate color */
     return 1;
 }
 
@@ -958,16 +943,11 @@ static int LgdImageColorClosestAlpha(lua_State *L)
     int a = getint(L, 5);
     int c;
 
-    if(im)
-    {
-        c = gdImageColorClosestAlpha(im, r, g, b, a);
-        if(c > 0)
-            lua_pushnumber(L, c);  /* ok */
-        else
-            lua_pushnil(L); /* Can not allocate color */
-    }
+    c = gdImageColorClosestAlpha(im, r, g, b, a);
+    if(c > 0)
+        lua_pushnumber(L, c);  /* ok */
     else
-        lua_pushnil(L);  /* Error reading the image */
+        lua_pushnil(L); /* Can not allocate color */
     return 1;
 }
 
@@ -981,16 +961,11 @@ static int LgdImageColorClosestHWB(lua_State *L)
     int b = getint(L, 4);
     int c;
 
-    if(im)
-    {
-        c = gdImageColorClosestHWB(im, r, g, b);
-        if(c >= 0)
-            lua_pushnumber(L, c);  /* ok */
-        else
-            lua_pushnil(L); /* Can not allocate color */
-    }
+    c = gdImageColorClosestHWB(im, r, g, b);
+    if(c >= 0)
+        lua_pushnumber(L, c);  /* ok */
     else
-        lua_pushnil(L);  /* Error reading the image */
+        lua_pushnil(L); /* Can not allocate color */
     return 1;
 }
 
@@ -1004,16 +979,11 @@ static int LgdImageColorExact(lua_State *L)
     int b = getint(L, 4);
     int c;
 
-    if(im)
-    {
-        c = gdImageColorExact(im, r, g, b);
-        if(c >= 0)
-            lua_pushnumber(L, c);  /* ok */
-        else
-            lua_pushnil(L); /* Can not allocate color */
-    }
+    c = gdImageColorExact(im, r, g, b);
+    if(c >= 0)
+        lua_pushnumber(L, c);  /* ok */
     else
-        lua_pushnil(L);  /* Error reading the image */
+        lua_pushnil(L); /* Can not allocate color */
     return 1;
 }
 
@@ -1028,16 +998,11 @@ static int LgdImageColorExactAlpha(lua_State *L)
     int a = getint(L, 5);
     int c;
 
-    if(im)
-    {
-        c = gdImageColorExactAlpha(im, r, g, b, a);
-        if(c >= 0)
-            lua_pushnumber(L, c);  /* ok */
-        else
-            lua_pushnil(L); /* Can not allocate color */
-    }
+    c = gdImageColorExactAlpha(im, r, g, b, a);
+    if(c >= 0)
+        lua_pushnumber(L, c);  /* ok */
     else
-        lua_pushnil(L);  /* Error reading the image */
+        lua_pushnil(L); /* Can not allocate color */
     return 1;
 }
 
@@ -1051,16 +1016,11 @@ static int LgdImageColorResolve(lua_State *L)
     int b = getint(L, 4);
     int c;
 
-    if(im)
-    {
-        c = gdImageColorResolve(im, r, g, b);
-        if(c >= 0)
-            lua_pushnumber(L, c);  /* ok */
-        else
-            lua_pushnil(L); /* Can not allocate color */
-    }
+    c = gdImageColorResolve(im, r, g, b);
+    if(c >= 0)
+        lua_pushnumber(L, c);  /* ok */
     else
-        lua_pushnil(L);  /* Error reading the image */
+        lua_pushnil(L); /* Can not allocate color */
     return 1;
 }
 
@@ -1075,16 +1035,11 @@ static int LgdImageColorResolveAlpha(lua_State *L)
     int a = getint(L, 5);
     int c;
 
-    if(im)
-    {
-        c = gdImageColorResolveAlpha(im, r, g, b, a);
-        if(c >= 0)
-            lua_pushnumber(L, c);  /* ok */
-        else
-            lua_pushnil(L); /* Can not allocate color */
-    }
+    c = gdImageColorResolveAlpha(im, r, g, b, a);
+    if(c >= 0)
+        lua_pushnumber(L, c);  /* ok */
     else
-        lua_pushnil(L);  /* Error reading the image */
+        lua_pushnil(L); /* Can not allocate color */
     return 1;
 }
 
@@ -1094,10 +1049,7 @@ static int LgdImageColorsTotal(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
 
-    if(im)
-        lua_pushnumber(L, gdImageColorsTotal(im));  /* ok */
-    else
-        lua_pushnil(L);  /* Error reading the image */
+    lua_pushnumber(L, gdImageColorsTotal(im));  /* ok */
     return 1;
 }
 
@@ -1108,10 +1060,7 @@ static int LgdImageRed(lua_State *L)
     gdImagePtr im = getImagePtr(L, 1);
     int c = getint(L, 2);
 
-    if(im)
-        lua_pushnumber(L, gdImageRed(im, c));  /* ok */
-    else
-        lua_pushnil(L);  /* Error reading the image */
+    lua_pushnumber(L, gdImageRed(im, c));  /* ok */
     return 1;
 }
 
@@ -1121,10 +1070,7 @@ static int LgdImageBlue(lua_State *L)
     gdImagePtr im = getImagePtr(L, 1);
     int c = getint(L, 2);
 
-    if(im)
-        lua_pushnumber(L, gdImageBlue(im, c));  /* ok */
-    else
-        lua_pushnil(L);  /* Error reading the image */
+    lua_pushnumber(L, gdImageBlue(im, c));  /* ok */
     return 1;
 }
 
@@ -1134,10 +1080,7 @@ static int LgdImageGreen(lua_State *L)
     gdImagePtr im = getImagePtr(L, 1);
     int c = getint(L, 2);
 
-    if(im)
-        lua_pushnumber(L, gdImageGreen(im, c));  /* ok */
-    else
-        lua_pushnil(L);  /* Error reading the image */
+    lua_pushnumber(L, gdImageGreen(im, c));  /* ok */
     return 1;
 }
 
@@ -1247,8 +1190,7 @@ static int LgdImageGetPixel(lua_State *L)
     int x = getint(L, 2);
     int y = getint(L, 3);
 
-    if(im)
-        lua_pushnumber(L, gdImageGetPixel(im, x, y));
+    lua_pushnumber(L, gdImageGetPixel(im, x, y));
     return 1;
 }
 
@@ -1261,8 +1203,7 @@ static int LgdImageSetPixel(lua_State *L)
     int y = getint(L, 3);
     int c = getint(L, 4);
 
-    if(im)
-        gdImageSetPixel(im, x, y, c);
+    gdImageSetPixel(im, x, y, c);
     return 0;
 }
 
@@ -1277,8 +1218,7 @@ static int LgdImageLine(lua_State *L)
     int y2 = getint(L, 5);
     int c = getint(L, 6);
 
-    if(im)
-        gdImageLine(im, x1, y1, x2, y2, c);
+    gdImageLine(im, x1, y1, x2, y2, c);
     return 0;
 }
 
@@ -1293,8 +1233,7 @@ static int LgdImageRectangle(lua_State *L)
     int y2 = getint(L, 5);
     int c = getint(L, 6);
 
-    if(im)
-        gdImageRectangle(im, x1, y1, x2, y2, c);
+    gdImageRectangle(im, x1, y1, x2, y2, c);
     return 0;
 }
 
@@ -1310,8 +1249,7 @@ static int LgdImageFilledRectangle(lua_State *L)
     int y2 = getint(L, 5);
     int c = getint(L, 6);
 
-    if(im)
-        gdImageFilledRectangle(im, x1, y1, x2, y2, c);
+    gdImageFilledRectangle(im, x1, y1, x2, y2, c);
     return 0;
 }
 
@@ -1598,7 +1536,6 @@ static int LgdImageSetStyle(lua_State *L)
 
     gdImageSetStyle(im, slist, size);
     free(slist);
-
     return 0;
 }
 
