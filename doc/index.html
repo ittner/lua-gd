@@ -1659,12 +1659,145 @@ PNGs and JPEGs. The disk space gain of conversion to palette is not great
 <h3>GIF animation functions</h3>
 
 <h4>gdImage:gifAnimBegin(filename, globalCM, loops)</h4>
-<h4>gdImage:gifAnimAdd(filename, localCM, leftOfs, topOfs, delay, disposal [, previm])</h4>
-<h4>gdImage:gifAnimEnd(filename)</h4>
+
+<p> This function must be called as the first function when creating a GIF
+animation in a file on the disk. It writes the correct GIF file headers
+to file name <b>filename</b> and prepares for frames to be added for
+the animation. The image argument is not used to produce an image frame
+to the file, it is only used to establish the GIF animation frame size,
+interlacing options and the color palette. <code>gd.gifAnimAdd</code>
+is used to add the first and subsequent frames to the animation, and
+the animation must be terminated by calling <code>gd.gifAnimEnd</code>,
+passing the same file name. </p>
+
+<p> The <b>GlobalCM</b> flag indicates if a global color map (or palette)
+is used in the GIF89A header. A <b>true</b> value specifies that a
+global color map should be used to reduce the size of the animation. Of
+course, if the color maps of individual frames differ greatly, a global
+color map may not be a good idea, so you should use <b>globalCM</b> =
+<b>false</b>. </p>
+
+<p> If <b>loops</b> is 0 or greater, the Netscape 2.0 extension for
+animation loop count is written. 0 means infinite loop count. -1 means
+that the extension is not added which results in no looping. -1 is
+the default. </p>
+
+
+
 <h4>gdImage:gifAnimBeginStr(globalCM, loops)</h4>
+
+<p> This function must be called as the first function when creating a
+GIF animation in memory. It returns the correct GIF file headers as an
+Lua string and prepares for frames to be added for the animation. The
+image argument is not used to produce an image frame to the file, it
+is only used to establish the GIF animation frame size, interlacing
+options and the color palette. New frames must be created with the
+function <code>gd.gifAnimAddStr</code> and concatened to this one with
+the <b>..</b> (string concatenation) operator. Finally, one last frame,
+generated with the function <code>gd.gifAnimEndStr</code>, must be
+concatened to finish the animation. </p>
+
+<p> The <b>GlobalCM</b> flag indicates if a global color map (or palette)
+is used in the GIF89A header. A <b>true</b> value specifies that a
+global color map should be used to reduce the size of the animation. Of
+course, if the color maps of individual frames differ greatly, a global
+color map may not be a good idea, so you should use <b>globalCM</b> =
+<b>false</b>. </p>
+
+<p> If <b>loops</b> is 0 or greater, the Netscape 2.0 extension for
+animation loop count is written. 0 means infinite loop count. -1 means
+that the extension is not added which results in no looping. -1 is
+the default. </p>
+
+
+
+<h4>gdImage:gifAnimAdd(filename, localCM, leftOfs, topOfs, delay, disposal [, previm])</h4>
+
+<p> This function writes GIF animation frames to the file specified by
+<b>filename</b>, which was created with <code>gd.gifAnimBegin</code>. With
+<b>leftOfs</b> and <b>topOfs</b> you can place this frame in
+different offset than (0, 0) inside the image screen as defined
+in <code>gd.gifAnimBegin</code>. Delay between the previous
+frame and this frame is in 1/100s units. Disposal is usually
+<code>gd.DISPOSAL_NONE</code>, meaning that the pixels changed by this
+frame should remain on the display when the next frame begins to render,
+but can also be <code>gd.DISPOSAL_UNKNOWN</code> (not recommended),
+<code>gd.DISPOSAL_RESTORE_BACKGROUND</code> (restores the first allocated
+color of the global palette), or <code>gd.DISPOSAL_RESTORE_PREVIOUS</code>
+(restores the appearance of the affected area before the frame was
+rendered). Only <code>gd.DISPOSAL_NONE</code> is a sensible choice for
+the first frame. If <b>previm</b> is passed, the built-in GIF optimizer
+will always use gd.DISPOSAL_NONE regardless of the <b>disposal</b>
+parameter. </p>
+
+<p> Setting the <b>localCM</b> flag to <b>true</b> adds a local
+palette for this image to the animation. Otherwise the global palette
+is assumed and the user must make sure the palettes match. Use
+<code>gd.paletteCopy</code> to do that. </p>
+
+<p> Automatic optimization is activated by giving the previous
+image as a parameter. This function then compares the images and
+only writes the changed pixels to the new frame in animation. The
+<b>disposal</b> parameter for optimized animations must be set to
+<code>gd.DISPOSAL_NONE</code>, also for the first frame. <b>leftOfs</b>
+and <b>topOfs</b> parameters are ignored for optimized frames. To achieve
+good optimization, it is usually best to use a single global color map. To
+allow <code>gd.gifAnimAdd</code> to compress unchanged pixels via the use
+of a transparent color, the image must include a transparent color.</p>
+
+
+
+
 <h4>gdImage:gifAnimAddStr(localCM, leftOfs, topOfs, delay, disposal [, previm])</h4>
+
+<p> This function returns GIF animation frames as Lua
+strings to be concatenated to headers which was created with
+<code>gd.gifAnimBeginStr</code>. With <b>leftOfs</b> and <b>topOfs</b>
+you can place this frame in different offset than (0, 0) inside the image
+screen as defined in <code>gd.gifAnimBegin</code>. Delay between the
+previous frame and this frame is in 1/100s units. Disposal is usually
+<code>gd.DISPOSAL_NONE</code>, meaning that the pixels changed by this
+frame should remain on the display when the next frame begins to render,
+but can also be <code>gd.DISPOSAL_UNKNOWN</code> (not recommended),
+<code>gd.DISPOSAL_RESTORE_BACKGROUND</code> (restores the first allocated
+color of the global palette), or <code>gd.DISPOSAL_RESTORE_PREVIOUS</code>
+(restores the appearance of the affected area before the frame was
+rendered). Only <code>gd.DISPOSAL_NONE</code> is a sensible choice for
+the first frame. If <b>previm</b> is passed, the built-in GIF optimizer
+will always use gd.DISPOSAL_NONE regardless of the <b>disposal</b>
+parameter. </p>
+
+<p> Setting the <b>localCM</b> flag to <b>true</b> adds a local
+palette for this image to the animation. Otherwise the global palette
+is assumed and the user must make sure the palettes match. Use
+<code>gd.paletteCopy</code> to do that. </p>
+
+<p> Automatic optimization is activated by giving the previous
+image as a parameter. This function then compares the images and
+only writes the changed pixels to the new frame in animation. The
+<b>disposal</b> parameter for optimized animations must be set to
+<code>gd.DISPOSAL_NONE</code>, also for the first frame. <b>leftOfs</b>
+and <b>topOfs</b> parameters are ignored for optimized frames. To achieve
+good optimization, it is usually best to use a single global color map. To
+allow <code>gd.gifAnimAdd</code> to compress unchanged pixels via the use
+of a transparent color, the image must include a transparent color.</p>
+
+
+<h4>gdImage:gifAnimEnd(filename)</h4>
+
+<p> Finishes a GIF animation properly by writing a semicolon character
+(;) to the output file. You mus call this function (or write the semicolon
+by yourself) to create valid animations. </p>
+
+
+
 <h4>gdImage:gifAnimEndStr()</h4>
 
+<p> Returns a semicolon character (;) as a Lua string, which must
+be concatened as the last element of an animation created with
+<code>gd.gifAnimBeginStr</code> and <code>gd.gifAnimAddStr</code>. Of
+course, you can concatenate a semicolon by yourself, but this is a more
+explicit way to finish the animation. </p>
 
 
 
