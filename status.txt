@@ -4,7 +4,7 @@ N - Will not be done for some (good) reason
 
 X gdAntiAliased 
 X gdBrushed 
-  gdDashSize 
+N gdDashSize (deprecated)
   gdFont 
   gdFontCacheSetup 
   gdFontCacheShutdown 
@@ -28,7 +28,7 @@ X gdImageColorExact
 X gdImageColorExactAlpha 
 X gdImageColorResolve 
 X gdImageColorResolveAlpha 
-  gdImageColorTransparent 
+X gdImageColorTransparent 
   gdImageCopy 
   gdImageCopyMerge 
   gdImageCopyResampled 
@@ -75,7 +75,7 @@ X gdImageGetInterlaced
 X gdImageGetPixel 
 X gdImageGetTransparent 
 X gdImageGreen 
-  gdImageInterlace 
+X gdImageInterlace 
 X gdImageJpeg 
 X gdImagePtr
 N gdImageJpegCtx 

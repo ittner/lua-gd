@@ -1563,6 +1563,19 @@ static int LgdImageSaveAlpha(lua_State *L)
 }
 
 
+/* gdImageInterlace(gdImagePtr im, int interlace) */
+/* Changed to: im:ImageInterlace(true_or_false) */
+static int LgdImageInterlace(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int i = lua_toboolean(L, 2);
+
+    gdImageInterlace(im, i);
+    return 0;
+}
+
+
+
 
 static const luaL_reg LgdFunctions[] =
 {
@@ -1616,7 +1629,6 @@ static const luaL_reg LgdFunctions[] =
     { "ImageBlue",                  LgdImageBlue },
     { "ImageGreen",                 LgdImageGreen },
     { "ImageAlpha",                 LgdImageAlpha },
-    { "ImageGetInterlaced",         LgdImageGetInterlaced },
     { "ImageGetTransparent",        LgdImageGetTransparent },
     { "ImageColorTransparent",      LgdImageColorTransparent },
     { "ImageColorDeallocate",       LgdImageColorDeallocate },
@@ -1648,6 +1660,8 @@ static const luaL_reg LgdFunctions[] =
     { "ImageSetThickness",              LgdImageSetThickness },
     { "ImageAlphaBlending",             LgdImageAlphaBlending },
     { "ImageSaveAlpha",                 LgdImageSaveAlpha },
+    { "ImageGetInterlaced",             LgdImageGetInterlaced },
+    { "ImageInterlace",                 LgdImageInterlace },
 
     { NULL, NULL }
 };
