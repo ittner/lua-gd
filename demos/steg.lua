@@ -38,9 +38,9 @@ the message with Bob's public key. It's a good solution because no
 one unless Bob will be able to read the message. She can also sign the
 message so Bob will know that the message really comes from her. BUT,
 a potential attacker will know that a ciphered message was sent. If the
-attacker has control over the communication channel, he can block the
+attacker has control over the communication channel, he might block the
 message in some way that Bob will never receive it. If Alice also HIDES
-the ciphertext in a unsuspected piece of information (like a photo of her
+the ciphertext in an unsuspected piece of information (like a photo of her
 cat) the attacker will not detect it and the message will arrive to Bob.
 
 This program will help Alice to hide some arbitrary text in a PNG image by
@@ -48,17 +48,17 @@ replacing the least significant bits of each color channel of some pixels
 with bits from the encrypted message. PNG or other loseless compression
 algorithm are mandatory here: if the image will be compressed by a
 lossy algorithm, the hidden data can be destroyed. The maximum length
-of the message are limited by the image's size (each byte needs 8 color
-channels or 2 pixels and 2 channels from the next pixel). So, image must
-heave at least "ceil((length+1)*8/3)" pixels (the extra byte is the NUL
-marker for the end of the string). So, if Alice's message is "Meet me
+of the message is limited by the image's size (each byte needs 8 color
+channels or 2 pixels and 2 channels from the next pixel). So, the image
+must have at least "ceil((length+1)*8/3)" pixels (the extra byte is the
+NUL marker for the end of the string). So, if Alice's message is "Meet me
 in the secret place at nine o'clock.", she will encrypt and sign it to
 something like "PyJYDpz5LCOSHPiXDvLHmVzxLV8qS7EFvZnoo1Mxk+BlT+7lMjpQKs"
 (imagine Alice's cat walking in you keyboard :). This is the ciphertext
 that will be sent to Bob through the image.
 
 The following table shows what happens to the first eight pixels from
-the image when mixed to the first three bytes from the encrypted massage:
+the image when mixed to the first three bytes from the encrypted message:
 
 
          +-----+---+----------+-----------------+----------+
@@ -95,8 +95,8 @@ the image when mixed to the first three bytes from the encrypted massage:
 When Bob wants to read the message he will extract the least significant
 bit (LSB) from each color channel from some pixels of the image and
 join them to get the original ciphertext. A NULL character (ASCII #0)
-will mark the end of the message within the image, so will know when
-stop. Of course, this program will also do this boring job for Bob.
+will mark the end of the message within the image, so he will know when
+to stop. Of course, this program will also do this boring job for Bob.
 
 
 $Id$
