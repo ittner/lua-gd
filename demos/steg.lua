@@ -291,8 +291,7 @@ function compare(fimg1, fimg2)
   end
   local oim = gd.createTrueColor(w1, h1)
   local x, y = 0, 0
-  local c1, c2, oc
-  local black = oim:colorResolve(0, 0, 0)
+  local c1, c2, oc, f, fc
   while y < h1 do
     c1 = im1:getPixel(x, y)
     c2 = im2:getPixel(x, y)
@@ -302,7 +301,9 @@ function compare(fimg1, fimg2)
       oc = oim:colorResolve(im2:red(c2), im2:green(c2), im2:blue(c2))
       oim:setPixel(x, y, oc)
     else
-      oim:setPixel(x, y, black)
+      f = math.floor((im1:red(c1) + im1:green(c1) + im2:blue(c2))/6.0)
+      fc = oim:colorResolve(f,f,f)
+      oim:setPixel(x, y, fc)
     end
     x = x + 1
     if x == w1 then
@@ -314,12 +315,17 @@ function compare(fimg1, fimg2)
 end
     
 
-
 function usage()
   print("Usage:")
-  print("  lua steg.lua hide input.png output.png   (reads data from stdin)")
-  print("  lua steg.lua show input.png              (writes data to stdout)")
-  print("  lua steg.lua comp img1.png img2.png result.png")
+  print(" lua steg.lua hide <input file> <output file>")
+  print(" lua steg.lua show <input file>")
+  print(" lua steg.lua diff <input file 1> <input file 2> <output file>")
+  print("")
+  print(" hide - Reads a message from stdin and saves into <output file>.")
+  print(" show - Reads a message from <input file> and prints it to stdout.")
+  print(" diff - Compares two images and writes the diff to <output file>.")
+  print("")
+  print(" WARNING: All files used here must be in the PNG format!")
 end
 
 
@@ -364,7 +370,7 @@ if arg[1] == "hide" then
   os.exit(0)
 end
 
-if arg[1] == "comp" then
+if arg[1] == "diff" then
   if not arg[3] and arg[4] then
     usage()
     os.exit(1)
@@ -376,7 +382,6 @@ if arg[1] == "comp" then
   end
   os.exit(0)
 end
-
 
 usage()
 os.exit(1)
