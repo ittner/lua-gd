@@ -12,43 +12,22 @@ if load_gd == nil then
 end
 load_gd()
 
+function printED(res, desc)
+  local str = "    " .. desc .. " "
+  str = str .. string.rep(".", 37 - string.len(str))
+  if res then
+    io.write(str .. " Enabled\n")
+  else
+    io.write(str .. " Disabled\n")
+  end
+end
+
 print("Lua-GD version: " .. gd.VERSION)
 print("Lua-GD features:")
 
-if gd.png then
-  print("    PNG support:           Enabled")
-else
-  print("    PNG support:           Disabled")
-end
-
-if gd.gif then
-  print("    GIF support:           Enabled")
-else
-  print("    GIF support:           Disabled")
-end
-
-if gd.jpeg then
-  print("    JPEG support:          Enabled")
-else
-  print("    JPEG support:          Disabled")
-end
-
-if gd.createFromXpm then
-  print("    XPM/XBM support:       Enabled")
-else
-  print("    XPM/XBM support:       Disabled")
-end
-
-if gd.stringFT then
-  print("    FreeType support:      Enabled")
-else
-  print("    FreeType support:      Disabled")
-end
-
-if gd.useFontConfig then
-  print("    Fontconfig support:    Enabled")
-else
-  print("    Fontconfig support:    Disabled")
-end
-
-
+printED(gd.png, "PNG support")
+printED(gd.gif, "GIF support")
+printED(gd.jpeg, "JPEG support")
+printED(gd.createFromXpm, "XPM/XBM support")
+printED(gd.stringFT, "FreeType support")
+printED(gd.useFontConfig, "Fontconfig support")
