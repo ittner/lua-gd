@@ -42,7 +42,7 @@ X gdImageCreateFromPng
   gdImageCreateFromPngSource 
 X gdImageCreateFromXbm 
 X gdImageCreateFromXpm 
-  gdImageCreatePalette 
+X gdImageCreatePalette 
 X gdImageCreateTrueColor 
   gdImageDashedLine 
 X gdImageDestroy 

@@ -72,6 +72,29 @@ static int LgdImageCreate(lua_State *L)
     return 1;
 }
 
+/* gdImageCreatePalette(int sx, int sy) */
+/* Useless? */
+static int LgdImageCreatePalette(lua_State *L)
+{
+    int sx, sy;
+    gdImagePtr im;
+
+    sx = getint(L, 1);
+    sy = getint(L, 2);
+    im = gdImageCreatePalette(sx, sy);
+    if(im != NULL)
+    {
+        lua_boxpointer(L, im);
+        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
+        lua_setmetatable(L, -2);    /* Done */
+    }
+    else
+        lua_pushnil(L); /* Error */
+    return 1;
+}
+
+
+
 /* gdImageCreateTrueColor(int sx, int sy) */
 static int LgdImageCreateTrueColor(lua_State *L)
 {
@@ -611,6 +634,7 @@ static int LgdImageWBMPPtr(lua_State *L)
 static const luaL_reg LgdFunctions[] =
 {
     { "ImageCreate",            LgdImageCreate },
+    { "ImageCreatePalette",     LgdImageCreatePalette },
     { "ImageCreateTrueColor",   LgdImageCreateTrueColor },
     { "ImageDestroy",           LgdImageDestroy },
     { "ImageCreateFromJpeg",    LgdImageCreateFromJpeg },
