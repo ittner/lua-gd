@@ -265,14 +265,33 @@ palette-based PNG file according to the PNG standard, and is also the
 maximum number of colors in a palette-based gd image. This of course
 does not apply to truecolor images.</p>
 
-<h4>gd.GD2_FMT_RAW</h4>
-<h4>gd.GD2_FMT_COMPRESSED</h4>
 
-<h4>gd.ARC</h4>
-<h4>gd.CHORD</h4>
-<h4>gd.PIE</h4>
-<h4>gd.NO_FILL</h4>
-<h4>gd.EDGED</h4>
+<h4>gd.GD2_FMT_RAW and gd.GD2_FMT_COMPRESSED</h4>
+
+<p> Used in the functions <code>gd.gd2</code> and <code>gd.gd2Str</code>
+to indicate the image file format. This format is not intended for general
+purpose use and should never be used to distribute images. It is a file
+format allowing pseudo-random access to large image files. Its purpose
+is solely to allow very fast loading of parts of images. You should
+use <code>GD2_FMT_RAW</code> for faster loading (and bigger files)
+or GD2_FMT_COMPRESSED for smaller files (and slower loading). </p>
+
+
+<h4>gd.ARC, gd.CHORD, gd.PIE, gd.NO_FILL and gd.EDGED</h4>
+
+<p> These constants are used with the function <code>gd.filledArc</code>
+and can be added together. <code>gd.ARC</code>, <code>gd.CHORD</code>,
+<code>gd.PIE</code> (synonym for <code>gd.CHORD</code>),
+<code>gd.NO_FILL</code> and <code>gd.EDGED</code>. <code>gd.ARC</code>
+and <code>gd.CHORD</code> are mutually exclusive; <code>gd.CHORD</code>
+just connects the starting and ending angles with a straight line, while
+<code>gd.ARC</code> produces a rounded edge. <code>gd.PIE</code> is a
+synonym for <code>gd.ARC</code>. <code>gd.NO_FILL</code> indicates that
+the arc or chord should be outlined, not filled. <code>gd.EDGED</code>,
+used together with <code>gd.NO_FILL</code>, indicates that the beginning
+and ending angles should be connected to the center; this is a good way
+to outline (rather than fill) a 'pie slice'. See <code>gd.filledArc</code>
+for details.</p>
 
 
 <h4>gd.ANTI_ALIASED</h4>
@@ -349,10 +368,10 @@ gd.FONT_GIANT</h4>
 
 <p> These are the standard gd fonts used by <code>gd.string</code> and
 <code>gd.stringUp</code>. Sizes and styles are shown bellow: <br>
-<center>
- <img src="stdfonts.png" width="140" height="110" alt="Standard GD fonts"
-  title="Standard GD fonts">
-</center>
+<img src="stdfonts.png" width="140" height="110" alt="Standard GD fonts"
+  title="Standard GD fonts"> 
+<br> If you need another fonts, you should use TrueType fonts with
+<code>gd.stringFT</code>.
 </p>
 
 
@@ -360,9 +379,25 @@ gd.FONT_GIANT</h4>
 <h3>Image creation and destruction functions</h3>
 
 
-<h4>gd.create(sx, sy)</h4>
-<h4>gd.createPalette(sx, sy)</h4>
-<h4>gd.createTrueColor(sx, sy)</h4>
+<h4>gd.create(x, sy)</h4>
+<h4>gd.createPalette(x, y)</h4>
+
+<p> Used to create palette-based images, with no more than 256
+colors. Invoke <code>gd.create</code> with the x and y dimensions
+of the desired image to return the new image or <b>nil</b>
+on error. <code>gd.createPalette</code> is a synomym for
+<code>gd.create</code>. </p>
+
+
+<h4>gd.createTrueColor(x, y)</h4>
+
+<p> Used to create truecolor images, with an essentially unlimited
+number of colors. Invoke <code>gd.createTrueColor</code> with the x and
+y dimensions of the desired image to return the new image or <b>nil</b>
+on error. Truecolor images are always filled with black at creation
+time. There is no concept of a "background" color index. </p>
+
+
 <h4>gd.createPaletteFromTrueColor(sx, sy)</h4>
 <h4>gd.trueColorToPalette(sx, sy)</h4>
 
@@ -897,7 +932,7 @@ im:png("out.png")
 
 
 
-<h4>gdImage:arc(cx,  cy,  w,  h,  s,  e, color)</h4>
+<h4>gdImage:arc(cx, cy, w, h, s, e, color)</h4>
 
 <p> <code>arc</code> is used to draw a partial ellipse centered at the
 given point, with the specified width and height in pixels. The arc
@@ -909,10 +944,10 @@ must be greater than <b>s</b>. Values greater than 360 are interpreted
 modulo 360. </p>
 
 
-<h4>gdImage:filledArc(cx,  cy,  w,  h,  s,  e, color, style)</h4>
+<h4>gdImage:filledArc(cx, cy, w, h, s, e, color, style)</h4>
 
-<p> <code>arc</code> is used to draw a partial ellipse centered at the
-given point, with the specified width and height in pixels. The arc
+<p> <code>filledArc</code> is used to draw a partial ellipse centered at
+the given point, with the specified width and height in pixels. The arc
 begins at the position in degrees specified by <b>s</b> and ends at the
 position specified by <b>e</b>. The arc is filled in the color specified
 by <b>color</b>. A circle can be drawn by beginning from 0 degrees
@@ -929,8 +964,7 @@ produces a rounded edge. <code>gd.PIE</code> is a synonym for
 or chord should be outlined, not filled. <code>gd.EDGED</code>, used
 together with <code>gd.NO_FILL</code>, indicates that the beginning and
 ending angles should be connected to the center; this is a good way to
-outline (rather than fill) a 'pie slice'.
-</p>
+outline (rather than fill) a 'pie slice'.  </p>
 
 
 <h4>gdImage:filledEllipse(cx, cy, w, h, color)</h4>
