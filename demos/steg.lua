@@ -177,46 +177,46 @@ function mergeMessage(im, msg)
     msg = msg .. string.rep(string.char(0), math.mod(len, 3))
     len = string.len(msg)
   end
-
   if h * w < len * 8 then
     return nil
   end
-
   local x, y = 0, 0
   local oim = gd.createTrueColor(w, h)
   local i = 1
-  local a, p, c, nc, chr
+  local a2, c, nc, chr
+  local a = {}
+  local s, e = 1, 1
   local rgb = {}
-
-  while i <= len do
-    chr = string.byte(string.sub(msg, i, i))
-    a = intToBitArray(chr)
---- está desprezando pixels da imagem aqui
---- enfileirar os pixels para gravar aqui.
-    c = im:getPixel(x, y)
-    for p = 7,0,-1 do
-      if not rgb.r then
-        rgb.r = setLSB(im:red(c), a[p])
-      elseif not rgb.g then
-        rgb.g = setLSB(im:green(c), a[p])
-      else
-        rgb.b = setLSB(im:blue(c), a[p])
-        nc = oim:colorResolve(rgb.r, rgb.g, rgb.b)
-        oim:setPixel(x, y, nc)
-        x = x + 1
-        if x == w then
-          x = 0
-          y = y + 1
-        end
-        rgb.r, rgb.g, rgb.b = nil, nil, nil
-      end
-    end
-    i = i + 1
-  end
 
   while y < h do
     c = im:getPixel(x, y)
-    nc = oim:colorResolve(im:red(c), im:green(c), im:blue(c))
+    rgb.r = im:red(c)
+    rgb.g = im:green(c)
+    rgb.b = im:blue(c)
+    if i < len and  e - s < 3 then
+      a2 = intToBitArray(string.byte(string.sub(msg, i, i)))
+      for cnt = 7,0,-1 do
+        a[e+7-cnt] = a2[cnt]
+      end
+      i = i + 1
+      e = e + 8
+    end
+    if e - s > 0 then
+      rgb.r = setLSB(rgb.r, a[s])
+      a[s] = nil
+      s = s + 1
+    end
+    if e - s > 0 then
+      rgb.g = setLSB(rgb.g, a[s])
+      a[s] = nil
+      s = s + 1
+    end
+    if e - s > 0 then
+      rgb.b = setLSB(rgb.b, a[s])
+      a[s] = nil
+      s = s + 1
+    end
+    nc = oim:colorResolve(rgb.r, rgb.g, rgb.b)
     oim:setPixel(x, y, nc)
     x = x + 1
     if x == w then
