@@ -119,15 +119,16 @@ pre.wrong
    <ul>
      <li><a href="#api.load">Library loading and initialisation</a></li>
      <li><a href="#api.constants">Constants</a></li>
-     <li><a href="#api.create">Image creation and destruction</a></li>
-     <li><a href="#api.input">Image input</a></li>
-     <li><a href="#api.output">Image output</a></li>
-     <li><a href="#api.color">Color manipulation</a></li>
-     <li><a href="#api.draw">Drawing</a></li>
-     <li><a href="#api.text">Text drawing</a></li>
-     <li><a href="#api.font">Font configuration</a></li>
-     <li><a href="#api.copy">Copying and Resizing</a></li>
-     <li><a href="#api.gifanim">GIF Animation</a></li>
+     <li><a href="#api.create">Image creation and destruction functions</a></li>
+     <li><a href="#api.input">Image input functions</a></li>
+     <li><a href="#api.output">Image output functions</a></li>
+     <li><a href="#api.color">Color manipulation functions</a></li>
+     <li><a href="#api.draw">Query functions</a></li>
+     <li><a href="#api.draw">Drawing functions</a></li>
+     <li><a href="#api.text">Text drawing functions</a></li>
+     <li><a href="#api.font">Font configuration functions</a></li>
+     <li><a href="#api.copy">Copying and resizing functions</a></li>
+     <li><a href="#api.gifanim">GIF animation functions</a></li>
    </ul>
  </li>
  <li><a href="#examples">Examples</a>
@@ -301,7 +302,7 @@ gd.FONT_GIANT</h4>
 
 
 <a name="api.create"></a>
-<h3>Image creation and destruction</h3>
+<h3>Image creation and destruction functions</h3>
 
 
 <h4>gd.create(sx, sy)</h4>
@@ -324,7 +325,7 @@ collector that detects when an piece of information becomes useless and
 "automagically" deletes it from memory. </p>
 
 <a name="api.input"></a>
-<h3>Image input</h3>
+<h3>Image input functions</h3>
 
 <h4>gd.createFromJpeg(filename)</h4>
 <h4>gd.createFromGif(filename)</h4>
@@ -380,7 +381,7 @@ local im = gd.createFromPngStr(str)
 
 
 <a name="api.output"></a>
-<h3>Image output</h3>
+<h3>Image output functions</h3>
 
 <h4>gdImage:jpeg(filename, quality)</h4>
 <h4>gdImage:png(filename)</h4>
@@ -469,7 +470,7 @@ io.write(im:jpegStr(75))
 
 
 <a name="api.color"></a>
-<h3>Color manipulation</h3>
+<h3>Color manipulation functions</h3>
 
 
 <h4>gdImage:colorAllocate(red, green, blue)</h4>
@@ -490,20 +491,96 @@ io.write(im:jpegStr(75))
 <h4>gdImage:colorTransparent</h4>
 <h4>gdImage:colorDeallocate</h4>
 
+<a name="api.query"></a>
+<h3>Query functions</h3>
+
+<h4>gdImage:boundsSafe(x, y)</h4>
+<h4>gdImage:getPixel(x, y)</h4>
+<h4>gdImage:sizeX()</h4>
+<h4>gdImage:sizeY()</h4>
+<h4>gdImage:sizeXY()</h4>
+<h4>gdImage:getClip()</h4>
+<h4>gdImage:setClip(x1, y1, x2, y2)</h4>
+
+ x1p, y1p, x2p, y2p = im:getClip() 
+
 <a name="api.draw"></a>
-<h3>Drawing</h3>
+<h3>Drawing functions</h3>
+
+<h4>gdImage:setPixel(x, y, color)</h4>
+<h4>gdImage:line(x1, y1, x2, y2, color)</h4>
+<h4>gdImage:rectangle(x1, y1, x2, y2, color)</h4>
+<h4>gdImage:filledRectangle(x1, y1, x2, y2, color)</h4>
+<h4>gdImage:polygon({ { x1, y1 }, { x2, y2 } ... }, color)</h4>
+<h4>gdImage:filledPolygon({ { x1, y1 }, { x2, y2 } ... }, color)</h4>
+<h4>gdImage:openPolygon({ { x1, y1 }, { x2, y2 } ... }, color)</h4>
+<h4>gdImage:arc(cx,  cy,  w,  h,  s,  e, color)</h4>
+<h4>gdImage:filledArc(cx,  cy,  w,  h,  s,  e, color, style)</h4>
+<h4>gdImage:filledEllipse(cx, cy, w, h, color)</h4>
+<h4>gdImage:fill(x, y, c)</h4>
+<h4>gdImage:fillToBorder( x, y, b, c)</h4>
 
 <a name="api.text"></a>
-<h3>Text drawing</h3>
+<h3>Text drawing functions</h3>
+
+<h4>gdImage:string(font, x, y, string, color);</h4>
+<h4>gdImage:stringUp(font, x, y, string, color);</h4>
+<h4>gdImage:char(font, x, y, char, color);</h4>
+<h4>gdImage:charUp(font, x, y, char, color);</h4>
+<h4>gdImage:stringFT(color, fontname, size, angle, x, y, string)</h4>
+<h4>gdImage:stringFTCircle(cx, cy, radius, textRadius, fillPortion, fontname, points, top, bottom, color)</h4>
+
 
 <a name="api.font"></a>
-<h3>Font configuration</h3>
+<h3>Font configuration functions</h3>
+
+<h4>gd.fontCacheSetup()</h4>
+<h4>gd.fontCacheShutdown()</h4>
+<h4>gd.useFontConfig(bool)</h4>
+
 
 <a name="api.copy"></a>
-<h3>Copying and Resizing</h3>
+<h3>Copying and resizing functions</h3>
+
+<h4>gd.copy(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h)</h4>
+<h4>dstImage:copy(srcImage, dstX, dstY, srcX, srcY, w, h)</h4>
+
+<h4>gd.copyResized(dstImage, srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)</h4>
+<h4>dstImage:copyResized(srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)</h4>
+
+<h4>gd.copyResampled(dstImage, srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)</h4>
+<h4>dstImage:copyResampled(srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)</h4>
+
+<h4>gd.copyRotated(dstImage, srcImage, dstX, dstY, srcX, srcY, srcW, srcH, ang)</h4>
+<h4>dstImage:copyRotated(srcImage, dstX, dstY, srcX, srcY, srcW, srcH, ang)</h4>
+
+<h4>gd.copyMerge(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h, pct)</h4>
+<h4>dstImage:copyMerge(srcImage, dstX, dstY, srcX, srcY, w, h, pct)</h4>
+
+<h4>gd.copyMergeGray(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h, pct)</h4>
+<h4>dstImage:copyMergeGray(srcImage, dstX, dstY, srcX, srcY, w, h, pct)</h4>
+
+
+<h4>gd.paletteCopy(dstImage, srcImage)</h4>
+<h4>dstImage:paletteCopy(srcImage)</h4>
+
+{ "squareToCircle
+{ "sharpen
+
+
 
 <a name="api.gifanim"></a>
-<h3>GIF Animation</h3>
+<h3>GIF animation functions</h3>
+
+<h4>gdImage:gifAnimBegin(filename, globalCM, loops)</h4>
+<h4>gdImage:gifAnimAdd(filename, localCM, leftOfs, topOfs, delay, disposal [, previm])</h4>
+<h4>gdImage:gifAnimEnd(filename)</h4>
+<h4>gdImage:gifAnimBeginStr(globalCM, loops)</h4>
+<h4>gdImage:gifAnimAddStr(localCM, leftOfs, topOfs, delay, disposal [, previm])</h4>
+<h4>gdImage:gifAnimEndStr()</h4>
+
+
+
 
 
 <a name="examples"></a>
