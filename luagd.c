@@ -213,6 +213,32 @@ static int LgdImageCreateFromGif(lua_State *L)
 }
 
 
+/* gdImageCreateFromGifPtr(int size, void *data) */
+static int LgdImageCreateFromGifPtr(lua_State *L)
+{
+    gdImagePtr im;
+    int size = lua_strlen(L, 1);
+    void *str = (void*) getstring(L, 1);
+
+    if(str == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    im = gdImageCreateFromGifPtr(size, str);
+    if(im != NULL)
+    {
+        lua_boxpointer(L, im);
+        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
+        lua_setmetatable(L, -2);    /* Done */
+    }
+    else
+        lua_pushnil(L); /* Error */
+    return 1;
+}
+
+
+
 /* gdImageCreateFromPng(FILE *in) */
 /* Changed to: gdImageCreateFromPng(char *filename) */
 static int LgdImageCreateFromPng(lua_State *L)
@@ -233,6 +259,31 @@ static int LgdImageCreateFromPng(lua_State *L)
     }
     im = gdImageCreateFromPng(fp);
     fclose(fp);
+    if(im != NULL)
+    {
+        lua_boxpointer(L, im);
+        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
+        lua_setmetatable(L, -2);    /* Done */
+    }
+    else
+        lua_pushnil(L); /* Error */
+    return 1;
+}
+
+
+/* gdImageCreateFromPngPtr(int size, void *data) */
+static int LgdImageCreateFromPngPtr(lua_State *L)
+{
+    gdImagePtr im;
+    int size = lua_strlen(L, 1);
+    void *str = (void*) getstring(L, 1);
+
+    if(str == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    im = gdImageCreateFromPngPtr(size, str);
     if(im != NULL)
     {
         lua_boxpointer(L, im);
@@ -276,6 +327,32 @@ static int LgdImageCreateFromGd(lua_State *L)
     return 1;
 }
 
+
+/* gdImageCreateFromGdPtr(int size, void *data) */
+static int LgdImageCreateFromGdPtr(lua_State *L)
+{
+    gdImagePtr im;
+    int size = lua_strlen(L, 1);
+    void *str = (void*) getstring(L, 1);
+
+    if(str == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    im = gdImageCreateFromGdPtr(size, str);
+    if(im != NULL)
+    {
+        lua_boxpointer(L, im);
+        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
+        lua_setmetatable(L, -2);    /* Done */
+    }
+    else
+        lua_pushnil(L); /* Error */
+    return 1;
+}
+
+
 /* gdImageCreateFromGd2(FILE *in) */
 /* Changed to: gdImageCreateFromGd2(char *filename) */
 static int LgdImageCreateFromGd2(lua_State *L)
@@ -308,6 +385,30 @@ static int LgdImageCreateFromGd2(lua_State *L)
 }
 
 
+/* gdImageCreateFromGd2Ptr(int size, void *data) */
+static int LgdImageCreateFromGd2Ptr(lua_State *L)
+{
+    gdImagePtr im;
+    int size = lua_strlen(L, 1);
+    void *str = (void*) getstring(L, 1);
+
+    if(str == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    im = gdImageCreateFromGd2Ptr(size, str);
+    if(im != NULL)
+    {
+        lua_boxpointer(L, im);
+        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
+        lua_setmetatable(L, -2);    /* Done */
+    }
+    else
+        lua_pushnil(L); /* Error */
+    return 1;
+}
+
 
 /* gdImageCreateFromGd2Part(FILE *in, int x, int y, int w, int h) */
 /* Changed to: gdImageCreateFromGd2Part(char *filename, int x, int y,
@@ -334,6 +435,36 @@ static int LgdImageCreateFromGd2Part(lua_State *L)
     }
     im = gdImageCreateFromGd2Part(fp, x, y, w, h);
     fclose(fp);
+    if(im != NULL)
+    {
+        lua_boxpointer(L, im);
+        luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
+        lua_setmetatable(L, -2);    /* Done */
+    }
+    else
+        lua_pushnil(L); /* Error */
+    return 1;
+}
+
+
+/* gdImageCreateFromGd2PartPtr(int size, void *data,
+                int srcX, int srcY, int w, int h)  */
+static int LgdImageCreateFromGd2PartPtr(lua_State *L)
+{
+    gdImagePtr im;
+    int size = lua_strlen(L, 1);
+    void *str = (void*) getstring(L, 1);
+    const int x = getint(L, 2);
+    const int y = getint(L, 3);
+    const int w = getint(L, 4);
+    const int h = getint(L, 5);
+
+    if(str == NULL)
+    {
+        lua_pushnil(L);
+        return 1;  /* Error */
+    }
+    im = gdImageCreateFromGd2PartPtr(size, str, x, y, w, h);
     if(im != NULL)
     {
         lua_boxpointer(L, im);
@@ -734,33 +865,38 @@ static int LgdImageWBMPPtr(lua_State *L)
 
 static const luaL_reg LgdFunctions[] =
 {
-    { "ImageCreate",            LgdImageCreate },
-    { "ImageCreatePalette",     LgdImageCreatePalette },
-    { "ImageCreateTrueColor",   LgdImageCreateTrueColor },
-    { "ImageDestroy",           LgdImageDestroy },
-    { "ImageCreateFromJpeg",    LgdImageCreateFromJpeg },
-    { "ImageCreateFromJpegPtr", LgdImageCreateFromJpegPtr },
-    { "ImageCreateFromGif",     LgdImageCreateFromGif },
-    { "ImageCreateFromPng",     LgdImageCreateFromPng },
-    { "ImageCreateFromGd",      LgdImageCreateFromGd },
-    { "ImageCreateFromGd2",     LgdImageCreateFromGd2 },
-    { "ImageCreateFromGd2Part", LgdImageCreateFromGd2Part },
-    { "ImageCreateFromXbm",     LgdImageCreateFromXbm },
-    { "ImageCreateFromXpm",     LgdImageCreateFromXpm },
-    { "ImageJpeg",              LgdImageJpeg },
-    { "ImageJpegPtr",           LgdImageJpegPtr },
-    { "ImagePng",               LgdImagePng },
-    { "ImagePngPtr",            LgdImagePngPtr },
-    { "ImagePngEx",             LgdImagePngEx },
-    { "ImagePngPtrEx",          LgdImagePngPtrEx },
-    { "ImageGif",               LgdImageGif },
-    { "ImageGifPtr",            LgdImageGifPtr },
-    { "ImageGd",                LgdImageGd },
-    { "ImageGdPtr",             LgdImageGdPtr },
-    { "ImageGd2",               LgdImageGd2 },
-    { "ImageGd2Ptr",            LgdImageGd2Ptr },
-    { "ImageWBMP",              LgdImageWBMP },
-    { "ImageWBMPPtr",           LgdImageWBMPPtr },
+    { "ImageCreate",                LgdImageCreate },
+    { "ImageCreatePalette",         LgdImageCreatePalette },
+    { "ImageCreateTrueColor",       LgdImageCreateTrueColor },
+    { "ImageDestroy",               LgdImageDestroy },
+    { "ImageCreateFromJpeg",        LgdImageCreateFromJpeg },
+    { "ImageCreateFromJpegPtr",     LgdImageCreateFromJpegPtr },
+    { "ImageCreateFromGif",         LgdImageCreateFromGif },
+    { "ImageCreateFromGifPtr",      LgdImageCreateFromGifPtr },
+    { "ImageCreateFromPng",         LgdImageCreateFromPng },
+    { "ImageCreateFromPngPtr",      LgdImageCreateFromPngPtr },
+    { "ImageCreateFromGd",          LgdImageCreateFromGd },
+    { "ImageCreateFromGdPtr",       LgdImageCreateFromGdPtr },
+    { "ImageCreateFromGd2",         LgdImageCreateFromGd2 },
+    { "ImageCreateFromGd2Ptr",      LgdImageCreateFromGd2Ptr },
+    { "ImageCreateFromGd2Part",     LgdImageCreateFromGd2Part },
+    { "ImageCreateFromGd2PartPtr",  LgdImageCreateFromGd2PartPtr },
+    { "ImageCreateFromXbm",         LgdImageCreateFromXbm },
+    { "ImageCreateFromXpm",         LgdImageCreateFromXpm },
+    { "ImageJpeg",                  LgdImageJpeg },
+    { "ImageJpegPtr",               LgdImageJpegPtr },
+    { "ImagePng",                   LgdImagePng },
+    { "ImagePngPtr",                LgdImagePngPtr },
+    { "ImagePngEx",                 LgdImagePngEx },
+    { "ImagePngPtrEx",              LgdImagePngPtrEx },
+    { "ImageGif",                   LgdImageGif },
+    { "ImageGifPtr",                LgdImageGifPtr },
+    { "ImageGd",                    LgdImageGd },
+    { "ImageGdPtr",                 LgdImageGdPtr },
+    { "ImageGd2",                   LgdImageGd2 },
+    { "ImageGd2Ptr",                LgdImageGd2Ptr },
+    { "ImageWBMP",                  LgdImageWBMP },
+    { "ImageWBMPPtr",               LgdImageWBMPPtr },
 
     { NULL, NULL }
 };
