@@ -127,6 +127,7 @@ pre.wrong
      <li><a href="#api.text">Text drawing</a></li>
      <li><a href="#api.font">Font configuration</a></li>
      <li><a href="#api.copy">Copying and Resizing</a></li>
+     <li><a href="#api.gifanim">GIF Animation</a></li>
    </ul>
  </li>
  <li><a href="#examples">Examples</a>
@@ -248,35 +249,34 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 <a name="api.constants"></a>
 <h3>Constants</h3>
 
-<dl>
-<dt>gd.VERSION</dt>
-<dd>A string with library's version information.</dd>
+<h4>gd.VERSION</h4>
+<p>A string with library's version information.</p>
 
-<dt>gd.MAX_COLORS</dt>
-<dd>The constant 256. This is the maximum number of colors in a
+<h4>gd.MAX_COLORS</h4>
+<p>The constant 256. This is the maximum number of colors in a
 palette-based PNG file according to the PNG standard, and is also the
 maximum number of colors in a palette-based gd image. This of course
-does not apply to truecolor images.</dd>
+does not apply to truecolor images.</p>
 
-<dt>gd.GD2_FMT_RAW</dt>
-<dt>gd.GD2_FMT_COMPRESSED</dt>
+<h4>gd.GD2_FMT_RAW</h4>
+<h4>gd.GD2_FMT_COMPRESSED</h4>
 
-<dt>gd.ARC</dt>
-<dt>gd.CHORD</dt>
-<dt>gd.PIE</dt>
-<dt>gd.NO_FILL</dt>
-<dt>gd.EDGED</dt>
+<h4>gd.ARC</h4>
+<h4>gd.CHORD</h4>
+<h4>gd.PIE</h4>
+<h4>gd.NO_FILL</h4>
+<h4>gd.EDGED</h4>
 
-<dt>gd.ANTI_ALIASED</dt>
-<dd>Used in place of a color when invoking a line-drawing function
+<h4>gd.ANTI_ALIASED</h4>
+<p>Used in place of a color when invoking a line-drawing function
 such as gd.line or gd.rectangle. When <code>gd.ANTI_ALIASED</code>
 is used as the color, the foreground color set with
 <a href="#gd.setAntiAliased"><code>gd.setAntiAliased</code></a>
 is used, with antialiasing mechanisms to minimize any
 "jagged" appearance. For more information, see
-<a href="#gd.setAntiAliased"><code>gd.setAntiAliased</code></a>.</dd>
+<a href="#gd.setAntiAliased"><code>gd.setAntiAliased</code></a>.</p>
 
-<dt>gd.BRUSHED</dt>
+<h4>gd.BRUSHED</h4>
 <dd>Used in place of a color when invoking a line-drawing
 function such as <a href="#gd.line"><code>gd.line</code></a>
 or <a href="#gd.rectangle"><code>gd.rectangle</code></a>. When
@@ -287,22 +287,17 @@ the effect of a wide paintbrush). See also <code>gd.STYLED_BRUSHED</code>
 for a way to draw broken lines with a series of distinct copies of an
 image. </dd>
 
-<dt>gd.STYLED</dt>
-<dt>gd.STYLED_BRUSHED</dt>
-<dt>gd.TILED</dt>
-<dt>gd.TRANSPARENT</dt>
+<h4>gd.STYLED</h4>
+<h4>gd.STYLED_BRUSHED</h4>
+<h4>gd.TILED</h4>
+<h4>gd.TRANSPARENT</h4>
 
-<dt>gd.FONT_TINY</dt>
-<dt>gd.FONT_SMALL</dt>
-<dt>gd.FONT_MEDIUM</dt>
-<dt>gd.FONT_LARGE</dt>
-<dt>gd.FONT_GIANT</dt>
+<h4>gd.FONT_TINY, gd.FONT_SMALL, gd.FONT_MEDIUM, gd.FONT_LARGE and
+gd.FONT_GIANT</h4>
 
-<dd> These are standard font sizes used by 
+<p> These are standard font sizes used by 
 <a href="#gd.string"><code>gd.string</code></a> and 
-<a href="#gd.stringUp"><code>gd.stringUp</code></a>. </dd>
-</dl>
-
+<a href="#gd.stringUp"><code>gd.stringUp</code></a>. </p>
 
 
 <a name="api.create"></a>
@@ -507,6 +502,8 @@ io.write(im:jpegStr(75))
 <a name="api.copy"></a>
 <h3>Copying and Resizing</h3>
 
+<a name="api.gifanim"></a>
+<h3>GIF Animation</h3>
 
 
 <a name="examples"></a>
