@@ -73,7 +73,7 @@ N gdImagePngCtxEx
 X gdImagePngEx 
 X gdImagePngPtr 
 X gdImagePngPtrEx 
-  gdImagePngToSink 
+N gdImagePngToSink
   gdImagePolygon 
   gdImagePtr 
   gdImageRectangle 
@@ -97,9 +97,9 @@ X gdImagePngPtrEx
   gdImageStringUp 
   gdImageStringUp16 
   gdImageToPalette 
-  gdImageWBMP 
-  gdImageWBMP 
-  gdImageWBMPCtx 
+X gdImageWBMP 
+X gdImageWBMPtr
+N gdImageWBMPCtx 
   gdMaxColors 
   gdPoint 
   gdStyled 

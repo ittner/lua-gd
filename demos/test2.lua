@@ -15,4 +15,10 @@ gd.ImagePng(im, "./blerg.png")
 gd.ImageDestroy(im)
 
 
+im = gd.ImageCreateFromGd2("./blerg.gd2")
+gd.ImageWBMP(im, 0, "./blerg.wbmp")
+gd.ImageDestroy(im)
+
+
+
 

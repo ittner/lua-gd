@@ -556,6 +556,54 @@ static int LgdImageGd2Ptr(lua_State *L)
 }
 
 
+/* void gdImageWBMP(gdImagePtr im, int fg, FILE *out) */
+/* Changed to: gdImageWBMP(gdImagePtr im, int fg, char *fname) */
+static int LgdImageWBMP(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int fg = getint(L, 2);
+    const char *fname = getstring(L, 3);
+    FILE *fp;
+
+    if(fname == NULL)
+    {
+        lua_pushnil(L);
+        return 1;
+    }
+    if((fp = fopen(fname, "wb")) == NULL)
+    {
+        lua_pushnil(L);
+        return 1;
+    }
+    gdImageWBMP(im, fg, fp);
+    fclose(fp);
+    lua_pushnumber(L, 1);
+    return 1;
+}
+
+
+/* void* gdImageWBMPPtr(gdImagePtr im, int *size) */
+static int LgdImageWBMPPtr(lua_State *L)
+{
+    gdImagePtr im = getImagePtr(L, 1);
+    int fg = getint(L, 2);
+    char *str;
+    int size;
+
+    str = gdImageWBMPPtr(im, &size, fg);
+    if(str != NULL)
+    {
+        lua_pushlstring(L, str, size);
+        gdFree(str);
+    }
+    else
+        lua_pushnil(L);  /* Error */
+    return 1;
+}
+
+
+
+
 
 
 
@@ -582,6 +630,8 @@ static const luaL_reg LgdFunctions[] =
     { "ImageGdPtr",             LgdImageGdPtr },
     { "ImageGd2",               LgdImageGd2 },
     { "ImageGd2Ptr",            LgdImageGd2Ptr },
+    { "ImageWBMP",              LgdImageWBMP },
+    { "ImageWBMPPtr",           LgdImageWBMPPtr },
 
     { NULL, NULL }
 };
