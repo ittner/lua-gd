@@ -44,9 +44,10 @@ function createClock(size, hours, minutes)
     blue)
 
   im:setThickness(math.max(1, size/25))
+  rang = math.rad(30*hours + minutes/2)
   im:line(size/2, size/2, 
-    size/2 + 0.25 * size * math.sin(math.rad(30*hours)),
-    size - (size/2 + 0.25 * size * math.cos(math.rad(30*hours))),
+    size/2 + 0.25 * size * math.sin(rang),
+    size - (size/2 + 0.25 * size * math.cos(rang)),
     blue)
 
   im:setThickness(1)
