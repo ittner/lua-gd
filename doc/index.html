@@ -403,12 +403,12 @@ gd. </p>
 <p> All the functions and constants are stored on a single global
 table called <code>gd</code>. Images are objects and they can use the
 common colon notation for it's methods, but you can also use a C-style
-syntax. So, the following two lines are equivalent:
+syntax. So, the following two lines are equivalent: </p>
+
 <pre class="example">
 local gray1 = im:colorResolve(128, 128, 128)        -- Using the colon notation
 local gray2 = gd.colorResolve(im, 128, 128, 128)    -- Using a C-style notation
 </pre>
-</p>
 
 <p> Constants, functions and methods are described bellow. </p>
 
