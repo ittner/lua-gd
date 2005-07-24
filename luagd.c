@@ -181,6 +181,7 @@ static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
             /* Future charsets here */
                 break;
             default:
+                free(ex);
                 luaL_error(L, "Invalid charset");
         }
     }
