@@ -2098,13 +2098,17 @@ static int LgdImageStringFTEx(lua_State *L)
         if(ex->flags & gdFTEX_XSHOW)
         {
             lua_pushstring(L, ex->xshow);
+            gdFree(ex->xshow);
             ret++;
         }
         if(ex->flags & gdFTEX_RETURNFONTPATHNAME)
         {
             lua_pushstring(L, ex->fontpath);
+            gdFree(ex->fontpath);
             ret++;
         }
+
+        free(ex);
         return ret;
     }
 
