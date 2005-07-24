@@ -128,6 +128,113 @@ static gdFontPtr getStdFont(lua_State *L, int i)
 }
 
 
+
+
+/* 
+ * Reads a Lua table and returns a pointer to a "gdFTStringExtra" struct. The
+ * table should have the following fields:
+ *
+ * {
+ *     linespacing = 1.0,                   -- linespacing for \n
+ *     charmap = gd.FTEX_Unicode,           -- default charset
+ *     hdpi = 96,                           -- horizontal resolution
+ *     vdpi = 96,                           -- vertical resolution
+ *     disable_kerning = true,              -- disable kerning?
+ *     xshow = true,                        -- return char positions?
+ *     return_font_path_name = true,        -- return font path names?
+ *     fontconfig = true                    -- Use fontconfig?
+ * }
+ * 
+ */
+#ifdef GD_FREETYPE
+static gdFTStringExtra *getFTStringExtraPtr(lua_State *L)
+{
+    gdFTStringExtra *ex = (gdFTStringExtra*) malloc(sizeof(gdFTStringExtra));
+
+    if(ex == NULL)
+        luaL_error(L, "Memory allocation failure");
+
+    ex->flags = 0;
+    luaL_checktype(L, -1, LUA_TTABLE);
+
+    lua_pushstring(L, "linespacing");
+    lua_gettable(L, -2);
+    if(!lua_isnil(L, -1))
+    {
+        ex->flags |= gdFTEX_LINESPACE;
+        ex->linespacing = (double) lua_tonumber(L, -1);
+    }
+    lua_pop(L, -1);
+
+    lua_pushstring(L, "charmap");
+    lua_gettable(L, -2);
+    if(!lua_isnil(L, -1))
+    {
+        ex->flags |= gdFTEX_CHARMAP;;
+        ex->charmap = (int) lua_tonumber(L, -1);
+        switch(ex->charmap)
+        {
+            case gdFTEX_Unicode:
+            case gdFTEX_Shift_JIS:
+            case gdFTEX_Big5:
+            /* Future charsets here */
+                break;
+            default:
+                luaL_error(L, "Invalid charset");
+        }
+    }
+    lua_pop(L, -1);
+
+    ex->hdpi = 96;
+    ex->vdpi = 96;
+
+    lua_pushstring(L, "hdpi");
+    lua_gettable(L, -2);
+    if(!lua_isnil(L, -1))
+    {
+        ex->flags |= gdFTEX_RESOLUTION;
+        ex->hdpi = (double) lua_tonumber(L, -1);
+    }
+    lua_pop(L, -1);
+
+    lua_pushstring(L, "vdpi");
+    lua_gettable(L, -2);
+    if(!lua_isnil(L, -1))
+    {
+        ex->flags |= gdFTEX_RESOLUTION;
+        ex->vdpi = (double) lua_tonumber(L, -1);
+    }
+    lua_pop(L, -1);
+
+    lua_pushstring(L, "disable_kerning");
+    lua_gettable(L, -2);
+    if(lua_toboolean(L, -1))
+        ex->flags |= gdFTEX_DISABLE_KERNING;
+    lua_pop(L, -1);
+
+    lua_pushstring(L, "xshow");
+    lua_gettable(L, -2);
+    if(lua_toboolean(L, -1))
+        ex->flags |= gdFTEX_XSHOW;
+    lua_pop(L, -1);
+
+    lua_pushstring(L, "return_font_path_name");
+    lua_gettable(L, -2);
+    if(lua_toboolean(L, -1))
+        ex->flags |= gdFTEX_RETURNFONTPATHNAME;
+    lua_pop(L, -1);
+
+    lua_pushstring(L, "fontconfig");
+    lua_gettable(L, -2);
+    if(lua_toboolean(L, -1))
+        ex->flags |= gdFTEX_FONTCONFIG;
+    lua_pop(L, -1);
+
+    return ex;
+}
+#endif 
+
+
 /* gdImageCreate(int sx, int sy) */
 static int LgdImageCreate(lua_State *L)
 {
