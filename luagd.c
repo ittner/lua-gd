@@ -154,9 +154,10 @@ static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
     if(ex == NULL)
         luaL_error(L, "Memory allocation failure");
 
-    lua_pushvalue(L, i);
-    luaL_checktype(L, -1, LUA_TTABLE);
     ex->flags = 0;
+
+    luaL_checktype(L, i, LUA_TTABLE);
+    lua_pushvalue(L, i);
 
     lua_pushstring(L, "linespacing");
     lua_gettable(L, -2);
@@ -165,7 +166,7 @@ static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
         ex->flags |= gdFTEX_LINESPACE;
         ex->linespacing = (double) lua_tonumber(L, -1);
     }
-    lua_pop(L, -1);
+    lua_pop(L, 1);
 
     lua_pushstring(L, "charmap");
     lua_gettable(L, -2);
@@ -184,7 +185,7 @@ static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
                 luaL_error(L, "Invalid charset");
         }
     }
-    lua_pop(L, -1);
+    lua_pop(L, 1);
 
     ex->hdpi = 96;
     ex->vdpi = 96;
@@ -196,7 +197,7 @@ static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
         ex->flags |= gdFTEX_RESOLUTION;
         ex->hdpi = (double) lua_tonumber(L, -1);
     }
-    lua_pop(L, -1);
+    lua_pop(L, 1);
 
     lua_pushstring(L, "vdpi");
     lua_gettable(L, -2);
@@ -205,35 +206,34 @@ static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
         ex->flags |= gdFTEX_RESOLUTION;
         ex->vdpi = (double) lua_tonumber(L, -1);
     }
-    lua_pop(L, -1);
+    lua_pop(L, 1);
 
     lua_pushstring(L, "disable_kerning");
     lua_gettable(L, -2);
     if(lua_toboolean(L, -1))
         ex->flags |= gdFTEX_DISABLE_KERNING;
-    lua_pop(L, -1);
+    lua_pop(L, 1);
 
+    lua_pushvalue(L, i);
     lua_pushstring(L, "xshow");
     lua_gettable(L, -2);
     if(lua_toboolean(L, -1))
         ex->flags |= gdFTEX_XSHOW;
-    lua_pop(L, -1);
+    lua_pop(L, 1);
 
     lua_pushstring(L, "return_font_path_name");
     lua_gettable(L, -2);
     if(lua_toboolean(L, -1))
         ex->flags |= gdFTEX_RETURNFONTPATHNAME;
-    lua_pop(L, -1);
+    lua_pop(L, 1);
 
     lua_pushstring(L, "fontconfig");
     lua_gettable(L, -2);
     if(lua_toboolean(L, -1))
         ex->flags |= gdFTEX_FONTCONFIG;
-    lua_pop(L, -1);
+    lua_pop(L, 1);
 
-    lua_pop(L, -1); /* Drops the table */
-
-    puts("done");
+    lua_pop(L, 1); /* Remove the table */
     return ex;
 }
 #endif 
