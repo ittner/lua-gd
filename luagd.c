@@ -135,27 +135,28 @@ static gdFontPtr getStdFont(lua_State *L, int i)
  * table should have the following fields:
  *
  * {
- *     linespacing = 1.0,                   -- linespacing for \n
+ *     linespacing = 1.0,                   -- linespacing for '\n'
  *     charmap = gd.FTEX_Unicode,           -- default charset
  *     hdpi = 96,                           -- horizontal resolution
  *     vdpi = 96,                           -- vertical resolution
  *     disable_kerning = true,              -- disable kerning?
  *     xshow = true,                        -- return char positions?
  *     return_font_path_name = true,        -- return font path names?
- *     fontconfig = true                    -- Use fontconfig?
+ *     fontconfig = true                    -- use fontconfig?
  * }
  * 
  */
 #ifdef GD_FREETYPE
-static gdFTStringExtra *getFTStringExtraPtr(lua_State *L)
+static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
 {
     gdFTStringExtra *ex = (gdFTStringExtra*) malloc(sizeof(gdFTStringExtra));
 
     if(ex == NULL)
         luaL_error(L, "Memory allocation failure");
 
-    ex->flags = 0;
+    lua_pushvalue(L, i);
     luaL_checktype(L, -1, LUA_TTABLE);
+    ex->flags = 0;
 
     lua_pushstring(L, "linespacing");
     lua_gettable(L, -2);
@@ -230,6 +231,9 @@ static gdFTStringExtra *getFTStringExtraPtr(lua_State *L)
         ex->flags |= gdFTEX_FONTCONFIG;
     lua_pop(L, -1);
 
+    lua_pop(L, -1); /* Drops the table */
+
+    puts("done");
     return ex;
 }
 #endif 
@@ -2050,6 +2054,68 @@ static int LgdImageStringFT(lua_State *L)
 }
 
 
+/* char *gdImageStringFT(gdImagePtr im, int *brect, int fg, char *fontname,
+        double ptsize, double angle, int x, int y, char *string)
+
+ Changed To:
+    llX, llY, lrX, lrY, urX, urY, ulX, ulY [, xshow] [, fontpath] =
+        im:stringFTEx(fg, fontname, ptsize, angle, x, y, string, { ... })
+
+  Or:
+    llX, llY, lrX, lrY, urX, urY, ulX, ulY [, xshow] [, fontpath] =
+        gd.stringFTEx(nil, fg, fontname, ptsize, angle, x, y, string, { ... })
+
+*/
+
+static int LgdImageStringFTEx(lua_State *L)
+{
+    gdImagePtr im;
+    int fg = getint(L, 2);
+    char *font = (char*) getstring(L, 3);
+    double size = (double) lua_tonumber(L, 4);
+    double ang = (double) lua_tonumber(L, 5);
+    int x = getint(L, 6);
+    int y = getint(L, 7);
+    char *str = (char*) getstring(L, 8);
+    gdFTStringExtra *ex = getFTStringExtraPtr(L, 9);
+    int brect[8];
+    int ret = 8;
+
+    if(lua_isnil(L, 1))
+        im = NULL;
+    else
+        im = getImagePtr(L, 1);
+
+    if(gdImageStringFTEx(im, brect, fg, font, size, ang, x, y, str, ex) == NULL)
+    {
+        lua_pushnumber(L, brect[0]);
+        lua_pushnumber(L, brect[1]);
+        lua_pushnumber(L, brect[2]);
+        lua_pushnumber(L, brect[3]);
+        lua_pushnumber(L, brect[4]);
+        lua_pushnumber(L, brect[5]);
+        lua_pushnumber(L, brect[6]);
+        lua_pushnumber(L, brect[7]);
+        ret = 8;
+        if(ex->flags & gdFTEX_XSHOW)
+        {
+            lua_pushstring(L, ex->xshow);
+            ret++;
+        }
+        if(ex->flags & gdFTEX_RETURNFONTPATHNAME)
+        {
+            lua_pushstring(L, ex->fontpath);
+            ret++;
+        }
+        return ret;
+    }
+
+    lua_pushnil(L);
+    return 1;
+}
+
+
+
 /* char *gdImageStringFTCircle(gdImagePtr im, int cx, int cy, double radius,
                 double textRadius, double fillPortion, char *font,
                 double points, char *top, char *bottom, int fgcolor)
@@ -2369,6 +2435,7 @@ static const luaL_reg LgdFunctions[] =
 
 #ifdef GD_FREETYPE
     { "stringFT",               LgdImageStringFT },
+    { "stringFTEx",             LgdImageStringFTEx },
     { "stringFTCircle",         LgdImageStringFTCircle },
     { "fontCacheSetup",         LgdFontCacheSetup },
     { "fontCacheShutdown",      LgdFontCacheShutdown },
@@ -2419,6 +2486,13 @@ int luaopen_gd(lua_State *L)
     tblseticons(L, "STYLED_BRUSHED", gdStyledBrushed);
     tblseticons(L, "TILED", gdTiled);
     tblseticons(L, "TRANSPARENT", gdTransparent);
+
+#ifdef GD_FREETYPE
+    /* For gd.StringFTEx */
+    tblseticons(L, "FTEX_Unicode", gdFTEX_Unicode);
+    tblseticons(L, "FTEX_Shift_JIS", gdFTEX_Shift_JIS);
+    tblseticons(L, "FTEX_Big5", gdFTEX_Big5);
+#endif
 
 #ifdef GD_GIF
     /* For gif animation */
