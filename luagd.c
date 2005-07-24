@@ -2284,7 +2284,6 @@ static const luaL_reg LgdFunctions[] =
 };
 
 
-/* Thanks, LHF! */
 static const luaL_reg LgdMetatable[] =
 {
     { "__gc", LgdImageDestroy },
