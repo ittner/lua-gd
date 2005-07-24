@@ -157,10 +157,9 @@ static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
     ex->flags = 0;
 
     luaL_checktype(L, i, LUA_TTABLE);
-    lua_pushvalue(L, i);
 
     lua_pushstring(L, "linespacing");
-    lua_gettable(L, -2);
+    lua_gettable(L, i);
     if(!lua_isnil(L, -1))
     {
         ex->flags |= gdFTEX_LINESPACE;
@@ -169,7 +168,7 @@ static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
     lua_pop(L, 1);
 
     lua_pushstring(L, "charmap");
-    lua_gettable(L, -2);
+    lua_gettable(L, i);
     if(!lua_isnil(L, -1))
     {
         ex->flags |= gdFTEX_CHARMAP;;
@@ -191,7 +190,7 @@ static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
     ex->vdpi = 96;
 
     lua_pushstring(L, "hdpi");
-    lua_gettable(L, -2);
+    lua_gettable(L, i);
     if(!lua_isnil(L, -1))
     {
         ex->flags |= gdFTEX_RESOLUTION;
@@ -200,7 +199,7 @@ static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
     lua_pop(L, 1);
 
     lua_pushstring(L, "vdpi");
-    lua_gettable(L, -2);
+    lua_gettable(L, i);
     if(!lua_isnil(L, -1))
     {
         ex->flags |= gdFTEX_RESOLUTION;
@@ -209,31 +208,30 @@ static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
     lua_pop(L, 1);
 
     lua_pushstring(L, "disable_kerning");
-    lua_gettable(L, -2);
+    lua_gettable(L, i);
     if(lua_toboolean(L, -1))
         ex->flags |= gdFTEX_DISABLE_KERNING;
     lua_pop(L, 1);
 
     lua_pushvalue(L, i);
     lua_pushstring(L, "xshow");
-    lua_gettable(L, -2);
+    lua_gettable(L, i);
     if(lua_toboolean(L, -1))
         ex->flags |= gdFTEX_XSHOW;
     lua_pop(L, 1);
 
     lua_pushstring(L, "return_font_path_name");
-    lua_gettable(L, -2);
+    lua_gettable(L, i);
     if(lua_toboolean(L, -1))
         ex->flags |= gdFTEX_RETURNFONTPATHNAME;
     lua_pop(L, 1);
 
     lua_pushstring(L, "fontconfig");
-    lua_gettable(L, -2);
+    lua_gettable(L, i);
     if(lua_toboolean(L, -1))
         ex->flags |= gdFTEX_FONTCONFIG;
     lua_pop(L, 1);
 
-    lua_pop(L, 1); /* Remove the table */
     return ex;
 }
 #endif 
