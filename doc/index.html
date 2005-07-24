@@ -70,6 +70,21 @@ TR, TD {
     cell-spacing: 1px;
 }
 
+TR.h, TD.h {
+    text-align: center;
+    font-weight: bold;
+}
+
+TR.i, TD.i {
+    text-align: center;
+}
+
+TR.n, TD.n {
+    font-size: 12px;
+    font-family: "Courier New", courier, monospace;
+}
+
+
 pre
 {
     font-family: "Courier New", courier, monospace;
@@ -1498,17 +1513,53 @@ im:polygon({ {llx, lly}, {lrx, lry}, {urx, ury}, {ulx, uly} }, blue)
 to the text regardless of the angle, so "upper left" means in the top
 left-hand corner seeing the text horizontally. </p>
 
-<table>
- <tr> <td>#</td> <td>Name</td> <td>Meaning</td> </tr>
- <tr> <td>1</td> <td>llx</td> <td>lower left corner, X position</td> </tr>
- <tr> <td>2</td> <td>lly</td> <td>lower left corner, Y position</td> </tr>
- <tr> <td>3</td> <td>lrx</td> <td>lower right corner, X position</td> </tr>
- <tr> <td>4</td> <td>lry</td> <td>lower right corner, Y position</td> </tr>
- <tr> <td>5</td> <td>urx</td> <td>upper right corner, X position</td> </tr>
- <tr> <td>6</td> <td>ury</td> <td>upper right corner, Y position</td> </tr>
- <tr> <td>7</td> <td>ulx</td> <td>upper left corner, X position</td> </tr>
- <tr> <td>8</td> <td>uly</td> <td>upper left corner, Y position</td> </tr>
-</table>
+<table> 
+ <tr> 
+  <td class="h"> # </td> 
+  <td class="h"> Name </td> 
+  <td class="h"> Meaning </td> 
+ </tr> 
+ <tr> 
+  <td> 1 </td> 
+  <td class="n"> llx </td> 
+  <td> lower left corner, X position </td> 
+ </tr> 
+ <tr> 
+  <td> 2 </td> 
+  <td class="n"> lly </td> 
+  <td> lower left corner, Y position </td> 
+ </tr> 
+ <tr> 
+  <td> 3 </td> 
+  <td class="n"> lrx </td> 
+  <td> lower right corner, X position </td> 
+ </tr> 
+ <tr> 
+  <td> 4 </td> 
+  <td class="n"> lry </td> 
+  <td> lower right corner, Y position </td> 
+ </tr> 
+ <tr> 
+  <td> 5 </td> 
+  <td class="n"> urx </td> 
+  <td> upper right corner, X position </td> 
+ </tr> 
+ <tr> 
+  <td> 6 </td> 
+  <td class="n"> ury </td> 
+  <td> upper right corner, Y position </td> 
+ </tr> 
+ <tr> 
+  <td> 7 </td> 
+  <td class="n"> ulx </td> 
+  <td> upper left corner, X position </td> 
+ </tr> 
+ <tr> 
+  <td> 8 </td> 
+  <td class="n"> uly </td> 
+  <td> upper left corner, Y position </td> 
+ </tr> 
+</table> 
 
 <p> Also, there is a way to get these values before drawing on the image
 passing <b>nil</b> as the first argument of <code>gd.stringFT</code> (note
@@ -1520,6 +1571,96 @@ calculation. </p>
 <pre class="example">
 llx, lly, lrx, lry, urx, ury, ulx, uly = gd.stringFT(nil, white, "Vera.ttf", 20, math.rad(45), 20, 90, "Lua-GD")
 </pre>
+
+
+
+<h4>gdImage:stringFTEx(color, fontname, ptsize, angle, x, y, string, extra)</h4>
+
+<p> This function is similar to <code>stringFT</code>, but accepts an <b>extra</b> argument, wich allo
+
+
+<table>
+ <tr>
+  <td class="h"> Field name </td>
+  <td class="h"> Type </td>
+  <td class="h"> Default </td>
+  <td class="h"> Usage </td>
+ </tr>
+
+ <tr>
+  <td class="n"> linespacing </td>
+  <td class="i"> float </td>
+  <td class="i"> 1.05 </td>
+  <td> Allows you to set the space between multiples lines, when rendering
+    multiple lines. </td>
+ </tr>
+
+ <tr>
+  <td class="n"> charmap </td>
+  <td class="i"> "enumeration" </td>
+  <td class="i"> gd.FTex_Unicode </td>
+  <td> Allows you to set a specific character encoding schema, which can
+    be any of <code>gd.FTEX_Unicode</code>, <code>gd.FTEX_Shift_JIS</code>,
+    or <code>gd.FTEX_Big5</code>. If you do not specify a preference,
+    Unicode will be tried first. If the preferred character mapping is
+    not found in the font, other character mappings are attempted.
+ </td>
+ </tr>
+
+ <tr>
+  <td class="n"> hdpi </td>
+  <td class="i"> integer </td>
+  <td class="i"> 96 </td>
+  <td> Set the horizontal resolution passed to the FreeType engine. </td>
+ </tr>
+
+ <tr>
+  <td class="n"> vdpi </td>
+  <td class="i"> integer </td>
+  <td class="i"> 96 </td>
+  <td> Set the vertical resolution passed to the FreeType engine. </td>
+ </tr>
+
+ <tr>
+  <td class="n"> disable_kerning </td>
+  <td class="i"> boolean </td>
+  <td class="i"> false </td>
+  <td> If fontconfig is available, GD will normally attempt to apply
+    kerning tables to adjust the relative positions of consecutive
+    characters more ideally for that pair of characters. This field
+    allows you to turn this feature off. </td>
+ </tr>
+
+ <tr>
+  <td class="n"> xshow </td>
+  <td class="i"> boolean</td>
+  <td class="i"> false </td>
+  <td> Request GD to return a vector of individual character position
+    advances, occasionally useful in applications that must know exactly
+    where each character begins. This is returned as a string with values
+    separated by spaces.  </td>
+ </tr>
+
+ <tr>
+  <td class="n"> return_font_path_name </td>
+  <td class="i"> boolean </td>
+  <td class="i"> false </td>
+  <td> Returns the path to the font used to render the text. This is
+    useful because GD are capable of selecting a font automatically
+    based on a fontconfig font pattern when fontconfig is available. </td>
+ </tr>
+
+ <tr>
+  <td class="n"> fontconfig </td>
+  <td class="i"> boolean </td>
+  <td class="i"> true </td>
+  <td> GD can use fontconfig to resolve font names, including fontconfig
+    patterns if this flag is set. As a convenience, this behavior can
+    also be made the default by calling <code>gd.useFontConfig</code>
+    with a <b>true</b> value. </td>
+ </tr>
+
+</table>
 
 
 
