@@ -2512,19 +2512,12 @@ int luaopen_gd(lua_State *L)
     tblseticons(L, "FONT_LARGE", MY_GD_FONT_LARGE);
     tblseticons(L, "FONT_GIANT", MY_GD_FONT_GIANT);
 
-        /* Stack: Lib */
     luaL_newmetatable(L, GD_IMAGE_PTR_TYPENAME);
-        /* Stack: Lib MT */
     lua_pushliteral(L, "__index");
-        /* Stack: Lib MT "__index" */
     lua_pushvalue(L, -3);
-        /* Stack: Lib MT "__index" Lib */
     lua_settable(L, -3);
-        /* Stack: Lib MT  */
     luaL_openlib(L, NULL, LgdMetatable, 0);
-        /* Stack: Lib MT "__index" */
     lua_pop(L, 1);
-        /* Stack: Lib */
 
     return 0;
 }
