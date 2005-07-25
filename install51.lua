@@ -4,7 +4,8 @@
 --
 -- This file is distributed under the same license that Lua 5.1 itself.
 --
-
+-- $Id$
+--
 
 -- Splits a package.cpath into a table.
 function splitpath(str)
