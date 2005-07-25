@@ -1,5 +1,5 @@
 #!/usr/bin/env lua
--- Easy way to put a library on the path. For Lua 5.1 only.
+-- Easy way to put a library on the path. For Lua >= 5.1 only.
 -- (c) 2005 Alexandre Erwin Ittner < aittner{at}netuno.com.br >
 --
 -- This file is distributed under the same license that Lua 5.1 itself.
@@ -43,7 +43,7 @@ function findplace(tbl)
 end
 
 
--- It's REALY stupid, but also it's REALY cross-platform
+-- It's REALLY stupid, but also it's REALLY cross-platform.
 function dumbcopy(from, to)
   local bufsize = 512*1024  -- 512K at once
   local ifp = io.open(from, "rb")
@@ -85,7 +85,8 @@ function installfile(fname, name)
   copy(fname, dest)
 end
 
-
+assert(package, "No package module found. Are you REALLY using Lua >= 5.1?")
 assert(arg[1] and arg[2], "No arguments provided")
+
 installfile(arg[1], arg[2])
 os.exit(0)
