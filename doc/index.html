@@ -133,7 +133,7 @@ pre.wrong
    </ul>
   </li>
  <li><a href="#download">Download and installation</a></li>
- <li><a href="#api.load">Library loading and initialisation</a></li>
+ <li><a href="#api.load">Library loading and initialization</a></li>
  <li><a href="#api">Lua-GD API</a>
    <ul>
      <li><a href="#api.constants">Constants</a></li>
@@ -341,7 +341,7 @@ by yourself. </p>
 
 
 <a name="load"></a>
-<h2>Library loading and initialisation</h2>
+<h2>Library loading and initialization</h2>
 
 <p> Lua-GD is a shared library that exports a single function called
 <code>luaopen_gd</code> that must be called by the Lua interpreter.
@@ -558,6 +558,14 @@ gd.FONT_GIANT </h4>
 <br> If you need another fonts, you should use TrueType fonts with
 <code>gd.stringFT</code>.
 </p>
+
+<h4> gd.FTEx_Unicode <br>
+gd.FTEx_Shift_JIS <br>
+gd.FTEx_Big5 </h4>
+
+<p> These are the character maps used by<code>gd.stringFTEx</code>. Explicit
+specification of the desired character mapping is useful when a font offers
+more than one of Unicode, Shift_JIS, and Big5. </p>
 
 
 <a name="api.create"></a>
@@ -1491,7 +1499,7 @@ difficulties.</p>
 <p> The string may be arbitrarily scaled (ptsize) and rotated (angle in
 radians). The direction of rotation is counter-clockwise, with 0 radians
 (0 degrees) at 3 o'clock and PI/2 radians (90 degrees) at 12 o'clock
-(you can use <code>math.rad</code> to convert degrees to radians).
+(you should use <code>math.rad</code> to convert degrees to radians).
 The string is rendered in the color indicated by the color index. Use
 the negative of the desired color index to disable anti-aliasing.  </p>
 
@@ -1576,8 +1584,10 @@ llx, lly, lrx, lry, urx, ury, ulx, uly = gd.stringFT(nil, white, "Vera.ttf", 20,
 
 <h4>gdImage:stringFTEx(color, fontname, ptsize, angle, x, y, string, extra)</h4>
 
-<p> This function is similar to <code>stringFT</code>, but accepts an <b>extra</b> argument, wich allo
-
+<p> This is an extended version of <code>stringFT</code> that accepts
+a table as an <b>extra</b> argument, which allows you to pass some
+parameters to the rendering engine. The fields currently available are
+show bellow: </p>
 
 <table>
  <tr>
@@ -1591,34 +1601,36 @@ llx, lly, lrx, lry, urx, ury, ulx, uly = gd.stringFT(nil, white, "Vera.ttf", 20,
   <td class="n"> linespacing </td>
   <td class="i"> float </td>
   <td class="i"> 1.05 </td>
-  <td> Allows you to set the space between multiples lines, when rendering
-    multiple lines. </td>
+  <td> Allows you to set the space between lines when rendering multiple
+    lines. A line spacing of 1.0 is the minimum to guarantee that lines
+    of text do not collide.</td>
  </tr>
 
  <tr>
   <td class="n"> charmap </td>
-  <td class="i"> "enumeration" </td>
+  <td class="i"> indexed </td>
   <td class="i"> gd.FTex_Unicode </td>
   <td> Allows you to set a specific character encoding schema, which can
-    be any of <code>gd.FTEX_Unicode</code>, <code>gd.FTEX_Shift_JIS</code>,
-    or <code>gd.FTEX_Big5</code>. If you do not specify a preference,
-    Unicode will be tried first. If the preferred character mapping is
-    not found in the font, other character mappings are attempted.
- </td>
+    be any of <code>gd.FTEX_Unicode</code>,
+    <code>gd.FTEX_Shift_JIS</code>, or <code>gd.FTEX_Big5</code>. It is
+    useful when a font offers more than one of Unicode, Shift_JIS, and
+    Big5. If you do not specify one, Unicode will be tried first. If
+    the preferred character mapping is not found in the font, other
+    character mappings are attempted.</td>
  </tr>
 
  <tr>
   <td class="n"> hdpi </td>
   <td class="i"> integer </td>
   <td class="i"> 96 </td>
-  <td> Set the horizontal resolution passed to the FreeType engine. </td>
+  <td> Sets the horizontal resolution passed to the FreeType engine. </td>
  </tr>
 
  <tr>
   <td class="n"> vdpi </td>
   <td class="i"> integer </td>
   <td class="i"> 96 </td>
-  <td> Set the vertical resolution passed to the FreeType engine. </td>
+  <td> Sets the vertical resolution passed to the FreeType engine. </td>
  </tr>
 
  <tr>
@@ -1653,14 +1665,37 @@ llx, lly, lrx, lry, urx, ury, ulx, uly = gd.stringFT(nil, white, "Vera.ttf", 20,
  <tr>
   <td class="n"> fontconfig </td>
   <td class="i"> boolean </td>
-  <td class="i"> true </td>
+  <td class="i"> false </td>
   <td> GD can use fontconfig to resolve font names, including fontconfig
-    patterns if this flag is set. As a convenience, this behavior can
-    also be made the default by calling <code>gd.useFontConfig</code>
-    with a <b>true</b> value. </td>
+    patterns, if this field is set to <b>true</b>. As a convenience,
+    this behavior can also be made the default by calling
+    <code>gd.useFontConfig</code> with a <b>true</b> value. </td>
  </tr>
 
 </table>
+
+<p> This method also returns the same values than <code>stringFT</code>,
+more two aditional ones if the fields <b>xshow</b> or
+<b>return_font_path_name</b> are set to <b>true</b>. See the following
+example: </p>
+
+<pre class="example">
+llX, llY, lrX, lrY, urX, urY, ulX, ulY = 
+  im:stringFTEx(blue, "Vera", 20, 0, 50, 50, "Lua-GD",
+    { hdpi = 40, vdpi = 20 } )
+
+llX, llY, lrX, lrY, urX, urY, ulX, ulY, pos = 
+  im:stringFTEx(blue, "Vera", 20, 0, 50, 150, "Lua-GD",
+    { hdpi = 40, vdpi = 20, xshow = true } )
+
+llX, llY, lrX, lrY, urX, urY, ulX, ulY, fontpath = 
+  im:stringFTEx(blue, "Vera", 20, 0, 50, 250, "Lua-GD",
+    { hdpi = 40, vdpi = 20, return_font_path_name = true } )
+
+llX, llY, lrX, lrY, urX, urY, ulX, ulY, pos, fontpath = 
+  im:stringFTEx(blue, "Vera", 20, 0, 50, 350, "Lua-GD",
+    { hdpi = 40, vdpi = 20, xshow = true, return_font_path_name = true } )
+</pre>
 
 
 
