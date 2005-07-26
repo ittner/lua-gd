@@ -39,18 +39,18 @@ LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -llua -lgd
 #LFLAGS=-shared -ljpeg -lfontconfig -lfreetype -lpng12 -lz -lm -llua -lgd
 
 
-all: libluagd.so
+all: $(OUTFILE)
 
 libluagd.so: luagd.c
 	$(CC) -o $(OUTFILE) $(GDFEATURES) $(CFLAGS) $(LFLAGS) luagd.c
 	lua test_features.lua
 
-install: libluagd.so
-	cp libluagd.so /usr/lib/
+install: $(OUTFILE)
+	cp $(OUTFILE) /usr/lib/
 
 
-install51: libluagd.so
-	lua install51.lua libluagd.so gd
+install51: $(OUTFILE)
+	lua install51.lua $(OUTFILE) gd
 
 clean:
-	rm -f libluagd.so *.o
+	rm -f $(OUTFILE) *.o
