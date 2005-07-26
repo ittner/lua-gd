@@ -55,6 +55,10 @@
 #define getoint(L, i)       (int) luaL_optnumber(L, i, 0)
 #define getlong             (long) luaL_checknumber
 
+/* Emulates lua_(un)boxpointer from Lua 5.0 (don't exists on Lua 5.1-w6) */
+#define boxptr(L, p)   (*(void**)(lua_newuserdata(L, sizeof(void*))) = (p))
+#define unboxptr(L, i) (*(void**)(lua_touserdata(L, i)))
+
 /* Table assumed on top */
 #define tblseticons(L, c, v)    \
     lua_pushliteral(L, c);      \
@@ -73,7 +77,7 @@ static gdImagePtr getImagePtr(lua_State *L, int i)
 {
     if(luaL_checkudata(L, i, GD_IMAGE_PTR_TYPENAME) != NULL)
     {
-        gdImagePtr im = lua_unboxpointer(L, i);
+        gdImagePtr im = unboxptr(L, i);
         if(im == NULL)
             luaL_error(L, "attempt to use an invalid " GD_IMAGE_PTR_TYPENAME);
         return im;
@@ -85,7 +89,7 @@ static gdImagePtr getImagePtr(lua_State *L, int i)
 
 static void pushImagePtr(lua_State *L, gdImagePtr im)
 {
-    lua_boxpointer(L, im);
+    boxptr(L, im);
     luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
     lua_setmetatable(L, -2);    /* Done */
 }
@@ -2519,6 +2523,6 @@ int luaopen_gd(lua_State *L)
     luaL_openlib(L, NULL, LgdMetatable, 0);
     lua_pop(L, 1);
 
-    return 0;
+    return 1;
 }
 

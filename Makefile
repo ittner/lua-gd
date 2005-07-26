@@ -48,5 +48,9 @@ libluagd.so: luagd.c
 install: libluagd.so
 	cp libluagd.so /usr/lib/
 
+
+install51: libluagd.so
+	lua install51.lua libluagd.so gd
+
 clean:
 	rm -f libluagd.so *.o
