@@ -48,12 +48,7 @@
   <lhf@tecgraf.puc-rio.br> in his lpdf.c */
 
 #define getstring           luaL_checkstring
-#define getostring(L, i)    luaL_optstring(L, i, NULL)
-#define getfloat            (float) luaL_checknumber
-#define getofloat(L, i)     (float) luaL_optnumber(L, i, 0)
 #define getint              (int) luaL_checknumber
-#define getoint(L, i)       (int) luaL_optnumber(L, i, 0)
-#define getlong             (long) luaL_checknumber
 
 /* Emulates lua_(un)boxpointer from Lua 5.0 (don't exists on Lua 5.1-w6) */
 #define boxptr(L, p)   (*(void**)(lua_newuserdata(L, sizeof(void*))) = (p))
