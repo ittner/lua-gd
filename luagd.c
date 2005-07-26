@@ -38,7 +38,6 @@
 
 #define LIB_NAME                "gd"
 #define GD_VERSION              "gd 2.0.33"
-#define GD_IMAGE_TYPENAME       "gdImage_handle"
 #define GD_IMAGE_PTR_TYPENAME   "gdImagePtr_handle"
 
 #define LIB_VERSION "lua-gd (c) 2004-05 Alexandre Erwin Ittner, " GD_VERSION
