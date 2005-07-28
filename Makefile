@@ -25,7 +25,7 @@ CC=gcc
 # you must comment out these lines and uncomment and change the next ones.
 
 OUTFILE=libluagd.so
-CFLAGS=-Wall `gdlib-config --cflags`
+CFLAGS=-Wall `gdlib-config --cflags` -O3
 GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
 LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -llua -lgd 
 
@@ -46,10 +46,12 @@ libluagd.so: luagd.c
 	lua test_features.lua
 
 install: $(OUTFILE)
+	strip $(OUTFILE)
 	cp $(OUTFILE) /usr/lib/
 
 
 install51: $(OUTFILE)
+	strip $(OUTFILE)
 	lua install51.lua $(OUTFILE) gd
 
 clean:
