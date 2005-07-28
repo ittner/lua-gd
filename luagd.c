@@ -2127,7 +2127,7 @@ static int LgdImageStringFTEx(lua_State *L)
 
 static int LgdImageStringFTCircle(lua_State *L)
 {
-    gdImagePtr im;
+    gdImagePtr im = getImagePtr(L, 1);
     int cx = getint(L, 2);
     int cy = getint(L, 3);
     double radius = (double) lua_tonumber(L, 4);
