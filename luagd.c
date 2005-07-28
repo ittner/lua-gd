@@ -1962,13 +1962,13 @@ static int LgdImageSetClip(lua_State *L)
 static int LgdImageGetClip(lua_State *L)
 {
     gdImagePtr im = getImagePtr(L, 1);
-    int *x1, *y1, *x2, *y2;
+    int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
 
-    gdImageGetClip(im, x1, y1, x2, y2);
-    lua_pushnumber(L, *x1);
-    lua_pushnumber(L, *y1);
-    lua_pushnumber(L, *x2);
-    lua_pushnumber(L, *y2);
+    gdImageGetClip(im, &x1, &y1, &x2, &y2);
+    lua_pushnumber(L, x1);
+    lua_pushnumber(L, y1);
+    lua_pushnumber(L, x2);
+    lua_pushnumber(L, y2);
     return 4;
 }
 
