@@ -1,5 +1,5 @@
 # luagd -- GD bindings to Lua.
-# (c) 2004 Alexandre Erwin Ittner <aittner@netuno.com.br>
+# (c) 2004-05 Alexandre Erwin Ittner <aittner@netuno.com.br>
 #
 #
 # This library is free software; you can redistribute it and/or
@@ -34,7 +34,7 @@ LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -llua -lgd
 # Uncomment, change and good luck :)
 
 #OUTFILE=libluagd.dll
-#CFLAGS=-Wall 
+#CFLAGS=-Wall -O3
 #GDFEATURES=-DGD_XPM -DGD_JPEG -DGD_FONTCONFIG -DGD_FREETYPE -DGD_PNG -DGD_GIF
 #LFLAGS=-shared -ljpeg -lfontconfig -lfreetype -lpng12 -lz -lm -llua -lgd
 
@@ -48,7 +48,6 @@ libluagd.so: luagd.c
 install: $(OUTFILE)
 	strip $(OUTFILE)
 	cp $(OUTFILE) /usr/lib/
-
 
 install51: $(OUTFILE)
 	strip $(OUTFILE)

@@ -1,6 +1,6 @@
 /*
  * luagd -- GD bindings for Lua.
- * (c) 2004 Alexandre Erwin Ittner <aittner@netuno.com.br>
+ * (c) 2004-05 Alexandre Erwin Ittner <aittner@netuno.com.br>
  *
  *
  * This library is free software; you can redistribute it and/or
