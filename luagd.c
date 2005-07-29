@@ -698,17 +698,17 @@ static int LgdImageJpeg(lua_State *L)
 
     if(fname == NULL)
     {
-        lua_pushnil(L);
+        lua_pushboolean(L, 0);
         return 1;
     }
     if((fp = fopen(fname, "wb")) == NULL)
     {
-        lua_pushnil(L);
+        lua_pushboolean(L, 0);
         return 1;
     }
     gdImageJpeg(im, fp, quality);
     fclose(fp);
-    lua_pushnumber(L, 1);
+    lua_pushboolean(L, 1);
     return 1;
 }
 
@@ -744,17 +744,17 @@ static int LgdImagePng(lua_State *L)
 
     if(fname == NULL)
     {
-        lua_pushnil(L);
+        lua_pushboolean(L, 0);
         return 1;
     }
     if((fp = fopen(fname, "wb")) == NULL)
     {
-        lua_pushnil(L);
+        lua_pushboolean(L, 0);
         return 1;
     }
     gdImagePng(im, fp);
     fclose(fp);
-    lua_pushnumber(L, 1);
+    lua_pushboolean(L, 1);
     return 1;
 }
 
@@ -789,17 +789,17 @@ static int LgdImagePngEx(lua_State *L)
 
     if(fname == NULL)
     {
-        lua_pushnil(L);
+        lua_pushboolean(L, 0);
         return 1;
     }
     if((fp = fopen(fname, "wb")) == NULL)
     {
-        lua_pushnil(L);
+        lua_pushboolean(L, 0);
         return 1;
     }
     gdImagePngEx(im, fp, level);
     fclose(fp);
-    lua_pushnumber(L, 1);
+    lua_pushboolean(L, 1);
     return 1;
 }
 
@@ -836,17 +836,17 @@ static int LgdImageGif(lua_State *L)
 
     if(fname == NULL)
     {
-        lua_pushnil(L);
+        lua_pushboolean(L, 0);
         return 1;
     }
     if((fp = fopen(fname, "wb")) == NULL)
     {
-        lua_pushnil(L);
+        lua_pushboolean(L, 0);
         return 1;
     }
     gdImageGif(im, fp);
     fclose(fp);
-    lua_pushnumber(L, 1);
+    lua_pushboolean(L, 1);
     return 1;
 }
 #endif
@@ -882,17 +882,17 @@ static int LgdImageGd(lua_State *L)
 
     if(fname == NULL)
     {
-        lua_pushnil(L);
+        lua_pushboolean(L, 0);
         return 1;
     }
     if((fp = fopen(fname, "wb")) == NULL)
     {
-        lua_pushnil(L);
+        lua_pushboolean(L, 0);
         return 1;
     }
     gdImageGd(im, fp);
     fclose(fp);
-    lua_pushnumber(L, 1);
+    lua_pushboolean(L, 1);
     return 1;
 }
 
@@ -929,17 +929,17 @@ static int LgdImageGd2(lua_State *L)
 
     if(fname == NULL)
     {
-        lua_pushnil(L);
+        lua_pushboolean(L, 0);
         return 1;
     }
     if((fp = fopen(fname, "wb")) == NULL)
     {
-        lua_pushnil(L);
+        lua_pushboolean(L, 0);
         return 1;
     }
     gdImageGd2(im, fp, cs, fmt);
     fclose(fp);
-    lua_pushnumber(L, 1);
+    lua_pushboolean(L, 1);
     return 1;
 }
 
@@ -986,7 +986,7 @@ static int LgdImageWBMP(lua_State *L)
     }
     gdImageWBMP(im, fg, fp);
     fclose(fp);
-    lua_pushnumber(L, 1);
+    lua_pushboolean(L, 1);
     return 1;
 }
 
@@ -1311,9 +1311,9 @@ static int LgdImageBoundsSafe(lua_State *L)
     int y = getint(L, 3);
 
     if(gdImageBoundsSafe(im, x, y) != 0)
-        lua_pushnumber(L, 1);
+        lua_pushboolean(L, 1);
     else
-        lua_pushnil(L);
+        lua_pushboolean(L, 0);
     return 1;
 }
 
@@ -2141,7 +2141,7 @@ static int LgdImageStringFTCircle(lua_State *L)
 
     if(gdImageStringFTCircle(im, cx, cy, radius, textRadius, fillPortion,
         font, points, top, bottom, color))
-        lua_pushnil(L);  /* Error */
+        lua_pushboolean(L, 0);  /* Error */
     else
         lua_pushboolean(L, 1);
     return 1;
@@ -2164,7 +2164,7 @@ static int LgdImageGifAnimBegin(lua_State *L)
 
     if((fp = fopen(fname, "wb")) == NULL)
     {
-        lua_pushnil(L); /* Error */
+        lua_pushboolean(L, 0); /* Error */
         return 1;
     }
 
@@ -2198,7 +2198,7 @@ static int LgdImageGifAnimAdd(lua_State *L)
 
     if((fp = fopen(fname, "ab")) == NULL)
     {
-        lua_pushnil(L); /* Error */
+        lua_pushboolean(L, 0); /* Error */
         return 1;
     }
 
@@ -2220,7 +2220,7 @@ static int LgdImageGifAnimEnd(lua_State *L)
 
     if((fp = fopen(fname, "ab")) == NULL)
     {
-        lua_pushnil(L); /* Error */
+        lua_pushboolean(L, 0); /* Error */
         return 1;
     }
 
