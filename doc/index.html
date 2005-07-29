@@ -838,7 +838,7 @@ the source (x, y) and width/height of the desired image. </p>
 <h4>gdImage:png(filename)</h4>
 
 <p> Outputs the image to a PNG file with the specified name (overwriting
-existing files). This function returns <b>nil</b> on error (eg. permission
+existing files). This function returns <b>false</b> on error (eg. permission
 denied to overwrite an existing file) and <b>true</b> on success. </p>
 
 <p>Example:</p>
@@ -873,7 +873,7 @@ end
 
 <p> Similiar to <code>gd.png</code>, but allows you to specify the
 compression level of a PNG image, from 1 to 6 (or -1 for the default
-compression level of libpng). This function returns <b>nil</b> on error
+compression level of libpng). This function returns <b>false</b> on error
 (eg. permission denied to overwrite an existing file) and <b>true</b>
 on success. </p>
 
@@ -883,7 +883,7 @@ on success. </p>
 <p> Outputs the image to a JPEG file with the specified name (overwriting
 existing files). You must specify the quality of the generated JPEG
 file from 1 (worst quality, small files) to 100 (best quality, large
-files). This function returns <b>nil</b> on error (eg. permission denied
+files). This function returns <b>false</b> on error (eg. permission denied
 to overwrite an existing file) and <b>true</b> on success. </p>
 
 
@@ -891,14 +891,14 @@ to overwrite an existing file) and <b>true</b> on success. </p>
 <h4>gdImage:gif(filename)</h4>
 
 <p> Outputs the image to a GIF file with the specified name (overwriting
-existing files). This function returns <b>nil</b> on error (eg. permission
+existing files). This function returns <b>false</b> on error (eg. permission
 denied to overwrite an existing file) and <b>true</b> on success. </p>
 
 
 <h4>gdImage:gd(filename)</h4>
 
 <p> Outputs the image to a gd format file with the specified name
-(overwriting existing files). This function returns <b>nil</b> on error
+(overwriting existing files). This function returns <b>false</b> on error
 (eg. permission denied to overwrite an existing file) and <b>true</b>
 on success. This format is not intended for general purpose use and
 should never be used to distribute images. Its purpose is solely to
@@ -908,7 +908,7 @@ allow very fast loading of images. </p>
 <h4>gdImage:gd2(filename, chunkSize, format)</h4>
 
 <p> Outputs the image to a gd2 format file with the specified name
-(overwriting existing files). This function returns <b>nil</b> on error
+(overwriting existing files). This function returns <b>false</b> on error
 (eg. permission denied to overwrite an existing file) and <b>true</b>
 on success. You must specify the chunk size (an integer, or 0 for the
 default) and the file format, which can be <code>gd.GD2_FMT_RAW</code>
@@ -923,7 +923,7 @@ purpose is solely to allow very fast loading of images. </p>
 existing files). WBMP file support is black and white only. The color
 index specified by the fg argument is the "foreground", and only pixels
 of this color will be set in the WBMP file. All other pixels will be
-considered "background". This function returns <b>nil</b> on error
+considered "background". This function returns <b>false</b> on error
 (eg. permission denied to overwrite an existing file) and <b>true</b>
 on success. </p>
 
