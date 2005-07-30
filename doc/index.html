@@ -133,7 +133,7 @@ pre.wrong
    </ul>
   </li>
  <li><a href="#download">Download and installation</a></li>
- <li><a href="#api.load">Library loading and initialization</a></li>
+ <li><a href="#load">Library loading and initialization</a></li>
  <li><a href="#api">Lua-GD API</a>
    <ul>
      <li><a href="#api.constants">Constants</a></li>
@@ -300,16 +300,16 @@ their prior contributions. </p>
 <a name="download"></a>
 <h2>Download and installation</h2>
 
-<p> Lua-GD source code comes in a tar.gz package that can be donwloaded
+<p> Lua-GD source code comes in a tar.gz package that can be downloaded
 from the <a href="http://luaforge.net/projects/lua-gd/">Lua-GD project
-page</a> at <a href="http://www.luaforge.net">LuaForge</a> or from
-its <a href="http://www.sourceforge.net/projects/lua-gd/">mirror at
+page</a> on <a href="http://www.luaforge.net">LuaForge</a> or from
+its <a href="http://www.sourceforge.net/projects/lua-gd/">mirror on
 Sourceforge</a>. There are also some pre-compiled binary packages
 available for Linux and some other Unix systems.</p>
 
 <p> After downloading, you need to compile the library. This process
 requires GNU Make, gd and its dependencies (libpng, libjpeg, FreeType2,
-fontconfig, etc). installed on your system. Some components that may
+fontconfig, etc.) installed on your system. Some components that may
 be disabled on your gd installation will be disabled in Lua-GD too. To
 compile on Unix, just unpack the distribution package, enter the directory
 and type <code>make</code> in your favourite shell. If the compilation
@@ -317,8 +317,8 @@ was succeful, you will see something like: </p>
 
 <pre>
 gcc -o libluagd.so `gdlib-config --features |sed -e "s/GD_/-DGD_/g"` -Wall
-`gdlib-config --cflags` -shared `gdlib-config --ldflags` `gdlib-config --libs`
--llua -lgd  luagd.c
+`gdlib-config --cflags` -O3 -shared `gdlib-config --ldflags`
+`gdlib-config --libs` -llua -lgd  luagd.c
 lua test_features.lua
 Lua-GD version: lua-gd (c) 2004-05 Alexandre Erwin Ittner, gd 2.0.33
 Lua-GD features:
@@ -330,9 +330,16 @@ Lua-GD features:
     Fontconfig support .............. Enabled
 </pre>
 
-<p> So, just type <code>make install</code> to copy
-<code>libluagd.so</code> to <code>/usr/lib/</code>.  You can also copy
-the file to a diferent directory in your <code>LUA_PATH</code>. </p>
+<p> To install the library with <b>Lua 5.0</b> just type <code>make
+install</code>.  The file <code>libluagd.so</code> will be copied to
+<code>/usr/lib/</code>.  You can also copy the file by hand to a diferent
+directory in your <code>LUA_PATH</code>. </p>
+
+<p> To install the library with <b>Lua 5.1</b> and above just type
+<code>make install51</code>. This will cause the Makefile to run
+a Lua script that will install the library into a directory from
+<code>package.cpath</code>, allowing you to use the package system to
+load the library. </p>
 
 <p> Compiling Lua-GD on Windows systems is almost, but not quite,
 entirely unlike compiling it on Unix. You will need to edit the Makefile
@@ -342,6 +349,8 @@ by yourself. </p>
 
 <a name="load"></a>
 <h2>Library loading and initialization</h2>
+
+<h3>Initialization on Lua 5.0</h3>
 
 <p> Lua-GD is a shared library that exports a single function called
 <code>luaopen_gd</code> that must be called by the Lua interpreter.
@@ -402,9 +411,19 @@ loadgd()
 <p> in your scripts. The examples in this document uses this solution,
 so, they can run unchanged under Unix and Windows. </p>
 
-<p> On the upcoming Lua 5.1, Lua-GD will use new package system. </p>
+<h3>Initialization on Lua 5.1</h3>
 
+<p> <b>WARNING:</b> Lua 5.1 was not released yet. This code and
+procedures were tested on lastest development release at the present date
+(lua-5.1-work6), but stills subject to changes.</p>
 
+<p> On the upcoming Lua 5.1, Lua-GD use new package system, allowing
+you to simply do a
+
+<pre class="example">require "gd"</pre>
+
+call, if the library was installed (by <code>install51.lua</code>) with
+the procedure described on the last topic.</p>
 
 
 <a name="api"></a>
@@ -417,7 +436,7 @@ gd. </p>
 
 <p> All the functions and constants are stored on a single global
 table called <code>gd</code>. Images are objects and they can use the
-common colon notation for it's methods, but you can also use a C-style
+common colon notation for its methods, but you can also use a C-style
 syntax. So, the following two lines are equivalent: </p>
 
 <pre class="example">
@@ -425,7 +444,7 @@ local gray1 = im:colorResolve(128, 128, 128)        -- Using the colon notation
 local gray2 = gd.colorResolve(im, 128, 128, 128)    -- Using a C-style notation
 </pre>
 
-<p> Constants, functions and methods are described bellow. </p>
+<p> Constants, functions and methods are described bellow.</p>
 
 
 
@@ -433,7 +452,7 @@ local gray2 = gd.colorResolve(im, 128, 128, 128)    -- Using a C-style notation
 <h3>Constants</h3>
 
 <h4>gd.VERSION</h4>
-<p>A string with library's version information.</p>
+<p>A string with the version and some information about the library.</p>
 
 <h4> gd.MAX_COLORS </h4>
 <p>The constant 256. This is the maximum number of colors in a
