@@ -2,7 +2,7 @@ Name: lua-gd
 Version: 2.0.33r1
 Release: 1
 Summary: gd bindings for the Lua programming language
-Summary(pt_BR): Bindings da bibliotea gd para Lua
+Summary(pt_BR): Bindings da biblioteca gd para a linguagem Lua
 Packager: Alexandre Erwin Ittner <aittner@netuno.com.br>
 License: LGPL
 Group: Libraries
@@ -23,8 +23,8 @@ programs written in the Lua programming language.
 
 
 %description -l pt_BR
-Lua-GD é uma biblioteca que permite que você use a biblioteca gráfica
-gd em programas escritos na linguagem Lua.
+Lua-GD é uma biblioteca que permite usar a biblioteca gráfica gd em
+programas escritos na linguagem Lua.
 
 
 %prep
@@ -48,7 +48,7 @@ rm -rf %{buildroot} $RPM_BUILD_ROOT $RPM_BUILD_DIR/%{name}-%{version}
 
 %files
 %defattr(-,root,root)
-%doc README COPYING doc/* demos/*
+%doc README COPYING doc/* demos
 %{_libdir}/*.so*
 
 %changelog
