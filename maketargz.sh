@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PACKAGE=lua-gd
-VERSION=2.0.33-r1
+VERSION=2.0.33r1
 
 DIRNAME=$PACKAGE-$VERSION
 TGZNAME=$DIRNAME.tar.gz
@@ -13,6 +13,7 @@ cp -r COPYING $DIRNAME
 cp -r Makefile $DIRNAME
 cp -r README $DIRNAME
 cp -r luagd.c $DIRNAME
+cp -r lua-gd.spec $DIRNAME
 cp -r test_features.lua $DIRNAME
 cp -r install51.lua $DIRNAME
 
