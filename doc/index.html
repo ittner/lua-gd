@@ -588,8 +588,8 @@ gd.FONT_GIANT </h4>
 <p> These are the standard gd fonts used by <code>gd.string</code> and
 <code>gd.stringUp</code>. Sizes and styles are shown bellow: <br>
 
-<img src="stdfonts.png" width="140" height="110" alt="Standard GD fonts"
-  title="Standard GD fonts"> 
+<img src="stdfonts.png" width="140" height="110" alt="Standard gd fonts"
+  title="Standard gd fonts"> 
 
 <br> If you need another fonts, you should use TrueType fonts with
 <code>gd.stringFT</code>.
@@ -1673,7 +1673,7 @@ show bellow: </p>
   <td class="n"> disable_kerning </td>
   <td class="i"> boolean </td>
   <td class="i"> false </td>
-  <td> If fontconfig is available, GD will normally attempt to apply
+  <td> If fontconfig is available, gd will normally attempt to apply
     kerning tables to adjust the relative positions of consecutive
     characters more ideally for that pair of characters. This field
     allows you to turn this feature off. </td>
@@ -1683,7 +1683,7 @@ show bellow: </p>
   <td class="n"> xshow </td>
   <td class="i"> boolean</td>
   <td class="i"> false </td>
-  <td> Request GD to return a vector of individual character position
+  <td> Request gd to return a vector of individual character position
     advances, occasionally useful in applications that must know exactly
     where each character begins. This is returned as a string with values
     separated by spaces.  </td>
@@ -1694,7 +1694,7 @@ show bellow: </p>
   <td class="i"> boolean </td>
   <td class="i"> false </td>
   <td> Returns the path to the font used to render the text. This is
-    useful because GD are capable of selecting a font automatically
+    useful because gd are capable of selecting a font automatically
     based on a fontconfig font pattern when fontconfig is available. </td>
  </tr>
 
@@ -1702,7 +1702,7 @@ show bellow: </p>
   <td class="n"> fontconfig </td>
   <td class="i"> boolean </td>
   <td class="i"> false </td>
-  <td> GD can use fontconfig to resolve font names, including fontconfig
+  <td> gd can use fontconfig to resolve font names, including fontconfig
     patterns, if this field is set to <b>true</b>. As a convenience,
     this behavior can also be made the default by calling
     <code>gd.useFontConfig</code> with a <b>true</b> value. </td>
@@ -1761,7 +1761,7 @@ and may have an alpha component, do blending, etc. </p>
 <h3>Font configuration methods</h3>
 
 <h4>gd.useFontConfig(bool)</h4>
-<p> GD has the ability to use
+<p> gd has the ability to use
 <a href="http://fontconfig.org/fontconfig-user.html#AEN36">fontconfig
 patterns</a> rather than font file names as parameters to
 <code>gd.stringFT</code> and <code>gd.stringFTCircle</code>. For
