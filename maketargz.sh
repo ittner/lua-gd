@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PACKAGE=lua-gd
-VERSION=beta-1
+VERSION=2.0.33-r1
 
 DIRNAME=$PACKAGE-$VERSION
 TGZNAME=$DIRNAME.tar.gz
@@ -14,6 +14,7 @@ cp -r Makefile $DIRNAME
 cp -r README $DIRNAME
 cp -r luagd.c $DIRNAME
 cp -r test_features.lua $DIRNAME
+cp -r install51.lua $DIRNAME
 
 cp -r demos $DIRNAME
 rm -rf $DIRNAME/demos/CVS
@@ -23,7 +24,6 @@ rm -f $DIRNAME/demos/out.*
 cp -r doc $DIRNAME
 rm -rf $DIRNAME/doc/CVS
 rm -rf $DIRNAME/doc/.xvpics
-
 
 tar -czf $TGZNAME $DIRNAME
 rm -rf $DIRNAME

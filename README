@@ -4,23 +4,31 @@ Lua-GD, the gd bindings for the Lua Programming Language
 
 + Introduction
 
-Lua-GD is a library that provides access to the Thomas Boutell's
-GD library from Lua. It's BETA software and it continues under
-test. 
+"gd" is a C graphics library created by Thomas Boutell that allows your
+code to quickly draw complete images with lines, polygons, arcs, text,
+multiple colors, cut and paste from other images, flood fills, read in
+or write out images in the PNG, JPEG or GIF format. This is particularly
+useful in World Wide Web applications, where PNG and JPEG are two of the
+formats accepted for inline images by most browsers. gd does not provide
+for every possible desirable graphics operation. It is not necessary or
+desirable for gd to become a kitchen-sink graphics package, but it does
+include most frequently requested features, including both truecolor
+and palette images, resampling (smooth resizing of truecolor images)
+and so forth. You can get more information about gd from it's homepage.
+
+Lua-GD is a "binding": a library that exports gd functions to the Lua
+Programming Language, allowing you to use gd from Lua. The API was
+NOT literally exported, but changed in a way that make it familiar to
+Lua users.
+
+Lua-GD is a programming library, not a paint program. If you are looking
+for that or are not familiar to the Lua Programming Language, you are
+in the wrong place.
 
 
 + Documentation
 
 See doc/index.html for installation instructions and API documentation.
-
-
-
-+ TO DO
-
-    * Support the new package proposal for Lua 5.1
-    * Better Makefiles (Win32 dlls?).
-    * Write some documentation.
-
 
 
 + License

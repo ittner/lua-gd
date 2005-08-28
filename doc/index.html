@@ -130,7 +130,7 @@ pre.wrong
 <center>
  <a href="http://lua-gd.luaforge.net"
   ><img src="lua-gd.png" alt="Lua-GD Logo" title="Lua-GD Logo" border="0"></a>
- <h1>Lua-GD Reference Manual</h1>
+ <h1>Lua-GD 2.0.33-r1</h1>
 </center>
 
 <h2> Contents </h2>
@@ -203,6 +203,13 @@ you are in the wrong place. </p>
 <p> This document, which was heavly based on gd manual, describes the API
 and provides the information needed to use the library. Some experience
 with Lua is <b>required</b>.</p>
+
+<p><b>A NOTE ON VERSION NUMBERS:</b> Lua-GD version numbers is in
+the format "X.Y.Z-rW", where X.Y.Z indicates the gd version and W the
+binding version. So, the <b>2.0.33-r1</b> version is the first binding
+version for gd 2.0.33 and <b>2.0.33-r2</b> has some improvements/bug
+fixes/etc. but uses the same gd version. </p>
+
 
 
 <a name="license"></a>
@@ -332,7 +339,7 @@ gcc -o libluagd.so `gdlib-config --features |sed -e "s/GD_/-DGD_/g"` -Wall
 `gdlib-config --cflags` -O3 -shared `gdlib-config --ldflags`
 `gdlib-config --libs` -llua -lgd  luagd.c
 lua test_features.lua
-Lua-GD version: lua-gd (c) 2004-05 Alexandre Erwin Ittner, gd 2.0.33
+Lua-GD version: lua-gd 2.0.33-r1
 Lua-GD features:
     PNG support ..................... Enabled
     GIF support ..................... Enabled
