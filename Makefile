@@ -1,4 +1,4 @@
-# luagd -- GD bindings to Lua.
+# luagd -- d bindings for the Lua Programming Language.
 # (c) 2004-05 Alexandre Erwin Ittner <aittner@netuno.com.br>
 #
 #
