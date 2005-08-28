@@ -2160,34 +2160,26 @@ explicit way to finish the animation. </p>
 <h3>CGI Web Counter</h3>
 <pre class="example">
 #!/usr/bin/env lua
-
 -- counter.lua -- a web counter in Lua!
 -- (c) 2004 Alexandre Erwin Ittner
 
-datafile="counter.txt"
-
 require "gd"
 
-fp = io.open(datafile, "r")
+datafile = "counter.txt"
+fp = io.open(datafile, "r+")
 if fp then
-  cnt = fp:read("*a")
-  fp:close()
+  cnt = tonumber(fp:read("*l")) or 0
+  fp:seek("set", 0)
 else
   cnt = 0
+  fp = io.open(datafile, "w")
+  assert(fp)
 end
 cnt = cnt + 1
-fp = io.open(datafile, "w")
-if fp then
-  fp:write(cnt)
-  fp:close()
-end
-cnt = cnt + 1
+fp:write(cnt .."\n")
+fp:close()
 
-sx = string.len(cnt) * 8
-if sx == 0 then
- sx = 10
-end
-
+sx = math.max(string.len(tostring(cnt)), 1) * 8
 im = gd.create(sx, 15)
 -- first allocated color defines the background.
 white = im:colorAllocate(255, 255, 255)
