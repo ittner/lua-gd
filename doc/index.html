@@ -93,12 +93,22 @@ pre
 
 pre.example
 {
-    border: gray 1pt solid;
-    padding: 2pt;
+    border: 1px solid rgb(128, 128, 128);
+    padding: 5pt;
     display: block;
     font-family: "Courier New", courier, monospace;
-    background-color: #EEEEEE;
-    color: #000000;
+    background-color: #F0F0F0;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+pre.example2
+{
+    border: 1px solid rgb(128, 128, 128);
+    padding: 5pt;
+    display: block;
+    font-family: "Courier New", courier, monospace;
+    background-color: #F0F0F0;
 }
 
 pre.wrong
@@ -2158,7 +2168,7 @@ explicit way to finish the animation. </p>
 
 <a name="examples.counter"></a>
 <h3>CGI Web Counter</h3>
-<pre class="example">
+<pre class="example2">
 #!/usr/bin/env lua
 -- counter.lua -- a web counter in Lua!
 -- (c) 2004 Alexandre Erwin Ittner
@@ -2198,7 +2208,7 @@ io.write(im:pngStr())
 <img src="clock-example.png" alt="Clock Example output"
 title="Clock Example output">
 
-<pre class="example">
+<pre class="example2">
 #!/usr/bin/env lua
 
 -- a cgi script that draws an analog clock with lua and lua-gd
@@ -2275,7 +2285,7 @@ io.write(im:pngStr())
 <img src="sierpinski.png" width="250" height="250"
  alt="The Sierpinski triangle" title="The Sierpinski triangle">
 
-<pre class="example">
+<pre class="example2">
 #!/usr/bin/env lua
 -- Draws the famous fractal called the Sierpinski triangle with lua-gd
 
@@ -2313,7 +2323,7 @@ im:png("sierpinski.png")
 <img src="fontconfig-example.png" alt="Fontconfig Example output"
  title="Fontconfig Example output">
 
-<pre class="example">
+<pre class="example2">
 -- The fonts used in this example comes with Microsoft operating systems 
 -- and can be downloaded from http://corefonts.sourceforge.net
 
@@ -2344,7 +2354,7 @@ im:png("out.png")
 <img src="gifanim.gif" width="120" height="120"
  alt="A GIF animation" title="A GIF animation">
 
-<pre class="example">
+<pre class="example2">
 require "gd"
 
 im = gd.createPalette(120, 120)
@@ -2398,7 +2408,7 @@ fp:close()
  </tr>
 </table>
 
-<pre class="example">
+<pre class="example2">
 #/usr/bin/env lua
 --[[
 
