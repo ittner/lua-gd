@@ -151,10 +151,11 @@ pre.wrong
  </li>
  <li><a href="#examples">Examples</a>
    <ul>
-     <li><a href="#examples.counter">Web Counter</a></li>
+     <li><a href="#examples.counter">CGI Web Counter</a></li>
      <li><a href="#examples.clock">CGI Analog Clock</a></li>
      <li><a href="#examples.fractal">The Sierpinski triangle</a></li>
      <li><a href="#examples.fontconfig">Using Freetype, Fontconfig and TrueType fonts</a></li>
+     <li><a href="#examples.gifanim">GIF animation</a></li>
      <li><a href="#examples.steg">A Steganography Application</a></li>
      <li><a href="#examples.other">Other examples</a></li>
    </ul>
@@ -2037,16 +2038,15 @@ the default. </p>
 
 <h4>gdImage:gifAnimBeginStr(globalCM, loops)</h4>
 
-<p> This method must be called as the first method when creating a
-GIF animation in memory. It returns the correct GIF file headers as an
-Lua string and prepares for frames to be added for the animation. The
-image argument is not used to produce an image frame to the file, it
-is only used to establish the GIF animation frame size, interlacing
-options and the color palette. New frames must be created with the
-method <code>gd.gifAnimAddStr</code> and concatened to this one with
-the <b>..</b> (string concatenation) operator. Finally, one last frame,
-generated with the method <code>gd.gifAnimEndStr</code>, must be
-concatened to finish the animation. </p>
+<p> This method must be called as the first method when creating a GIF
+animation in memory. It returns the correct GIF file headers as an Lua
+string and prepares for frames to be added for the animation. The image
+argument is not used to produce an image frame to the file, it is only
+used to establish the GIF animation frame size, interlacing options
+and the color palette. New frames must be created with the method
+<code>gd.gifAnimAddStr</code> and concatened to this one.  Finally,
+one last frame, generated with the method <code>gd.gifAnimEndStr</code>,
+must be concatened to finish the animation. </p>
 
 <p> The <b>GlobalCM</b> flag indicates if a global color map (or palette)
 is used in the GIF89A header. A <b>true</b> value specifies that a
@@ -2157,7 +2157,7 @@ explicit way to finish the animation. </p>
 <h2>Examples</h2>
 
 <a name="examples.counter"></a>
-<h3>Web Counter</h3>
+<h3>CGI Web Counter</h3>
 <pre class="example">
 #!/usr/bin/env lua
 
@@ -2343,6 +2343,43 @@ im:stringFT(black, "Comic Sans MS", 20, 0, 10, 180, "Comic Sans MS")
 
 im:png("out.png")
 </pre>
+
+
+
+<a name="examples.gifanim"></a>
+<h3>GIF animation</h3>
+
+<img src="gifanim.gif" width="120" height="120"
+ alt="A GIF animation" title="A GIF animation">
+
+<pre class="example">
+require "gd"
+
+im = gd.createPalette(120, 120)
+assert(im)
+
+black = im:colorAllocate(0, 0, 0)
+blue = {}
+for i = 1, 20 do
+  blue[i] = im:colorAllocate(0, 0, 120+6*i)
+end
+
+fp = io.open("out.gif", "w")
+assert(fp, "Failed to open file for writting")
+
+fp:write(im:gifAnimBeginStr(true, 0))
+
+for i = 1, 20 do
+  tim = gd.createPalette(120, 120)
+  tim:paletteCopy(im)
+  tim:arc(60, 60, 6*i, 6*i, 0, 360, blue[21-i])
+  fp:write(tim:gifAnimAddStr(false, 0, 0, 5, gd.DISPOSAL_NONE))
+end
+
+fp:write(gd.gifAnimEndStr())
+fp:close()
+</pre>
+
 
 
 <a name="examples.steg"></a>
