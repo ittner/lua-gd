@@ -180,7 +180,7 @@ truecolor and palette images, resampling (smooth resizing of truecolor
 images) and so forth.  You can get more information about gd from <a
 href="http://www.boutell.com/gd/">it's homepage</a>. </p>
 
-<p> Lua-GD is a "binding": A library that exports gd functions to the <a
+<p> Lua-GD is a "binding": a library that exports gd functions to the <a
 href="http://www.lua.org">Lua Programming Language</a>, allowing you to
 use gd from Lua. The API was <b>NOT</b> literally exported, but changed
 in a way that make it familiar to Lua users. </p>
@@ -210,7 +210,7 @@ for both academic and commercial purposes. Or, more precisely: </p>
 
 <blockquote>
 <pre>
-Lua-GD, an gd binding to the Lua Programming Language
+Lua-GD, a gd binding to the Lua Programming Language
 (c) 2004-2005 Alexandre Erwin Ittner
 
 This library is free software; you can redistribute it and/or modify it
@@ -298,6 +298,7 @@ their prior contributions. </p>
 
 
 <a name="download"></a>
+<a name="installation"></a>
 <h2>Download and installation</h2>
 
 <p> Lua-GD source code comes in a tar.gz package that can be downloaded
@@ -411,19 +412,23 @@ loadgd()
 <p> in your scripts. The examples in this document uses this solution,
 so, they can run unchanged under Unix and Windows. </p>
 
+
+
 <h3>Initialization on Lua 5.1</h3>
 
 <p> <b>WARNING:</b> Lua 5.1 was not released yet. This code and
 procedures were tested on lastest development release at the present date
 (lua-5.1-work6), but stills subject to changes.</p>
 
-<p> On the upcoming Lua 5.1, Lua-GD use new package system, allowing
-you to simply do a
+<p> On the Lua 5.1, Lua-GD uses the new package system that allows you to
+simply do a
 
 <pre class="example">require "gd"</pre>
 
-call, if the library was installed (by <code>install51.lua</code>) with
-the procedure described on the last topic.</p>
+call to load up the library (that was installed on the right place by
+<code>install51.lua</code>). </p>
+
+
 
 
 <a name="api"></a>
@@ -1975,7 +1980,7 @@ center). This is known as a "polar coordinate transform".  The image
 
 <p> Sharpens the specified image. <b>pct</b> is a sharpening percentage,
 and can be greater than 100. Silently does nothing to non-truecolor
-images. Silently does nothing for <b>pct</b> < 0. Transparency/alpha
+images. Silently does nothing for <b>pct</b> &lt; 0. Transparency/alpha
 channel are not altered. </p>
 
 
