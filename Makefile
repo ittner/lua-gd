@@ -36,12 +36,12 @@ LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -llua -lgd
 #OUTFILE=libluagd.dll
 #CFLAGS=-Wall -O3
 #GDFEATURES=-DGD_XPM -DGD_JPEG -DGD_FONTCONFIG -DGD_FREETYPE -DGD_PNG -DGD_GIF
-#LFLAGS=-shared -ljpeg -lfontconfig -lfreetype -lpng12 -lz -lm -llua -lgd
+#LFLAGS=-shared -lgd2 -lm -llua -llualib
 
 
 all: $(OUTFILE)
 
-libluagd.so: luagd.c
+$(OUTFILE): luagd.c
 	$(CC) -o $(OUTFILE) $(GDFEATURES) $(CFLAGS) $(LFLAGS) luagd.c
 	lua test_features.lua
 
