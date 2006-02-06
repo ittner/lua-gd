@@ -20,14 +20,22 @@
 
 CC=gcc
 
-# Automatic configuration using gdlib-config and sed. These lines should
-# work on most Linux/Unix systems. If your system does not have these programs
-# you must comment out these lines and uncomment and change the next ones.
+# Automatic configuration using gdlib-config, lua-config and sed. These
+# lines should work on most Linux/Unix systems. If your system does not
+# have these programs you must comment out these lines and uncomment and
+# change the next ones.
 
 OUTFILE=libluagd.so
-CFLAGS=-Wall `gdlib-config --cflags` -O3
+CFLAGS=-Wall `gdlib-config --cflags` `lua-config --include` -O3
 GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
-LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -llua -lgd 
+LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` \
+    `lua-config --libs` -lgd 
+
+# Manual configuration for systems withou 'lua-config'
+
+#CFLAGS=-Wall `gdlib-config --cflags` -O3
+#GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
+#LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -llua -lgd 
 
 
 # Manual configuration for Windows and systems without sed and gdlib-config.
