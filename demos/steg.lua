@@ -46,16 +46,16 @@ cat) the attacker will not detect it and the message will arrive to Bob.
 This program will help Alice to hide some arbitrary text in a PNG image by
 replacing the least significant bits of each color channel of some pixels
 with bits from the encrypted message. PNG or other loseless compression
-algorithm are mandatory here: if the image will be compressed by a
-lossy algorithm, the hidden data can be destroyed. The maximum length
-of the message is limited by the image's size (each byte needs 8 color
-channels or 2 pixels and 2 channels from the next pixel). So, the image
-must have at least "ceil((length+1)*8/3)" pixels (the extra byte is the
-NUL marker for the end of the string). So, if Alice's message is "Meet me
-in the secret place at nine o'clock.", she will encrypt and sign it to
-something like "PyJYDpz5LCOSHPiXDvLHmVzxLV8qS7EFvZnoo1Mxk+BlT+7lMjpQKs"
-(imagine Alice's cat walking in you keyboard :). This is the ciphertext
-that will be sent to Bob through the image.
+algorithm are mandatory here: Compressing the image with a lossy algorithm
+will destroy the stored information. The maximum length of the message is
+limited by the image's size (each byte needs 8 color channels or 2 pixels
+and 2 channels from the next pixel). So, the image must have at least
+"ceil((length+1)*8/3)" pixels (the extra byte is the NUL marker for the
+end of the string). So, if Alice's message is "Meet me in the secret place
+at nine o'clock.", she will encrypt and sign it to something like
+"PyJYDpz5LCOSHPiXDvLHmVzxLV8qS7EFvZnoo1Mxk+BlT+7lMjpQKs" (imagine Alice's
+cat walking in you keyboard :). This is the ciphertext that will be sent
+to Bob through the image.
 
 The following table shows what happens to the first eight pixels from
 the image when mixed to the first three bytes from the encrypted message:
@@ -222,7 +222,7 @@ end
 
 
 function getMessage(im)
-  local msg = ""
+  local msg = {}
   local w, h = im:sizeXY()
   local x, y = 0, 0
   local a = {}
@@ -246,9 +246,9 @@ function getMessage(im)
       end
       s = s + 8
       if b == 0 then
-        return msg
+        return table.concat(msg)
       else
-        msg = msg .. string.char(b)
+        msg[#msg+1] = string.char(b)
       end
     end
     e = e + 1
@@ -258,7 +258,7 @@ function getMessage(im)
       y = y + 1
     end
   end
-  return msg
+  return table.concat(msg)
 end
 
 

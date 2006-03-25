@@ -64,7 +64,7 @@ $(OUTFILE): luagd.c
 	lua test_features.lua
 
 install: $(OUTFILE)
-	install -s $(OUTFILE).so $(INSTALL_PATH)
+	install -s $(OUTFILE) $(INSTALL_PATH)
 
 clean:
 	rm -f $(OUTFILE) *.o

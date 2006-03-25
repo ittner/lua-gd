@@ -1,5 +1,7 @@
 require "gd"
 
+gd.useFontConfig(true) -- Use Fontconfig by default.
+
 local im = gd.createTrueColor(400, 400)
 assert(im)
 
@@ -38,7 +40,7 @@ local llX, llY, lrX, lrY, urX, urY, ulX, ulY, fontpath =
   im:stringFTEx(lblue, "Vera", 20, 0, 50, 320, "This font comes from",
     { return_font_path_name = true } )
 
-im:string(gd.FONT_MEDIUM, 50, 340, fontpath, lblue)
+im:string(gd.FONT_MEDIUM, 10, 340, fontpath, lblue)
 
 
 im:png("out.png")
