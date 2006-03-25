@@ -130,7 +130,7 @@ pre.wrong
 <center>
  <a href="http://lua-gd.luaforge.net"
   ><img src="lua-gd.png" alt="Lua-GD Logo" title="Lua-GD Logo" border="0"></a>
- <h1>Lua-GD 2.0.33r1</h1>
+ <h1>Lua-GD 2.0.33r2</h1>
 </center>
 
 <h2> Contents </h2>
@@ -332,14 +332,15 @@ fontconfig, etc.) installed on your system. Some components that may
 be disabled on your gd installation will be disabled in Lua-GD too. To
 compile on Unix, just unpack the distribution package, enter the directory
 and type <code>make</code> in your favourite shell. If the compilation
-was succeful, you will see something like: </p>
+was successful, you will see something like: </p>
 
 <pre>
-gcc -o libluagd.so `gdlib-config --features |sed -e "s/GD_/-DGD_/g"` -Wall
-`gdlib-config --cflags` -O3 -shared `gdlib-config --ldflags`
-`gdlib-config --libs` -llua -lgd  luagd.c
+gcc -o gd.so `gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
+`gdlib-config --cflags` `pkg-config lua5.1 --cflags` -O3 -Wall -shared
+`gdlib-config --ldflags` `gdlib-config --libs` `pkg-config lua5.1 --libs`
+-lgd luagd.c
 lua test_features.lua
-Lua-GD version: lua-gd 2.0.33r1
+Lua-GD version: lua-gd 2.0.33r2
 Lua-GD features:
     PNG support ..................... Enabled
     GIF support ..................... Enabled
@@ -349,102 +350,32 @@ Lua-GD features:
     Fontconfig support .............. Enabled
 </pre>
 
-<p> To install the library with <b>Lua 5.0</b> just type <code>make
-install</code>.  The file <code>libluagd.so</code> will be copied to
-<code>/usr/lib/</code>.  You can also copy the file by hand to a diferent
-directory in your <code>LUA_PATH</code>. </p>
-
 <p> To install the library with <b>Lua 5.1</b> and above just type
-<code>make install51</code>. This will cause the Makefile to run
-a Lua script that will install the library into a directory from
-<code>package.cpath</code>, allowing you to use the package system to
-load the library. </p>
+<code>make install</code>, as root. </p>
+
+<p> <b> WARNING:</b> This will work only in systems with pkg-config (which
+includes the major Linux distributions). In other systems, you will need to
+edit the Makefile and manually install the library, by copying the 'gd.so'
+file to your Lua binary modules directory.</p>
 
 <p> Compiling Lua-GD on Windows systems is almost, but not quite,
 entirely unlike compiling it on Unix. You will need to edit the Makefile
 by yourself. </p>
+
+<p> <b>A NOTE TO DEBIAN/UBUNTU USERS:</b> To enable the Fontconfig and XPM
+support, you will need the <b>libgd2-xpm</b> and <b>libgd2-xpm-dev</b>
+packages. The <b>libgd2-noxpm</b> does not have Fontconfig support.</p>
 
 
 
 <a name="load"></a>
 <h2>Library loading and initialization</h2>
 
-<h3>Initialization on Lua 5.0</h3>
-
-<p> Lua-GD is a shared library that exports a single function called
-<code>luaopen_gd</code> that must be called by the Lua interpreter.
-You must use <code>loadlib</code> function to for that. Using Lua 5.0,
-under Unix and with <code>libluagd.so</code> on your <code>LUA_PATH</code>
-(or also your <code>LD_PATH</code>) you can just do: </p>
-
-<pre class="example">
-assert(loadlib("libluagd.so", "luaopen_gd"), "Can't find Lua-GD")()
-</pre>
-
-<p> And, under Windows and with <code>libluagd.dll</code> on your path,
-you can do </p>
-
-<pre class="example">
-assert(loadlib("libluagd.dll", "luaopen_gd"), "Can't find Lua-GD")()
-</pre>
-
-<p> But none of these solutions are portable enough for some users. A
-more tricky loader, that can load Lua-GD from some common locations
-under Unix and Windows, are shown bellow. </p>
-
-<pre class="example">
--- Generic loader for Lua-GD.
-
--- Common locations (add new ones if needed).
-local locs = {
-    -- Unices
-    "libluagd.so",
-    "./libluagd.so",
-    "/usr/lib/libluagd.so",
-    "/usr/local/lib/libluagd.so",
-    "/usr/local/lib/lua/5.0/lib/libluagd.so",
-    -- Windows
-    "libluagd.dll",
-    "luagd.dll",
-    ".\\luagd.dll",
-    ".\\libluagd.dll",
-    "c:\\lua\\lib\\libluagd.dll"
-}
-
-local loadgd, fname, ndx
-for ndx, fname in ipairs(locs) do
-  loadgd = loadlib(fname, "luaopen_gd")
-  if loadgd then
-    break
-  end
-end
-assert(loadgd, "Can't load Lua-GD")
-loadgd()
-</pre>
-
-<p> So, just put this code on a file called <code>gd.lua</code> in your
-<code>LUA_PATH</code> and insert a simple </p>
+<p>Lua-GD uses the Lua 5.1 package system that allows you to simply do a</p>
 
 <pre class="example">require "gd"</pre>
 
-<p> in your scripts. The examples in this document uses this solution,
-so, they can run unchanged under Unix and Windows. </p>
-
-
-
-<h3>Initialization on Lua 5.1</h3>
-
-<p> <b>WARNING:</b> Lua 5.1 was not released yet. This code and
-procedures were tested on lastest development release at the present date
-(lua-5.1-work6), but stills subject to changes.</p>
-
-<p> On the Lua 5.1, Lua-GD uses the new package system that allows you to
-simply do a </p>
-
-<pre class="example">require "gd"</pre>
-
-<p> call to load up the library (that was installed on the right place by
-<code>install51.lua</code>). </p>
+<p> call to load up the library. </p>
 
 
 
@@ -458,7 +389,7 @@ provided by Lua, at cost of some learning for those that already use
 gd. </p>
 
 <p> All the functions and constants are stored on a single global
-table called <code>gd</code>. Images are objects and they can use the
+module called <code>gd</code>. Images are objects and they can use the
 common colon notation for its methods, but you can also use a C-style
 syntax. So, the following two lines are equivalent: </p>
 
@@ -633,7 +564,7 @@ local im = gd.create(20, 20)
 
 <p>You don't need to destroy an image by yourself.  Lua has a garbage
 collector that detects when an piece of information becomes useless and
-"automagically" deletes it from memory. </p>
+"automagically" removes it from memory. </p>
 
 
 <h4>gd.createTrueColor(x, y)</h4>

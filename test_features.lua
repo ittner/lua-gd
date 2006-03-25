@@ -2,15 +2,7 @@
 
 -- $Id$
 
-load_gd = loadlib("./libluagd.so", "luaopen_gd")        -- Unix
-if load_gd == nil then
-  load_gd = loadlib("./libluagd.dll", "luaopen_gd")     -- Windows
-end
-if load_gd == nil then
-  print("Oops! Can't initialize Lua-GD; Problems when compiling?")
-  os.exit(1)
-end
-load_gd()
+require "gd"
 
 function enabled(res, desc)
   local str = "    " .. desc .. " "

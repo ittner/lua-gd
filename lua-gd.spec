@@ -1,5 +1,5 @@
 Name: lua-gd
-Version: 2.0.33r1
+Version: 2.0.33r2
 Release: 1
 Summary: gd bindings for the Lua programming language
 Summary(pt_BR): Bindings da biblioteca gd para a linguagem Lua
@@ -10,12 +10,12 @@ Group(pt_BR): Bibliotecas
 Source0: %{name}-%{version}.tar.gz
 URL: http://lua-gd.luaforge.net/
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
-Requires: lua >= 5.0
+Requires: lua >= 5.1
 Requires: libgd2 >= 2.0.33
 BuildRequires: lua-devel
 BuildRequires: libgd-devel >= 2.0.33
 Prefix: /usr
-Provides: libluagd.so libluagd
+Provides: luagd
 
 %description
 Lua-GD is a library that allows you to use the gd graphic library from
