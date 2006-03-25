@@ -60,4 +60,3 @@ end
 
 makelogo(140):png("lualogo.png")
 os.execute("display lualogo.png")
-
