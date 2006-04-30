@@ -67,10 +67,8 @@
 #define MY_GD_FONT_TINY             4
 
 
-static gdImagePtr getImagePtr(lua_State *L, int i)
-{
-    if (luaL_checkudata(L, i, GD_IMAGE_PTR_TYPENAME) != NULL)
-    {
+static gdImagePtr getImagePtr(lua_State *L, int i) {
+    if (luaL_checkudata(L, i, GD_IMAGE_PTR_TYPENAME) != NULL) {
         gdImagePtr im = unboxptr(L, i);
         if (im == NULL)
             luaL_error(L, "attempt to use an invalid " GD_IMAGE_PTR_TYPENAME);
@@ -81,27 +79,23 @@ static gdImagePtr getImagePtr(lua_State *L, int i)
 }
 
 
-static void pushImagePtr(lua_State *L, gdImagePtr im)
-{
+static void pushImagePtr(lua_State *L, gdImagePtr im) {
     boxptr(L, im);
     luaL_getmetatable(L, GD_IMAGE_PTR_TYPENAME);
     lua_setmetatable(L, -2);    /* Done */
 }
 
 
-static gdFontPtr getStdFont(lua_State *L, int i)
-{
+static gdFontPtr getStdFont(lua_State *L, int i) {
     int size;
 
-    if (lua_isnumber(L, i) == 0)
-    {
+    if (lua_isnumber(L, i) == 0) {
         luaL_typerror(L, i, "Standard GD Font");
         return gdFontGetSmall();
     }
 
     size = getint(L, i);
-    switch(size)
-    {
+    switch(size) {
         case MY_GD_FONT_SMALL:
             return gdFontGetSmall();
 
@@ -145,8 +139,7 @@ static gdFontPtr getStdFont(lua_State *L, int i)
  * 
  */
 #ifdef GD_FREETYPE
-static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
-{
+static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i) {
     gdFTStringExtra *ex = (gdFTStringExtra*) malloc(sizeof(gdFTStringExtra));
 
     if (ex == NULL)
@@ -158,8 +151,7 @@ static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
 
     lua_pushstring(L, "linespacing");
     lua_gettable(L, i);
-    if (!lua_isnil(L, -1))
-    {
+    if (!lua_isnil(L, -1)) {
         ex->flags |= gdFTEX_LINESPACE;
         ex->linespacing = (double) lua_tonumber(L, -1);
     }
@@ -167,12 +159,10 @@ static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
 
     lua_pushstring(L, "charmap");
     lua_gettable(L, i);
-    if (!lua_isnil(L, -1))
-    {
+    if (!lua_isnil(L, -1)) {
         ex->flags |= gdFTEX_CHARMAP;;
         ex->charmap = (int) lua_tonumber(L, -1);
-        switch(ex->charmap)
-        {
+        switch(ex->charmap) {
             case gdFTEX_Unicode:
             case gdFTEX_Shift_JIS:
             case gdFTEX_Big5:
@@ -190,8 +180,7 @@ static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
 
     lua_pushstring(L, "hdpi");
     lua_gettable(L, i);
-    if (!lua_isnil(L, -1))
-    {
+    if (!lua_isnil(L, -1)) {
         ex->flags |= gdFTEX_RESOLUTION;
         ex->hdpi = (double) lua_tonumber(L, -1);
     }
@@ -199,8 +188,7 @@ static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
 
     lua_pushstring(L, "vdpi");
     lua_gettable(L, i);
-    if (!lua_isnil(L, -1))
-    {
+    if (!lua_isnil(L, -1)) {
         ex->flags |= gdFTEX_RESOLUTION;
         ex->vdpi = (double) lua_tonumber(L, -1);
     }
@@ -237,8 +225,7 @@ static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i)
 
 
 /* gdImageCreate(int sx, int sy) */
-static int LgdImageCreate(lua_State *L)
-{
+static int LgdImageCreate(lua_State *L) {
     int sx, sy;
     gdImagePtr im;
 
@@ -254,8 +241,7 @@ static int LgdImageCreate(lua_State *L)
 
 /* gdImageCreatePalette(int sx, int sy) */
 /* Useless? */
-static int LgdImageCreatePalette(lua_State *L)
-{
+static int LgdImageCreatePalette(lua_State *L) {
     int sx, sy;
     gdImagePtr im;
 
@@ -272,8 +258,7 @@ static int LgdImageCreatePalette(lua_State *L)
 
 
 /* gdImageCreateTrueColor(int sx, int sy) */
-static int LgdImageCreateTrueColor(lua_State *L)
-{
+static int LgdImageCreateTrueColor(lua_State *L) {
     int sx, sy;
     gdImagePtr im;
 
@@ -289,8 +274,7 @@ static int LgdImageCreateTrueColor(lua_State *L)
 
 /* gdImagePtr gdImageCreatePaletteFromTrueColor(gdImagePtr im, int ditherFlag,
     int colorsWanted) */
-static int LgdImageCreatePaletteFromTrueColor(lua_State *L)
-{
+static int LgdImageCreatePaletteFromTrueColor(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int dither = lua_toboolean(L, 2);
     int colors = getint(L, 3);
@@ -306,8 +290,7 @@ static int LgdImageCreatePaletteFromTrueColor(lua_State *L)
 
 /* void gdImageTrueColorToPalette(gdImagePtr im, int ditherFlag,
     int colorsWanted) */
-static int LgdImageTrueColorToPalette(lua_State *L)
-{
+static int LgdImageTrueColorToPalette(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int dither = lua_toboolean(L, 2);
     int colors = getint(L, 3);
@@ -319,8 +302,7 @@ static int LgdImageTrueColorToPalette(lua_State *L)
 
 
 /* gdImageDestroy(gdImagePtr im) */
-static int LgdImageDestroy(lua_State *L)
-{
+static int LgdImageDestroy(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     if (im)
         gdImageDestroy(im);
@@ -330,19 +312,16 @@ static int LgdImageDestroy(lua_State *L)
 #ifdef GD_JPEG
 /* gdImageCreateFromJpeg(FILE *in) */
 /* Changed to: gd.createFromJpeg(char *filename) */
-static int LgdImageCreateFromJpeg(lua_State *L)
-{
+static int LgdImageCreateFromJpeg(lua_State *L) {
     gdImagePtr im;
     FILE *fp;
     const char *fname = getstring(L, 1);
 
-    if (fname == NULL)
-    {
+    if (fname == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
-    if ((fp = fopen(fname, "rb")) == NULL)
-    {
+    if ((fp = fopen(fname, "rb")) == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
@@ -357,14 +336,12 @@ static int LgdImageCreateFromJpeg(lua_State *L)
 
 
 /* gdImageCreateFromJpegPtr(int size, void *data) */
-static int LgdImageCreateFromJpegPtr(lua_State *L)
-{
+static int LgdImageCreateFromJpegPtr(lua_State *L) {
     gdImagePtr im;
     int size = lua_strlen(L, 1);
     void *str = (void*) getstring(L, 1);
 
-    if (str == NULL)
-    {
+    if (str == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
@@ -381,19 +358,16 @@ static int LgdImageCreateFromJpegPtr(lua_State *L)
 #ifdef GD_GIF
 /* gdImageCreateFromGif (FILE *in) */
 /* Changed to: gd.createFromGif (filename) */
-static int LgdImageCreateFromGif (lua_State *L)
-{
+static int LgdImageCreateFromGif (lua_State *L) {
     gdImagePtr im;
     FILE *fp;
     const char *fname = getstring(L, 1);
 
-    if (fname == NULL)
-    {
+    if (fname == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
-    if ((fp = fopen(fname, "rb")) == NULL)
-    {
+    if ((fp = fopen(fname, "rb")) == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
@@ -407,14 +381,12 @@ static int LgdImageCreateFromGif (lua_State *L)
 }
 
 /* gdImageCreateFromGifPtr(int size, void *data) */
-static int LgdImageCreateFromGifPtr(lua_State *L)
-{
+static int LgdImageCreateFromGifPtr(lua_State *L) {
     gdImagePtr im;
     int size = lua_strlen(L, 1);
     void *str = (void*) getstring(L, 1);
 
-    if (str == NULL)
-    {
+    if (str == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
@@ -431,19 +403,16 @@ static int LgdImageCreateFromGifPtr(lua_State *L)
 #ifdef GD_PNG
 /* gdImageCreateFromPng(FILE *in) */
 /* Changed to: gd.createFromPng(filename) */
-static int LgdImageCreateFromPng(lua_State *L)
-{
+static int LgdImageCreateFromPng(lua_State *L) {
     gdImagePtr im;
     FILE *fp;
     const char *fname = getstring(L, 1);
 
-    if (fname == NULL)
-    {
+    if (fname == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
-    if ((fp = fopen(fname, "rb")) == NULL)
-    {
+    if ((fp = fopen(fname, "rb")) == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
@@ -458,14 +427,12 @@ static int LgdImageCreateFromPng(lua_State *L)
 
 
 /* gdImageCreateFromPngPtr(int size, void *data) */
-static int LgdImageCreateFromPngPtr(lua_State *L)
-{
+static int LgdImageCreateFromPngPtr(lua_State *L) {
     gdImagePtr im;
     int size = lua_strlen(L, 1);
     void *str = (void*) getstring(L, 1);
 
-    if (str == NULL)
-    {
+    if (str == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
@@ -481,19 +448,16 @@ static int LgdImageCreateFromPngPtr(lua_State *L)
 
 /* gdImageCreateFromGd(FILE *in) */
 /* Changed to: gd.createFromGd(filename) */
-static int LgdImageCreateFromGd(lua_State *L)
-{
+static int LgdImageCreateFromGd(lua_State *L) {
     gdImagePtr im;
     FILE *fp;
     const char *fname = getstring(L, 1);
 
-    if (fname == NULL)
-    {
+    if (fname == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
-    if ((fp = fopen(fname, "rb")) == NULL)
-    {
+    if ((fp = fopen(fname, "rb")) == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
@@ -508,14 +472,12 @@ static int LgdImageCreateFromGd(lua_State *L)
 
 
 /* gdImageCreateFromGdPtr(int size, void *data) */
-static int LgdImageCreateFromGdPtr(lua_State *L)
-{
+static int LgdImageCreateFromGdPtr(lua_State *L) {
     gdImagePtr im;
     int size = lua_strlen(L, 1);
     void *str = (void*) getstring(L, 1);
 
-    if (str == NULL)
-    {
+    if (str == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
@@ -530,19 +492,16 @@ static int LgdImageCreateFromGdPtr(lua_State *L)
 
 /* gdImageCreateFromGd2(FILE *in) */
 /* Changed to: gd.createFromGd2(filename) */
-static int LgdImageCreateFromGd2(lua_State *L)
-{
+static int LgdImageCreateFromGd2(lua_State *L) {
     gdImagePtr im;
     FILE *fp;
     const char *fname = getstring(L, 1);
 
-    if (fname == NULL)
-    {
+    if (fname == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
-    if ((fp = fopen(fname, "rb")) == NULL)
-    {
+    if ((fp = fopen(fname, "rb")) == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
@@ -557,14 +516,12 @@ static int LgdImageCreateFromGd2(lua_State *L)
 
 
 /* gdImageCreateFromGd2Ptr(int size, void *data) */
-static int LgdImageCreateFromGd2Ptr(lua_State *L)
-{
+static int LgdImageCreateFromGd2Ptr(lua_State *L) {
     gdImagePtr im;
     int size = lua_strlen(L, 1);
     void *str = (void*) getstring(L, 1);
 
-    if (str == NULL)
-    {
+    if (str == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
@@ -579,8 +536,7 @@ static int LgdImageCreateFromGd2Ptr(lua_State *L)
 
 /* gdImageCreateFromGd2Part(FILE *in, int x, int y, int w, int h) */
 /* Changed to: gd.createFromGd2Part(filename, x, y, w, h)) */
-static int LgdImageCreateFromGd2Part(lua_State *L)
-{
+static int LgdImageCreateFromGd2Part(lua_State *L) {
     gdImagePtr im;
     FILE *fp;
     const char *fname = getstring(L, 1);
@@ -589,13 +545,11 @@ static int LgdImageCreateFromGd2Part(lua_State *L)
     const int w = getint(L, 4);
     const int h = getint(L, 5);
 
-    if (fname == NULL)
-    {
+    if (fname == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
-    if ((fp = fopen(fname, "rb")) == NULL)
-    {
+    if ((fp = fopen(fname, "rb")) == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
@@ -611,8 +565,7 @@ static int LgdImageCreateFromGd2Part(lua_State *L)
 
 /* gdImageCreateFromGd2PartPtr(int size, void *data,
                 int srcX, int srcY, int w, int h)  */
-static int LgdImageCreateFromGd2PartPtr(lua_State *L)
-{
+static int LgdImageCreateFromGd2PartPtr(lua_State *L) {
     gdImagePtr im;
     int size = lua_strlen(L, 1);
     void *str = (void*) getstring(L, 1);
@@ -621,8 +574,7 @@ static int LgdImageCreateFromGd2PartPtr(lua_State *L)
     const int w = getint(L, 4);
     const int h = getint(L, 5);
 
-    if (str == NULL)
-    {
+    if (str == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
@@ -638,19 +590,16 @@ static int LgdImageCreateFromGd2PartPtr(lua_State *L)
 #ifdef GD_XPM
 /* gdImageCreateFromXbm(FILE *in) */
 /* Changed to: gd.createFromXbm(filename) */
-static int LgdImageCreateFromXbm(lua_State *L)
-{
+static int LgdImageCreateFromXbm(lua_State *L) {
     gdImagePtr im;
     FILE *fp;
     const char *fname = getstring(L, 1);
 
-    if (fname == NULL)
-    {
+    if (fname == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
-    if ((fp = fopen(fname, "rb")) == NULL)
-    {
+    if ((fp = fopen(fname, "rb")) == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
@@ -665,13 +614,11 @@ static int LgdImageCreateFromXbm(lua_State *L)
 
 
 /* gdImageCreateFromXpm(char *filename) */
-static int LgdImageCreateFromXpm(lua_State *L)
-{
+static int LgdImageCreateFromXpm(lua_State *L) {
     gdImagePtr im;
     char *fname = (char*) getstring(L, 1);
 
-    if (fname == NULL)
-    {
+    if (fname == NULL) {
         lua_pushnil(L);
         return 1;  /* Error */
     }
@@ -689,20 +636,17 @@ static int LgdImageCreateFromXpm(lua_State *L)
 #ifdef GD_JPEG
 /* gdImageJpeg(gdImagePtr im, FILE *out, int quality) */
 /* Changed to: gd.jpeg(im, fname, quality) */
-static int LgdImageJpeg(lua_State *L)
-{
+static int LgdImageJpeg(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     const char *fname = getstring(L, 2);
     int quality = getint(L, 3);
     FILE *fp;
 
-    if (fname == NULL)
-    {
+    if (fname == NULL) {
         lua_pushboolean(L, 0);
         return 1;
     }
-    if ((fp = fopen(fname, "wb")) == NULL)
-    {
+    if ((fp = fopen(fname, "wb")) == NULL) {
         lua_pushboolean(L, 0);
         return 1;
     }
@@ -714,21 +658,19 @@ static int LgdImageJpeg(lua_State *L)
 
 
 /* void *gdImageJpegPtr(gdImagePtr im, int quality) */
-static int LgdImageJpegPtr(lua_State *L)
-{
+static int LgdImageJpegPtr(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int quality = getint(L, 2);
     char *str;
     int size;
 
     str = gdImageJpegPtr(im, &size, quality);
-    if (str != NULL)
-    {
+    if (str != NULL) {
         lua_pushlstring(L, str, size);
         gdFree(str);
-    }
-    else
+    } else {
         lua_pushnil(L);  /* Error */
+    }
     return 1;
 }
 #endif
@@ -736,19 +678,16 @@ static int LgdImageJpegPtr(lua_State *L)
 #ifdef GD_PNG
 /* gdImagePng(gdImagePtr im, FILE *out) */
 /* Changed to: gd.png(im, fname) */
-static int LgdImagePng(lua_State *L)
-{
+static int LgdImagePng(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     const char *fname = getstring(L, 2);
     FILE *fp;
 
-    if (fname == NULL)
-    {
+    if (fname == NULL) {
         lua_pushboolean(L, 0);
         return 1;
     }
-    if ((fp = fopen(fname, "wb")) == NULL)
-    {
+    if ((fp = fopen(fname, "wb")) == NULL) {
         lua_pushboolean(L, 0);
         return 1;
     }
@@ -760,40 +699,35 @@ static int LgdImagePng(lua_State *L)
 
 
 /* void *gdImagePngPtr(gdImagePtr im) */
-static int LgdImagePngPtr(lua_State *L)
-{
+static int LgdImagePngPtr(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     char *str;
     int size;
 
     str = gdImagePngPtr(im, &size);
-    if (str != NULL)
-    {
+    if (str != NULL) {
         lua_pushlstring(L, str, size);
         gdFree(str);
-    }
-    else
+    } else {
         lua_pushnil(L);  /* Error */
+    }
     return 1;
 }
 
 
 /* gdImagePngEx(gdImagePtr im, FILE *out, int compression_level) */
 /* Changed to: gd.pngEx(im, fname, compression_level) */
-static int LgdImagePngEx(lua_State *L)
-{
+static int LgdImagePngEx(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     const char *fname = getstring(L, 2);
     int level = getint(L, 3);
     FILE *fp;
 
-    if (fname == NULL)
-    {
+    if (fname == NULL) {
         lua_pushboolean(L, 0);
         return 1;
     }
-    if ((fp = fopen(fname, "wb")) == NULL)
-    {
+    if ((fp = fopen(fname, "wb")) == NULL) {
         lua_pushboolean(L, 0);
         return 1;
     }
@@ -805,21 +739,19 @@ static int LgdImagePngEx(lua_State *L)
 
 
 /* void *gdImagePngPtrEx(gdImagePtr im, int compression_level) */
-static int LgdImagePngPtrEx(lua_State *L)
-{
+static int LgdImagePngPtrEx(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int level = getint(L, 2);
     char *str;
     int size;
 
     str = gdImagePngPtrEx(im, &size, level);
-    if (str != NULL)
-    {
+    if (str != NULL) {
         lua_pushlstring(L, str, size);
         gdFree(str);
-    }
-    else
+    } else {
         lua_pushnil(L);  /* Error */
+    }
     return 1;
 }
 #endif
@@ -828,19 +760,16 @@ static int LgdImagePngPtrEx(lua_State *L)
 #ifdef GD_GIF
 /* gdImageGif (gdImagePtr im, FILE *out) */
 /* Changed to: gd.gif (im, fname) */
-static int LgdImageGif (lua_State *L)
-{
+static int LgdImageGif (lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     const char *fname = getstring(L, 2);
     FILE *fp;
 
-    if (fname == NULL)
-    {
+    if (fname == NULL) {
         lua_pushboolean(L, 0);
         return 1;
     }
-    if ((fp = fopen(fname, "wb")) == NULL)
-    {
+    if ((fp = fopen(fname, "wb")) == NULL) {
         lua_pushboolean(L, 0);
         return 1;
     }
@@ -853,20 +782,18 @@ static int LgdImageGif (lua_State *L)
 
 #ifdef GD_GIF
 /* void *gdImageGifPtr(gdImagePtr im) */
-static int LgdImageGifPtr(lua_State *L)
-{
+static int LgdImageGifPtr(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     char *str;
     int size;
 
     str = gdImageGifPtr(im, &size);
-    if (str != NULL)
-    {
+    if (str != NULL) {
         lua_pushlstring(L, str, size);
         gdFree(str);
-    }
-    else
+    } else {
         lua_pushnil(L);  /* Error */
+    }
     return 1;
 }
 #endif
@@ -874,19 +801,16 @@ static int LgdImageGifPtr(lua_State *L)
 
 /* gdImageGd(gdImagePtr im, FILE *out) */
 /* Changed to: gd.gd(im, fname) */
-static int LgdImageGd(lua_State *L)
-{
+static int LgdImageGd(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     const char *fname = getstring(L, 2);
     FILE *fp;
 
-    if (fname == NULL)
-    {
+    if (fname == NULL) {
         lua_pushboolean(L, 0);
         return 1;
     }
-    if ((fp = fopen(fname, "wb")) == NULL)
-    {
+    if ((fp = fopen(fname, "wb")) == NULL) {
         lua_pushboolean(L, 0);
         return 1;
     }
@@ -898,20 +822,18 @@ static int LgdImageGd(lua_State *L)
 
 
 /* void *gdImageGdPtr(gdImagePtr im) */
-static int LgdImageGdPtr(lua_State *L)
-{
+static int LgdImageGdPtr(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     char *str;
     int size;
 
     str = gdImageGdPtr(im, &size);
-    if (str != NULL)
-    {
+    if (str != NULL) {
         lua_pushlstring(L, str, size);
         gdFree(str);
-    }
-    else
+    } else {
         lua_pushnil(L);  /* Error */
+    }
     return 1;
 }
 
@@ -919,21 +841,18 @@ static int LgdImageGdPtr(lua_State *L)
 
 /* gdImageGd2(gdImagePtr im, FILE *out, int chunkSize, int fmt) */
 /* Changed to: gd.gd2(im, fname, chunkSize, fmt) */
-static int LgdImageGd2(lua_State *L)
-{
+static int LgdImageGd2(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     const char *fname = getstring(L, 2);
     int cs = getint(L, 3);
     int fmt = getint(L, 4);
     FILE *fp;
 
-    if (fname == NULL)
-    {
+    if (fname == NULL) {
         lua_pushboolean(L, 0);
         return 1;
     }
-    if ((fp = fopen(fname, "wb")) == NULL)
-    {
+    if ((fp = fopen(fname, "wb")) == NULL) {
         lua_pushboolean(L, 0);
         return 1;
     }
@@ -945,8 +864,7 @@ static int LgdImageGd2(lua_State *L)
 
 
 /* void* gdImageGd2Ptr(gdImagePtr im, int chunkSize, int fmt, int *size) */
-static int LgdImageGd2Ptr(lua_State *L)
-{
+static int LgdImageGd2Ptr(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int cs = getint(L, 2);
     int fmt = getint(L, 3);
@@ -954,12 +872,10 @@ static int LgdImageGd2Ptr(lua_State *L)
     int size;
 
     str = gdImageGd2Ptr(im, cs, fmt, &size);
-    if (str != NULL)
-    {
+    if (str != NULL) {
         lua_pushlstring(L, str, size);
         gdFree(str);
-    }
-    else
+    } else
         lua_pushnil(L);  /* Error */
     return 1;
 }
@@ -967,20 +883,17 @@ static int LgdImageGd2Ptr(lua_State *L)
 
 /* void gdImageWBMP(gdImagePtr im, int fg, FILE *out) */
 /* Changed to: gd.wbmp(im, int fg, filename) */
-static int LgdImageWBMP(lua_State *L)
-{
+static int LgdImageWBMP(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int fg = getint(L, 2);
     const char *fname = getstring(L, 3);
     FILE *fp;
 
-    if (fname == NULL)
-    {
+    if (fname == NULL) {
         lua_pushnil(L);
         return 1;
     }
-    if ((fp = fopen(fname, "wb")) == NULL)
-    {
+    if ((fp = fopen(fname, "wb")) == NULL) {
         lua_pushnil(L);
         return 1;
     }
@@ -992,28 +905,25 @@ static int LgdImageWBMP(lua_State *L)
 
 
 /* void* gdImageWBMPPtr(gdImagePtr im, int *size) */
-static int LgdImageWBMPPtr(lua_State *L)
-{
+static int LgdImageWBMPPtr(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int fg = getint(L, 2);
     char *str;
     int size;
 
     str = gdImageWBMPPtr(im, &size, fg);
-    if (str != NULL)
-    {
+    if (str != NULL) {
         lua_pushlstring(L, str, size);
         gdFree(str);
-    }
-    else
+    } else {
         lua_pushnil(L);  /* Error */
+    }
     return 1;
 }
 
 
 /* int gdImageColorAllocate(gdImagePtr im, int r, int g, int b) */
-static int LgdImageColorAllocate(lua_State *L)
-{
+static int LgdImageColorAllocate(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int r = getint(L, 2);
     int g = getint(L, 3);
@@ -1030,8 +940,7 @@ static int LgdImageColorAllocate(lua_State *L)
 
 
 /* int gdImageColorAllocateAlpha(gdImagePtr im, int r, int g, int b, int a) */
-static int LgdImageColorAllocateAlpha(lua_State *L)
-{
+static int LgdImageColorAllocateAlpha(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int r = getint(L, 2);
     int g = getint(L, 3);
@@ -1049,8 +958,7 @@ static int LgdImageColorAllocateAlpha(lua_State *L)
 
 
 /* int gdImageColorClosest(gdImagePtr im, int r, int g, int b) */
-static int LgdImageColorClosest(lua_State *L)
-{
+static int LgdImageColorClosest(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int r = getint(L, 2);
     int g = getint(L, 3);
@@ -1067,8 +975,7 @@ static int LgdImageColorClosest(lua_State *L)
 
 
 /* int gdImageColorClosestAlpha(gdImagePtr im, int r, int g, int b, int a) */
-static int LgdImageColorClosestAlpha(lua_State *L)
-{
+static int LgdImageColorClosestAlpha(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int r = getint(L, 2);
     int g = getint(L, 3);
@@ -1086,8 +993,7 @@ static int LgdImageColorClosestAlpha(lua_State *L)
 
 
 /* int gdImageColorClosestHWB(gdImagePtr im, int r, int g, int b) */
-static int LgdImageColorClosestHWB(lua_State *L)
-{
+static int LgdImageColorClosestHWB(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int r = getint(L, 2);
     int g = getint(L, 3);
@@ -1104,8 +1010,7 @@ static int LgdImageColorClosestHWB(lua_State *L)
 
 
 /* int gdImageColorExact(gdImagePtr im, int r, int g, int b) */
-static int LgdImageColorExact(lua_State *L)
-{
+static int LgdImageColorExact(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int r = getint(L, 2);
     int g = getint(L, 3);
@@ -1122,8 +1027,7 @@ static int LgdImageColorExact(lua_State *L)
 
 
 /* int gdImageColorExactAlpha(gdImagePtr im, int r, int g, int b, int a) */
-static int LgdImageColorExactAlpha(lua_State *L)
-{
+static int LgdImageColorExactAlpha(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int r = getint(L, 2);
     int g = getint(L, 3);
@@ -1141,8 +1045,7 @@ static int LgdImageColorExactAlpha(lua_State *L)
 
 
 /* int gdImageColorResolve(gdImagePtr im, int r, int g, int b) */
-static int LgdImageColorResolve(lua_State *L)
-{
+static int LgdImageColorResolve(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int r = getint(L, 2);
     int g = getint(L, 3);
@@ -1159,8 +1062,7 @@ static int LgdImageColorResolve(lua_State *L)
 
 
 /* int gdImageColorResolveAlpha(gdImagePtr im, int r, int g, int b, int a) */
-static int LgdImageColorResolveAlpha(lua_State *L)
-{
+static int LgdImageColorResolveAlpha(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int r = getint(L, 2);
     int g = getint(L, 3);
@@ -1178,8 +1080,7 @@ static int LgdImageColorResolveAlpha(lua_State *L)
 
 
 /* int gdImageColorsTotal(gdImagePtr im) */
-static int LgdImageColorsTotal(lua_State *L)
-{
+static int LgdImageColorsTotal(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
 
     lua_pushnumber(L, gdImageColorsTotal(im));  /* ok */
@@ -1188,8 +1089,7 @@ static int LgdImageColorsTotal(lua_State *L)
 
 
 /* int gdImageRed(gdImagePtr im, int c) */
-static int LgdImageRed(lua_State *L)
-{
+static int LgdImageRed(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int c = getint(L, 2);
 
@@ -1198,8 +1098,7 @@ static int LgdImageRed(lua_State *L)
 }
 
 /* int gdImageBlue(gdImagePtr im, int c) */
-static int LgdImageBlue(lua_State *L)
-{
+static int LgdImageBlue(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int c = getint(L, 2);
 
@@ -1208,8 +1107,7 @@ static int LgdImageBlue(lua_State *L)
 }
 
 /* int gdImageBlue(gdImagePtr im, int c) */
-static int LgdImageGreen(lua_State *L)
-{
+static int LgdImageGreen(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int c = getint(L, 2);
 
@@ -1218,8 +1116,7 @@ static int LgdImageGreen(lua_State *L)
 }
 
 /* int gdImageAlpha(gdImagePtr im, int color) */
-static int LgdImageAlpha(lua_State *L)
-{
+static int LgdImageAlpha(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int c = getint(L, 2);
     lua_pushnumber(L, gdImageAlpha(im, c));
@@ -1227,8 +1124,7 @@ static int LgdImageAlpha(lua_State *L)
 }
 
 /* int gdImageGetInterlaced(gdImagePtr im) */
-static int LgdImageGetInterlaced(lua_State *L)
-{
+static int LgdImageGetInterlaced(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int ret = gdImageGetInterlaced(im);
 
@@ -1240,8 +1136,7 @@ static int LgdImageGetInterlaced(lua_State *L)
 }
 
 /* int gdImageGetTransparent(gdImagePtr im) */
-static int LgdImageGetTransparent(lua_State *L)
-{
+static int LgdImageGetTransparent(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int ret = gdImageGetTransparent(im);
 
@@ -1254,8 +1149,7 @@ static int LgdImageGetTransparent(lua_State *L)
 
 
 /* void gdImageColorTransparent(gdImagePtr im, int c) */
-static int LgdImageColorTransparent(lua_State *L)
-{
+static int LgdImageColorTransparent(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int c = -1;
     if (!lua_isnil(L, 2))
@@ -1266,8 +1160,7 @@ static int LgdImageColorTransparent(lua_State *L)
 
 
 /* void gdImageColorDeallocate(gdImagePtr im, int c) */
-static int LgdImageColorDeallocate(lua_State *L)
-{
+static int LgdImageColorDeallocate(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int c = getint(L, 2);
     gdImageColorDeallocate(im, c);
@@ -1276,8 +1169,7 @@ static int LgdImageColorDeallocate(lua_State *L)
 
 
 /* int gdImageSX(gdImagePtr im) */
-static int LgdImageSX(lua_State *L)
-{
+static int LgdImageSX(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     lua_pushnumber(L, gdImageSX(im));
     return 1;
@@ -1285,8 +1177,7 @@ static int LgdImageSX(lua_State *L)
 
 
 /* int gdImageSY(gdImagePtr im) */
-static int LgdImageSY(lua_State *L)
-{
+static int LgdImageSY(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     lua_pushnumber(L, gdImageSY(im));
     return 1;
@@ -1294,8 +1185,7 @@ static int LgdImageSY(lua_State *L)
 
 
 /* Fear the power of the Moon!!  ---   x, y = im:sizeXY() */
-static int LgdImageSXY(lua_State *L)
-{
+static int LgdImageSXY(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     lua_pushnumber(L, gdImageSX(im));
     lua_pushnumber(L, gdImageSY(im));
@@ -1304,8 +1194,7 @@ static int LgdImageSXY(lua_State *L)
 
 
 /* int gdImageBoundsSafe(gdImagePtr im, int x, int y) */
-static int LgdImageBoundsSafe(lua_State *L)
-{
+static int LgdImageBoundsSafe(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int x = getint(L, 2);
     int y = getint(L, 3);
@@ -1319,8 +1208,7 @@ static int LgdImageBoundsSafe(lua_State *L)
 
 
 /* int gdImageGetPixel(gdImagePtr im, int x, int y) */
-static int LgdImageGetPixel(lua_State *L)
-{
+static int LgdImageGetPixel(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int x = getint(L, 2);
     int y = getint(L, 3);
@@ -1331,8 +1219,7 @@ static int LgdImageGetPixel(lua_State *L)
 
 
 /* void gdImageSetPixel(gdImagePtr im, int x, int y, int color) */
-static int LgdImageSetPixel(lua_State *L)
-{
+static int LgdImageSetPixel(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int x = getint(L, 2);
     int y = getint(L, 3);
@@ -1344,8 +1231,7 @@ static int LgdImageSetPixel(lua_State *L)
 
 
 /* void gdImageLine(gdImagePtr im, int x1, int y1, int x2, int y2, int c) */
-static int LgdImageLine(lua_State *L)
-{
+static int LgdImageLine(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int x1 = getint(L, 2);
     int y1 = getint(L, 3);
@@ -1359,8 +1245,7 @@ static int LgdImageLine(lua_State *L)
 
 /* void gdImageRectangle(gdImagePtr im, int x1, int y1, int x2, int y2,
         int c) */
-static int LgdImageRectangle(lua_State *L)
-{
+static int LgdImageRectangle(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int x1 = getint(L, 2);
     int y1 = getint(L, 3);
@@ -1375,8 +1260,7 @@ static int LgdImageRectangle(lua_State *L)
 
 /* void gdImageFilledRectangle(gdImagePtr im, int x1, int y1, int x2, int y2,
         int c) */
-static int LgdImageFilledRectangle(lua_State *L)
-{
+static int LgdImageFilledRectangle(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int x1 = getint(L, 2);
     int y1 = getint(L, 3);
@@ -1390,8 +1274,7 @@ static int LgdImageFilledRectangle(lua_State *L)
 
 
 /* Stack must have ONLY the table of points */
-static gdPoint *getPointList(lua_State *L, int *size)
-{
+static gdPoint *getPointList(lua_State *L, int *size) {
     gdPoint *plist;
     int i;
 
@@ -1399,14 +1282,12 @@ static gdPoint *getPointList(lua_State *L, int *size)
     *size = luaL_getn(L, -1);
     plist = (gdPoint*) malloc(*size * sizeof(gdPoint));
 
-    for (i = 0; i < *size; i++)
-    {
+    for (i = 0; i < *size; i++) {
         /* Stack: T */
         lua_rawgeti(L, 1, i + 1);
 
         /* Stack:  T, T'  */
-        if (lua_type(L, 2) != LUA_TTABLE)
-        {
+        if (lua_type(L, 2) != LUA_TTABLE) {
             free(plist);
             luaL_typerror(L, 2, "Point");
         }
@@ -1436,8 +1317,7 @@ static gdPoint *getPointList(lua_State *L, int *size)
 /* void gdImagePolygon(gdImagePtr im, gdPointPtr points, int pointsTotal,
         int color)
   Changed to: gd.polygon(im, { { x1, y1 }, { x2, y2 } ... }, color)  */
-static int LgdImagePolygon(lua_State *L)
-{
+static int LgdImagePolygon(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     gdPoint *plist;
     int size;
@@ -1457,8 +1337,7 @@ static int LgdImagePolygon(lua_State *L)
 /* void gdImageFilledPolygon(gdImagePtr im, gdPointPtr points,
         int pointsTotal, int color)
   Changed to: gd.filledPolygon(im, { { x1, y1 }, { x2, y2 } ... }, color) */
-static int LgdImageFilledPolygon(lua_State *L)
-{
+static int LgdImageFilledPolygon(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     gdPoint *plist;
     int size;
@@ -1478,8 +1357,7 @@ static int LgdImageFilledPolygon(lua_State *L)
 /* void gdImageOpenPolygon(gdImagePtr im, gdPointPtr points,
         int pointsTotal, int color)
   Changed to: gd.openPolygon(im, { { x1, y1 }, { x2, y2 } ... }, color) */
-static int LgdImageOpenPolygon(lua_State *L)
-{
+static int LgdImageOpenPolygon(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     gdPoint *plist;
     int size;
@@ -1499,8 +1377,7 @@ static int LgdImageOpenPolygon(lua_State *L)
 
 /* void gdImageArc(gdImagePtr im, int cx, int cy, int w, int h, int s, int e,
     int color) */
-static int LgdImageArc(lua_State *L)
-{
+static int LgdImageArc(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int cx = getint(L, 2);
     int cy = getint(L, 3);
@@ -1517,8 +1394,7 @@ static int LgdImageArc(lua_State *L)
 
 /* void gdImageFilledArc(gdImagePtr im, int cx, int cy, int w, int h,
     int s, int e, int color, int style) */
-static int LgdImageFilledArc(lua_State *L)
-{
+static int LgdImageFilledArc(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int cx = getint(L, 2);
     int cy = getint(L, 3);
@@ -1536,8 +1412,7 @@ static int LgdImageFilledArc(lua_State *L)
 
 /* void gdImageFilledEllipse(gdImagePtr im, int cx, int cy, int w, int h,
         int color) */
-static int LgdImageFilledEllipse(lua_State *L)
-{
+static int LgdImageFilledEllipse(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int cx = getint(L, 2);
     int cy = getint(L, 3);
@@ -1551,8 +1426,7 @@ static int LgdImageFilledEllipse(lua_State *L)
 
 
 /* void gdImageFill(gdImagePtr im, int x, int y, int color) */
-static int LgdImageFill(lua_State *L)
-{
+static int LgdImageFill(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int x = getint(L, 2);
     int y = getint(L, 3);
@@ -1565,8 +1439,7 @@ static int LgdImageFill(lua_State *L)
 
 /* void gdImageFillToBorder(gdImagePtr im, int x, int y, int border,
         int color) */
-static int LgdImageFillToBorder(lua_State *L)
-{
+static int LgdImageFillToBorder(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int x = getint(L, 2);
     int y = getint(L, 3);
@@ -1579,8 +1452,7 @@ static int LgdImageFillToBorder(lua_State *L)
 
 
 /* void gdImageSetAntiAliased(gdImagePtr im, int c) */
-static int LgdImageSetAntiAliased(lua_State *L)
-{
+static int LgdImageSetAntiAliased(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int c = getint(L, 2);
 
@@ -1590,8 +1462,7 @@ static int LgdImageSetAntiAliased(lua_State *L)
 
 
 /* void gdImageSetAntiAliasedDontBlend(gdImagePtr im, int c) */
-static int LgdImageSetAntiAliasedDontBlend(lua_State *L)
-{
+static int LgdImageSetAntiAliasedDontBlend(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int c = getint(L, 2);
 
@@ -1601,8 +1472,7 @@ static int LgdImageSetAntiAliasedDontBlend(lua_State *L)
 
 
 /* void gdImageSetBrush(gdImagePtr im, gdImagePtr brush) */
-static int LgdImageSetBrush(lua_State *L)
-{
+static int LgdImageSetBrush(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     gdImagePtr b = getImagePtr(L, 2);
 
@@ -1612,8 +1482,7 @@ static int LgdImageSetBrush(lua_State *L)
 
 
 /* void gdImageSetTile(gdImagePtr im, gdImagePtr tile) */
-static int LgdImageSetTile(lua_State *L)
-{
+static int LgdImageSetTile(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     gdImagePtr t = getImagePtr(L, 1);
 
@@ -1624,8 +1493,7 @@ static int LgdImageSetTile(lua_State *L)
 
 /* void gdImageSetStyle(gdImagePtr im, int *style, int styleLength)  */
 /* Changed To: gd.setStyle(im, { c1, c2, c3,  ...  } ) */
-static int LgdImageSetStyle(lua_State *L)
-{
+static int LgdImageSetStyle(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int *slist;
     int size;
@@ -1636,14 +1504,12 @@ static int LgdImageSetStyle(lua_State *L)
     size = luaL_getn(L, -1);
     slist = (int*) malloc(size * sizeof(int));
 
-    for (i = 0; i < size; i++)
-    {
+    for (i = 0; i < size; i++) {
         /* Stack: Im, T */
         lua_rawgeti(L, 2, i + 1);
 
         /* Stack:  Im, T, num */
-        if (lua_type(L, -1) != LUA_TNUMBER)
-        {
+        if (lua_type(L, -1) != LUA_TNUMBER) {
             free(slist);
             luaL_typerror(L, -1, "Number");
         }
@@ -1661,8 +1527,7 @@ static int LgdImageSetStyle(lua_State *L)
 
 
 /* void gdImageSetThickness(gdImagePtr im, int thickness) */
-static int LgdImageSetThickness(lua_State *L)
-{
+static int LgdImageSetThickness(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int t = getint(L, 2);
 
@@ -1673,8 +1538,7 @@ static int LgdImageSetThickness(lua_State *L)
 
 /* void gdImageAlphaBlending(gdImagePtr im, int blending) */
 /* Changed to: im:alphaBlending(true_or_false) */
-static int LgdImageAlphaBlending(lua_State *L)
-{
+static int LgdImageAlphaBlending(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int b = lua_toboolean(L, 2);
 
@@ -1685,8 +1549,7 @@ static int LgdImageAlphaBlending(lua_State *L)
 
 /* void gdImageSaveAlpha(gdImagePtr im, int saveFlag) */
 /* Changed to: im:saveAlpha(true_or_false) */
-static int LgdImageSaveAlpha(lua_State *L)
-{
+static int LgdImageSaveAlpha(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int b = lua_toboolean(L, 2);
 
@@ -1697,8 +1560,7 @@ static int LgdImageSaveAlpha(lua_State *L)
 
 /* gdImageInterlace(gdImagePtr im, int interlace) */
 /* Changed to: im:interlace(true_or_false) */
-static int LgdImageInterlace(lua_State *L)
-{
+static int LgdImageInterlace(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int i = lua_toboolean(L, 2);
 
@@ -1709,8 +1571,7 @@ static int LgdImageInterlace(lua_State *L)
 
 /* void gdImageString(gdImagePtr im, gdFontPtr font, int x, int y,
         unsigned char *s, int color) */
-static int LgdImageString(lua_State *L)
-{
+static int LgdImageString(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     gdFontPtr fnt = getStdFont(L, 2);
     int x = getint(L, 3);
@@ -1725,8 +1586,7 @@ static int LgdImageString(lua_State *L)
 
 /* void gdImageStringUp(gdImagePtr im, gdFontPtr font, int x, int y,
         unsigned char *s, int color)  */
-static int LgdImageStringUp(lua_State *L)
-{
+static int LgdImageStringUp(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     gdFontPtr fnt = getStdFont(L, 2);
     int x = getint(L, 3);
@@ -1742,8 +1602,7 @@ static int LgdImageStringUp(lua_State *L)
 /* void gdImageChar(gdImagePtr im, gdFontPtr font, int x, int y,
             int c, int color)  */
 /* Useless? */
-static int LgdImageChar(lua_State *L)
-{
+static int LgdImageChar(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     gdFontPtr fnt = getStdFont(L, 2);
     int x = getint(L, 3);
@@ -1752,10 +1611,9 @@ static int LgdImageChar(lua_State *L)
     int c = getint(L, 6);
     int chr;
 
-    if (str)
+    if (str) {
         chr = (int) str[0];
-    else
-    {
+    } else {
         luaL_typerror(L, 5, "string");
         return 0;
     }
@@ -1767,8 +1625,7 @@ static int LgdImageChar(lua_State *L)
 
 /* void gdImageCharUp(gdImagePtr im, gdFontPtr font, int x, int y,
             int c, int color)  */
-static int LgdImageCharUp(lua_State *L)
-{
+static int LgdImageCharUp(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     gdFontPtr fnt = getStdFont(L, 2);
     int x = getint(L, 3);
@@ -1779,8 +1636,7 @@ static int LgdImageCharUp(lua_State *L)
 
     if (str)
         chr = (int) str[0];
-    else
-    {
+    else {
         luaL_typerror(L, 5, "string");
         return 0;
     }
@@ -1792,8 +1648,7 @@ static int LgdImageCharUp(lua_State *L)
 
 /* void gdImageCopy(gdImagePtr dst, gdImagePtr src, int dstX, int dstY,
             int srcX, int srcY, int w, int h) */
-static int LgdImageCopy(lua_State *L)
-{
+static int LgdImageCopy(lua_State *L) {
     gdImagePtr dst = getImagePtr(L, 1);
     gdImagePtr src = getImagePtr(L, 2);
     int dstX = getint(L, 3);
@@ -1812,8 +1667,7 @@ static int LgdImageCopy(lua_State *L)
 /* void gdImageCopyResized(gdImagePtr dst, gdImagePtr src, int dstX,
             int dstY, int srcX, int srcY, int destW, int destH,
             int srcW, int srcH)  */
-static int LgdImageCopyResized(lua_State *L)
-{
+static int LgdImageCopyResized(lua_State *L) {
     gdImagePtr dst = getImagePtr(L, 1);
     gdImagePtr src = getImagePtr(L, 2);
     int dstX = getint(L, 3);
@@ -1834,8 +1688,7 @@ static int LgdImageCopyResized(lua_State *L)
 /* void gdImageCopyResampled(gdImagePtr dst, gdImagePtr src, int dstX,
         int dstY, int srcX, int srcY, int destW, int destH, int srcW,
         int srcH)  */
-static int LgdImageCopyResampled(lua_State *L)
-{
+static int LgdImageCopyResampled(lua_State *L) {
     gdImagePtr dst = getImagePtr(L, 1);
     gdImagePtr src = getImagePtr(L, 2);
     int dstX = getint(L, 3);
@@ -1855,8 +1708,7 @@ static int LgdImageCopyResampled(lua_State *L)
 
 /* void gdImageCopyRotated(gdImagePtr dst, gdImagePtr src, double dstX,
         double dstY, int srcX, int srcY, int srcW, int srcH, int angle) */
-static int LgdImageCopyRotated(lua_State *L)
-{
+static int LgdImageCopyRotated(lua_State *L) {
     gdImagePtr dst = getImagePtr(L, 1);
     gdImagePtr src = getImagePtr(L, 2);
     double dstX = (double) lua_tonumber(L, 3);
@@ -1874,8 +1726,7 @@ static int LgdImageCopyRotated(lua_State *L)
 
 /* void gdImageCopyMerge(gdImagePtr dst, gdImagePtr src, int dstX,
         int dstY, int srcX, int srcY, int w, int h, int pct)  */
-static int LgdImageCopyMerge(lua_State *L)
-{
+static int LgdImageCopyMerge(lua_State *L) {
     gdImagePtr dst = getImagePtr(L, 1);
     gdImagePtr src = getImagePtr(L, 2);
     int dstX = getint(L, 3);
@@ -1893,8 +1744,7 @@ static int LgdImageCopyMerge(lua_State *L)
 
 /* void gdImageCopyMergeGray(gdImagePtr dst, gdImagePtr src, int dstX,
         int dstY, int srcX, int srcY, int w, int h, int pct) */
-static int LgdImageCopyMergeGray(lua_State *L)
-{
+static int LgdImageCopyMergeGray(lua_State *L) {
     gdImagePtr dst = getImagePtr(L, 1);
     gdImagePtr src = getImagePtr(L, 2);
     int dstX = getint(L, 3);
@@ -1911,8 +1761,7 @@ static int LgdImageCopyMergeGray(lua_State *L)
 
 
 /* void gdImagePaletteCopy(gdImagePtr dst, gdImagePtr src) */
-static int LgdImagePaletteCopy(lua_State *L)
-{
+static int LgdImagePaletteCopy(lua_State *L) {
     gdImagePtr dst = getImagePtr(L, 1);
     gdImagePtr src = getImagePtr(L, 2);
 
@@ -1922,8 +1771,7 @@ static int LgdImagePaletteCopy(lua_State *L)
 
 
 /* void gdImageSquareToCircle(gdImagePtr im, int radius) */
-static int LgdImageSquareToCircle(lua_State *L)
-{
+static int LgdImageSquareToCircle(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int r = getint(L, 2);
 
@@ -1933,8 +1781,7 @@ static int LgdImageSquareToCircle(lua_State *L)
 
 
 /* void gdImageSharpen(gdImagePtr im, int pct) */
-static int LgdImageSharpen(lua_State *L)
-{
+static int LgdImageSharpen(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int pct = getint(L, 2);
 
@@ -1944,8 +1791,7 @@ static int LgdImageSharpen(lua_State *L)
 
 
 /* void gdImageSetClip(gdImagePtr im, int x1, int y1, int x2, int y2) */
-static int LgdImageSetClip(lua_State *L)
-{
+static int LgdImageSetClip(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int x1 = getint(L, 2);
     int y1 = getint(L, 3);
@@ -1959,8 +1805,7 @@ static int LgdImageSetClip(lua_State *L)
 
 /* void gdImageGetClip(gdImagePtr im, int *x1, int *y1, int *x2, int *y2) */
 /* Changed to:  x1p, y1p, x2p, y2p = im:getClip() */
-static int LgdImageGetClip(lua_State *L)
-{
+static int LgdImageGetClip(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
 
@@ -1976,8 +1821,7 @@ static int LgdImageGetClip(lua_State *L)
 #ifdef GD_FONTCONFIG
 /* int gdFTUseFontConfig(int flag) */
 /* Changed to: gd.useFontConfig(true_or_false) */
-static int LgdFTUseFontConfig(lua_State *L)
-{
+static int LgdFTUseFontConfig(lua_State *L) {
     int b = lua_toboolean(L, 1);
     lua_pushboolean(L, gdFTUseFontConfig(b));
     return 1;
@@ -1987,16 +1831,14 @@ static int LgdFTUseFontConfig(lua_State *L)
 
 #ifdef GD_FREETYPE 
 /* int gdFontCacheSetup(void) */
-static int LgdFontCacheSetup(lua_State *L)
-{
+static int LgdFontCacheSetup(lua_State *L) {
     lua_pushboolean(L, !gdFontCacheSetup());
     return 1;
 }
 
 
 /* void gdFontCacheShutdown(void) */
-static int LgdFontCacheShutdown(lua_State *L)
-{
+static int LgdFontCacheShutdown(lua_State *L) {
     gdFontCacheShutdown();
     return 0;
 }
@@ -2016,8 +1858,7 @@ static int LgdFontCacheShutdown(lua_State *L)
 */
 
 #ifdef GD_FREETYPE 
-static int LgdImageStringFT(lua_State *L)
-{
+static int LgdImageStringFT(lua_State *L) {
     gdImagePtr im;
     int fg = getint(L, 2);
     char *font = (char*) getstring(L, 3);
@@ -2033,8 +1874,7 @@ static int LgdImageStringFT(lua_State *L)
     else
         im = getImagePtr(L, 1);
 
-    if (gdImageStringFT(im, brect, fg, font, size, ang, x, y, str) == NULL)
-    {
+    if (gdImageStringFT(im, brect, fg, font, size, ang, x, y, str) == NULL) {
         lua_pushnumber(L, brect[0]);
         lua_pushnumber(L, brect[1]);
         lua_pushnumber(L, brect[2]);
@@ -2064,8 +1904,7 @@ static int LgdImageStringFT(lua_State *L)
 
 */
 
-static int LgdImageStringFTEx(lua_State *L)
-{
+static int LgdImageStringFTEx(lua_State *L) {
     gdImagePtr im;
     int fg = getint(L, 2);
     char *font = (char*) getstring(L, 3);
@@ -2083,8 +1922,7 @@ static int LgdImageStringFTEx(lua_State *L)
     else
         im = getImagePtr(L, 1);
 
-    if (gdImageStringFTEx(im, brect, fg, font, size, ang, x, y, str, ex) == NULL)
-    {
+    if (gdImageStringFTEx(im, brect, fg, font, size, ang, x, y, str, ex) == NULL) {
         lua_pushnumber(L, brect[0]);
         lua_pushnumber(L, brect[1]);
         lua_pushnumber(L, brect[2]);
@@ -2094,14 +1932,12 @@ static int LgdImageStringFTEx(lua_State *L)
         lua_pushnumber(L, brect[6]);
         lua_pushnumber(L, brect[7]);
         ret = 8;
-        if (ex->flags & gdFTEX_XSHOW)
-        {
+        if (ex->flags & gdFTEX_XSHOW) {
             lua_pushstring(L, ex->xshow);
             gdFree(ex->xshow);
             ret++;
         }
-        if (ex->flags & gdFTEX_RETURNFONTPATHNAME)
-        {
+        if (ex->flags & gdFTEX_RETURNFONTPATHNAME) {
             lua_pushstring(L, ex->fontpath);
             gdFree(ex->fontpath);
             ret++;
@@ -2125,8 +1961,7 @@ static int LgdImageStringFTEx(lua_State *L)
                    fillPortion, fontname, points, top, bottom, color)
 */
 
-static int LgdImageStringFTCircle(lua_State *L)
-{
+static int LgdImageStringFTCircle(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1);
     int cx = getint(L, 2);
     int cy = getint(L, 3);
@@ -2154,16 +1989,14 @@ static int LgdImageStringFTCircle(lua_State *L)
     Changed to:  im:gifAnimBegin(filename, globalCM, loops)
 */
 
-static int LgdImageGifAnimBegin(lua_State *L)
-{
+static int LgdImageGifAnimBegin(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1); 
     const char *fname = getstring(L, 2);
     int globalCM = lua_toboolean(L, 3);
     int loops = getint(L, 4);
     FILE *fp;
 
-    if ((fp = fopen(fname, "wb")) == NULL)
-    {
+    if ((fp = fopen(fname, "wb")) == NULL) {
         lua_pushboolean(L, 0); /* Error */
         return 1;
     }
@@ -2181,8 +2014,7 @@ static int LgdImageGifAnimBegin(lua_State *L)
                     disposal [, previm])
 */
 
-static int LgdImageGifAnimAdd(lua_State *L)
-{
+static int LgdImageGifAnimAdd(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1); 
     const char *fname = getstring(L, 2);
     int localCM = lua_toboolean(L, 3);
@@ -2196,8 +2028,7 @@ static int LgdImageGifAnimAdd(lua_State *L)
     if (lua_gettop(L) >= 8)
         previm = getImagePtr(L, 8);
 
-    if ((fp = fopen(fname, "ab")) == NULL)
-    {
+    if ((fp = fopen(fname, "ab")) == NULL) {
         lua_pushboolean(L, 0); /* Error */
         return 1;
     }
@@ -2213,13 +2044,11 @@ static int LgdImageGifAnimAdd(lua_State *L)
     Changed to:  gd.gifAnimEnd(filename)
 */
 
-static int LgdImageGifAnimEnd(lua_State *L)
-{
+static int LgdImageGifAnimEnd(lua_State *L) {
     const char *fname = getstring(L, 1);
     FILE *fp;
 
-    if ((fp = fopen(fname, "ab")) == NULL)
-    {
+    if ((fp = fopen(fname, "ab")) == NULL) {
         lua_pushboolean(L, 0); /* Error */
         return 1;
     }
@@ -2236,8 +2065,7 @@ static int LgdImageGifAnimEnd(lua_State *L)
     Changed to:  im:gifAnimBeginStr(globalCM, loops)
 */
 
-static int LgdImageGifAnimBeginPtr(lua_State *L)
-{
+static int LgdImageGifAnimBeginPtr(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1); 
     int globalCM = lua_toboolean(L, 2);
     int loops = getint(L, 3);
@@ -2245,12 +2073,10 @@ static int LgdImageGifAnimBeginPtr(lua_State *L)
     int size;
 
     str = gdImageGifAnimBeginPtr(im, &size, globalCM, loops);
-    if (str != NULL)
-    {
+    if (str != NULL) {
         lua_pushlstring(L, str, size);
         gdFree(str);
-    }
-    else
+    } else
         lua_pushnil(L);
     return 1;
 }
@@ -2263,8 +2089,7 @@ static int LgdImageGifAnimBeginPtr(lua_State *L)
                     disposal [, previm])
 */
 
-static int LgdImageGifAnimAddPtr(lua_State *L)
-{
+static int LgdImageGifAnimAddPtr(lua_State *L) {
     gdImagePtr im = getImagePtr(L, 1); 
     int localCM = lua_toboolean(L, 2);
     int leftOfs = getint(L, 3);
@@ -2280,12 +2105,10 @@ static int LgdImageGifAnimAddPtr(lua_State *L)
 
     str = gdImageGifAnimAddPtr(im, &size, localCM, leftOfs, topOfs, delay,
             disp, previm);
-    if (str != NULL)
-    {
+    if (str != NULL) {
         lua_pushlstring(L, str, size);
         gdFree(str);
-    }
-    else
+    } else
         lua_pushnil(L);
     return 1;
 }
@@ -2295,18 +2118,15 @@ static int LgdImageGifAnimAddPtr(lua_State *L)
     Changed to:  gd.gifAnimEndStr()
 */
 
-static int LgdImageGifAnimEndPtr(lua_State *L)
-{
+static int LgdImageGifAnimEndPtr(lua_State *L) {
     int size;
     char *str;
 
     str = gdImageGifAnimEndPtr(&size);
-    if (str != NULL)
-    {
+    if (str != NULL) {
         lua_pushlstring(L, str, size);
         gdFree(str);
-    }
-    else
+    } else
         lua_pushnil(L);
     return 1;
 }
@@ -2466,8 +2286,7 @@ static const luaL_reg LgdMetatable[] =
 };
 
 
-int luaopen_gd(lua_State *L)
-{
+int luaopen_gd(lua_State *L) {
     luaL_openlib(L, LIB_NAME, LgdFunctions, 0);
     lua_pushliteral(L, "VERSION");
     lua_pushliteral(L, LIB_VERSION);
