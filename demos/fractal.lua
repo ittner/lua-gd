@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 
--- Draws the famous fractal called the Sierpinski triangle with lua-gd
+-- Draws the famous Sierpinski triangle with lua-gd
 
 require "gd"
 
