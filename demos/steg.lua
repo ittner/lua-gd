@@ -1,21 +1,6 @@
 #/usr/bin/env lua
 --[[
 
-Using Lua-GD to write steganographic messages in PNG images.
-(c) 2005 Alexandre Erwin Ittner <aittner@netuno.com.br>
-
-This program is free software; you can redistribute it and/or modify it
-under the terms of the GNU General Public License as published by the
-Free Software Foundation; either version 2 of the License, or (at your
-option) any later version.
-
-This program is distributed in the hope that it will be useful, but
-WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-for more details.
-
-
-
                       Steganography with Lua-GD
 
 Steganography is the technique of writing hidden messages in such a way
@@ -46,13 +31,13 @@ cat) the attacker will not detect it and the message will arrive to Bob.
 This program will help Alice to hide some arbitrary text in a PNG image by
 replacing the least significant bits of each color channel of some pixels
 with bits from the encrypted message. PNG or other loseless compression
-algorithm are mandatory here: Compressing the image with a lossy algorithm
-will destroy the stored information. The maximum length of the message is
-limited by the image's size (each byte needs 8 color channels or 2 pixels
-and 2 channels from the next pixel). So, the image must have at least
-"ceil((length+1)*8/3)" pixels (the extra byte is the NUL marker for the
-end of the string). So, if Alice's message is "Meet me in the secret place
-at nine o'clock.", she will encrypt and sign it to something like
+algorithm are mandatory here, since compressing the image with a lossy
+algorithm will destroy the stored information. The maximum length of the
+message is limited by the image's size (each byte needs 8 color channels or
+2 pixels and 2 channels from the next pixel). So, the image must have at
+least "ceil((length+1)*8/3)" pixels (the extra byte is the NUL marker for
+the end of the string). So, if Alice's message is "Meet me in the secret
+place at nine o'clock.", she will encrypt and sign it to something like
 "PyJYDpz5LCOSHPiXDvLHmVzxLV8qS7EFvZnoo1Mxk+BlT+7lMjpQKs" (imagine Alice's
 cat walking in you keyboard :). This is the ciphertext that will be sent
 to Bob through the image.

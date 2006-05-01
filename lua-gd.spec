@@ -4,7 +4,7 @@ Release: 1
 Summary: gd bindings for the Lua programming language
 Summary(pt_BR): Bindings da biblioteca gd para a linguagem Lua
 Packager: Alexandre Erwin Ittner <aittner@netuno.com.br>
-License: LGPL
+License: MIT
 Group: Libraries
 Group(pt_BR): Bibliotecas
 Source0: %{name}-%{version}.tar.gz
@@ -54,5 +54,7 @@ rm -rf %{buildroot} $RPM_BUILD_ROOT $RPM_BUILD_DIR/%{name}-%{version}
 %changelog
 * Sun Aug 28 2005 Alexandre Erwin Ittner <aittner@netuno.com.br>
 - First version of this package.
+* Sun Apr 30 2006 Alexandre Erwin Ittner <aittner@netuno.com.br>
+- New version. License update.
 
 
