@@ -48,7 +48,7 @@ INSTALL_PATH=`pkg-config $(LUAPKG) --variable=INSTALL_CMOD`
 #OUTFILE=gd.so
 #CFLAGS=-Wall `gdlib-config --cflags` -I/usr/include/lua5.1 -O3
 #GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
-#LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -llua5.1 -lgd 
+#LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -llua51 -lgd
 #INSTALL_PATH=/usr/lib/lua/
 
 
@@ -59,7 +59,7 @@ INSTALL_PATH=`pkg-config $(LUAPKG) --variable=INSTALL_CMOD`
 #OUTFILE=gd.dll
 #CFLAGS=-Wall -IC:/lua5.1/ -O3
 #GDFEATURES=-DGD_XPM -DGD_JPEG -DGD_FONTCONFIG -DGD_FREETYPE -DGD_PNG -DGD_GIF
-#LFLAGS=-shared -lgd2 -lm -llua5.1
+#LFLAGS=-shared -lgd2 -lm -llua51
 #INSTALL_PATH="C:/Program Files/lua/"
 # ---------------------------------------------------------------------------
 
