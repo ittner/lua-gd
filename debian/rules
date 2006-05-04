@@ -46,7 +46,7 @@ install: build
 	mkdir -p debian/lua-gd/$(INSTALL_PATH)
 
 	cp gd.so debian/lua-gd/$(INSTALL_PATH)
-	cp doc/* debian/lua-gd/usr/share/doc/lua-gd/
+	cp README COPYING doc/* debian/lua-gd/usr/share/doc/lua-gd/
 	cp demos/* debian/lua-gd/usr/share/doc/lua-gd/demos/
 
 # Build architecture-dependent files here.

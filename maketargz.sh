@@ -16,6 +16,10 @@ cp -r luagd.c $DIRNAME
 cp -r lua-gd.spec $DIRNAME
 cp -r test_features.lua $DIRNAME
 
+mkdir $DIRNAME/debian
+cp debian/changelog debian/control debian/copyright debian/rules \
+    $DIRNAME/debian
+
 cp -r demos $DIRNAME
 rm -rf $DIRNAME/demos/CVS
 rm -rf $DIRNAME/demos/.xvpics
