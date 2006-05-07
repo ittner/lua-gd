@@ -26,6 +26,10 @@
 
 CC=gcc
 
+# For the brave of heart ;)
+OMITFP=-fomit-frame-pointer
+
+
 # ---------------------------------------------------------------------------
 # Automatic configuration using pkgconfig, gd-config and sed. These
 # lines should work on most Linux/Unix systems. If your system does not
@@ -35,7 +39,8 @@ CC=gcc
 # Name of .pc file. "lua5.1" on Debian/Ubuntu
 LUAPKG=lua5.1
 OUTFILE=gd.so
-CFLAGS=`gdlib-config --cflags` `pkg-config $(LUAPKG) --cflags` -O3 -Wall
+CFLAGS=`gdlib-config --cflags` `pkg-config $(LUAPKG) --cflags` -O3 -Wall \
+    $(OMITFP)
 GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
 LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` \
     `pkg-config $(LUAPKG) --libs` -lgd
@@ -46,7 +51,7 @@ INSTALL_PATH=`pkg-config $(LUAPKG) --variable=INSTALL_CMOD`
 # Manual configuration for systems without pkgconfig.
 
 #OUTFILE=gd.so
-#CFLAGS=-Wall `gdlib-config --cflags` -I/usr/include/lua5.1 -O3
+#CFLAGS=-Wall `gdlib-config --cflags` -I/usr/include/lua5.1 -O3 $(OMITFP)
 #GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
 #LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -llua51 -lgd
 #INSTALL_PATH=/usr/lib/lua/
@@ -57,7 +62,7 @@ INSTALL_PATH=`pkg-config $(LUAPKG) --variable=INSTALL_CMOD`
 # Uncomment, change and good luck :)
 
 #OUTFILE=gd.dll
-#CFLAGS=-Wall -IC:/lua5.1/ -O3
+#CFLAGS=-Wall -IC:/lua5.1/ -O3 $(OMITFP)
 #GDFEATURES=-DGD_XPM -DGD_JPEG -DGD_FONTCONFIG -DGD_FREETYPE -DGD_PNG -DGD_GIF
 #LFLAGS=-shared -lgd2 -lm -llua51
 #INSTALL_PATH="C:/Program Files/lua/"
