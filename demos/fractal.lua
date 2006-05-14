@@ -4,15 +4,16 @@
 
 require "gd"
 
-size = 500
+local size = 500
 
-im = gd.createPalette(size, size)
-white = im:colorAllocate(255, 255, 255)
-black = im:colorAllocate(0, 0, 0)
+local im = gd.createPalette(size, size)
+local white = im:colorAllocate(255, 255, 255)
+local black = im:colorAllocate(0, 0, 0)
 
-m = {}
+local m = {}
 m[math.floor(size/2)] = true
 
+local n
 for i = 1, size do
   n = {}
   for j = 1, size do
