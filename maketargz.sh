@@ -21,12 +21,12 @@ cp debian/changelog debian/control debian/copyright debian/rules \
     $DIRNAME/debian
 
 cp -r demos $DIRNAME
-rm -rf $DIRNAME/demos/CVS
+rm -rf $DIRNAME/demos/.svn
 rm -rf $DIRNAME/demos/.xvpics
 rm -f $DIRNAME/demos/out.*
 
 cp -r doc $DIRNAME
-rm -rf $DIRNAME/doc/CVS
+rm -rf $DIRNAME/doc/.svn
 rm -rf $DIRNAME/doc/.xvpics
 
 tar -czf $TGZNAME $DIRNAME
