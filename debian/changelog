@@ -1,3 +1,10 @@
+lua-gd (2.0.33r2-2) unstable; urgency=low
+
+  * Updated to Debian compatibility level 4.
+
+ -- Alexandre Erwin Ittner <aittner@netuno.com.br>  Sun, 11 Feb 2007 15:20:09 -0200
+
+
 lua-gd (2.0.33r2-1) unstable; urgency=low
 
   * Initial release Closes: #nnnn  (nnnn is the bug number of your ITP)
