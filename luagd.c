@@ -55,6 +55,7 @@ static char *rev = "$Id$";
 #endif
 #if LUA_VERSION_NUM < 501
 #define luaL_register(a, b, c) luaL_openlib((a), (b), (c), 0)
+#define luaL_checkinteger(L, n) ((int)luaL_checknumber(L, n))
 #endif
 
 /* Emulates lua_(un)boxpointer from Lua 5.0 (don't exists on Lua 5.1) */
