@@ -23,3 +23,4 @@ enabled(gd.jpeg, "JPEG support")
 enabled(gd.createFromXpm, "XPM/XBM support")
 enabled(gd.stringFT, "FreeType support")
 enabled(gd.useFontConfig, "Fontconfig support")
+
