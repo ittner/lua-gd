@@ -1,125 +1,176 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
- <head>
-  <title>Lua-GD Reference Manual</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+
+<head>
+ <title>Lua-GD Reference Manual</title>
+ <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+ <meta name="Language" content="en" />
+ <meta name="Keywords" content="Lua GD image manipulation library bitmap imaging manual" />
+ <meta name="Description" content="The Lua-GD reference manual. Basic installation, API documentation, and usage tips for Lua-GD" />
+
   <style type="text/css">
 <!--
-H1 {
+* {
     font-family: Verdana, Arial, helvetica, sans-serif;
-    font-size: 20px;
-    color: #000000;
-    background-color: #FFFFFF;
-    text-align: center;
-}    
-
-H2 {
-    font-family: Verdana, Arial, helvetica, sans-serif;
-    font-size: 18px;
-    color: #000000;
-    background-color: #EAEAEA;
-}    
-
-H3 {
-    font-family: Verdana, Arial, helvetica, sans-serif;
-    font-size: 16px;
-    color: #000000;
-    background-color: #EAEAEA;
-}    
-
-H4 {
-    font-family: Verdana, Arial, helvetica, sans-serif;
-    font-size: 14px;
-    color: #000000;
-}    
-
-BODY  {
-    font-family: Verdana, Arial, helvetica, sans-serif;
-    font-size: 12px;
-    color: #000000;
-    background: #FFFFFF;
 }
 
-A {
-    font-family: Verdana, Arial, helvetica, sans-serif;
+body  {
     font-size: 12px;
+    color: #000000;
+    background: #ffffff;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+}    
+
+h2 {
+    font-size: 1.5em;
+    font-weight: bold;    
+    background-color: #eaeaea;
+    margin-top: 3em;
+}    
+
+h3 {
+    font-size: 1.25em;
+    font-weight: bold;    
+    background-color: #eaeaea;
+    margin-top: 2em;    
+}    
+
+h4 {
+    font-weight: bold;
+    font-size: 1.15em;
+}
+
+a {
     color: #000088;
     text-decoration: none;
 }
 
-A:HOVER {
+a:hover {
     text-decoration: underline;
-    color: #FF0000;
-    background-color: #EAEAEA;
+    color: #ff0000;
+    background-color: #eaeaea;
 }
 
-HR {
-    border: 1px solid #EAEAEA;
+pre {
+    font-family: "Courier New", courier, monospace;
+    color: black;
 }
 
-TABLE {
-    border: 0px;
+hr {
+    border: 1px solid #eaeaea;
 }
 
-TR, TD {
-    font-family: Verdana, Arial, helvetica, sans-serif;
-    font-size: 12px;
-    border: 1px solid #EAEAEA;
-    background-color: #FFFFFF;
+img {
+    border: none;
+}
+
+
+table {
+    border: none;
+}
+
+tr, td, th {
+    font-family: Verdana, Arial, helvetica, sans-serif; /* IE bugs */
+    font-size: 1em;
+    border: 1px solid #eaeaea;
     padding: 0px;
-    cell-spacing: 1px;
 }
 
-TR.h, TD.h {
+th {
     text-align: center;
+    font-weight: bold;
+    background-color: #eaeaea;    
+}
+
+tr.i, td.i {
+    text-align: center;
+}
+
+tr.n, td.n {
+    font-size: 1em;
+    font-family: "Courier New", courier, monospace;
+}
+
+
+
+
+.typed-command {
+    font-family: "Courier New", courier, monospace;
+}
+
+.code-example, .license-text {
+    border: 1px solid rgb(128, 128, 128);
+    padding: 5pt;
+    display: block;
+    font-family: "Courier New", courier, monospace;
+    background-color: #f0f0f0;
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.console-output {
+    font-family: "Courier New", courier, monospace;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 5pt;
+    width: 50em;
+}
+
+.wrong {
+    color: #ff0000;
+    text-decoration: line-through;
+}
+
+div.image-box {
+    display: inline;
+    min-height: 300px;
+    border: gray 1pt solid;
+    padding: 2px;
+    margin: 2px
+}
+
+div.image-box img {
+    top: 0px;
+}
+
+div.image-box p {
+    font-size: 0.75em;
+    text-align: center;
+}
+
+div.header {
+    text-align: center;
+}
+    
+.indented {
+    margin-left: 2em
+}
+
+.method-name {
     font-weight: bold;
 }
 
-TR.i, TD.i {
-    text-align: center;
+.constant {
+    color: #008800;
+    font-weight: bold;
 }
 
-TR.n, TD.n {
-    font-size: 12px;
-    font-family: "Courier New", courier, monospace;
+.lua-keyword {
+    color: #550055;
+    font-weight: bold;
+    text-decoration: none;    
 }
 
-
-pre
-{
-    font-family: "Courier New", courier, monospace;
-    color: black;
+.argument, .parameter, .module-name {
+    font-weight: bold;
 }
 
-pre.example
-{
-    border: 1px solid rgb(128, 128, 128);
-    padding: 5pt;
-    display: block;
-    font-family: "Courier New", courier, monospace;
-    background-color: #F0F0F0;
-    margin-left: 2%;
-    margin-right: 2%;
-}
-
-pre.example2
-{
-    border: 1px solid rgb(128, 128, 128);
-    padding: 5pt;
-    display: block;
-    font-family: "Courier New", courier, monospace;
-    background-color: #F0F0F0;
-}
-
-pre.wrong
-{
-    border: gray 1pt solid;
-    padding: 2pt;
-    display: block;
-    font-family: "Courier New", courier, monospace;
-    background-color: #FF0000;
-    color: black;
-}
 
 -->
  </style>
@@ -127,15 +178,17 @@ pre.wrong
 
 <body>
 
-<center>
- <a href="http://lua-gd.luaforge.net"
-  ><img src="lua-gd.png" alt="Lua-GD Logo" title="Lua-GD Logo" border="0"></a>
+<div class="header">
+ <a href="http://lua-gd.luaforge.net" title="Lua-GD homepage">
+  <img src="lua-gd.png" alt="Lua-GD Logo" title="Lua-GD" width="140" height="140" />
+ </a>
  <h1>Lua-GD 2.0.33r2</h1>
-</center>
+</div>
 
-<h2> Contents </h2>
+
+<h2><a id="contents">Contents</a></h2>
 <ul>
- <li><a href="#intro">Introduction</a>
+ <li><a href="#intro">Introduction</a></li>
  <li><a href="#license">Licensing information</a>
    <ul>
      <li><a href="#license.luagd">Lua-GD License</a></li>
@@ -174,11 +227,10 @@ pre.wrong
 </ul>
 
 
-<a name="intro"></a>
-<h2>Introduction</h2>
+<h2><a id="intro">Introduction</a></h2>
 
 <p> "gd" is a C graphics library created by
-<a href="http://www.boutell.com/contact">Thomas Boutell</a> that allows
+<a href="http://www.boutell.com/contact" title="Thomas Boutell's homepage">Thomas Boutell</a> that allows
 your code to quickly draw complete images with lines, polygons, arcs,
 text, multiple colors, cut and paste from other images, flood fills,
 read in or write out images in the PNG, JPEG or GIF format. This is
@@ -188,12 +240,12 @@ not provide for every possible desirable graphics operation. It is not
 necessary or desirable for gd to become a kitchen-sink graphics package,
 but it does include most frequently requested features, including both
 truecolor and palette images, resampling (smooth resizing of truecolor
-images) and so forth.  You can get more information about gd from <a
-href="http://www.boutell.com/gd/">it's homepage</a>. </p>
+images) and so forth.  You can get more information about gd from
+<a href="http://www.libgd.org/" title="Lib-GD homepage">it's homepage</a>. </p>
 
 <p> Lua-GD is a "binding": a library that exports gd functions to the <a
-href="http://www.lua.org">Lua Programming Language</a>, allowing you to
-use gd from Lua. The API was <b>NOT</b> literally exported, but changed
+href="http://www.lua.org" title="Lua homepage">Lua Programming Language</a>, allowing you to
+use gd from Lua. The API was <strong>not</strong> literally exported, but changed
 in a way that make it familiar to Lua users. </p>
 
 <p> Lua-GD is a programming library, not a paint program. If you are
@@ -202,31 +254,29 @@ you are in the wrong place. </p>
 
 <p> This document, which was heavly based on gd manual, describes the API
 and provides the information needed to use the library. Some experience
-with Lua is <b>required</b>.</p>
+with Lua is <strong>required</strong>.</p>
 
-<p><b>A NOTE ON VERSION NUMBERS:</b> Lua-GD version numbers is in
+<p><strong>A note on version numbers:</strong> Lua-GD version numbers is in
 the format "X.Y.ZrW", where X.Y.Z indicates the gd version and W the
-binding version. So, the <b>2.0.33r1</b> version is the first binding
-version for gd 2.0.33 and <b>2.0.33r2</b> has some improvements/bug
+binding version. So, the <em>2.0.33r1</em> version is the first binding
+version for gd 2.0.33 and <em>2.0.33r2</em> has some improvements/bug
 fixes/etc. but uses the same gd version. </p>
 
 
 
-<a name="license"></a>
-<h2>Licensing information</h2>
+<h2><a id="license">Licensing information</a></h2>
 
 <p> Lua-GD and gd have diferent licenses. In order to use Lua-GD in your
 application, you need to accept both them. </p>
 
-<a name="license.luagd"></a>
-<h3>Lua-GD License</h3>
+<h3><a id="license.luagd">Lua-GD License</a></h3>
 
 <p>Lua-GD is <em>copyrighted free software</em>, distributed under the
 MIT license (the same used by Lua 5.1) and it can be used at no cost for
 both academic and commercial purpouses. Or, more precisely: </p>
 
-<blockquote>
-<pre>
+
+<pre class="license-text indented">
 Lua-GD (c) 2004-2006 Alexandre Erwin Ittner
 
 Permission is hereby granted, free of charge, to any person obtaining
@@ -251,13 +301,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 If you use this package in a product, an acknowledgment in the product
 documentation would be greatly appreciated (but it is not required).
 </pre>
-</blockquote>
 
 
-<a name="license.gd"></a>
-<h3>gd License</h3>
+<h3><a id="license.gd">gd License</a></h3>
 
-<blockquote>
+<div class="indented">
 <p>Portions copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
 2002, 2003, 2004 by Cold Spring Harbor Laboratory. Funded under Grant
 P41-RR02188 by the National Institutes of Health.</p>
@@ -293,7 +341,7 @@ David Koblas, with modifications for thread safety by Thomas Boutell.</p>
 <p>Portions relating to WBMP copyright 2000, 2001, 2002, 2003, 2004
 Maurice Szmurlo and Johan Van den Brande.</p>
 
-<p>Portions relating to GIF animations copyright 2004 Jaakko Hyvätti
+<p>Portions relating to GIF animations copyright 2004 Jaakko HyvÃ¤tti
 (jaakko.hyvatti@iki.fi)</p>
 
 <p>Permission has been granted to copy, distribute and modify gd in any
@@ -315,19 +363,18 @@ purpose, with respect to this code and accompanying documentation.</p>
 authors also wish to thank Hutchison Avenue Software Corporation for
 their prior contributions. </p>
 
-</blockquote>
+</div>
 
 
 
 
 
-<a name="download"></a>
-<a name="installation"></a>
-<h2>Download and installation</h2>
+
+<h2><a id="download">Download and installation</a></h2>
 
 <p> Lua-GD source code comes in a tar.gz package that can be downloaded
 from the <a href="http://luaforge.net/projects/lua-gd/">Lua-GD project
-page</a> on <a href="http://www.luaforge.net">LuaForge</a> or from
+page</a> on <a href="http://www.luaforge.net/">LuaForge</a> or from
 its <a href="http://www.sourceforge.net/projects/lua-gd/">mirror on
 Sourceforge</a>. There are also some pre-compiled binary packages
 available for Linux and some other Unix systems.</p>
@@ -337,10 +384,10 @@ requires GNU Make, gd and its dependencies (libpng, libjpeg, FreeType2,
 fontconfig, etc.) installed on your system. Some components that may
 be disabled on your gd installation will be disabled in Lua-GD too. To
 compile on Unix, just unpack the distribution package, enter the directory
-and type <code>make</code> in your favourite shell. If the compilation
+and type <code class="typed-command">make</code> in your favourite shell. If the compilation
 was successful, you will see something like: </p>
 
-<pre>
+<pre class="console-output">
 gcc -o gd.so `gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
 `gdlib-config --cflags` `pkg-config lua5.1 --cflags` -O3 -Wall -shared
 `gdlib-config --ldflags` `gdlib-config --libs` `pkg-config lua5.1 --libs`
@@ -356,38 +403,35 @@ Lua-GD features:
     Fontconfig support .............. Enabled
 </pre>
 
-<p> To install the library with <b>Lua 5.1</b> and above just type
-<code>make install</code>, as root. </p>
+<p> To install the library with <strong>Lua 5.1</strong> and above just type
+<code class="typed-command">make install</code>, as root. </p>
 
-<p> <b> WARNING:</b> This will work only in systems with pkg-config (which
+<p> <strong class="strong-warning">Warning:</strong> This will work only in systems with pkg-config (which
 includes the major Linux distributions). In other systems, you will need to
-edit the Makefile and manually install the library, by copying the 'gd.so'
+edit the Makefile and manually install the library, by copying the '<span class="file-name">gd.so</span>'
 file to your Lua binary modules directory.</p>
 
 <p> Compiling Lua-GD on Windows systems is almost, but not quite,
 entirely unlike compiling it on Unix. You will need to edit the Makefile
 by yourself. </p>
 
-<p> <b>A NOTE TO DEBIAN/UBUNTU USERS:</b> To enable the Fontconfig and XPM
-support, you will need the <b>libgd2-xpm</b> and <b>libgd2-xpm-dev</b>
-packages. The <b>libgd2-noxpm</b> does not have Fontconfig support.</p>
+<p> <strong class="strong-warning">A note to Debian/Ubuntu users:</strong> To enable the Fontconfig and XPM
+support, you will need the libgd2-xpm and libgd2-xpm-dev
+packages. The libgd2-noxpm does not have Fontconfig support.</p>
 
 
 
-<a name="load"></a>
-<h2>Library loading and initialization</h2>
+<h2><a id="load">Library loading and initialization</a></h2>
 
 <p>Lua-GD uses the Lua 5.1 package system that allows you to simply do a</p>
 
-<pre class="example">require "gd"</pre>
+<pre class="code-example indented">require "gd"</pre>
 
 <p> call to load up the library. </p>
 
 
 
-
-<a name="api"></a>
-<h2>Lua-GD API</h2>
+<h2><a id="api">Lua-GD API</a></h2>
 
 <p> The Lua-GD API is not identical to the gd C API: it was changed in
 a way that make it more familiar to Lua users and use the extra power
@@ -395,11 +439,11 @@ provided by Lua, at cost of some learning for those that already use
 gd. </p>
 
 <p> All the functions and constants are stored on a single global
-module called <code>gd</code>. Images are objects and they can use the
+module called <span class="module-name">gd</span>. Images are objects and they can use the
 common colon notation for its methods, but you can also use a C-style
 syntax. So, the following two lines are equivalent: </p>
 
-<pre class="example">
+<pre class="code-example indented">
 local gray1 = im:colorResolve(128, 128, 128)        -- Using the colon notation
 local gray2 = gd.colorResolve(im, 128, 128, 128)    -- Using a C-style notation
 </pre>
@@ -408,8 +452,7 @@ local gray2 = gd.colorResolve(im, 128, 128, 128)    -- Using a C-style notation
 
 
 
-<a name="api.constants"></a>
-<h3>Constants</h3>
+<h3><a id="api.constants">Constants</a></h3>
 
 <h4>gd.VERSION</h4>
 <p>A string with the version and some information about the library.</p>
@@ -420,150 +463,149 @@ palette-based PNG file according to the PNG standard, and is also the
 maximum number of colors in a palette-based gd image. This of course
 does not apply to truecolor images.</p>
 
-<h4> gd.GD2_FMT_RAW <br>
+<h4> gd.GD2_FMT_RAW <br/>
 gd.GD2_FMT_COMPRESSED</h4>
 
-<p> Used when saving images to GD2 files with <code>gd2</code> and
-<code>gd2Str</code> to indicate the image file format. This format is not
+<p> Used when saving images to GD2 files with <code class="method-name">gd2</code> and
+<code class="method-name">gd2Str</code> to indicate the image file format. This format is not
 intended for general purpose use and should never be used to distribute
 images. It is a file format allowing pseudo-random access to large
 image files. Its purpose is solely to allow very fast loading of parts
-of images. You should use <code>GD2_FMT_RAW</code> for faster loading
-(and bigger files) or GD2_FMT_COMPRESSED for smaller files (and slower
+of images. You should use <code class="constant">GD2_FMT_RAW</code> for faster loading
+(and bigger files) or <code class="constant">GD2_FMT_COMPRESSED</code> for smaller files (and slower
 loading). </p>
 
 
-<h4> gd.ARC <br>
-gd.CHORD <br>
-gd.PIE <br>
-gd.NO_FILL <br>
+<h4> gd.ARC <br />
+gd.CHORD <br />
+gd.PIE <br />
+gd.NO_FILL <br />
 gd.EDGED </h4>
 
-<p> These constants are used with the method <code>filledArc</code>
-and can be added together. <code>gd.ARC</code>, <code>gd.CHORD</code>,
-<code>gd.PIE</code> (synonym for <code>gd.CHORD</code>),
-<code>gd.NO_FILL</code> and <code>gd.EDGED</code> are mutually
-exclusive; <code>gd.CHORD</code> just connects the starting and
-ending angles with a straight line, while <code>gd.ARC</code>
-produces a rounded edge. <code>gd.PIE</code> is a synonym for
-<code>gd.ARC</code>. <code>gd.NO_FILL</code> indicates that the arc
+<p> These constants are used with the method <code class="method-name">filledArc</code>
+and can be added together. <code class="constant">gd.ARC</code>, <code class="constant">gd.CHORD</code>,
+<code class="constant">gd.PIE</code> (synonym for <code class="constant">gd.CHORD</code>),
+<code class="constant">gd.NO_FILL</code> and <code class="constant">gd.EDGED</code> are mutually
+exclusive; <code class="constant">gd.CHORD</code> just connects the starting and
+ending angles with a straight line, while <code class="constant">gd.ARC</code>
+produces a rounded edge. <code class="constant">gd.PIE</code> is a synonym for
+<code class="constant">gd.ARC</code>. <code class="constant">gd.NO_FILL</code> indicates that the arc
 or chord should be outlined, not filled. <code>gd.EDGED</code>, used
-together with <code>gd.NO_FILL</code>, indicates that the beginning and
+together with <code class="constant">gd.NO_FILL</code>, indicates that the beginning and
 ending angles should be connected to the center; this is a good way to
-outline (rather than fill) a 'pie slice'. See <code>gd.filledArc</code>
+outline (rather than fill) a 'pie slice'. See <code class="method-name">gd.filledArc</code>
 for details.</p>
 
 
 <h4>gd.ANTI_ALIASED</h4>
 
 <p>Used in place of a color when invoking a line-drawing method
-such as <code>gd.line</code> or <code>gd.rectangle</code>. When
-<code>gd.ANTI_ALIASED</code> is used as the color, the foreground color
-set with <code>gd.setAntiAliased</code> is used, with antialiasing
+such as <code class="method-name">gd.line</code> or <code class="method-name">gd.rectangle</code>. When
+<code class="constant">gd.ANTI_ALIASED</code> is used as the color, the foreground color
+set with <code class="method-name">gd.setAntiAliased</code> is used, with antialiasing
 mechanisms to minimize any "jagged" appearance. For more information,
-see <code>gd.setAntiAliased</code>.</p>
+see <code class="method-name">gd.setAntiAliased</code>.</p>
 
 
 <h4>gd.BRUSHED</h4>
 
 <p>Used in place of a color when invoking a line-drawing method
-such as <code>gd.line</code> or <code>gd.rectangle</code>. When
-<code>gd.BRUSHED</code> is used as the color, the brush image set with
-<code>gd.setBrush</code> is drawn in place of each pixel of the line
+such as <code class="method-name">gd.line</code> or <code class="method-name">gd.rectangle</code>. When
+<code class="constant">gd.BRUSHED</code> is used as the color, the brush image set with
+<code class="method-name">gd.setBrush</code> is drawn in place of each pixel of the line
 (the brush is usually larger than one pixel, creating the effect of a
-wide paintbrush). See also <code>gd.STYLED_BRUSHED</code> for a way to
+wide paintbrush). See also <code class="constant">gd.STYLED_BRUSHED</code> for a way to
 draw broken lines with a series of distinct copies of an image. </p>
 
 
 <h4>gd.STYLED</h4>
 
 <p> Used in place of a color when invoking a line-drawing method
-such as <code>gd.line</code> or <code>gd.rectangle</code>. When
-<code>gd.STYLED</code> is used as the color, the colors of the
+such as <code class="method-name">gd.line</code> or <code class="method-name">gd.rectangle</code>. When
+<code class="constant">gd.STYLED</code> is used as the color, the colors of the
 pixels are drawn successively from the style that has been set
 with <code>gd.setStyle</code>. If the color of a pixel is equal to
-<code>gd.TRANSPARENT</code>, that pixel is not altered. (This mechanism
+<code class="constant">gd.TRANSPARENT</code>, that pixel is not altered. (This mechanism
 is completely unrelated to the "transparent color" of the image itself;
-see <code>gd.colorTransparent</code> for that mechanism). </p>
+see <code class="method-name">gd.colorTransparent</code> for that mechanism). </p>
 
 
 <h4>gd.STYLED_BRUSHED</h4>
 
 <p> Used in place of a color when invoking a line-drawing method
-such as <code>gd.line</code> or <code>gd.rectangle</code>. When
-<code>gd.STYLED_BRUSHED</code> is used as the color, the brush image
-set with <code>gd.setBrush</code> is drawn at each pixel of the line,
-providing that the style set with <code>gd.setStyle</code> contains
-a nonzero value (OR <code>gd.TRANSPARENT</code>, which does not equal
+such as <code class="method-name">gd.line</code> or <code class="method-name">gd.rectangle</code>. When
+<code class="constant">gd.STYLED_BRUSHED</code> is used as the color, the brush image
+set with <code class="method-name">gd.setBrush</code> is drawn at each pixel of the line,
+providing that the style set with <code class="method-name">gd.setStyle</code> contains
+a nonzero value (OR <code class="constant">gd.TRANSPARENT</code>, which does not equal
 zero but is supported for consistency) for the current pixel. (Pixels
 are drawn successively from the style as the line is drawn, returning to
 the beginning when the available pixels in the style are exhausted). Note
-that this differs from the behavior of <code>gd.STYLED</code>, in which
+that this differs from the behavior of <code class="constant">gd.STYLED</code>, in which
 the values in the style are used as actual pixel colors, except for
-<code>gd.TRANSPARENT</code>. </p>
+<code class="constant">gd.TRANSPARENT</code>. </p>
 
 
 <h4>gd.TILED</h4>
 
-<p> Used in place of a normal color in <code>gd.filledRectangle</code>,
-<code>gd.filledPolygon</code>, <code>gd.fill</code>, and
- <code>gd.fillToBorder</code>. <code>gd.TILED</code>
-selects a pixel from the tile image set with <code>gd.setTile</code>
+<p> Used in place of a normal color in <code class="method-name">gd.filledRectangle</code>,
+<code class="method-name">gd.filledPolygon</code>, <code class="method-name">gd.fill</code>, and
+ <code class="method-name">gd.fillToBorder</code>. <code class="constant">gd.TILED</code>
+selects a pixel from the tile image set with <code class="method-name">gd.setTile</code>
 in such a way as to ensure that the filled area will be tiled with
 copies of the tile image. See the discussions of <code>gd.fill</code>
-and <code>gd.fillToBorder</code> for special restrictions regarding
+and <code class="method-name">gd.fillToBorder</code> for special restrictions regarding
 those methods. </p>
 
 
 <h4>gd.TRANSPARENT</h4>
 
 <p> Used in place of a normal color in a style to be set with
-<code>gd.setStyle</code>. <code>gd.TRANSPARENT</code> <b>is not</b>
+<code class="method-name">gd.setStyle</code>. <code class="constant">gd.TRANSPARENT</code> <b>is not</b>
 the transparent color index of the image; for that functionality please
-see <code>gd.colorTransparent</code>. </p>
+see <code class="method-name">gd.colorTransparent</code>. </p>
 
 
-<h4> gd.FONT_TINY <br>
-gd.FONT_SMALL <br>
-gd.FONT_MEDIUM <br>
-gd.FONT_LARGE <br>
+<h4> gd.FONT_TINY <br/>
+gd.FONT_SMALL <br/>
+gd.FONT_MEDIUM <br/>
+gd.FONT_LARGE <br/>
 gd.FONT_GIANT </h4>
 
-<p> These are the standard gd fonts used by <code>gd.string</code> and
-<code>gd.stringUp</code>. Sizes and styles are shown bellow: <br>
+<p> These are the standard gd fonts used by <code class="method-name">gd.string</code> and
+<code class="method-name">gd.stringUp</code>. Sizes and styles are shown bellow: <br />
 
 <img src="stdfonts.png" width="140" height="110" alt="Standard gd fonts"
-  title="Standard gd fonts"> 
+  title="Standard gd fonts" /> <br/>
 
-<br> If you need another fonts, you should use TrueType fonts with
-<code>gd.stringFT</code>.
+If you need another fonts, you should use TrueType fonts with
+<code class="method-name">gd.stringFT</code>.
 </p>
 
-<h4> gd.FTEX_Unicode <br>
-gd.FTEX_Shift_JIS <br>
+<h4> gd.FTEX_Unicode <br/>
+gd.FTEX_Shift_JIS <br/>
 gd.FTEX_Big5 </h4>
 
-<p> These are the character maps used by <code>gd.stringFTEx</code>. Explicit
+<p> These are the character maps used by <code class="method-name">gd.stringFTEx</code>. Explicit
 specification of the desired character mapping is useful when a font offers
 more than one of Unicode, Shift_JIS, and Big5. </p>
 
 
-<a name="api.create"></a>
-<h3>Image creation and destruction</h3>
+<h3><a id="api.create">Image creation and destruction</a></h3>
 
 
-<h4> gd.create(x, sy) <br>
+<h4> gd.create(x, sy) <br/>
 gd.createPalette(x, y) </h4>
 
 <p> These functions are used to create palette-based images, with
-no more than 256 colors. Invoke <code>gd.create</code> with the x
-and y dimensions of the desired image to return the new image or
-<b>nil</b> on error. <code>gd.createPalette</code> is a synomym for
-<code>gd.create</code>. </p>
+no more than 256 colors. Invoke <code class="method-name">gd.create</code> with the <var class="parameter">x</var>
+and <var class="parameter">y</var> dimensions of the desired image to return the new image or
+<var class="lua-keyword">nil</var> on error. <code class="method-name">gd.createPalette</code> is a synomym for
+<code class="method-name">gd.create</code>. </p>
 
 <p>Example:</p>
 
-<pre class="example">
+<pre class="code-example indented">
 -- creates a 20x20px palette-based image
 local im = gd.create(20, 20)
 </pre>
@@ -576,13 +618,13 @@ collector that detects when an piece of information becomes useless and
 <h4>gd.createTrueColor(x, y)</h4>
 
 <p> Used to create truecolor images, with an essentially unlimited
-number of colors. Invoke <code>gd.createTrueColor</code> with the x and
-y dimensions of the desired image to return the new image or <b>nil</b>
+number of colors. Invoke <code class="method-name">gd.createTrueColor</code> with the <var class="parameter">x</var>
+and <var class="parameter">y</var> dimensions of the desired image to return the new image or <var class="lua-keyword">nil</var>
 on error. Truecolor images are always filled with black at creation
 time. There is no concept of a "background" color index. </p>
 
 <p>Example:</p>
-<pre class="example">
+<pre class="code-example indented">
 -- creates a 20x20px true color image
 local im = gd.createTrueColor(20, 20)
 </pre>
@@ -597,9 +639,9 @@ collector that detects when an piece of information becomes useless and
 
 <p> This method creates a new palette-based image from a truecolor
 image using a high-quality two-pass quantization routine. If
-the <b>dither</b> flag is set to <b>true</b>, the image will be
+the <var class="parameter">dither</var> flag is set to <var class="lua-keyword">true</var>, the image will be
 dithered to approximate colors better, at the expense of some obvious
-"speckling". <b>colorsWanted</b>, an integer value, can be anything up
+"speckling". <var class="parameter">colorsWanted</var>, an integer value, can be anything up
 to 256. If the original source image includes photographic information
 or anything that came out of a JPEG, 256 is strongly recommended. 100%
 transparency of a single transparent color in the original truecolor
@@ -613,31 +655,29 @@ PNGs and JPEGs. The disk space gain of conversion to palette is not great
 
 
 
-<a name="api.input"></a>
-<h3>Image input functions</h3>
-
+<h3><a id="api.input">Image input functions</a></h3>
 
 
 <h4>gd.createFromJpeg(filename)</h4>
 
-<p> <code>gd.createFromJpeg</code> is called to load truecolor images from
-JPEG format files. Invoke <code>gd.createFromJpeg</code> with a string
+<p> <code class="method-name">gd.createFromJpeg</code> is called to load truecolor images from
+JPEG format files. Invoke <code class="method-name">gd.createFromJpeg</code> with a string
 pointing to an existing file containing the desired image to return a new
-truecolor image or <b>nil</b> if unable to load the image (most often
+truecolor image or <var class="lua-keyword">nil</var> if unable to load the image (most often
 because the file is corrupt or does not contain a JPEG image). You can
-determine the size of the image with <code>gd.sizeXY</code>. The returned
+determine the size of the image with <code class="method-name">gd.sizeXY</code>. The returned
 image is always a truecolor image. </p>
 
 
 
 <h4>gd.createFromPng(filename)</h4>
 
-<p> <code>gd.createFromPng</code> is called to load images from PNG format
-files. Invoke <code>gd.createFromPng</code> with a string pointing to
+<p> <code class="method-name">gd.createFromPng</code> is called to load images from PNG format
+files. Invoke <code class="method-name">gd.createFromPng</code> with a string pointing to
 an existing file containing the desired image to return a new image or
-<b>nil</b> if unable to load the image (most often because the file is
+<var class="lua-keyword">nil</var> if unable to load the image (most often because the file is
 corrupt or does not contain a PNG image). You can determine the size of
-the image with <code>gd.sizeXY</code>. </p>
+the image with <code class="method-name">gd.sizeXY</code>. </p>
 
 <p> If the PNG image being loaded is a truecolor image, the resulting
 value will refer to a truecolor image. If the PNG image being loaded
@@ -651,7 +691,7 @@ invisible to the eye. 7 bits of alpha channel resolution is, in practice,
 quite a lot. </p>
 
 <p>Example:</p>
-<pre class="example">
+<pre class="code-example indented">
 -- copies the content of picture.png to a new image
 local im = gd.createFromPng("picture.png")
 </pre>
@@ -659,47 +699,47 @@ local im = gd.createFromPng("picture.png")
 
 <h4>gd.createFromGif(filename)</h4>
 
-<p> <code>gd.createFromGif</code> is called to load images from GIF format
-files. Invoke <code>gd.createFromGif</code> with a string pointing to
+<p> <code class="method-name">gd.createFromGif</code> is called to load images from GIF format
+files. Invoke <code class="method-name">gd.createFromGif</code> with a string pointing to
 an existing file containing the desired image to return a new image or
-<b>nil</b> if unable to load the image (most often because the file is
+<var class="lua-keyword">nil</var> if unable to load the image (most often because the file is
 corrupt or does not contain a GIF image). You can determine the size of
-the image with <code>gd.sizeXY</code>. </p>
+the image with <code class="method-name">gd.sizeXY</code>. </p>
 
 
 <h4>gd.createFromGd(filename)</h4>
 
-<p> <code>gd.createFromGd</code> is called to load images from gd format
-files. Invoke <code>gd.createFromGd</code> with a string pointing to
+<p> <code class="method-name">gd.createFromGd</code> is called to load images from gd format
+files. Invoke <code class="method-name">gd.createFromGd</code> with a string pointing to
 an existing file containing the desired image to return a new image or
-<b>nil</b> if unable to load the image (most often because the file is
+<var class="lua-keyword">nil</var> if unable to load the image (most often because the file is
 corrupt or does not contain a gd image). You can determine the size of
-the image with <code>gd.sizeXY</code>. This format is not intended for
+the image with <code class="method-name">gd.sizeXY</code>. This format is not intended for
 general purpose use and should never be used to distribute images. Its
 purpose is solely to allow very fast loading of images. </p>
 
 
 <h4>gd.createFromGd2(filename)</h4>
 
-<p> <code>gd.createFromGd2</code> is called to load images from gd2 format
-files. Invoke <code>gd.createFromGd2</code> with a string pointing to
+<p> <code class="method-name">gd.createFromGd2</code> is called to load images from gd2 format
+files. Invoke <code class="method-name">gd.createFromGd2</code> with a string pointing to
 an existing file containing the desired image to return a new image or
-<b>nil</b> if unable to load the image (most often because the file is
+<var class="lua-keyword">nil</var> if unable to load the image (most often because the file is
 corrupt or does not contain a gd2 image). You can determine the size of
-the image with <code>gd.sizeXY</code>. This format is not intended for
+the image with <code class="method-name">gd.sizeXY</code>. This format is not intended for
 general purpose use and should never be used to distribute images. Its
 purpose is solely to allow very fast loading of images. </p>
 
 
 <h4>gd.createFromGd2Part(filename, x, y, w, h)</h4>
 
-<p> <code>gd.createFromGd2Part</code> is called to load parts
+<p> <code class="method-name">gd.createFromGd2Part</code> is called to load parts
 of images from gd2 format files. Invoked in the same way as
-<code>gd.createFromGd2</code>, but with extra parameters indicating the
+<code class="method-name">gd.createFromGd2</code>, but with extra parameters indicating the
 source (x, y) and width/height of the desired image. </p>
 
 <p>Example:</p>
-<pre class="example">
+<pre class="code-example indented">
 -- Being base.gd2 a 40x40px image, copies its upper-left part to a new image
 local im = gd.createFromGd2Part("base.gd2", 0, 0, 20, 20)
 </pre>
@@ -707,54 +747,54 @@ local im = gd.createFromGd2Part("base.gd2", 0, 0, 20, 20)
 
 <h4>gd.createFromXbm(filename)</h4>
 
-<p> <code>gd.createFromXbm</code> is called to load images from
-monochromatic X bitmap format files. Invoke <code>gd.createFromXbm</code>
+<p> <code class="method-name">gd.createFromXbm</code> is called to load images from
+monochromatic X bitmap format files. Invoke <code class="method-name">gd.createFromXbm</code>
 with a string pointing to an existing file containing the desired image
-to return a new image or <b>nil</b> if unable to load the image (most
+to return a new image or <var class="lua-keyword">nil</var> if unable to load the image (most
 often because the file is corrupt or does not contain a XBM image). You
-can determine the size of the image with <code>gd.sizeXY</code>. </p>
+can determine the size of the image with <code class="method-name">gd.sizeXY</code>. </p>
 
 
 <h4>gd.createFromXpm(filename)</h4>
 
-<p> <code>gd.createFromXpm</code> is called to load images from color X
-bitmap format files. Invoke <code>gd.createFromXpm</code> with a string
+<p> <code class="method-name">gd.createFromXpm</code> is called to load images from color X
+bitmap format files. Invoke <code class="method-name">gd.createFromXpm</code> with a string
 pointing to an existing file containing the desired image to return a
-new image or <b>nil</b> if unable to load the image (most often because
+new image or <var class="lua-keyword">nil</var> if unable to load the image (most often because
 the file is corrupt or does not contain a XPM image). You can determine
-the size of the image with <code>gd.sizeXY</code>. </p>
+the size of the image with <code class="method-name">gd.sizeXY</code>. </p>
 
 
 <h4>gd.createFromJpegStr(string)</h4>
 
-<p> <code>gd.createFromJpegStr</code> is called to load
+<p> <code class="method-name">gd.createFromJpegStr</code> is called to load
 truecolor images from strings with JPEG format image data. Invoke
-<code>gd.createFromJpegStr</code> passing a string with the desired
-image to return a new truecolor image or <b>nil</b> if unable to
+<code class="method-name">gd.createFromJpegStr</code> passing a string with the desired
+image to return a new truecolor image or <var class="lua-keyword">nil</var> if unable to
 load the image (most often because the data is corrupt or does not
 contain a JPEG image). You can determine the size of the image with
-<code>gd.sizeXY</code>. The returned image is always a truecolor
+<code class="method-name">gd.sizeXY</code>. The returned image is always a truecolor
 image. </p>
 
 
 <h4>gd.createFromGifStr(string)</h4>
 
-<p> <code>gd.createFromGifStr</code> is called to load
+<p> <code class="method-name">gd.createFromGifStr</code> is called to load
 palette-based images from strings with GIF format image data. Invoke
-<code>gd.createFromGifStr</code> passing a string with the desired image
-to return a new image or <b>nil</b> if unable to load the image (most
+<code class="method-name">gd.createFromGifStr</code> passing a string with the desired image
+to return a new image or <var class="lua-keyword">nil</var> if unable to load the image (most
 often because the data is corrupt or does not contain a GIF image). You
-can determine the size of the image with <code>gd.sizeXY</code>. </p>
+can determine the size of the image with <code class="method-name">gd.sizeXY</code>. </p>
 
 
 <h4>gd.createFromPngStr(string)</h4>
 
-<p> <code>gd.createFromPngStr</code> is called to load images from strings
-with PNG format image data. Invoke <code>gd.createFromPngStr</code>
+<p> <code class="method-name">gd.createFromPngStr</code> is called to load images from strings
+with PNG format image data. Invoke <code class="method-name">gd.createFromPngStr</code>
 passing a string with the desired image to return a new image or
-<b>nil</b> if unable to load the image (most often because the data is
+<var class="lua-keyword">nil</var> if unable to load the image (most often because the data is
 corrupt or does not contain a PNG image). You can determine the size of
-the image with <code>gd.sizeXY</code>. </p>
+the image with <code class="method-name">gd.sizeXY</code>. </p>
 
 <p> If the PNG image being loaded is a truecolor image, the resulting
 value will refer to a truecolor image. If the PNG image being loaded
@@ -769,7 +809,7 @@ quite a lot. </p>
 
 <p>Example:</p>
 
-<pre class="example">
+<pre class="code-example indented">
 -- reads the contents of the file to a string
 fp = io.open("picture.png")
 str = fp:read("*a")
@@ -782,12 +822,12 @@ local im = gd.createFromPngStr(str)
 
 <h4>gd.createFromGdStr(string)</h4>
 
-<p> <code>gd.createFromGdStr</code> is called to load images from strings
-with gd format image data. Invoke <code>gd.createFromGdStr</code> passing
-a string with the desired image to return a new image or <b>nil</b>
+<p> <code class="method-name">gd.createFromGdStr</code> is called to load images from strings
+with gd format image data. Invoke <code class="method-name">gd.createFromGdStr</code> passing
+a string with the desired image to return a new image or <var class="lua-keyword">nil</var>
 if unable to load the image (most often because the data is corrupt or
 does not contain a gd image). You can determine the size of the image
-with <code>gd.sizeXY</code>. This format is not intended for general
+with <code class="method-name">gd.sizeXY</code>. This format is not intended for general
 purpose use and should never be used to distribute images. Its purpose
 is solely to allow very fast loading of images. </p>
 
@@ -797,33 +837,32 @@ is solely to allow very fast loading of images. </p>
 <p> <code>gd.createFromGd2Str</code> is called to load images from strings
 with gd2 format image data. Invoke <code>gd.createFromGd2Str</code>
 passing a string with the desired image to return a new image or
-<b>nil</b> if unable to load the image (most often because the data is
+<var class="lua-keyword">nil</var> if unable to load the image (most often because the data is
 corrupt or does not contain a gd2 image). You can determine the size of
-the image with <code>gd.sizeXY</code>. This format is not intended for
+the image with <code class="method-name">gd.sizeXY</code>. This format is not intended for
 general purpose use and should never be used to distribute images. Its
 purpose is solely to allow very fast loading of images. </p>
 
 
 <h4>gd.createFromGd2PartStr(string, x, y, w, h)</h4>
 
-<p> <code>gd.createFromGd2PartStr</code> is called to load parts
+<p> <code class="method-name">gd.createFromGd2PartStr</code> is called to load parts
 of images from gd2 format strings. Invoked in the same way as
-<code>gd.createFromGd2Str</code>, but with extra parameters indicating
+<code class="method-name">gd.createFromGd2Str</code>, but with extra parameters indicating
 the source (x, y) and width/height of the desired image. </p>
 
 
-<a name="api.output"></a>
-<h3>Image output methods</h3>
+<h3><a id="api.output">Image output methods</a></h3>
 
 <h4>gdImage:png(filename)</h4>
 
 <p> Outputs the image to a PNG file with the specified name (overwriting
-existing files). This method returns <b>false</b> on error (eg. permission
-denied to overwrite an existing file) and <b>true</b> on success. </p>
+existing files). This method returns <var class="lua-keyword">false</var> on error (eg. permission
+denied to overwrite an existing file) and <var class="lua-keyword">true</var> on success. </p>
 
 <p>Example:</p>
 
-<pre class="example">
+<pre class="code-example indented">
 -- creates a new image
 local im = gd.createTrueColor(20, 20)
 
@@ -835,7 +874,7 @@ im:png("picture.png")
 
 
 <p> If you want to check if the writting was succeful:</p>
-<pre class="example">
+<pre class="code-example indented">
 -- creates a new image
 local im = gd.createTrueColor(20, 20)
 
@@ -851,10 +890,10 @@ end
 
 <h4>gdImage:pngEx(filename, compression_level)</h4>
 
-<p> Similiar to <code>gd.png</code>, but allows you to specify the
+<p> Similiar to <code class="method-name">gd.png</code>, but allows you to specify the
 compression level of a PNG image, from 1 to 6 (or -1 for the default
-compression level of libpng). This method returns <b>false</b> on error
-(eg. permission denied to overwrite an existing file) and <b>true</b>
+compression level of libpng). This method returns <var class="lua-keyword">false</var> on error
+(eg. permission denied to overwrite an existing file) and <var class="lua-keyword">true</var>
 on success. </p>
 
 
@@ -863,23 +902,23 @@ on success. </p>
 <p> Outputs the image to a JPEG file with the specified name (overwriting
 existing files). You must specify the quality of the generated JPEG
 file from 1 (worst quality, small files) to 100 (best quality, large
-files). This method returns <b>false</b> on error (eg. permission denied
-to overwrite an existing file) and <b>true</b> on success. </p>
+files). This method returns <var class="lua-keyword">false</var> on error (eg. permission denied
+to overwrite an existing file) and <var class="lua-keyword">true</var> on success. </p>
 
 
 
 <h4>gdImage:gif(filename)</h4>
 
 <p> Outputs the image to a GIF file with the specified name (overwriting
-existing files). This method returns <b>false</b> on error (eg. permission
-denied to overwrite an existing file) and <b>true</b> on success. </p>
+existing files). This method returns <var class="lua-keyword">false</var> on error (eg. permission
+denied to overwrite an existing file) and <var class="lua-keyword">true</var> on success. </p>
 
 
 <h4>gdImage:gd(filename)</h4>
 
 <p> Outputs the image to a gd format file with the specified name
-(overwriting existing files). This method returns <b>false</b> on error
-(eg. permission denied to overwrite an existing file) and <b>true</b>
+(overwriting existing files). This method returns <var class="lua-keyword">false</var> on error
+(eg. permission denied to overwrite an existing file) and <var class="lua-keyword">true</var>
 on success. This format is not intended for general purpose use and
 should never be used to distribute images. Its purpose is solely to
 allow very fast loading of images. </p>
@@ -888,11 +927,11 @@ allow very fast loading of images. </p>
 <h4>gdImage:gd2(filename, chunkSize, format)</h4>
 
 <p> Outputs the image to a gd2 format file with the specified name
-(overwriting existing files). This method returns <b>false</b> on error
-(eg. permission denied to overwrite an existing file) and <b>true</b>
+(overwriting existing files). This method returns <var class="lua-keyword">false</var> on error
+(eg. permission denied to overwrite an existing file) and <var class="lua-keyword">true</var>
 on success. You must specify the chunk size (an integer, or 0 for the
-default) and the file format, which can be <code>gd.GD2_FMT_RAW</code>
-or <code>gd.GD2_FMT_COMPRESSED</code>. This format is not intended for
+default) and the file format, which can be <code class="constant">gd.GD2_FMT_RAW</code>
+or <code class="constant">gd.GD2_FMT_COMPRESSED</code>. This format is not intended for
 general purpose use and should never be used to distribute images. Its
 purpose is solely to allow very fast loading of images. </p>
 
@@ -901,36 +940,36 @@ purpose is solely to allow very fast loading of images. </p>
 
 <p> Outputs the image to a WBMP file with the specified name (overwriting
 existing files). WBMP file support is black and white only. The color
-index specified by the fg argument is the "foreground", and only pixels
+index specified by the <var class="parameter">fg</var> argument is the "foreground", and only pixels
 of this color will be set in the WBMP file. All other pixels will be
-considered "background". This method returns <b>false</b> on error
-(eg. permission denied to overwrite an existing file) and <b>true</b>
+considered "background". This method returns <var class="lua-keyword">false</var> on error
+(eg. permission denied to overwrite an existing file) and <var class="lua-keyword">true</var>
 on success. </p>
 
 
 <h4>gdImage:pngStr()</h4>
 
 <p> This method returns the image in the PNG format as a Lua string
-or <b>nil</b> on error (eg. a corrupted image).</p>
+or <var class="lua-keyword">nil</var> on error (eg. a corrupted image).</p>
 
 
 <h4>gdImage:pngStrEx(compression_level)</h4>
 
-<p> Similiar to <code>gd.pngStr</code>, but allows you to specify the
+<p> Similiar to <code class="method-name">gd.pngStr</code>, but allows you to specify the
 compression level of a PNG image, from 1 to 6 (or -1 for the default
-compression level of libpng). This method returns <b>nil</b> on
+compression level of libpng). This method returns <var class="lua-keyword">nil</var> on
 error. </p>
 
 
 <h4>gdImage:jpegStr(quality)</h4>
 
 <p> This method returns the image in the JPEG format as a Lua string
-or <b>nil</b> on error (eg. a corrupted image).  You must specify the
+or <var class="lua-keyword">nil</var> on error (eg. a corrupted image).  You must specify the
 quality of the generated JPEG data from 1 (worst quality, small string)
 to 100 (best quality, large string).  </p>
 
 <p> Example: </p>
-<pre class="example">
+<pre class="code-example indented">
 -- creates a new image
 local im = gd.createTrueColor(20, 20)
 
@@ -947,21 +986,21 @@ io.write(im:jpegStr(75))
 <h4>gdImage:gifStr()</h4>
 
 <p> This method returns the image in the GIF format as a Lua string
-or <b>nil</b> on error (eg. a corrupted image).</p>
+or <var class="lua-keyword">nil</var> on error (eg. a corrupted image).</p>
 
 
 <h4>gdImage:gdStr()</h4>
 
 <p> This method returns the image in the gd format as a Lua string
-or <b>nil</b> on error (eg. a corrupted image).</p>
+or <var class="lua-keyword">nil</var> on error (eg. a corrupted image).</p>
 
 
 <h4>gdImage:gd2Str(chunkSize, format)</h4>
 
 <p> This method returns the image in the gd2 format as a Lua string or
-<b>nil</b> on error (eg. a corrupted image).  You must specify the chunk
+<var class="lua-keyword">nil</var> on error (eg. a corrupted image).  You must specify the chunk
 size (an integer, or 0 for the default) and the data format, which can be
-<code>gd.GD2_FMT_RAW</code> or <code>gd.GD2_FMT_COMPRESSED</code>. This
+<code class="constant">gd.GD2_FMT_RAW</code> or <code class="constant">gd.GD2_FMT_COMPRESSED</code>. This
 format is not intended for general purpose use and should never be used
 to distribute images. Its purpose is solely to allow very fast loading
 of images. </p>
@@ -970,20 +1009,19 @@ of images. </p>
 <h4>gdImage:wbmpStr(fg)</h4>
 
 <p> This method returns the image in the WBMP format as a Lua string
-or <b>nil</b> on error (eg. a corrupted image). WBMP format support is
-black and white only. The color index specified by the fg argument is
+or <var class="lua-keyword">nil</var> on error (eg. a corrupted image). WBMP format support is
+black and white only. The color index specified by the <var class="parameter">fg</var> argument is
 the "foreground", and only pixels of this color will be set in the WBMP
 string. All other pixels will be considered "background". </p>
 
 
 
-<a name="api.color"></a>
-<h3>Color manipulation methods</h3>
+<h3><a id="api.color">Color manipulation methods</a></h3>
 
 
 <h4>gdImage:colorAllocate(red, green, blue)</h4>
 
-<p><code>colorAllocate()</code> finds the first available color
+<p><code class="method-name">colorAllocate()</code> finds the first available color
 index in the image specified, sets its RGB values to those requested
 (255 is the maximum for each), and returns the index of the new color
 table entry, or an RGBA value in the case of a truecolor image; in
@@ -992,20 +1030,20 @@ drawing methods. When creating a new palette-based image, the first
 time you invoke this method, you are setting the background color for
 that image.</p>
 
-<p>In the event that all <code>gd.MAX_COLORS</code> colors (256)
-have already been allocated, <code>colorAllocate</code> will
-return <b>nil</b> to indicate failure. (This is not uncommon when working
+<p>In the event that all <code class="constant">gd.MAX_COLORS</code> colors (256)
+have already been allocated, <code class="method-name">colorAllocate</code> will
+return <var class="lua-keyword">nil</var> to indicate failure. (This is not uncommon when working
 with existing PNG files that already use 256 colors). Note that
-<code>colorAllocate</code> does not check for existing colors that match
-your request; see <code>colorExact</code>, <code>colorClosest</code>
-and <code>colorClosestHWB</code> for ways to locate existing colors
+<code class="method-name">colorAllocate</code> does not check for existing colors that match
+your request; see <code class="method-name">colorExact</code>, <code class="method-name">colorClosest</code>
+and <code class="method-name">colorClosestHWB</code> for ways to locate existing colors
 that approximate the color desired in situations where a new color is
 not available.</p>
 
 
 <h4>gdImage:colorAllocateAlpha(red, green, blue, alpha)</h4>
 
-<p><code>colorAllocateAlpha</code> finds the first available color index
+<p><code class="method-name">colorAllocateAlpha</code> finds the first available color index
 in the image specified, sets its RGBA values to those requested (255 is
 the maximum for red, green and blue, and 127 represents full transparency
 for alpha), and returns the index of the new color table entry, or an RGBA
@@ -1014,89 +1052,89 @@ the returned value as a parameter to drawing methods. When creating
 a new palette-based image, the first time you invoke this method,
 you are setting the background color for that image.</p>
 
-<p>In the event that all <code>gd.MAX_COLORS</code> colors (256) have
-already been allocated, <code>colorAllocateAlpha</code> will return
-<b>nil</b> to indicate failure. (This is not uncommon when working with
+<p>In the event that all <code class="constant">gd.MAX_COLORS</code> colors (256) have
+already been allocated, <code class="method-name">colorAllocateAlpha</code> will return
+<var class="lua-keyword">nil</var> to indicate failure. (This is not uncommon when working with
 existing palette-based PNG files that already use 256 colors). Note
-that <code>colorAllocateAlpha</code> does not check for existing
-colors that match your request; see <code>colorExactAlpha</code> and
-<code>colorClosestAlpha</code> for ways to locate existing colors that
+that <code class="method-name">colorAllocateAlpha</code> does not check for existing
+colors that match your request; see <code class="method-name">colorExactAlpha</code> and
+<code class="method-name">colorClosestAlpha</code> for ways to locate existing colors that
 approximate the color desired in situations where a new color is not
-available. Also see <code>colorResolveAlpha</code>.</p>
+available. Also see <code class="method-name">colorResolveAlpha</code>.</p>
 
 
 
 <h4>gdImage:colorClosest(red, green, blue)</h4>
 
-<p><code>colorClosest</code> searches the colors which have been defined
+<p><code class="method-name">colorClosest</code> searches the colors which have been defined
 thus far in the image specified and returns the index of the color with
 RGB values closest to those of the request. (Closeness is determined
 by Euclidian distance, which is used to determine the distance in
 three-dimensional color space between colors). </p>
 
 <p>If no colors have yet been allocated in the image,
-<code>colorClosest</code> returns <b>nil</b>.</p>
+<code class="method-name">colorClosest</code> returns <var class="lua-keyword">nil</var>.</p>
 
 <p>When applied to a truecolor image, this method always succeeds in
 returning the desired color.</p>
 
 <p>This method is most useful as a backup method for choosing a
-drawing color when an image already contains <code>gd.MAX_COLORS</code>
+drawing color when an image already contains <code class="constant">gd.MAX_COLORS</code>
 (256) colors and no more can be allocated. (This is not uncommon when
 working with existing PNG files that already use many colors). See
-<code>colorExact</code> for a method of locating exact matches only.</p>
+<code class="method-name">colorExact</code> for a method of locating exact matches only.</p>
 
 
 <h4>gdImage:colorClosestAlpha(red, green, blue, alpha)</h4>
 
-<p> <code>colorClosestAlpha</code> searches the colors which have been
+<p> <code class="method-name">colorClosestAlpha</code> searches the colors which have been
 defined thus far in the image specified and returns the index of the
 color with RGBA values closest to those of the request. (Closeness is
 determined by Euclidian distance, which is used to determine the distance
 in four-dimensional color/alpha space between colors). </p>
 
 <p> If no colors have yet been allocated in the image,
-<code>colorClosestAlpha</code> returns <b>nil</b>. </p>
+<code class="method-name">colorClosestAlpha</code> returns <var class="lua-keyword">nil</var>. </p>
 
 <p> When applied to a truecolor image, this method always succeeds in
 returning the desired color. </p>
 
 <p> This method is most useful as a backup method for
 choosing a drawing color when a palette-based image already
-contains <code>gd.MAX_COLORS</code> (256) colors and no more can be
+contains <code class="constant">gd.MAX_COLORS</code> (256) colors and no more can be
 allocated. (This is not uncommon when working with existing palette-based
-PNG files that already use many colors). See <code>colorExactAlpha</code>
+PNG files that already use many colors). See <code class="method-name">colorExactAlpha</code>
 for a method of locating exact matches only.</p>
 
 
 <h4>gdImage:colorClosestHWB(red, green, blue)</h4>
 
-<p> <code>colorClosestHWB</code> searches the colors which have been
+<p> <code class="method-name">colorClosestHWB</code> searches the colors which have been
 defined thus far in the image specified and returns the index of the color
 with hue, whiteness and blackness closest to the requested color. This
 scheme is typically superior to the Euclidian distance scheme used by
-<code>colorClosest</code>. </p>
+<code class="method-name">colorClosest</code>. </p>
 
 <p> If no colors have yet been allocated in the image,
-<code>colorClosestHWB</code> returns <b>nil</b>. </p>
+<code class="method-name">colorClosestHWB</code> returns <var class="lua-keyword">nil</var>. </p>
 
 <p> When applied to a truecolor image, this method always succeeds in
 returning the desired color. </p>
 
 <p> This method is most useful as a backup method for choosing a
-drawing color when an image already contains <code>gd.MAX_COLORS</code>
+drawing color when an image already contains <code class="constant">gd.MAX_COLORS</code>
 (256) colors and no more can be allocated. (This is not uncommon when
 working with existing PNG files that already use many colors). See
-<code>colorExact</code> for a method of locating exact matches only. </p>
+<code class="method-name">colorExact</code> for a method of locating exact matches only. </p>
 
 
 <h4>gdImage:colorExact(red, green, blue)</h4>
 
-<p> <code>colorExact</code> searches the colors which have been defined
+<p> <code class="method-name">colorExact</code> searches the colors which have been defined
 thus far in the image specified and returns the index of the first
 color with RGB values which exactly match those of the request. If no
-allocated color matches the request precisely, <code>colorExact</code>
-returns <b>nil</b>. See <code>colorClosest</code> for a way to find the
+allocated color matches the request precisely, <code class="method-name">colorExact</code>
+returns <var class="lua-keyword">nil</var>. See <code class="method-name">colorClosest</code> for a way to find the
 color closest to the color requested.</p>
 
 <p> When applied to a truecolor image, this method always succeeds in
@@ -1105,12 +1143,12 @@ returning the desired color. </p>
 
 <h4>gdImage:colorExactAlpha(red, green, blue, alpha)</h4>
 
-<p> <code>colorExactAlpha</code> searches the colors which have
+<p> <code class="method-name">colorExactAlpha</code> searches the colors which have
 been defined thus far in the image specified and returns the
 index of the first color with RGBA values which exactly match
 those of the request. If no allocated color matches the request
-precisely, <code>colorExactAlpha</code> returns <b>nil</b>. See
-<code>colorClosestAlpha</code> for a way to find the color closest to
+precisely, <code class="method-name">colorExactAlpha</code> returns <var class="lua-keyword">nil</var>. See
+<code class="method-name">colorClosestAlpha</code> for a way to find the color closest to
 the color requested.</p>
 
 <p> When applied to a truecolor image, this method always succeeds in
@@ -1118,13 +1156,13 @@ returning the desired color. </p>
 
 <h4>gdImage:colorResolve(red, green, blue)</h4>
 
-<p> <code>colorResolve</code> searches the colors which have been defined
+<p> <code class="method-name">colorResolve</code> searches the colors which have been defined
 thus far in the image specified and returns the index of the first color
 with RGB values which exactly match those of the request. If no allocated
-color matches the request precisely, then <code>colorResolve</code>
+color matches the request precisely, then <code class="method-name">colorResolve</code>
 tries to allocate the exact color. If there is no space left in
 the color table then ColorResolve returns the closest color (as in
-<code>colorClosest</code>). This method always returns an index of a
+<code class="method-name">colorClosest</code>). This method always returns an index of a
 color. </p>
 
 <p> When applied to a truecolor image, this method always succeeds in
@@ -1133,13 +1171,13 @@ returning the desired color. </p>
 
 <h4>gdImage:colorResolveAlpha(red, green, blue, alpha)</h4>
 
-<p> <code>colorResolveAlpha</code> searches the colors which have
+<p> <code class="method-name">colorResolveAlpha</code> searches the colors which have
 been defined thus far in the image specified and returns the index
 of the first color with RGBA values which exactly match those of the
 request. If no allocated color matches the request precisely, then
-<code>colorResolveAlpha</code> tries to allocate the exact color. If there
-is no space left in the color table then <code>colorResolveAlpha</code>
-returns the closest color (as in <code>colorClosestAlpha</code>). This
+<code class="method-name">colorResolveAlpha</code> tries to allocate the exact color. If there
+is no space left in the color table then <code class="method-name">colorResolveAlpha</code>
+returns the closest color (as in <code class="method-name">colorClosestAlpha</code>). This
 method always returns an index of a color. </p>
 
 <p> When applied to a truecolor image, this method always succeeds in
@@ -1175,21 +1213,21 @@ image. This method works for both palette and truecolor images. </p>
 
 <h4>gdImage:getTransparent()</h4>
 <p> This method returns the current transparent color index in
-the image. If there is no transparent color, <code>getTransparent</code>
-returns <b>nil</b>. </p>
+the image. If there is no transparent color, <code class="method-name">getTransparent</code>
+returns <var class="lua-keyword">nil</var>. </p>
 
 
 <h4>gdImage:colorTransparent(color)</h4>
 
-<p><code>colorTransparent</code> sets the transparent color index for
+<p><code class="method-name">colorTransparent</code> sets the transparent color index for
 the specified image to the specified index. To indicate that there
-should be no transparent color, invoke <code>colorTransparent</code>
-with a color index of <b>nil</b> (or passing no color index). Note that
+should be no transparent color, invoke <code class="method-name">colorTransparent</code>
+with a color index of <var class="lua-keyword">nil</var> (or passing no color index). Note that
 JPEG images do not support transparency, so this setting has no effect
 when writing JPEG images.</p>
 
 <p>The color index used should be an index allocated by
-<code>colorAllocate</code>, whether explicitly invoked by your code or
+<code class="method-name">colorAllocate</code>, whether explicitly invoked by your code or
 implicitly invoked by loading an image. In order to ensure that your
 image has a reasonable appearance when viewed by users who do not
 have transparent background capabilities (or when you are writing a
@@ -1201,48 +1239,47 @@ transparency.</p>
 
 <h4>gdImage:colorDeallocate(color)</h4>
 
-<p> <code>colorDeallocate</code> marks the specified color as being
+<p> <code class="method-name">colorDeallocate</code> marks the specified color as being
 available for reuse. It does not attempt to determine whether the
 color index is still in use in the image. After a call to this
-method, the next call to <code>colorAllocate</code> for the same
+method, the next call to <code class="method-name">colorAllocate</code> for the same
 image will set new RGB values for that color index, changing the color
 of any pixels which have that index as a result. If multiple calls to
-<code>colorDeallocate</code> are made consecutively, the lowest-numbered
-index among them will be reused by the next <code>colorAllocate</code>
-call.<p>
+<code class="method-name">colorDeallocate</code> are made consecutively, the lowest-numbered
+index among them will be reused by the next <code class="method-name">colorAllocate</code>
+call.</p>
 
 
-<a name="api.query"></a>
-<h3>Query methods</h3>
+<h3><a id="api.query">Query methods</a></h3>
 
 <h4>gdImage:boundsSafe(x, y)</h4>
 
-<p> <code>boundsSafe</code> returns <b>true</b> if the specified point
-is within the current clipping rectangle, <b>false</b> if not. The
-clipping rectangle is set by <code>setClip</code> and defaults to the
+<p> <code class="method-name">boundsSafe</code> returns <var class="lua-keyword">true</var> if the specified point
+is within the current clipping rectangle, <var class="lua-keyword">false</var> if not. The
+clipping rectangle is set by <code class="method-name">setClip</code> and defaults to the
 entire image. This method is intended primarily for use by those who
 wish to add methods to Lua-GD. All of the drawing functions already
 clip safely. </p>
 
 
 <h4>gdImage:getPixel(x, y)</h4>
-<p><code>getPixel</code> returns the color index of a particular pixel.</p>
+<p><code class="method-name">getPixel</code> returns the color index of a particular pixel.</p>
 
 <h4>gdImage:sizeX()</h4>
-<p><code>sizeX</code> returns the width of the image in pixels.</p>
+<p><code class="method-name">sizeX</code> returns the width of the image in pixels.</p>
 
 
 <h4>gdImage:sizeY()</h4>
-<p><code>sizeY</code> returns the height of the image in pixels.</p>
+<p><code class="method-name">sizeY</code> returns the height of the image in pixels.</p>
 
 
 <h4>gdImage:sizeXY()</h4>
-<p><code>sizeXY</code> returns the width and the height of the image
+<p><code class="method-name">sizeXY</code> returns the width and the height of the image
 in pixels. This method has no C equivalent because, unlike Lua,
 C functions cannot return multiple values.</p>
 
 <p>Example: </p>
-<pre class="example">
+<pre class="code-example indented">
 local x, y = im:sizeXY()
 </pre>
 
@@ -1253,7 +1290,7 @@ local x, y = im:sizeXY()
 returns four numbers.</p>
 
 <p>Example: </p>
-<pre class="example">
+<pre class="code-example indented">
 local x1, y1, x2, y2 = im:getClip()
 </pre>
 
@@ -1261,50 +1298,49 @@ local x1, y1, x2, y2 = im:getClip()
 
 <h4>gdImage:setClip(x1, y1, x2, y2)</h4>
 
-<p> Establishes a clipping rectangle. Once <code>setClip</code> has been
+<p> Establishes a clipping rectangle. Once <code class="method-name">setClip</code> has been
 called, all future drawing operations will remain within the specified
-clipping area, until a new <code>setClip</code> call takes place. For
+clipping area, until a new <code class="method-name">setClip</code> call takes place. For
 instance, if a clipping rectangle of 25, 25, 75, 75 has been set within
 a 100x100 image, a diagonal line from 0,0 to 99,99 will appear only
 between 25,25 and 75,75. </p>
 
 
-<a name="api.draw"></a>
-<h3>Drawing methods</h3>
+<h3><a id="api.draw">Drawing methods</a></h3>
 
 <h4>gdImage:setPixel(x, y, color)</h4>
-<p> <code>setPixel</code> sets a pixel to a particular color index. </p>
+<p> <code class="method-name">setPixel</code> sets a pixel to a particular color index. </p>
 
 <h4>gdImage:line(x1, y1, x2, y2, color)</h4>
 
-<p> <code>line</code> is used to draw a line between two endpoints
-(x1,y1 and x2, y2). The line is drawn using the color index
+<p> <code class="method-name">line</code> is used to draw a line between two endpoints
+(<var class="parameter">x1</var>, <var class="parameter">y1</var>) and (<var class="parameter">x2</var>, <var class="parameter">y2</var>). The line is drawn using the color index
 specified. Note that the color index can be an actual color returned
-by <code>colorAllocate</code> or one of <code>gd.STYLED</code>,
-<code>gd.BRUSHED</code> or <code>gd.STYLED_BRUSHED</code>. </p>
+by <code class="method-name">colorAllocate</code> or one of <code class="constant">gd.STYLED</code>,
+<code class="constant">gd.BRUSHED</code> or <code class="constant">gd.STYLED_BRUSHED</code>. </p>
 
 
 <h4>gdImage:rectangle(x1, y1, x2, y2, color)</h4>
 
-<p> <code>rectangle</code> is used to draw a rectangle with the two
+<p> <code class="method-name">rectangle</code> is used to draw a rectangle with the two
 corners (upper left first, then lower right) specified, using the color
 index specified. </p>
 
 
 <h4>gdImage:filledRectangle(x1, y1, x2, y2, color)</h4>
 
-<p> <code>filledRectangle</code> is used to draw a rectangle with the
+<p> <code class="method-name">filledRectangle</code> is used to draw a rectangle with the
 two corners (upper left first, then lower right) specified, filled using
 the color index specified. </p>
 
 
 <h4>gdImage:polygon({ { x1, y1 }, { x2, y2 } ... }, color)</h4>
 
-<p> <code>polygon</code> is used to draw a polygon with the verticies
+<p> <code class="method-name">polygon</code> is used to draw a polygon with the verticies
 (at least 3) specified in the table, using the color index specified. </p>
 
 <p>Example: </p>
-<pre class="example">
+<pre class="code-example indented">
 im = assert(gd.createTrueColor(80, 80))
 black = im:colorAllocate(0, 0, 0)
 white = im:colorAllocate(255, 255, 255)
@@ -1317,11 +1353,11 @@ im:png("out.png")
 
 <h4>gdImage:filledPolygon({ { x1, y1 }, { x2, y2 } ... }, color)</h4>
 
-<p> <code>polygon</code> is used to fill a polygon with the verticies
+<p> <code class="method-name">polygon</code> is used to fill a polygon with the verticies
 (at least 3) specified in the table, using the color index specified. </p>
 
 <p>Example: </p>
-<pre class="example">
+<pre class="code-example indented">
 im = assert(gd.createTrueColor(80, 80))
 black = im:colorAllocate(0, 0, 0)
 white = im:colorAllocate(255, 255, 255)
@@ -1335,13 +1371,13 @@ im:png("out.png")
 
 <h4>gdImage:openPolygon({ { x1, y1 }, { x2, y2 } ... }, color)</h4>
 
-<p> <code>openPolygon</code> is used to draw a sequence of lines with the
+<p> <code class="method-name">openPolygon</code> is used to draw a sequence of lines with the
 verticies (at least 3) specified, using the color index specified. Unlike
-<code>polygon</code>, the enpoints of the line sequence are not connected to
+<code class="method-name">polygon</code>, the enpoints of the line sequence are not connected to
 a closed polygon. </p>
 
 <p>Example: </p>
-<pre class="example">
+<pre class="code-example indented">
 im = assert(gd.createTrueColor(80, 80))
 black = im:colorAllocate(0, 0, 0)
 white = im:colorAllocate(255, 255, 255)
@@ -1354,88 +1390,87 @@ im:png("out.png")
 
 <h4>gdImage:arc(cx, cy, w, h, s, e, color)</h4>
 
-<p> <code>arc</code> is used to draw a partial ellipse centered at the
+<p> <code class="method-name">arc</code> is used to draw a partial ellipse centered at the
 given point, with the specified width and height in pixels. The arc
-begins at the position in degrees specified by <b>s</b> and ends at the
-position specified by <b>e</b>. The arc is drawn in the color specified
+begins at the position in degrees specified by <var class="parameter">s</var> and ends at the
+position specified by <var class="parameter">e</var> . The arc is drawn in the color specified
 by the last argument. A circle can be drawn by beginning from 0 degrees
-and ending at 360 degrees, with width and height being equal. <b>e</b>
-must be greater than <b>s</b>. Values greater than 360 are interpreted
+and ending at 360 degrees, with width and height being equal. <var class="parameter">e</var> 
+must be greater than <var class="parameter">s</var>. Values greater than 360 are interpreted
 modulo 360. </p>
 
 
 <h4>gdImage:filledArc(cx, cy, w, h, s, e, color, style)</h4>
 
-<p> <code>filledArc</code> is used to draw a partial ellipse centered at
+<p> <code class="method-name">filledArc</code> is used to draw a partial ellipse centered at
 the given point, with the specified width and height in pixels. The arc
-begins at the position in degrees specified by <b>s</b> and ends at the
-position specified by <b>e</b>. The arc is filled in the color specified
-by <b>color</b>. A circle can be drawn by beginning from 0 degrees
-and ending at 360 degrees, with width and height being equal. <b>e</b>
-must be greater than <b>s</b>. Values greater than 360 are interpreted
+begins at the position in degrees specified by <var class="parameter">s</var> and ends at the
+position specified by <var class="parameter">e</var>. The arc is filled in the color specified
+by <var class="parameter">color</var>. A circle can be drawn by beginning from 0 degrees
+and ending at 360 degrees, with width and height being equal. <var class="parameter">e</var>
+must be greater than <var class="parameter">s</var>. Values greater than 360 are interpreted
 modulo 360. The last argument is a sum of the following possibilities:
-<code>gd.ARC</code>, <code>gd.CHORD</code>, <code>gd.PIE</code>
-(synonym for <code>gd.CHORD</code>), <code>gd.NO_FILL</code> and
-<code>gd.EDGED</code>. <code>gd.ARC</code> and <code>gd.CHORD</code> are
-mutually exclusive; <code>gd.CHORD</code> just connects the starting
-and ending angles with a straight line, while <code>gd.ARC</code>
-produces a rounded edge. <code>gd.PIE</code> is a synonym for
-<code>gd.ARC</code>. <code>gd.NO_FILL</code> indicates that the arc
-or chord should be outlined, not filled. <code>gd.EDGED</code>, used
-together with <code>gd.NO_FILL</code>, indicates that the beginning and
+<code class="constant">gd.ARC</code>, <code class="constant">gd.CHORD</code>, <code class="constant">gd.PIE</code>
+(synonym for <code class="constant">gd.CHORD</code>), <code class="constant">gd.NO_FILL</code> and
+<code class="constant">gd.EDGED</code>. <code class="constant">gd.ARC</code> and <code class="constant">gd.CHORD</code> are
+mutually exclusive; <code class="constant">gd.CHORD</code> just connects the starting
+and ending angles with a straight line, while <code class="constant">gd.ARC</code>
+produces a rounded edge. <code class="constant">gd.PIE</code> is a synonym for
+<code class="constant">gd.ARC</code>. <code class="constant">gd.NO_FILL</code> indicates that the arc
+or chord should be outlined, not filled. <code class="constant">gd.EDGED</code>, used
+together with <code class="constant">gd.NO_FILL</code>, indicates that the beginning and
 ending angles should be connected to the center; this is a good way to
 outline (rather than fill) a 'pie slice'.  </p>
 
 
 <h4>gdImage:filledEllipse(cx, cy, w, h, color)</h4>
 
-<p> <code>filledEllipse</code> is used to draw an ellipse centered at the
+<p> <code class="method-name">filledEllipse</code> is used to draw an ellipse centered at the
 given point, with the specified width and height in pixels. The ellipse
 is filled in the color specified by the last argument.</p>
 
 
 <h4>gdImage:fill(x, y, c)</h4>
 
-<p> <code>fill</code> floods a portion of the image with the specified
+<p> <code class="method-name">fill</code> floods a portion of the image with the specified
 color, beginning at the specified point and flooding the surrounding
 region of the same color as the starting point. For a way of flooding
 a region defined by a specific border color rather than by its interior
-color, see <code>fillToBorder</code>. </p>
+color, see <code class="method-name">fillToBorder</code>. </p>
 
-<p>The fill color can be <code>gd.TILED</code>, resulting in a tile
+<p>The fill color can be <code class="constant">gd.TILED</code>, resulting in a tile
 fill using another image as the tile. However, the tile image cannot be
 transparent. If the image you wish to fill with has a transparent color
-index, call <code>setTransparent</code> on the tile image and set the
-transparent color index to <b>nil</b> to turn off its transparency. </p>
+index, call <code class="method-name">setTransparent</code> on the tile image and set the
+transparent color index to <var class="lua-keyword">nil</var> to turn off its transparency. </p>
 
 <h4>gdImage:fillToBorder(x, y, border_color, color)</h4>
 
-<p> <code>fillToBorder</code> floods a portion of the image with the
+<p> <code class="method-name">fillToBorder</code> floods a portion of the image with the
 specified color, beginning at the specified point and stopping at the
 specified border color. For a way of flooding an area defined by the
-color of the starting point, see <code>fill</code>. </p>
+color of the starting point, see <code class="method-name">fill</code>. </p>
 
 <p> The border color cannot be a special color such as
-<code>gd.TILED</code>; it must be a proper solid color. The fill color
+<code class="method-name">gd.TILED</code>; it must be a proper solid color. The fill color
 can be, however. </p>
 
 
-<a name="api.text"></a>
-<h3>Text drawing methods</h3>
+<h3><a id="api.text">Text drawing methods</a></h3>
 
 <h4>gdImage:string(font, x, y, string, color)</h4>
 
 <p> This method draws the string in the fourth argument on the image
-using one of the standard gd fonts (<code>gd.FONT_TINY</code>,
-<code>gd.FONT_SMALL</code>, <code>gd.FONT_MEDIUM</code>,
-<code>gd.FONT_LARGE</code> or <code>gd.FONT_GIANT</code>) from left
+using one of the standard gd fonts (<code class="constant">gd.FONT_TINY</code>,
+<code class="constant">gd.FONT_SMALL</code>, <code class="constant">gd.FONT_MEDIUM</code>,
+<code class="constant">gd.FONT_LARGE</code> or <code class="constant">gd.FONT_GIANT</code>) from left
 to right, starting from the (x, y) point and with the color specified
 by the fifth argument. The string must have only ISO-8859-1 characters
-(you should use <code>gd.stringFT</code> and True Type fonts for drawing
+(you should use <code class="method-name">gd.stringFT</code> and True Type fonts for drawing
 Unicode strings. </p>
 
 <p> Example: </p>
-<pre class="example">
+<pre class="code-example indented">
 im = gd.create(140, 80)
 white = im:colorAllocate(255, 255, 255)
 black = im:colorAllocate(0, 0, 0)
@@ -1450,44 +1485,44 @@ im:png("out.png")
 
 <h4>gdImage:stringUp(fontname, x, y, string, color)</h4>
 
-<p> Similar to <code>gd.string</code> but the string will be drawn
+<p> Similar to <code class="method-name">gd.string</code> but the string will be drawn
 vertically (rotated 90 degrees), from bottom to up, starting from the
 (x, y) point.  The string must have only ISO-8859-1 characters. If you
-want use Unicode characters or other rotations than 90°, you should
-use <code>gd.stringFT</code> and True Type fonts. </p>
+want use Unicode characters or other rotations than 90Â°, you should
+use <code class="method-name">gd.stringFT</code> and True Type fonts. </p>
 
 <h4>gdImage:stringFT(color, fontname, ptsize, angle, x, y, string)</h4>
 
-<p> <code>stringFT</code> draws a string of anti-aliased characters on the
+<p> <code class="method-name">stringFT</code> draws a string of anti-aliased characters on the
 image using the FreeType library to render user-supplied TrueType fonts.
 The string is anti-aliased, meaning that there should be fewer "jaggies"
-visible. The fontname is the full pathname to a TrueType font file,
-or a font face name if the <code>GDFONTPATH</code> environment variable
+visible. The <var class="parameter">fontname</var> is the full pathname to a TrueType font file,
+or a font face name if the <code class="environment-variable">GDFONTPATH</code> environment variable
 have been set intelligently. In the absence of a full path, the font face
 name may be presented with or without extension. Font names can also be
 <a href="http://fontconfig.org/fontconfig-user.html#AEN36">fontconfig
-patterns</a> (see <code>gd.useFontConfig</code>) so, the library will
+patterns</a> (see <code class="method-name">gd.useFontConfig</code>) so, the library will
 automatically use fonts from your operating system.</p>
 
 <p> The string argument is considered to be encoded via the UTF-8
 standard; also, HTML entities are supported, including decimal,
 hexadecimal, and named entities. Those who are passing ordinary
 ASCII strings may have difficulty with the &amp; character unless
-encoded correctly as <code>&amp;amp;</code> but should have no other
+encoded correctly as <code class="constant">&amp;amp;</code> but should have no other
 difficulties.</p>
 
-<p> The string may be arbitrarily scaled (ptsize) and rotated (angle in
+<p> The string may be arbitrarily scaled (<var class="parameter">ptsize</var>) and rotated (<var class="parameter">angle</var> in
 radians). The direction of rotation is counter-clockwise, with 0 radians
 (0 degrees) at 3 o'clock and PI/2 radians (90 degrees) at 12 o'clock
-(you should use <code>math.rad</code> to convert degrees to radians).
+(you should use <code class="method-name">math.rad</code> to convert degrees to radians).
 The string is rendered in the color indicated by the color index. Use
 the negative of the desired color index to disable anti-aliasing.  </p>
 
 <p> This method return eight values with the limits of the rendered
-text on sucess or <b>nil</b> on failure. The following code show how to
+text on sucess or <var class="lua-keyword">nil</var> on failure. The following code show how to
 use them to draw a bounding rectangle arround the text. </p>
 
-<pre class="example">
+<pre class="code-example indented">
 im = gd.createTrueColor(100, 100)
 black = im:colorAllocate(0, 0, 0)
 white = im:colorAllocate(255, 255, 255)
@@ -1503,9 +1538,9 @@ left-hand corner seeing the text horizontally. </p>
 
 <table> 
  <tr> 
-  <td class="h"> # </td> 
-  <td class="h"> Name </td> 
-  <td class="h"> Meaning </td> 
+  <th> # </th> 
+  <th> Name </th> 
+  <th> Meaning </th> 
  </tr> 
  <tr> 
   <td> 1 </td> 
@@ -1550,13 +1585,13 @@ left-hand corner seeing the text horizontally. </p>
 </table> 
 
 <p> Also, there is a way to get these values before drawing on the image
-passing <b>nil</b> as the first argument of <code>gd.stringFT</code> (note
+passing <var class="lua-keyword">nil</var> as the first argument of <code class="method-name">gd.stringFT</code> (note
 the absence of the colon notation!), as follows. This is a relatively
 cheap operation if followed by a rendering of the same string, because
 of the caching of the partial rendering during bounding rectangle
 calculation. </p> 
 
-<pre class="example">
+<pre class="code-example indented">
 llx, lly, lrx, lry, urx, ury, ulx, uly = gd.stringFT(nil, white, "Vera.ttf", 20, math.rad(45), 20, 90, "Lua-GD")
 </pre>
 
@@ -1564,17 +1599,17 @@ llx, lly, lrx, lry, urx, ury, ulx, uly = gd.stringFT(nil, white, "Vera.ttf", 20,
 
 <h4>gdImage:stringFTEx(color, fontname, ptsize, angle, x, y, string, extra)</h4>
 
-<p> This is an extended version of <code>stringFT</code> that accepts
-a table as an <b>extra</b> argument, which allows you to pass some
+<p> This is an extended version of <code class="method-name">stringFT</code> that accepts
+a table as an <var class="parameter">extra</var> argument, which allows you to pass some
 parameters to the rendering engine. The fields currently available are
 show bellow: </p>
 
 <table>
  <tr>
-  <td class="h"> Field name </td>
-  <td class="h"> Type </td>
-  <td class="h"> Default </td>
-  <td class="h"> Usage </td>
+  <th> Field name </th>
+  <th> Type </th>
+  <th> Default </th>
+  <th> Usage </th>
  </tr>
 
  <tr>
@@ -1591,8 +1626,8 @@ show bellow: </p>
   <td class="i"> indexed </td>
   <td class="i"> gd.FTEX_Unicode </td>
   <td> Allows you to set a specific character encoding schema, which can
-    be any of <code>gd.FTEX_Unicode</code>,
-    <code>gd.FTEX_Shift_JIS</code>, or <code>gd.FTEX_Big5</code>. It is
+    be any of <code class="constant">gd.FTEX_Unicode</code>,
+    <code class="constant">gd.FTEX_Shift_JIS</code>, or <code class="constant">gd.FTEX_Big5</code>. It is
     useful when a font offers more than one of Unicode, Shift_JIS, and
     Big5. If you do not specify one, Unicode will be tried first. If
     the preferred character mapping is not found in the font, other
@@ -1647,19 +1682,19 @@ show bellow: </p>
   <td class="i"> boolean </td>
   <td class="i"> false </td>
   <td> gd can use fontconfig to resolve font names, including fontconfig
-    patterns, if this field is set to <b>true</b>. As a convenience,
+    patterns, if this field is set to <var class="lua-keyword">true</var>. As a convenience,
     this behavior can also be made the default by calling
-    <code>gd.useFontConfig</code> with a <b>true</b> value. </td>
+    <code class="method-name">gd.useFontConfig</code> with a <var class="lua-keyword">true</var> value. </td>
  </tr>
 
 </table>
 
-<p> This method also returns the same values than <code>stringFT</code>,
-more two aditional ones if the fields <b>xshow</b> or
-<b>return_font_path_name</b> are set to <b>true</b>. See the following
+<p> This method also returns the same values than <code class="method-name">stringFT</code>,
+more two aditional ones if the fields <var class="parameter">xshow</var> or
+<var class="parameter">return_font_path_name</var> are set to <var class="lua-keyword">true</var>. See the following
 example: </p>
 
-<pre class="example">
+<pre class="code-example indented">
 llX, llY, lrX, lrY, urX, urY, ulX, ulY = 
   im:stringFTEx(blue, "Vera", 20, 0, 50, 50, "Lua-GD",
     { hdpi = 40, vdpi = 20 } )
@@ -1682,46 +1717,45 @@ llX, llY, lrX, lrY, urX, urY, ulX, ulY, pos, fontpath =
 
 <h4>gdImage:stringFTCircle(cx, cy, radius, textRadius, fillPortion, fontname, points, top, bottom, color)</h4>
 
-<p> Draws the text strings specified by <b>top</b> and <b>bottom</b> on
-the image, curved along the edge of a circle of radius <b>radius</b>,
-with its center at <b>cx</b> and <b>cy</b>. <b>top</b> is written
-clockwise along the top; <b>bottom</b> is written counterclockwise along
-the bottom. <b>textRadius</b> determines the "height" of each character;
-if <b>textRadius</b> is 1/2 of <b>radius</b>, characters extend halfway
-from the edge to the center. <b>fillPortion</b> varies from 0 to 1.0,
+<p> Draws the text strings specified by <var class="parameter">top</var> and <var class="parameter">bottom</var> on
+the image, curved along the edge of a circle of radius <var class="parameter">radius</var>,
+with its center at <var class="parameter">cx</var> and <var class="parameter">cy</var>. <var class="parameter">top</var> is written
+clockwise along the top; <var class="parameter">bottom</var> is written counterclockwise along
+the bottom. <var class="parameter">textRadius</var> determines the "height" of each character;
+if <var class="parameter">textRadius</var> is 1/2 of <var class="parameter">radius</var>, characters extend halfway
+from the edge to the center. <var class="parameter">fillPortion</var> varies from 0 to 1.0,
 with useful values from about 0.4 to 0.9, and determines how much of the
 180 degrees of arc assigned to each section of text is actually occupied
-by text; 0.9 looks better than 1.0 which is rather crowded. <b>fontname</b>
-is a freetype font; see <code>gd.stringFT</code>. <b>points</b> is
+by text; 0.9 looks better than 1.0 which is rather crowded. <var class="parameter">fontname</var>
+is a freetype font; see <code class="method-name">gd.stringFT</code>. <var class="parameter">points</var> is
 passed to the freetype engine and has an effect on hinting; although
-the size of the text is determined by <b>radius</b>, <b>textRadius</b>,
-and <b>fillPortion</b>, you should pass a point size that "hints"
+the size of the text is determined by <var class="parameter">radius</var>, <var class="parameter">textRadius</var>,
+and <var class="parameter">fillPortion</var>, you should pass a point size that "hints"
 appropriately -- if you know the text will be large, pass a large point
-size such as 24.0 to get the best results. <b>color</b> can be any color,
+size such as 24.0 to get the best results. <var class="parameter">color</var> can be any color,
 and may have an alpha component, do blending, etc. </p>
 
 
-<a name="api.font"></a>
-<h3>Font configuration methods</h3>
+<h3><a id="api.font">Font configuration methods</a></h3>
 
 <h4>gd.useFontConfig(bool)</h4>
 <p> gd has the ability to use
 <a href="http://fontconfig.org/fontconfig-user.html#AEN36">fontconfig
 patterns</a> rather than font file names as parameters to
-<code>gd.stringFT</code> and <code>gd.stringFTCircle</code>. For
+<code class="method-name">gd.stringFT</code> and <code class="method-name">gd.stringFTCircle</code>. For
 backwards compatibility reasons, the fontlist parameter to those
 functions is still expected to be a full or partial font file path
 name or list thereof by default. However, as a convenience, a single
-call to <code>gd.useFontConfig</code> with a <b>true</b> parameter
+call to <code class="method-name">gd.useFontConfig</code> with a <var class="lua-keyword">true</var> parameter
 configures Lua-GD to expect the fontlist parameter to be a fontconfig
-pattern. Otherwise, calling <code>gd.useFontConfig</code> with a
-<b>false</b> parameter will disable the fontconfig patters. </p>
+pattern. Otherwise, calling <code class="method-name">gd.useFontConfig</code> with a
+<var class="lua-keyword">false</var> parameter will disable the fontconfig patters. </p>
 
 
 <h4>gd.fontCacheSetup()</h4>
 
 <p> This function initializes the font cache for freetype text
-output functions such as <code>gd.stringFT</code>. If this function
+output functions such as <code class="method-name">gd.stringFT</code>. If this function
 is not called by the programmer, it is invoked automatically on the
 first truetype text output call, which is perfectly safe unless the
 application is multithreaded (either using LuaThreads or running Lua from
@@ -1729,8 +1763,8 @@ a different thread in your host program which also uses gd from the C API)
 . Multithreaded applications should directly invoke this function before
 allowing any thread to use freetype text output. You don't need to call
 this functions if you are using Lua coroutines because any calls from
-Lua to C API ara atomic. This function returns <b>true</b> on success
-or <b>false</b> if the freetype library fails to initialize.  </p>
+Lua to C API ara atomic. This function returns <var class="lua-keyword">true</var> on success
+or <var class="lua-keyword">false</var> if the freetype library fails to initialize.  </p>
 
 
 <h4>gd.fontCacheShutdown()</h4>
@@ -1742,127 +1776,126 @@ return value. </p>
 
 
 
-<a name="api.copy"></a>
-<h3>Image copying, resizing and transformation methods</h3>
+<h3><a id="api.copy">Image copying, resizing and transformation methods</a></h3>
 
 
-<h4>gd.copy(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h) <br>
+<h4>gd.copy(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h) <br />
 dstImage:copy(srcImage, dstX, dstY, srcX, srcY, w, h)</h4>
 
-<p> <code>gd.copy</code> is used to copy a rectangular portion of one
+<p> <code class="method-name">gd.copy</code> is used to copy a rectangular portion of one
 image to another image (For a way of stretching or shrinking the image
-in the process, see <code>gd.copyResized</code>). </p>
+in the process, see <code class="method-name">gd.copyResized</code>). </p>
 
-<p> The <b>dstImage</b> argument is the destination image to which
+<p> The <var class="parameter">dstImage</var> argument is the destination image to which
 the region will be copied (you can use the colon notation for it). The
-<b>srcImage</b> argument is the source image from which the region is
-copied. The <b>dstX</b> and <b>dstY</b> arguments specify the point in
-the destination image to which the region will be copied. The <b>srcX</b>
-and <b>srcY</b> arguments specify the upper left corner of the region
-in the source image. The <b>w</b> and <b>h</b> arguments specify the
+<var class="parameter">srcImage</var> argument is the source image from which the region is
+copied. The <var class="parameter">dstX</var> and <var class="parameter">dstY</var> arguments specify the point in
+the destination image to which the region will be copied. The <var class="parameter">srcX</var>
+and <var class="parameter">srcY</var> arguments specify the upper left corner of the region
+in the source image. The <var class="parameter">w</var> and <var class="parameter">h</var> arguments specify the
 width and height of the region. </p>
 
 <p> When you copy a region from one location in an image to another
-location in the same image, <code>gd.copy</code> will perform as
+location in the same image, <code class="method-name">gd.copy</code> will perform as
 expected unless the regions overlap, in which case the result is
-<b>unpredictable</b>. </p>
+<strong>unpredictable</strong>. </p>
 
-<p> <b>Important note on copying between images:</b> since different
+<p> <strong>Important note on copying between images:</strong> since different
 images do not necessarily have the same color tables, pixels are
 not simply set to the same color index values to copy them.  If the
 destination image is a palette image, this method will use the
-<code>gd.colorResolve</code> method to determine the best color
+<code class="method-name">gd.colorResolve</code> method to determine the best color
 available. </p>
 
 
 
-<h4>gd.copyResized(dstImage, srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)<br>
+<h4>gd.copyResized(dstImage, srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)<br />
 dstImage:copyResized(srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)</h4>
 
 
-<p> <code>gd.copyResized</code> is used to copy a rectangular portion of
+<p> <code class="method-name">gd.copyResized</code> is used to copy a rectangular portion of
 one image to another image. The X and Y dimensions of the original region
-and the destination region can vary, resulting in stretching or shrinking
+and the destination region may vary, resulting in stretching or shrinking
 of the region as appropriate (For a simpler version of this method
-which does not deal with resizing, see <code>gd.copy</code>). </p>
+which does not deal with resizing, see <code class="method-name">gd.copy</code>). </p>
 
-<p> The <b>dstImage</b> argument is the destination image to which the
-region will be copied. The <code>srcImage</code> argument is the source
-image from which the region is copied. The <b>dstX</b> and <b>dstY</b>
+<p> The <var class="parameter">dstImage</var> argument is the destination image to which the
+region will be copied. The <var class="parameter">srcImage</var> argument is the source
+image from which the region is copied. The <var class="parameter">dstX</var> and <var class="parameter">dstY</var>
 arguments specify the point in the destination image to which the region
-will be copied. The <b>srcX</b> and <b>srcY</b> arguments specify the
-upper left corner of the region in the source image. The <b>dstW</b>
-and <b>dstH</b> arguments specify the width and height of the destination
-region. The <b>srcW</b> and <b>srcH</b> arguments specify the width and
+will be copied. The <var class="parameter">srcX</var> and <var class="parameter">srcY</var> arguments specify the
+upper left corner of the region in the source image. The <var class="parameter">dstW</var>
+and <var class="parameter">dstH</var> arguments specify the width and height of the destination
+region. The <var class="parameter">srcW</var> and <var class="parameter">srcH</var> arguments specify the width and
 height of the source region and can differ from the destination size,
 allowing a region to be scaled during the copying process. </p>
 
 <p> When you copy a region from one location in an image to another
-location in the same image, <code>gd.copyResized</code> will perform
+location in the same image, <code class="method-name">gd.copyResized</code> will perform
 as expected unless the regions overlap, in which case the result is
-<b>unpredictable</b>. </p>
+<strong>unpredictable</strong>. </p>
 
-<p> <b>Important note on copying between images:</b> since different
+<p> <strong>Important note on copying between images:</strong> since different
 images do not necessarily have the same color tables, pixels are
 not simply set to the same color index values to copy them.  If the
 destination image is a palette image, this method will use the
-<code>gd.colorResolve</code> method to determine the best color
+<code class="method-name">gd.colorResolve</code> method to determine the best color
 available. </p>
 
 
 
 
-<h4>gd.copyResampled(dstImage, srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)<br>
+<h4>gd.copyResampled(dstImage, srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)<br />
 dstImage:copyResampled(srcImage, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH)</h4>
 
-<p> <code>gd.copyResampled</code> is used to copy a rectangular portion
+<p> <code class="method-name">gd.copyResampled</code> is used to copy a rectangular portion
 of one image to another image, smoothly interpolating pixel values so
 that, in particular, reducing the size of an image still retains a great
 deal of clarity. The X and Y dimensions of the original region and the
 destination region can vary, resulting in stretching or shrinking of the
 region as appropriate. (For a simpler version of this method which does
-not deal with resizing, see <code>gd.copy</code>. For a version which
-does not interpolate pixel values, see <code>gd.copyResized</code>). </p>
+not deal with resizing, see <code class="method-name">gd.copy</code>. For a version which
+does not interpolate pixel values, see <code class="method-name">gd.copyResized</code>). </p>
 
 <p> Pixel values are only interpolated if the destination image is a
-truecolor image. Otherwise, <code>gd.copyResized</code> is automatically
+truecolor image. Otherwise, <code class="method-name">gd.copyResized</code> is automatically
 invoked.</p>
 
-<p> The <b>dstImage</b> argument is the destination image to which
-the region will be copied. The <b>srcImage</b> argument is the source
-image from which the region is copied. The <b>dstX</b> and <b>dstY</b>
+<p> The <var class="parameter">dstImage</var> argument is the destination image to which
+the region will be copied. The <var class="parameter">srcImage</var> argument is the source
+image from which the region is copied. The <var class="parameter">dstX</var> and <var class="parameter">dstY</var>
 arguments specify the point in the destination image to which the region
-will be copied. The <b>srcX</b> and <b>srcY</b> arguments specify the
-upper left corner of the region in the source image. The <b>dstW</b>
-and <b>dstH</b> arguments specify the width and height of the destination
-region. The <b>srcW</b> and <b>srcH</b> arguments specify the width and
+will be copied. The <var class="parameter">srcX</var> and <var class="parameter">srcY</var> arguments specify the
+upper left corner of the region in the source image. The <var class="parameter">dstW</var>
+and <var class="parameter">dstH</var> arguments specify the width and height of the destination
+region. The <var class="parameter">srcW</var> and <var class="parameter">srcH</var> arguments specify the width and
 height of the source region and can differ from the destination size,
 allowing a region to be scaled during the copying process.</p>
 
 <p> When you copy a region from one location in an image to another
-location in the same image, <code>gd.copyResampled</code> will perform
+location in the same image, <code class="method-name">gd.copyResampled</code> will perform
 as expected unless the regions overlap, in which case the result is
-<b>unpredictable</b>. If this presents a problem, create a scratch image
+<strong>unpredictable</strong>. If this presents a problem, create a scratch image
 in which to keep intermediate results.</p>
 
-<p> <b>Important note on copying between images:</b> since different
+<p> <strong>Important note on copying between images:</strong> since different
 images do not necessarily have the same color tables, pixels are
 not simply set to the same color index values to copy them.  If the
 destination image is a palette image, this method will use the
-<code>gd.colorResolve</code> method to determine the best color
+<code class="method-name">gd.colorResolve</code> method to determine the best color
 available. </p>
 
 
 
 
-<h4>gd.copyRotated(dstImage, srcImage, dstX, dstY, srcX, srcY, srcW, srcH, ang)<br>
+<h4>gd.copyRotated(dstImage, srcImage, dstX, dstY, srcX, srcY, srcW, srcH, ang)<br />
 dstImage:copyRotated(srcImage, dstX, dstY, srcX, srcY, srcW, srcH, ang)</h4>
 
-<p> <code>gd.copyRotated</code> is used to copy a rectangular portion of
+<p> <code class="method-name">gd.copyRotated</code> is used to copy a rectangular portion of
 one image to another image, or to another region of the same image. The
-<b>srcX</b> and <b>srcY</b> coordinates specify the upper left corner of
-the source area; however, the <b>dstX</b> and <b>dstY</b> coordinates
-specify the <b>center</b> of the destination area.  This important
+<var class="parameter">srcX</var> and <var class="parameter">srcY</var> coordinates specify the upper left corner of
+the source area; however, the <var class="parameter">dstX</var> and <var class="parameter">dstY</var> coordinates
+specify the <var class="parameter">center</var> of the destination area.  This important
 distinction is made because the rotated rectangle may may or may not be
 parallel to the X and Y axes. The destination coordinates may be floating
 point, as the center of the desired destination area may lie at the
@@ -1872,27 +1905,27 @@ with 0 degrees causing no change, and counterclockwise rotation as the
 angle increases.</p>
 
 <p>When you copy a region from one location in an image to another
-location in the same image, <code>gd.copyRotated</code> will perform
+location in the same image, <code class="method-name">gd.copyRotated</code> will perform
 as expected unless the regions overlap, in which case the result is
-<b>unpredictable</b>. If this presents a problem, create a scratch image
+<strong>unpredictable</strong>. If this presents a problem, create a scratch image
 in which to keep intermediate results.</p>
 
-<p> <b>Important note on copying between images:</b> since different
+<p> <strong>Important note on copying between images:</strong> since different
 images do not necessarily have the same color tables, pixels are
 not simply set to the same color index values to copy them.  If the
 destination image is a palette image, this method will use the
-<code>gd.colorRotated</code> method to determine the best color
+<code class="method-name">gd.colorRotated</code> method to determine the best color
 available. </p>
 
 
 
-<h4>gd.copyMerge(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h, pct)<br>
+<h4>gd.copyMerge(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h, pct)<br />
 dstImage:copyMerge(srcImage, dstX, dstY, srcX, srcY, w, h, pct)</h4>
 
-<p> <code>gd.copyMerge</code> is almost identical to <code>gd.copy</code>,
+<p> <code class="method-name">gd.copyMerge</code> is almost identical to <code class="method-name">gd.copy</code>,
 except that it 'merges' the two images by an amount specified in the
 last parameter. If the last parameter is 100, then it will method
-identically to <code>gd.copy</code> - the source image replaces the
+identically to <code class="method-name">gd.copy</code> - the source image replaces the
 pixels in the destination.</p>
 
 <p> If, however, the pct parameter is less than 100, then the two images
@@ -1903,20 +1936,20 @@ merging a solid color with pct = 50.</p>
 
 
 
-<h4>gd.copyMergeGray(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h, pct)<br>
+<h4>gd.copyMergeGray(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h, pct)<br />
 dstImage:copyMergeGray(srcImage, dstX, dstY, srcX, srcY, w, h, pct)</h4>
 
-<p> <code>gd.copyMergeGray</code> is almost identical to
-<code>gd.copyMerge</code>, except that when merging images it preserves
+<p> <code class="method-name">gd.copyMergeGray</code> is almost identical to
+<code class="method-name">gd.copyMerge</code>, except that when merging images it preserves
 the hue of the source by converting the destination pixels to grey scale
-before the copy operation. <p>
+before the copy operation. </p>
 
 
 
-<h4>gd.paletteCopy(dstImage, srcImage)<br>
+<h4>gd.paletteCopy(dstImage, srcImage)<br />
 dstImage:paletteCopy(srcImage)</h4>
 
-<p> <code>gd.paletteCopy</code> copies a palette from one image to another,
+<p> <code class="method-name">gd.paletteCopy</code> copies a palette from one image to another,
 attempting to match the colors in the target image to the colors in the
 source palette. </p>
 
@@ -1928,15 +1961,15 @@ source palette. </p>
 axis of the original has been remapped to <em>theta</em> (angle) and the
 Y axis of the original has been remapped to <em>rho</em> (distance from
 center). This is known as a "polar coordinate transform".  The image
-<b>MUST</b> be square, but can have any size. </p>
+<strong>must</strong> be square, but can have any size. </p>
 
 
 
 <h4>gdImage:sharpen(pct)</h4>
 
-<p> Sharpens the specified image. <b>pct</b> is a sharpening percentage,
+<p> Sharpens the specified image. <var class="parameter">pct</var> is a sharpening percentage,
 and can be greater than 100. Silently does nothing to non-truecolor
-images. Silently does nothing for <b>pct</b> &lt; 0. Transparency/alpha
+images. Silently does nothing for <var class="parameter">pct</var> &lt; 0. Transparency/alpha
 channel are not altered. </p>
 
 
@@ -1944,9 +1977,9 @@ channel are not altered. </p>
 <h4>gdImage:trueColorToPalette(dither, colorsWanted)</h4>
 
 <p> This method converts a truecolor image to a palette-based image,
-using a high-quality two-pass quantization routine. If <b>dither</b>
-is set to <b>true</b>, the image will be dithered to approximate colors
-better, at the expense of some obvious "speckling". <b>colorsWanted</b>,
+using a high-quality two-pass quantization routine. If <var class="parameter">dither</var>
+is set to <var class="lua-keyword">true</var>, the image will be dithered to approximate colors
+better, at the expense of some obvious "speckling". <var class="parameter">colorsWanted</var>,
 an integer value, can be anything up to 256. If the original source image
 includes photographic information or anything that came out of a JPEG,
 256 is strongly recommended. 100% transparency of a single transparent
@@ -1961,29 +1994,28 @@ PNGs and JPEGs. The disk space gain of conversion to palette is not great
 
 
 
-<a name="api.gifanim"></a>
-<h3>GIF animation methods</h3>
+<h3><a id="api.gifanim">GIF animation methods</a></h3>
 
 <h4>gdImage:gifAnimBegin(filename, globalCM, loops)</h4>
 
 <p> This method must be called as the first method when creating a GIF
 animation in a file on the disk. It writes the correct GIF file headers
-to file name <b>filename</b> and prepares for frames to be added for
+to file name <var class="parameter">filename</var> and prepares for frames to be added for
 the animation. The image argument is not used to produce an image frame
 to the file, it is only used to establish the GIF animation frame size,
-interlacing options and the color palette. <code>gd.gifAnimAdd</code>
+interlacing options and the color palette. <code class="method-name">gd.gifAnimAdd</code>
 is used to add the first and subsequent frames to the animation, and
-the animation must be terminated by calling <code>gd.gifAnimEnd</code>,
+the animation must be terminated by calling <code class="method-name">gd.gifAnimEnd</code>,
 passing the same file name. </p>
 
-<p> The <b>GlobalCM</b> flag indicates if a global color map (or palette)
-is used in the GIF89A header. A <b>true</b> value specifies that a
+<p> The <var class="parameter">globalCM</var> flag indicates if a global color map (or palette)
+is used in the GIF89A header. A <var class="lua-keyword">true</var> value specifies that a
 global color map should be used to reduce the size of the animation. Of
 course, if the color maps of individual frames differ greatly, a global
-color map may not be a good idea, so you should use <b>globalCM</b> =
-<b>false</b>. </p>
+color map may not be a good idea, so you should use <var class="parameter">globalCM</var> =
+<var class="lua-keyword">false</var>. </p>
 
-<p> If <b>loops</b> is 0 or greater, the Netscape 2.0 extension for
+<p> If <var class="parameter">loops</var> is 0 or greater, the Netscape 2.0 extension for
 animation loop count is written. 0 means infinite loop count. -1 means
 that the extension is not added which results in no looping. -1 is
 the default. </p>
@@ -1998,18 +2030,18 @@ string and prepares for frames to be added for the animation. The image
 argument is not used to produce an image frame to the file, it is only
 used to establish the GIF animation frame size, interlacing options
 and the color palette. New frames must be created with the method
-<code>gd.gifAnimAddStr</code> and concatened to this one.  Finally,
-one last frame, generated with the method <code>gd.gifAnimEndStr</code>,
+<code class="method-name">gd.gifAnimAddStr</code> and concatened to this one.  Finally,
+one last frame, generated with the method <code class="method-name">gd.gifAnimEndStr</code>,
 must be concatened to finish the animation. </p>
 
-<p> The <b>GlobalCM</b> flag indicates if a global color map (or palette)
-is used in the GIF89A header. A <b>true</b> value specifies that a
+<p> The <var class="parameter">globalCM</var> flag indicates if a global color map (or palette)
+is used in the GIF89A header. A <var class="lua-keyword">true</var> value specifies that a
 global color map should be used to reduce the size of the animation. Of
 course, if the color maps of individual frames differ greatly, a global
-color map may not be a good idea, so you should use <b>globalCM</b> =
-<b>false</b>. </p>
+color map may not be a good idea, so you should use <var class="parameter">globalCM</var> =
+<var class="lua-keyword">false</var>. </p>
 
-<p> If <b>loops</b> is 0 or greater, the Netscape 2.0 extension for
+<p> If <var class="parameter">loops</var> is 0 or greater, the Netscape 2.0 extension for
 animation loop count is written. 0 means infinite loop count. -1 means
 that the extension is not added which results in no looping. -1 is
 the default. </p>
@@ -2019,35 +2051,35 @@ the default. </p>
 <h4>gdImage:gifAnimAdd(filename, localCM, leftOfs, topOfs, delay, disposal [, previm])</h4>
 
 <p> This method writes GIF animation frames to the file specified by
-<b>filename</b>, which was created with <code>gd.gifAnimBegin</code>. With
-<b>leftOfs</b> and <b>topOfs</b> you can place this frame in
+<var class="parameter">filename</var>, which was created with <code class="method-name">gd.gifAnimBegin</code>. With
+<var class="parameter">leftOfs</var> and <var class="parameter">topOfs</var> you can place this frame in
 different offset than (0, 0) inside the image screen as defined
-in <code>gd.gifAnimBegin</code>. Delay between the previous
+in <code class="method-name">gd.gifAnimBegin</code>. Delay between the previous
 frame and this frame is in 1/100s units. Disposal is usually
-<code>gd.DISPOSAL_NONE</code>, meaning that the pixels changed by this
+<code class="constant">gd.DISPOSAL_NONE</code>, meaning that the pixels changed by this
 frame should remain on the display when the next frame begins to render,
-but can also be <code>gd.DISPOSAL_UNKNOWN</code> (not recommended),
-<code>gd.DISPOSAL_RESTORE_BACKGROUND</code> (restores the first allocated
-color of the global palette), or <code>gd.DISPOSAL_RESTORE_PREVIOUS</code>
+but can also be <code class="constant">gd.DISPOSAL_UNKNOWN</code> (not recommended),
+<code class="constant">gd.DISPOSAL_RESTORE_BACKGROUND</code> (restores the first allocated
+color of the global palette), or <code class="constant">gd.DISPOSAL_RESTORE_PREVIOUS</code>
 (restores the appearance of the affected area before the frame was
-rendered). Only <code>gd.DISPOSAL_NONE</code> is a sensible choice for the
-first frame. If <b>previm</b> is passed, the built-in GIF optimizer will
-always use <code>gd.DISPOSAL_NONE</code> regardless of the <b>disposal</b>
+rendered). Only <code class="constant">gd.DISPOSAL_NONE</code> is a sensible choice for the
+first frame. If <var class="parameter">previm</var> is passed, the built-in GIF optimizer will
+always use <code class="constant">gd.DISPOSAL_NONE</code> regardless of the <var class="parameter">disposal</var>
 parameter. </p>
 
-<p> Setting the <b>localCM</b> flag to <b>true</b> adds a local
+<p> Setting the <var class="parameter">localCM</var> flag to <var class="lua-keyword">true</var> adds a local
 palette for this image to the animation. Otherwise the global palette
 is assumed and the user must make sure the palettes match. Use
-<code>gd.paletteCopy</code> to do that. </p>
+<code class="method-name">gd.paletteCopy</code> to do that. </p>
 
 <p> Automatic optimization is activated by giving the previous
 image as a parameter. This method then compares the images and
 only writes the changed pixels to the new frame in animation. The
-<b>disposal</b> parameter for optimized animations must be set to
-<code>gd.DISPOSAL_NONE</code>, also for the first frame. <b>leftOfs</b>
-and <b>topOfs</b> parameters are ignored for optimized frames. To achieve
+<var class="parameter">disposal</var> parameter for optimized animations must be set to
+<code class="constant">gd.DISPOSAL_NONE</code>, also for the first frame. <var class="parameter">leftOfs</var>
+and <var class="parameter">topOfs</var> parameters are ignored for optimized frames. To achieve
 good optimization, it is usually best to use a single global color map. To
-allow <code>gd.gifAnimAdd</code> to compress unchanged pixels via the use
+allow <code class="method-name">gd.gifAnimAdd</code> to compress unchanged pixels via the use
 of a transparent color, the image must include a transparent color.</p>
 
 
@@ -2057,34 +2089,34 @@ of a transparent color, the image must include a transparent color.</p>
 
 <p> This method returns GIF animation frames as Lua
 strings to be concatenated to headers which was created with
-<code>gd.gifAnimBeginStr</code>. With <b>leftOfs</b> and <b>topOfs</b>
+<code class="method-name">gd.gifAnimBeginStr</code>. With <var class="parameter">leftOfs</var> and <var class="parameter">topOfs</var>
 you can place this frame in different offset than (0, 0) inside the image
-screen as defined in <code>gd.gifAnimBegin</code>. Delay between the
+screen as defined in <code class="method-name">gd.gifAnimBegin</code>. Delay between the
 previous frame and this frame is in 1/100s units. Disposal is usually
-<code>gd.DISPOSAL_NONE</code>, meaning that the pixels changed by this
+<code class="constant">gd.DISPOSAL_NONE</code>, meaning that the pixels changed by this
 frame should remain on the display when the next frame begins to render,
-but can also be <code>gd.DISPOSAL_UNKNOWN</code> (not recommended),
-<code>gd.DISPOSAL_RESTORE_BACKGROUND</code> (restores the first allocated
-color of the global palette), or <code>gd.DISPOSAL_RESTORE_PREVIOUS</code>
+but can also be <code class="constant">gd.DISPOSAL_UNKNOWN</code> (not recommended),
+<code class="constant">gd.DISPOSAL_RESTORE_BACKGROUND</code> (restores the first allocated
+color of the global palette), or <code class="constant">gd.DISPOSAL_RESTORE_PREVIOUS</code>
 (restores the appearance of the affected area before the frame was
-rendered). Only <code>gd.DISPOSAL_NONE</code> is a sensible choice for the
-first frame. If <b>previm</b> is passed, the built-in GIF optimizer will
-always use <code>gd.DISPOSAL_NONE</code> regardless of the <b>disposal</b>
+rendered). Only <code class="constant">gd.DISPOSAL_NONE</code> is a sensible choice for the
+first frame. If <var class="parameter">previm</var> is passed, the built-in GIF optimizer will
+always use <code class="constant">gd.DISPOSAL_NONE</code> regardless of the <var class="parameter">disposal</var>
 parameter. </p>
 
-<p> Setting the <b>localCM</b> flag to <b>true</b> adds a local
+<p> Setting the <var class="parameter">localCM</var> flag to <var class="lua-keyword">true</var> adds a local
 palette for this image to the animation. Otherwise the global palette
 is assumed and the user must make sure the palettes match. Use
-<code>gd.paletteCopy</code> to do that. </p>
+<code class="method-name">gd.paletteCopy</code> to do that. </p>
 
 <p> Automatic optimization is activated by giving the previous
 image as a parameter. This method then compares the images and
 only writes the changed pixels to the new frame in animation. The
-<b>disposal</b> parameter for optimized animations must be set to
-<code>gd.DISPOSAL_NONE</code>, also for the first frame. <b>leftOfs</b>
-and <b>topOfs</b> parameters are ignored for optimized frames. To achieve
+<var class="parameter">disposal</var> parameter for optimized animations must be set to
+<code class="constant">gd.DISPOSAL_NONE</code>, also for the first frame. <var class="parameter">leftOfs</var>
+and <var class="parameter">topOfs</var> parameters are ignored for optimized frames. To achieve
 good optimization, it is usually best to use a single global color map. To
-allow <code>gd.gifAnimAdd</code> to compress unchanged pixels via the use
+allow <code class="method-name">gd.gifAnimAdd</code> to compress unchanged pixels via the use
 of a transparent color, the image must include a transparent color.</p>
 
 
@@ -2100,19 +2132,18 @@ by yourself) to create valid animations. </p>
 
 <p> Returns a semicolon character (;) as a Lua string, which must
 be concatened as the last element of an animation created with
-<code>gd.gifAnimBeginStr</code> and <code>gd.gifAnimAddStr</code>. Of
+<code class="method-name">gd.gifAnimBeginStr</code> and <code class="method-name">gd.gifAnimAddStr</code>. Of
 course, you can concatenate a semicolon by yourself, but this is a more
 explicit way to finish the animation. </p>
 
 
 
 
-<a name="examples"></a>
-<h2>Examples</h2>
+<h2><a id="examples">Examples</a></h2>
 
-<a name="examples.counter"></a>
-<h3>CGI Web Counter</h3>
-<pre class="example2">
+
+<h3><a id="examples.counter">CGI Web Counter</a></h3>
+<pre class="code-example">
 #!/usr/bin/env lua
 -- counter.lua -- a web counter in Lua!
 -- (c) 2004 Alexandre Erwin Ittner
@@ -2146,13 +2177,11 @@ io.write(im:pngStr())
 </pre>
 
 
-<a name="examples.clock"></a>
-<h3>CGI Analog clock</h3>
+<h3><a id="examples.clock">CGI Analog clock</a></h3>
 
-<img src="clock-example.png" alt="Clock Example output"
-title="Clock Example output">
+<p><img src="clock-example.png" alt="Clock Example output" title="Clock Example output" /></p>
 
-<pre class="example2">
+<pre class="code-example">
 #!/usr/bin/env lua
 
 -- a cgi script that draws an analog clock with lua and lua-gd
@@ -2223,13 +2252,11 @@ io.write(im:pngStr())
 </pre>
 
 
-<a name="examples.fractal"></a>
-<h3>The Sierpinski triangle</h3>
+<h3><a id="examples.fractal">The Sierpinski triangle</a></h3>
 
-<img src="sierpinski.png" width="250" height="250"
- alt="The Sierpinski triangle" title="The Sierpinski triangle">
+<p><img src="sierpinski.png" width="250" height="250" alt="The Sierpinski triangle" title="The Sierpinski triangle" /></p>
 
-<pre class="example2">
+<pre class="code-example">
 #!/usr/bin/env lua
 -- Draws the famous Sierpinski triangle with lua-gd
 
@@ -2261,13 +2288,11 @@ im:png("sierpinski.png")
 
 
 
-<a name="examples.fontconfig"></a>
-<h3>Using Freetype, Fontconfig and TrueType fonts</h3>
+<h3><a id="examples.fontconfig">Using Freetype, Fontconfig and TrueType fonts</a></h3>
 
-<img src="fontconfig-example.png" alt="Fontconfig Example output"
- title="Fontconfig Example output">
+<p><img src="fontconfig-example.png" alt="Fontconfig Example output" title="Fontconfig Example output" /></p>
 
-<pre class="example2">
+<pre class="code-example">
 -- The fonts used in this example comes with Microsoft operating systems 
 -- and can be downloaded from http://corefonts.sourceforge.net
 
@@ -2292,13 +2317,11 @@ im:png("out.png")
 
 
 
-<a name="examples.gifanim"></a>
-<h3>GIF animation</h3>
+<h3><a id="examples.gifanim">GIF animation</a></h3>
 
-<img src="gifanim.gif" width="120" height="120"
- alt="A GIF animation" title="A GIF animation">
+<p><img src="gifanim.gif" width="120" height="120" alt="A GIF animation" title="A GIF animation" /></p>
 
-<pre class="example2">
+<pre class="code-example">
 require "gd"
 
 im = gd.createPalette(120, 120)
@@ -2328,31 +2351,25 @@ fp:close()
 
 
 
-<a name="examples.steg"></a>
-<h3>A Steganography Application</h3>
+<h3><a id="examples.steg">A Steganography Application</a></h3>
 
-<table border="0">
- <tr>
-  <td width="216">
-   <img src="cat.png" width="216" height="256" alt="Original test image.">
-  </td>
-  <td width="216">
-   <img src="catmsg.png" width="216" height="256" alt="Image with a staganographic message">
-  </td>
-  <td width="216">
-    <img src="catdiff.png" width="216" height="256" alt="Resulting image from 'steg.lua diff'">
-  </td>
- </tr>
- <tr>
-  <td width="216"> Original test image. </td>
-  <td width="216"> Image with a staganographic message (the message cause no
-    visible changes).</td>
-  <td width="216"> Resulting image from <code>"steg.lua diff"</code>
-    showing, in color, the pixels changed to store the message. </td>
- </tr>
-</table>
+<div class="image-box" style="width: 216px">
+  <img src="cat.png" width="216" height="256" alt="Original test image." />
+  <p>Original test image.</p>
+</div>
 
-<pre class="example2">
+<div class="image-box" style="width: 216px">
+  <img src="catmsg.png" width="216" height="256" alt="Image with a staganographic message" />
+  <p>Image with a steganographic message (the message cause no visible changes).</p>
+</div>
+
+<div class="image-box" style="width: 216px">
+  <img src="catdiff.png" width="216" height="256" alt="Resulting image from 'steg.lua diff'" />
+  <p>Resulting image from <code>"steg.lua diff"</code> showing, in color, the pixels changed to store the message.</p>
+</div>
+
+
+<pre class="code-example">
 #/usr/bin/env lua
 --[[
                       Steganography with Lua-GD
@@ -2713,30 +2730,28 @@ os.exit(1)
 
 
 
-<a name="examples.other"></a>
-<h3>Other examples</h3>
+<h3><a id="examples.other">Other examples</a></h3>
 <p> There are some useful examples in the <code>demos</code> directory
 within the distribution package. </p>
 
 
 
-<a name="contact"></a>
-<h2>Contact information</h2>
 
-<p>
-Author: <b>Alexandre Erwin Ittner</b>
-<br> E-mail: <a href="mailto:aittner#netuno.com.br">aittner<b>#</b>netuno.com.br</a>
+<h2><a id="contact">Contact information</a></h2>
+
+<p> Author: <strong>Alexandre Erwin Ittner</strong> <br />
+E-mail: <a href="mailto:aittner#gmail.com">aittner<strong>#</strong>netuno.com.br</a>
 (e-mail obfuscated to avoid spam-bots. Please replace the "#" with an "@").
 
-<br> GnuPG/PGP Key: <a href="http://users.netuno.com.br/aittner/AlexandreErwinIttner.pub.asc">0x0041A1FB</a>
+<br /> GnuPG/PGP Key: <a href="http://users.netuno.com.br/aittner/AlexandreErwinIttner.pub.asc">0x0041A1FB</a>
  (key fingerprint: <code>9B49 FCE2 E6B9 D1AD 6101  29AD 4F6D F114 0041 A1FB</code>).
-<br> Homepage: <a href="http://users.netuno.com.br/aittner/">http://users.netuno.com.br/aittner/</a>.
-<br> Location: Jaraguá do Sul, Santa Catarina, Brazil.
+<br /> Homepage: <a href="http://users.netuno.com.br/aittner/">http://users.netuno.com.br/aittner/</a>.
+<br /> Location: JaraguÃ¡ do Sul, Santa Catarina, Brazil.
 </p>
 
 
-<hr>
-$Id$
+<hr />
+<p>$Id$</p>
 </body>
 </html>
 
