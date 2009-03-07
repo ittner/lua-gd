@@ -1456,6 +1456,25 @@ color of the starting point, see <code class="method-name">fill</code>. </p>
 can be, however. </p>
 
 
+<h4>gdImage:saveAlpha(boolean)</h4>
+
+<p>By default, gd does not saves the alpha channel on a PNG image, an option
+that saves some space in the output file. To enable this, just call up this
+method passing <var class="lua-keyword">true</var> as the sole paremeter.</p>
+
+
+<h4>gdImage:alphaBlending(boolean)</h4>
+
+<p>This method allows for two different modes of drawing on truecolor images.
+In blending mode, the alpha channel component of the color supplied to all
+drawing methods determines how much of the underlying color should be allowed
+to shine through. As a result, Lua-GD automatically blends the existing color
+at that point with the drawing color, and stores the result in the image,
+resulting in a opaque pixel. In non-blending mode, the drawing color is
+copied with its alpha channel information, replacing the destination pixel.
+Blending mode is not available when drawing on palette images. </p>
+
+
 <h3><a id="api.text">Text drawing methods</a></h3>
 
 <h4>gdImage:string(font, x, y, string, color)</h4>
