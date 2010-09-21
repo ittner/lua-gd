@@ -42,8 +42,7 @@ OUTFILE=gd.so
 CFLAGS=`gdlib-config --cflags` `pkg-config $(LUAPKG) --cflags` -O3 -Wall \
     $(OMITFP)
 GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
-LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` \
-    `pkg-config $(LUAPKG) --libs` -lgd
+LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -lgd $(OMITFP)
 INSTALL_PATH=`pkg-config $(LUAPKG) --variable=INSTALL_CMOD`
 
 
@@ -53,7 +52,7 @@ INSTALL_PATH=`pkg-config $(LUAPKG) --variable=INSTALL_CMOD`
 #OUTFILE=gd.so
 #CFLAGS=-Wall `gdlib-config --cflags` -I/usr/include/lua5.1 -O3 $(OMITFP)
 #GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
-#LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -llua51 -lgd
+#LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -lgd $(OMITFP)
 #INSTALL_PATH=/usr/lib/lua/
 
 
@@ -64,19 +63,22 @@ INSTALL_PATH=`pkg-config $(LUAPKG) --variable=INSTALL_CMOD`
 #OUTFILE=gd.dll
 #CFLAGS=-Wall -IC:/lua5.1/ -O3 $(OMITFP)
 #GDFEATURES=-DGD_XPM -DGD_JPEG -DGD_FONTCONFIG -DGD_FREETYPE -DGD_PNG -DGD_GIF
-#LFLAGS=-shared -lgd2 -lm -llua51
+#LFLAGS=-shared -lgd2 -lm $(OMITFP)
 #INSTALL_PATH="C:/Program Files/lua/"
 # ---------------------------------------------------------------------------
 
 
 all: $(OUTFILE)
 
-$(OUTFILE): luagd.c
-	$(CC) -o $(OUTFILE) $(GDFEATURES) $(CFLAGS) $(LFLAGS) luagd.c
+$(OUTFILE): gd.lo
+	$(CC) -o $(OUTFILE) $(LFLAGS) gd.lo
 	lua test_features.lua
 
+gd.lo: luagd.c
+	$(CC) -o gd.lo -c $(GDFEATURES) $(CFLAGS) luagd.c
+
 install: $(OUTFILE)
-	install -s $(OUTFILE) $(INSTALL_PATH)
+	install -D -s $(OUTFILE) $(INSTALL_PATH)
 
 clean:
-	rm -f $(OUTFILE) *.o
+	rm -f $(OUTFILE) gd.lo
