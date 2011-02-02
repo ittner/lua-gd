@@ -72,7 +72,7 @@ INSTALL_PATH=`pkg-config $(LUAPKG) --variable=INSTALL_CMOD`
 all: $(OUTFILE)
 
 $(OUTFILE): luagd.c
-	$(CC) -o $(OUTFILE) $(GDFEATURES) $(CFLAGS) $(LFLAGS) luagd.c
+	$(CC) -o $(OUTFILE) $(GDFEATURES) $(CFLAGS) luagd.c $(LFLAGS)
 	lua test_features.lua
 
 install: $(OUTFILE)
