@@ -40,7 +40,7 @@ OMITFP=-fomit-frame-pointer
 LUAPKG=lua5.1
 OUTFILE=gd.so
 CFLAGS=`gdlib-config --cflags` `pkg-config $(LUAPKG) --cflags` -O3 -Wall \
-    $(OMITFP)
+    $(OMITFP) -fPIC
 GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
 LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -lgd $(OMITFP)
 INSTALL_PATH=`pkg-config $(LUAPKG) --variable=INSTALL_CMOD`
@@ -71,7 +71,7 @@ INSTALL_PATH=`pkg-config $(LUAPKG) --variable=INSTALL_CMOD`
 all: $(OUTFILE)
 
 $(OUTFILE): gd.lo
-	$(CC) -o $(OUTFILE) $(LFLAGS) gd.lo
+	$(CC) -o $(OUTFILE) gd.lo $(LFLAGS)
 	lua test_features.lua
 
 gd.lo: luagd.c
