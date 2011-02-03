@@ -26,8 +26,6 @@
  *
  */
  
-static char *rev = "$Id$";
-
 #include <lua.h>
 #include <lauxlib.h>
 #include <stdlib.h>
@@ -2300,10 +2298,6 @@ int luaopen_gd(lua_State *L) {
 
     lua_pushliteral(L, "VERSION");
     lua_pushstring(L, LIB_VERSION);
-    lua_settable(L, -3);
-
-    lua_pushliteral(L, "REVISION");
-    lua_pushstring(L, rev);
     lua_settable(L, -3);
 
     lua_pushliteral(L, "COPYRIGHT");

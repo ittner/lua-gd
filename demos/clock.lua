@@ -2,7 +2,6 @@
 
 -- a cgi script that draws an analog clock with lua and lua-gd
 -- (c) 2004 Alexandre Erwin Ittner
--- $Id$
 
 require "gd"
 

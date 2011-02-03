@@ -6,7 +6,6 @@
 -- Drawns the Lua Logo. This script requires fontconfig and the "Helvetica" 
 -- font installed in your system.
 --
--- $Id$
 --
 
 

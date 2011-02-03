@@ -1,7 +1,5 @@
 #!/usr/bin/env lua
 
--- $Id$
-
 require "gd"
 
 function enabled(res, desc)

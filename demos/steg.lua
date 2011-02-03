@@ -84,9 +84,7 @@ will mark the end of the message within the image, so he will know when
 to stop. Of course, this program will also do this boring job for Bob.
 
 
-$Id$
-
---]]
+]]
 
 
 require "gd"
