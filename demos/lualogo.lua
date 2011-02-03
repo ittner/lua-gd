@@ -1,7 +1,7 @@
 #!/usr/bin/env lua
 
 --
--- lualogo.lua (c) 2006 Alexandre Erwin Ittner <aittner@netuno.com.br>
+-- lualogo.lua (c) 2006-11 Alexandre Erwin Ittner <alexandre@ittner.com.br>
 --
 -- Drawns the Lua Logo. This script requires fontconfig and the "Helvetica" 
 -- font installed in your system.

@@ -1,5 +1,5 @@
 Lua-GD, the gd bindings for the Lua Programming Language
-(c) 2004-06 Alexandre Erwin Ittner <aittner@netuno.com.br>
+(c) 2004-11 Alexandre Erwin Ittner <alexandre@ittner.com.br>
 
 These are the Windows binaries for Lua-GD for Lua 5.1, compiled with
 mingw32 3.4.4. These binaries also work with LuaJit 1.1.0. GD and its

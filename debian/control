@@ -1,6 +1,6 @@
 Source: lua-gd
 Priority: optional
-Maintainer: Alexandre Erwin Ittner <aittner@netuno.com.br>
+Maintainer: Alexandre Erwin Ittner <alexandre@ittner.com.br>
 Build-Depends: debhelper (>= 4.0.0), liblua5.1-dev
 Standards-Version: 3.6.1
 Section: interpreters

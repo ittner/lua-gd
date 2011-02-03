@@ -1,5 +1,5 @@
 # luagd -- gd bindings for the Lua Programming Language.
-# (c) 2004-06 Alexandre Erwin Ittner <aittner@netuno.com.br>
+# (c) 2004-11 Alexandre Erwin Ittner <alexandre@ittner.com.br>
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
