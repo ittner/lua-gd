@@ -2331,7 +2331,7 @@ int luaopen_gd(lua_State *L) {
     tblseticons(L, "DISPOSAL_NONE", gdDisposalNone);
     tblseticons(L, "DISPOSAL_UNKNOWN", gdDisposalUnknown);
     tblseticons(L, "DISPOSAL_RESTORE_BACKGROUND", gdDisposalRestoreBackground);
-    tblseticons(L, "DISPOSAL_RESTORE_PREVIUOUS", gdDisposalRestorePrevious);
+    tblseticons(L, "DISPOSAL_RESTORE_PREVIOUS", gdDisposalRestorePrevious);
 #endif
 
     /* Standard gd fonts */
