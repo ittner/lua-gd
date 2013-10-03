@@ -107,8 +107,9 @@ clean:
 TDIR=lua-gd-$(VERSION)
 DFILES=COPYING README luagd.c lua-gd.spec Makefile test_features.lua
 dist: $(DISTFILES)
-	rm $(TDIR).tar.gz
-	mkdir -p $(TDIR) $(TDIR)/doc $(TDIR)/demos $(TDIR)/debian
+	rm -f $(TDIR).tar.gz
+	mkdir $(TDIR)
+	mkdir -p $(TDIR)/doc $(TDIR)/demos $(TDIR)/debian
 	cp $(DFILES) $(TDIR)
 	cp demos/* $(TDIR)/demos/
 	cp doc/* $(TDIR)/doc/
