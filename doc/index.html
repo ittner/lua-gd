@@ -425,9 +425,14 @@ packages. The libgd2-noxpm does not have Fontconfig support.</p>
 
 <p>Lua-GD uses the Lua 5.1 package system that allows you to simply do a</p>
 
-<pre class="code-example indented">require "gd"</pre>
+<pre class="code-example indented">local gd = require("gd")</pre>
 
-<p> call to load up the library. </p>
+<p> call to load up the library.</p>
+
+<p><strong>Compatibility notice:</strong> Until version 2.0.33r2, Lua-GD
+exported a global table called "gd" (as usually done for Lua 5.0 libraries).
+Versions 2.0.33.r3 and newer dropped Lua 5.0 compatibility and no longers
+changes the global environment, so an explicit attribution is necessary. </p>
 
 
 
@@ -438,8 +443,9 @@ a way that make it more familiar to Lua users and use the extra power
 provided by Lua, at cost of some learning for those that already use
 gd. </p>
 
-<p> All the functions and constants are stored on a single global
-module called <span class="module-name">gd</span>. Images are objects and they can use the
+<p> All the functions and constants are stored on a single table returned by
+<code>require</code> and stored to a variable conventionally named
+<span class="module-name">gd</span>. Images are objects and they can use the
 common colon notation for its methods, but you can also use a C-style
 syntax. So, the following two lines are equivalent: </p>
 
@@ -2167,7 +2173,7 @@ explicit way to finish the animation. </p>
 -- counter.lua -- a web counter in Lua!
 -- (c) 2004 Alexandre Erwin Ittner
 
-require "gd"
+local gc = require("gd")
 
 datafile = "counter.txt"
 fp = io.open(datafile, "r+")
@@ -2206,7 +2212,7 @@ io.write(im:pngStr())
 -- a cgi script that draws an analog clock with lua and lua-gd
 -- (c) 2004 Alexandre Erwin Ittner
 
-require "gd"
+local gd = require("gd")
 
 function createClock(size, hours, minutes)
   local im = gd.createTrueColor(size, size)
@@ -2279,7 +2285,7 @@ io.write(im:pngStr())
 #!/usr/bin/env lua
 -- Draws the famous Sierpinski triangle with lua-gd
 
-require "gd"
+local gd = require("gd")
 
 size = 250
 im = gd.createPalette(size, size)
@@ -2315,7 +2321,7 @@ im:png("sierpinski.png")
 -- The fonts used in this example comes with Microsoft operating systems 
 -- and can be downloaded from http://corefonts.sourceforge.net
 
-require "gd"
+local gd = require("gd")
 
 im = gd.createTrueColor(220, 190)
 white = im:colorAllocate(255, 255, 255)
@@ -2341,7 +2347,7 @@ im:png("out.png")
 <p><img src="gifanim.gif" width="120" height="120" alt="A GIF animation" title="A GIF animation" /></p>
 
 <pre class="code-example">
-require "gd"
+local gd = require("gd")
 
 im = gd.createPalette(120, 120)
 assert(im)
@@ -2470,7 +2476,7 @@ to stop. Of course, this program will also do this boring job for Bob.
 
 --]]
 
-require "gd"
+local gd = require("gd")
 
 function getLSB(n)
   return math.mod(n, 2) ~= 0

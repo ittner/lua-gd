@@ -2,7 +2,7 @@
 -- counter.lua -- a web counter in Lua!
 -- (c) 2004 Alexandre Erwin Ittner
 
-require "gd"
+local gd = require("gd")
 
 datafile = "counter.txt"
 fp = io.open(datafile, "r+")

@@ -1,7 +1,7 @@
 -- The fonts used in this example comes with Microsoft operating systems 
 -- and can be downloaded from http://corefonts.sourceforge.net
 
-require "gd"
+local gd = require("gd")
 
 im = gd.createTrueColor(220, 190)
 white = im:colorAllocate(255, 255, 255)

@@ -1,4 +1,4 @@
-require "gd"
+local gd = require("gd")
 
 im = gd.createTrueColor(400, 400)
 assert(im)

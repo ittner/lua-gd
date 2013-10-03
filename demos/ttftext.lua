@@ -1,4 +1,4 @@
-require "gd"
+local gd = require("gd")
 
 function boxedtext(im, color, font, size, ang, x, y, text, bcolor)
   font = "./" .. font .. ".ttf"

@@ -1,4 +1,4 @@
-require "gd"
+local gd = require("gd")
 
 gd.useFontConfig(true) -- Use Fontconfig by default.
 

@@ -2,7 +2,7 @@
 
 -- Draws the famous Sierpinski triangle with lua-gd
 
-require "gd"
+local gd = require("gd")
 
 local size = 500
 

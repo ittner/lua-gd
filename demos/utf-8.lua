@@ -7,7 +7,7 @@
 -- WARNING: Windows Notepad will add some prefixes, making this file an
 -- invalid Lua script.
 
-require "gd"
+local gd = require("gd")
 
 local text = [[
 ⌠ ☾ Lua-GD

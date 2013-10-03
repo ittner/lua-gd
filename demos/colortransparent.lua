@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 
-require "gd"
+local gd = require("gd")
 
 local im = gd.createPalette(90, 90)
 

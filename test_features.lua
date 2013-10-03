@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 
-require "gd"
+local gd = require("gd")
 
 function enabled(res, desc)
   local str = "    " .. desc .. " "

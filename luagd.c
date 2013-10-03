@@ -47,16 +47,15 @@
 #define GD_IMAGE_PTR_TYPENAME   "gdImagePtr_handle"
 
 
-/* Compatibility between Lua 5.1+ and Lua 5.0 */
-#ifndef LUA_VERSION_NUM
-#define LUA_VERSION_NUM 0
-#endif
+/* Compatibility between Lua 5.1 and Lua 5.2 */
 #if LUA_VERSION_NUM < 501
-#define luaL_register(a, b, c) luaL_openlib((a), (b), (c), 0)
-#define luaL_checkinteger(L, n) ((int)luaL_checknumber(L, n))
+ #error "Unsuported Lua version. You must use Lua >= 5.1"
 #endif
 
-/* Emulates lua_(un)boxpointer from Lua 5.0 (don't exists on Lua 5.1) */
+#if LUA_VERSION_NUM < 502
+ #define luaL_newlib(L, f)  { lua_newtable(L); luaL_register(L, NULL, f); }
+#endif
+
 #define boxptr(L, p)   (*(void**)(lua_newuserdata(L, sizeof(void*))) = (p))
 #define unboxptr(L, i) (*(void**)(lua_touserdata(L, i)))
 
@@ -2294,7 +2293,7 @@ static const luaL_reg LgdMetatable[] =
 
 
 int luaopen_gd(lua_State *L) {
-    luaL_register(L, LIB_NAME, LgdFunctions);
+    luaL_newlib(L, LgdFunctions);
 
     lua_pushliteral(L, "VERSION");
     lua_pushstring(L, LIB_VERSION);

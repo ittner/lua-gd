@@ -1,5 +1,5 @@
 
-require "gd"
+local gd = require("gd")
 
 local im = gd.createPalette(150, 100)
 assert(im, "Failed to create new image.")

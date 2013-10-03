@@ -1,4 +1,4 @@
-require "gd"
+local gd = require("gd")
 
 im = gd.createFromJpeg("./bugs.jpg")
 assert(im)

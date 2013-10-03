@@ -3,7 +3,7 @@
 -- a cgi script that draws an analog clock with lua and lua-gd
 -- (c) 2004 Alexandre Erwin Ittner
 
-require "gd"
+local gd = require("gd")
 
 function createClock(size, hours, minutes)
   local im = gd.createTrueColor(size, size)

@@ -87,7 +87,7 @@ to stop. Of course, this program will also do this boring job for Bob.
 ]]
 
 
-require "gd"
+local gd = require("gd")
 
 
 function getLSB(n)

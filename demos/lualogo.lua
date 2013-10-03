@@ -9,7 +9,7 @@
 --
 
 
-require "gd"
+local gd = require("gd")
 
 gd.useFontConfig(true)
 
