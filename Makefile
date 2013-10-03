@@ -36,6 +36,7 @@ OMITFP=-fomit-frame-pointer
 # have these programs you must comment out these lines and uncomment and
 # change the next ones.
 
+LUABIN=lua
 # Name of .pc file. "lua5.1" on Debian/Ubuntu
 LUAPKG=lua5.1
 OUTFILE=gd.so
@@ -43,7 +44,15 @@ CFLAGS=`gdlib-config --cflags` `pkg-config $(LUAPKG) --cflags` -O3 -Wall \
     $(OMITFP) -fPIC
 GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
 LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -lgd $(OMITFP)
-INSTALL_PATH=`pkg-config $(LUAPKG) --variable=INSTALL_CMOD`
+
+INSTALL_PATH := `$(LUABIN) -e'                          \
+    for dir in package.cpath:gmatch("(/[^?;]+)?") do    \
+        io.write(dir)                                   \
+        os.exit(0)                                      \
+    end                                                 \
+    os.exit(1)                                          \
+'`
+
 
 
 # ---------------------------------------------------------------------------
