@@ -24,6 +24,8 @@
 # documentation would be greatly appreciated (but it is not required).
 #
 
+VERSION=2.0.33r3
+
 CC=gcc
 
 # Optimization for the brave of heart ;)
@@ -94,4 +96,19 @@ install: $(OUTFILE)
 clean:
 	rm -f $(OUTFILE) gd.lo
 
-.PHONY: all test install clean
+
+# Rules for making a distribution tarball
+
+TDIR=lua-gd-$(VERSION)
+DFILES=COPYING README luagd.c lua-gd.spec Makefile test_features.lua
+dist: $(DISTFILES)
+	rm $(TDIR).tar.gz
+	mkdir -p $(TDIR) $(TDIR)/doc $(TDIR)/demos $(TDIR)/debian
+	cp $(DFILES) $(TDIR)
+	cp demos/* $(TDIR)/demos/
+	cp doc/* $(TDIR)/doc/
+	cp debian/* $(TDIR)/debian/
+	tar czf $(TDIR).tar.gz $(TDIR)
+	rm -rf $(TDIR)
+
+.PHONY: all test install clean dist
