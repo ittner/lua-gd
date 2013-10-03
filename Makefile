@@ -42,8 +42,11 @@ LUABIN=lua
 # Name of .pc file. "lua5.1" on Debian/Ubuntu
 LUAPKG=lua5.1
 OUTFILE=gd.so
+
 CFLAGS=-O3 -Wall -fPIC
 CFLAGS+=`gdlib-config --cflags` `pkg-config $(LUAPKG) --cflags` $(OMITFP)
+CFLAGS+=-DVERSION=\"$(VERSION)\"
+
 GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
 LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -lgd $(OMITFP)
 
@@ -62,6 +65,7 @@ INSTALL_PATH := `$(LUABIN) -e'                          \
 
 #OUTFILE=gd.so
 #CFLAGS=-Wall `gdlib-config --cflags` -I/usr/include/lua5.1 -O3 $(OMITFP)
+#CFLAGS+=-DVERSION=\"$(VERSION)\"
 #GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
 #LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -lgd $(OMITFP)
 #INSTALL_PATH=/usr/lib/lua/
@@ -73,6 +77,7 @@ INSTALL_PATH := `$(LUABIN) -e'                          \
 
 #OUTFILE=gd.dll
 #CFLAGS=-Wall -IC:/lua5.1/ -O3 $(OMITFP)
+#CFLAGS+=-DVERSION=\"$(VERSION)\"
 #GDFEATURES=-DGD_XPM -DGD_JPEG -DGD_FONTCONFIG -DGD_FREETYPE -DGD_PNG -DGD_GIF
 #LFLAGS=-shared -lgd2 -lm $(OMITFP)
 #INSTALL_PATH="C:/Program Files/lua/"

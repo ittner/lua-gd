@@ -39,9 +39,10 @@
 #include <gdfontg.h>
 #include <gdfontt.h>
 
-#define LIB_NAME        "gd"
-#define GD_VERSION      "2.0.33"
-#define LIB_VERSION     "lua-gd " GD_VERSION "r3"
+#ifndef VERSION
+ #error "Trying to build without -DVERSION=xxx defined. Check the Makefile"
+#endif
+#define LIB_VERSION     "lua-gd " VERSION
 #define LIB_COPYRIGHT   LIB_VERSION " (c) 2004-13 Alexandre Erwin Ittner"
 
 #define GD_IMAGE_PTR_TYPENAME   "gdImagePtr_handle"
