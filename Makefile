@@ -98,9 +98,6 @@ gd.lo: luagd.c
 install: $(OUTFILE)
 	install -D -s $(OUTFILE) $(INSTALL_PATH)
 
-clean:
-	rm -f $(OUTFILE) gd.lo
-
 
 # Rules for making a distribution tarball
 
@@ -116,5 +113,9 @@ dist: $(DISTFILES)
 	cp debian/* $(TDIR)/debian/
 	tar czf $(TDIR).tar.gz $(TDIR)
 	rm -rf $(TDIR)
+
+clean:
+	rm -f $(OUTFILE) gd.lo
+	rm -rf $(TDIR) $(TDIR).tar.gz
 
 .PHONY: all test install clean dist
