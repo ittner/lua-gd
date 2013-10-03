@@ -182,7 +182,7 @@ div.header {
  <a href="http://lua-gd.luaforge.net" title="Lua-GD homepage">
   <img src="lua-gd.png" alt="Lua-GD Logo" title="Lua-GD" width="140" height="140" />
  </a>
- <h1>Lua-GD 2.0.33r2</h1>
+ <h1>Lua-GD 2.0.33r3</h1>
 </div>
 
 
@@ -260,7 +260,7 @@ with Lua is <strong>required</strong>.</p>
 the format "X.Y.ZrW", where X.Y.Z indicates the gd version and W the
 binding version. So, the <em>2.0.33r1</em> version is the first binding
 version for gd 2.0.33 and <em>2.0.33r2</em> has some improvements/bug
-fixes/etc. but uses the same gd version. </p>
+fixes/etc. but were based in the same gd version. </p>
 
 
 
@@ -277,7 +277,7 @@ both academic and commercial purpouses. Or, more precisely: </p>
 
 
 <pre class="license-text indented">
-Lua-GD (c) 2004-2006 Alexandre Erwin Ittner
+Lua-GD (c) 2004-2013 Alexandre Erwin Ittner
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -393,7 +393,7 @@ gcc -o gd.so `gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
 `gdlib-config --ldflags` `gdlib-config --libs` `pkg-config lua5.1 --libs`
 -lgd luagd.c
 lua test_features.lua
-Lua-GD version: lua-gd 2.0.33r2
+Lua-GD version: lua-gd 2.0.33r3
 Lua-GD features:
     PNG support ..................... Enabled
     GIF support ..................... Enabled
@@ -2771,7 +2771,6 @@ Email: <a href="mailto:alexandre#ittner.com.br">alexandre<strong>#</strong>ittne
 
 
 <hr />
-<p>$Id$</p>
 </body>
 </html>
 

@@ -1,5 +1,5 @@
 Name: lua-gd
-Version: 2.0.33r2
+Version: 2.0.33r3
 Release: 1
 Summary: gd bindings for the Lua programming language
 Summary(pt_BR): Bindings da biblioteca gd para a linguagem Lua

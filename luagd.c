@@ -1,6 +1,6 @@
 /*
  * luagd -- GD bindings for Lua.
- * (c) 2004-11 Alexandre Erwin Ittner <alexandre@ittner.com.br>
+ * (c) 2004-13 Alexandre Erwin Ittner <alexandre@ittner.com.br>
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -41,8 +41,8 @@
 
 #define LIB_NAME        "gd"
 #define GD_VERSION      "2.0.33"
-#define LIB_VERSION     "lua-gd " GD_VERSION "r2"
-#define LIB_COPYRIGHT   LIB_VERSION " (c) 2004-06 Alexandre Erwin Ittner"
+#define LIB_VERSION     "lua-gd " GD_VERSION "r3"
+#define LIB_COPYRIGHT   LIB_VERSION " (c) 2004-13 Alexandre Erwin Ittner"
 
 #define GD_IMAGE_PTR_TYPENAME   "gdImagePtr_handle"
 
