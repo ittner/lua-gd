@@ -26,7 +26,7 @@
 
 CC=gcc
 
-# For the brave of heart ;)
+# Optimization for the brave of heart ;)
 OMITFP=-fomit-frame-pointer
 
 
@@ -40,8 +40,8 @@ LUABIN=lua
 # Name of .pc file. "lua5.1" on Debian/Ubuntu
 LUAPKG=lua5.1
 OUTFILE=gd.so
-CFLAGS=`gdlib-config --cflags` `pkg-config $(LUAPKG) --cflags` -O3 -Wall \
-    $(OMITFP) -fPIC
+CFLAGS=-O3 -Wall -fPIC
+CFLAGS+=`gdlib-config --cflags` `pkg-config $(LUAPKG) --cflags` $(OMITFP)
 GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
 LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -lgd $(OMITFP)
 
@@ -77,10 +77,12 @@ INSTALL_PATH := `$(LUABIN) -e'                          \
 # ---------------------------------------------------------------------------
 
 
-all: $(OUTFILE)
+all: test
 
 $(OUTFILE): gd.lo
 	$(CC) -o $(OUTFILE) gd.lo $(LFLAGS)
+
+test: $(OUTFILE)
 	lua test_features.lua
 
 gd.lo: luagd.c
@@ -91,3 +93,5 @@ install: $(OUTFILE)
 
 clean:
 	rm -f $(OUTFILE) gd.lo
+
+.PHONY: all test install clean
