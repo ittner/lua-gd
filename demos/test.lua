@@ -1,3 +1,5 @@
+#!/usr/bin/env lua
+
 local gd = require("gd")
 
 math.randomseed(os.time())

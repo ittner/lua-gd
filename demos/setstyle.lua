@@ -1,3 +1,4 @@
+#!/usr/bin/env lua
 
 local gd = require("gd")
 

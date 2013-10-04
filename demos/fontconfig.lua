@@ -1,3 +1,5 @@
+#!/usr/bin/env lua
+
 -- The fonts used in this example comes with Microsoft operating systems 
 -- and can be downloaded from http://corefonts.sourceforge.net
 

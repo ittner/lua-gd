@@ -1,3 +1,5 @@
+#!/usr/bin/env lua
+
 local gd = require("gd")
 
 local function boxedtext(im, color, font, size, ang, x, y, text, bcolor)

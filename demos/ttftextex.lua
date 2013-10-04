@@ -1,3 +1,5 @@
+#!/usr/bin/env lua
+
 local gd = require("gd")
 
 gd.useFontConfig(true) -- Use Fontconfig by default.
