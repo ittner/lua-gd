@@ -13,4 +13,4 @@ im:filledRectangle(10, 10, 50, 50, blue)
 im:filledRectangle(40, 40, 80, 80, red)
 
 im:gif("out.gif")
-os.execute("display out.gif")
+os.execute("xdg-open out.gif")

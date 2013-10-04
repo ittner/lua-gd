@@ -11,4 +11,4 @@ im:filledPolygon( { { 30, 30 }, { 30, 40 }, { 40, 40 }, { 40, 30 } }, white)
 im:openPolygon( { { 50, 50 }, { 50, 60 }, { 60, 60 }, { 60, 50 } }, white)
 
 im:png("out.png")
-print(os.execute("display out.png"))
+print(os.execute("xdg-open out.png"))

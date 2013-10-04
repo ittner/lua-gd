@@ -15,5 +15,5 @@ for i = 1, 10 do
 end
 
 gd.gifAnimEnd("out.gif")
+os.execute("xdg-open out.gif")
 
-print("Gif animation written to 'out.gif' file")

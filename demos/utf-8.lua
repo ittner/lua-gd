@@ -32,4 +32,4 @@ im:filledRectangle(0, 0, x, y, white)
 im:stringFT(black, fontname, 16, 0, 10, 30, text)
 
 im:png("out.png")
-os.execute("display out.png")
+os.execute("xdg-open out.png")

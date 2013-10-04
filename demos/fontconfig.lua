@@ -18,4 +18,4 @@ im:stringFT(black, "Times New Roman", 20, 0, 10, 150, "Times New Roman")
 im:stringFT(black, "Comic Sans MS", 20, 0, 10, 180, "Comic Sans MS")
 
 im:png("out.png")
-os.execute("display out.png")
+os.execute("xdg-open out.png")

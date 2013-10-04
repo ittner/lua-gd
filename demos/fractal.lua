@@ -27,5 +27,5 @@ for i = 1, size do
 end
 
 im:png("out.png")
-os.execute("display out.png")
+os.execute("xdg-open out.png")
 

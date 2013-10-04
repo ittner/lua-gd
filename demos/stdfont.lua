@@ -16,5 +16,5 @@ im:line(60, 93, 70, 93, black)
 im:string(gd.FONT_SMALL, 80, 86, "= 10 px", black)
 
 im:png("out.png")
-os.execute("display out.png")
+os.execute("xdg-open out.png")
 

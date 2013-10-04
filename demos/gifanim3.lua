@@ -24,4 +24,4 @@ end
 fp:write(gd.gifAnimEndStr())
 fp:close()
 
-print("Gif animation written to file 'out.gif'.")
+os.execute("xdg-open out.gif")

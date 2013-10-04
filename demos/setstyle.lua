@@ -30,6 +30,6 @@ for i = 0, 100, 2 do
 end
 
 im:png("out.png")
-os.execute("display out.png")
+os.execute("xdg-open out.png")
 
 

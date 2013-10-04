@@ -44,4 +44,4 @@ im:string(gd.FONT_MEDIUM, 10, 340, fontpath, lblue)
 
 
 im:png("out.png")
-os.execute("display out.png")
+os.execute("xdg-open out.png")

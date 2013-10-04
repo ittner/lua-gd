@@ -30,4 +30,4 @@ im2:stringFT(white, "./Vera.ttf", 45, math.pi/5, 340, 250, "FreeType")
 
 
 im2:png("out.png")
-os.execute("display out.png")
+os.execute("xdg-open out.png")
