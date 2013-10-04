@@ -33,7 +33,6 @@ function makelogo(size)
   im:filledArc(cxy, cxy, ediam, ediam, 0, 360, blue, gd.ARC)
 
   im:setThickness(math.max(0.02 * ediam, 1))
-  local i
   for i = 0, 360, 10 do
     im:arc(cxy, cxy, odiam, odiam, i, i+5, gray)
   end
@@ -57,5 +56,5 @@ function makelogo(size)
   return im2
 end
 
-makelogo(140):png("lualogo.png")
-os.execute("display lualogo.png")
+makelogo(140):png("out.png")
+os.execute("display out.png")

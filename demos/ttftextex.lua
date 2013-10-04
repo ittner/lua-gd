@@ -5,13 +5,13 @@ gd.useFontConfig(true) -- Use Fontconfig by default.
 local im = gd.createTrueColor(400, 400)
 assert(im)
 
-black = im:colorAllocate(0, 0, 0)
-grayt = im:colorAllocateAlpha(255, 255, 255, 80)
-blue = im:colorAllocate(0, 0, 250)
-red = im:colorAllocate(255, 0, 0)
-green = im:colorAllocate(0, 250, 0)
-lblue = im:colorAllocate(180, 180, 255)
-yellow = im:colorAllocate(240, 240, 0)
+local black = im:colorAllocate(0, 0, 0)
+local grayt = im:colorAllocateAlpha(255, 255, 255, 80)
+local blue = im:colorAllocate(0, 0, 250)
+local red = im:colorAllocate(255, 0, 0)
+local green = im:colorAllocate(0, 250, 0)
+local lblue = im:colorAllocate(180, 180, 255)
+local yellow = im:colorAllocate(240, 240, 0)
 
 im:stringFTEx(lblue, "Vera", 20, 0, 40, 40, "Half\nspace", 
     { linespacing = 0.5 } )

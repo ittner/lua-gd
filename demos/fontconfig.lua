@@ -3,10 +3,10 @@
 
 local gd = require("gd")
 
-im = gd.createTrueColor(220, 190)
-white = im:colorAllocate(255, 255, 255)
-black = im:colorAllocate(0, 0, 0)
-x, y = im:sizeXY()
+local im = gd.createTrueColor(220, 190)
+local white = im:colorAllocate(255, 255, 255)
+local black = im:colorAllocate(0, 0, 0)
+local x, y = im:sizeXY()
 im:filledRectangle(0, 0, x, y, white)
 
 gd.useFontConfig(true)

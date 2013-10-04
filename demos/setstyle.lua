@@ -29,6 +29,7 @@ for i = 0, 100, 2 do
     im:line(i, i, i+50, i, gd.STYLED)
 end
 
-im:png("styled.png")
+im:png("out.png")
+os.execute("display out.png")
 
 

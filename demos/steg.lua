@@ -90,13 +90,13 @@ to stop. Of course, this program will also do this boring job for Bob.
 local gd = require("gd")
 
 
-function getLSB(n)
+local function getLSB(n)
   return math.mod(n, 2) ~= 0
 end
 
 
 -- Bizarre way to do some bit-level operations without bitlib.
-function setLSB(n, b)
+local function setLSB(n, b)
   if type(b) == "number" then
     if b == 0 then
       b = false
@@ -124,7 +124,7 @@ function setLSB(n, b)
 end
 
 
-function intToBitArray(n)
+local function intToBitArray(n)
   local ret = {}
   local i = 0
   while n ~= 0 do
@@ -137,7 +137,7 @@ function intToBitArray(n)
 end
 
 
-function printBitArray(a)
+local function printBitArray(a)
   local i
   for i = a.size,0,-1 do
     if a[i] then
@@ -149,7 +149,7 @@ function printBitArray(a)
 end
 
 
-function mergeMessage(im, msg)
+local function mergeMessage(im, msg)
   local w, h = im:sizeXY()
   msg = msg .. string.char(0)
   local len = string.len(msg)
@@ -204,7 +204,7 @@ function mergeMessage(im, msg)
 end
 
 
-function getMessage(im)
+local function getMessage(im)
   local msg = {}
   local w, h = im:sizeXY()
   local x, y = 0, 0
@@ -245,7 +245,7 @@ function getMessage(im)
 end
 
 
-function compare(fimg1, fimg2)
+local function compare(fimg1, fimg2)
   local im1 = gd.createFromPng(fimg1)
   if not im1 then
     print("ERROR: " .. fimg1 .. " bad PNG data.")
@@ -288,7 +288,7 @@ function compare(fimg1, fimg2)
 end
     
 
-function usage()
+local function usage()
   print("Usage:")
   print(" lua steg.lua hide <input file> <output file>")
   print(" lua steg.lua show <input file>")
@@ -308,7 +308,7 @@ if not arg[1] or not arg[2] then
 end
 
 if arg[1] == "show" then
-  im = gd.createFromPng(arg[2])
+  local im = gd.createFromPng(arg[2])
   if not im then    
     print("ERROR: Bad image data.")
     os.exit(1)
@@ -322,14 +322,14 @@ if arg[1] == "hide" then
     usage()
     os.exit(1)
   end
-  im = gd.createFromPng(arg[2])
+  local im = gd.createFromPng(arg[2])
   if not im then
     print("ERROR: Bad image data.")
     os.exit(1)
   end
   print("Type your message and press CTRL+D to finish.")
-  msg = io.read("*a")
-  oim, l, t = mergeMessage(im, msg)
+  local msg = io.read("*a")
+  local oim, l, t = mergeMessage(im, msg)
   if not oim then
     print("ERROR: Image is too small for the message.")
     os.exit(1)
@@ -348,7 +348,7 @@ if arg[1] == "diff" then
     usage()
     os.exit(1)
   end
-  oim = compare(arg[2], arg[3])
+  local oim = compare(arg[2], arg[3])
   if not oim:png(arg[4]) then
     print("ERROR: Failed to write output file.")
     os.exit(1)

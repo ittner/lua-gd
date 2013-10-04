@@ -1,10 +1,10 @@
 local gd = require("gd")
 
-im = gd.createPalette(80, 80)
+local im = gd.createPalette(80, 80)
 assert(im)
 
-black = im:colorAllocate(0, 0, 0)
-white = im:colorAllocate(255, 255, 255)
+local black = im:colorAllocate(0, 0, 0)
+local white = im:colorAllocate(255, 255, 255)
 im:gifAnimBegin("out.gif", true, 0)
 
 for i = 1, 10 do

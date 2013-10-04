@@ -5,7 +5,7 @@
 
 local gd = require("gd")
 
-function createClock(size, hours, minutes)
+local function createClock(size, hours, minutes)
   local im = gd.createTrueColor(size, size)
   local white = im:colorAllocate(255, 255, 255)
   local gray = im:colorAllocate(128, 128, 128)
@@ -55,8 +55,8 @@ function createClock(size, hours, minutes)
   return im
 end
 
-dh = os.date("*t")
-im = createClock(100, dh.hour, dh.min)
+local dh = os.date("*t")
+local im = createClock(100, dh.hour, dh.min)
 
 print("Content-type: image/png")
 print("Refresh: 60")            -- Ask browser to reload the image after 60s

@@ -1,12 +1,12 @@
 local gd = require("gd")
 
-im = gd.createTrueColor(400, 400)
+local im = gd.createTrueColor(400, 400)
 assert(im)
 
-black = im:colorAllocate(0, 0, 0)
-white = im:colorAllocate(255, 255, 255)
+local black = im:colorAllocate(0, 0, 0)
+local white = im:colorAllocate(255, 255, 255)
 
-brush = gd.createFromPng("paper.png")
+local brush = gd.createFromPng("paper.png")
 im:setBrush(brush)
 im:line(60, 60, 70, 70, gd.BRUSHED)
 im:line(120, 120, 130, 130, gd.BRUSHED)

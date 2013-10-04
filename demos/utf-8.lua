@@ -24,12 +24,12 @@ local fontname = "FreeSerif"    -- Common on Unix systems
 
 gd.useFontConfig(true)
 
-im = gd.createTrueColor(180, 180)
-white = im:colorAllocate(255, 255, 255)
-black = im:colorAllocate(0, 0, 0)
-x, y = im:sizeXY()
+local im = gd.createTrueColor(180, 180)
+local white = im:colorAllocate(255, 255, 255)
+local black = im:colorAllocate(0, 0, 0)
+local x, y = im:sizeXY()
 im:filledRectangle(0, 0, x, y, white)
 im:stringFT(black, fontname, 16, 0, 10, 30, text)
 
-im:png("utf-8.png")
-os.execute("display utf-8.png")
+im:png("out.png")
+os.execute("display out.png")
