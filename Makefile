@@ -117,5 +117,6 @@ dist: $(DISTFILES)
 clean:
 	rm -f $(OUTFILE) gd.lo
 	rm -rf $(TDIR) $(TDIR).tar.gz
+	rm -f demos/out.png demos/out.gif demos/counter.txt
 
 .PHONY: all test install clean dist
