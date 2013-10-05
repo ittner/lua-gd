@@ -186,7 +186,7 @@ div.header {
 </div>
 
 
-<h2><a id="contents">Contents</a></h2>
+<h2 id="contents">Contents</h2>
 <ul>
  <li><a href="#intro">Introduction</a></li>
  <li><a href="#license">Licensing information</a>
@@ -227,7 +227,7 @@ div.header {
 </ul>
 
 
-<h2><a id="intro">Introduction</a></h2>
+<h2 id="intro">Introduction</h2>
 
 <p> "gd" is a C graphics library created by
 <a href="http://www.boutell.com/contact" title="Thomas Boutell's homepage">Thomas Boutell</a> that allows
@@ -264,12 +264,12 @@ fixes/etc. but were based in the same gd version. </p>
 
 
 
-<h2><a id="license">Licensing information</a></h2>
+<h2 id="license">Licensing information</h2>
 
 <p> Lua-GD and gd have diferent licenses. In order to use Lua-GD in your
 application, you need to accept both them. </p>
 
-<h3><a id="license.luagd">Lua-GD License</a></h3>
+<h3 id="license.luagd">Lua-GD License</h3>
 
 <p>Lua-GD is <em>copyrighted free software</em>, distributed under the
 MIT license (the same used by Lua 5.1) and it can be used at no cost for
@@ -303,7 +303,7 @@ documentation would be greatly appreciated (but it is not required).
 </pre>
 
 
-<h3><a id="license.gd">gd License</a></h3>
+<h3 id="license.gd">gd License</h3>
 
 <div class="indented">
 <p>Portions copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
@@ -370,7 +370,7 @@ their prior contributions. </p>
 
 
 
-<h2><a id="download">Download and installation</a></h2>
+<h2 id="download">Download and installation</h2>
 
 <p> Lua-GD source code comes in a tar.gz package that can be downloaded
 from the <a href="http://luaforge.net/projects/lua-gd/">Lua-GD project
@@ -421,7 +421,7 @@ packages. The libgd2-noxpm does not have Fontconfig support.</p>
 
 
 
-<h2><a id="load">Library loading and initialization</a></h2>
+<h2 id="load">Library loading and initialization</h2>
 
 <p>Lua-GD uses the Lua 5.1 package system that allows you to simply do a</p>
 
@@ -436,7 +436,7 @@ changes the global environment, so an explicit attribution is necessary. </p>
 
 
 
-<h2><a id="api">Lua-GD API</a></h2>
+<h2 id="api">Lua-GD API</h2>
 
 <p> The Lua-GD API is not identical to the gd C API: it was changed in
 a way that make it more familiar to Lua users and use the extra power
@@ -458,7 +458,7 @@ local gray2 = gd.colorResolve(im, 128, 128, 128)    -- Using a C-style notation
 
 
 
-<h3><a id="api.constants">Constants</a></h3>
+<h3 id="api.constants">Constants</h3>
 
 <h4>gd.VERSION</h4>
 <p>A string with the version and some information about the library.</p>
@@ -597,7 +597,7 @@ specification of the desired character mapping is useful when a font offers
 more than one of Unicode, Shift_JIS, and Big5. </p>
 
 
-<h3><a id="api.create">Image creation and destruction</a></h3>
+<h3 id="api.create">Image creation and destruction</h3>
 
 
 <h4> gd.create(x, sy) <br/>
@@ -661,7 +661,7 @@ PNGs and JPEGs. The disk space gain of conversion to palette is not great
 
 
 
-<h3><a id="api.input">Image input functions</a></h3>
+<h3 id="api.input">Image input functions</h3>
 
 
 <h4>gd.createFromJpeg(filename)</h4>
@@ -858,7 +858,7 @@ of images from gd2 format strings. Invoked in the same way as
 the source (x, y) and width/height of the desired image. </p>
 
 
-<h3><a id="api.output">Image output methods</a></h3>
+<h3 id="api.output">Image output methods</h3>
 
 <h4>gdImage:png(filename)</h4>
 
@@ -1022,7 +1022,7 @@ string. All other pixels will be considered "background". </p>
 
 
 
-<h3><a id="api.color">Color manipulation methods</a></h3>
+<h3 id="api.color">Color manipulation methods</h3>
 
 
 <h4>gdImage:colorAllocate(red, green, blue)</h4>
@@ -1256,7 +1256,7 @@ index among them will be reused by the next <code class="method-name">colorAlloc
 call.</p>
 
 
-<h3><a id="api.query">Query methods</a></h3>
+<h3 id="api.query">Query methods</h3>
 
 <h4>gdImage:boundsSafe(x, y)</h4>
 
@@ -1312,7 +1312,7 @@ a 100x100 image, a diagonal line from 0,0 to 99,99 will appear only
 between 25,25 and 75,75. </p>
 
 
-<h3><a id="api.draw">Drawing methods</a></h3>
+<h3 id="api.draw">Drawing methods</h3>
 
 <h4>gdImage:setPixel(x, y, color)</h4>
 <p> <code class="method-name">setPixel</code> sets a pixel to a particular color index. </p>
@@ -1481,7 +1481,7 @@ copied with its alpha channel information, replacing the destination pixel.
 Blending mode is not available when drawing on palette images. </p>
 
 
-<h3><a id="api.text">Text drawing methods</a></h3>
+<h3 id="api.text">Text drawing methods</h3>
 
 <h4>gdImage:string(font, x, y, string, color)</h4>
 
@@ -1761,7 +1761,7 @@ size such as 24.0 to get the best results. <var class="parameter">color</var> ca
 and may have an alpha component, do blending, etc. </p>
 
 
-<h3><a id="api.font">Font configuration methods</a></h3>
+<h3 id="api.font">Font configuration methods</h3>
 
 <h4>gd.useFontConfig(bool)</h4>
 <p> gd has the ability to use
@@ -1801,7 +1801,7 @@ return value. </p>
 
 
 
-<h3><a id="api.copy">Image copying, resizing and transformation methods</a></h3>
+<h3 id="api.copy">Image copying, resizing and transformation methods</h3>
 
 
 <h4>gd.copy(dstImage, srcImage, dstX, dstY, srcX, srcY, w, h) <br />
@@ -2019,7 +2019,7 @@ PNGs and JPEGs. The disk space gain of conversion to palette is not great
 
 
 
-<h3><a id="api.gifanim">GIF animation methods</a></h3>
+<h3 id="api.gifanim">GIF animation methods</h3>
 
 <h4>gdImage:gifAnimBegin(filename, globalCM, loops)</h4>
 
@@ -2164,10 +2164,10 @@ explicit way to finish the animation. </p>
 
 
 
-<h2><a id="examples">Examples</a></h2>
+<h2 id="examples">Examples</h2>
 
 
-<h3><a id="examples.counter">CGI Web Counter</a></h3>
+<h3 id="examples.counter">CGI Web Counter</h3>
 <pre class="code-example">
 #!/usr/bin/env lua
 -- counter.lua -- a web counter in Lua!
@@ -2202,7 +2202,7 @@ io.write(im:pngStr())
 </pre>
 
 
-<h3><a id="examples.clock">CGI Analog clock</a></h3>
+<h3 id="examples.clock">CGI Analog clock</h3>
 
 <p><img src="clock-example.png" alt="Clock Example output" title="Clock Example output" /></p>
 
@@ -2277,7 +2277,7 @@ io.write(im:pngStr())
 </pre>
 
 
-<h3><a id="examples.fractal">The Sierpinski triangle</a></h3>
+<h3 id="examples.fractal">The Sierpinski triangle</h3>
 
 <p><img src="sierpinski.png" width="250" height="250" alt="The Sierpinski triangle" title="The Sierpinski triangle" /></p>
 
@@ -2313,7 +2313,7 @@ im:png("sierpinski.png")
 
 
 
-<h3><a id="examples.fontconfig">Using Freetype, Fontconfig and TrueType fonts</a></h3>
+<h3 id="examples.fontconfig">Using Freetype, Fontconfig and TrueType fonts</h3>
 
 <p><img src="fontconfig-example.png" alt="Fontconfig Example output" title="Fontconfig Example output" /></p>
 
@@ -2342,7 +2342,7 @@ im:png("out.png")
 
 
 
-<h3><a id="examples.gifanim">GIF animation</a></h3>
+<h3 id="examples.gifanim">GIF animation</h3>
 
 <p><img src="gifanim.gif" width="120" height="120" alt="A GIF animation" title="A GIF animation" /></p>
 
@@ -2376,7 +2376,7 @@ fp:close()
 
 
 
-<h3><a id="examples.steg">A Steganography Application</a></h3>
+<h3 id="examples.steg">A Steganography Application</h3>
 
 <p>
  <img src="cat.png" width="216" height="256" alt="Original test image." />
@@ -2750,14 +2750,14 @@ os.exit(1)
 
 
 
-<h3><a id="examples.other">Other examples</a></h3>
+<h3 id="examples.other">Other examples</h3>
 <p> There are some useful examples in the <code>demos</code> directory
 within the distribution package. </p>
 
 
 
 
-<h2><a id="contact">Contact information</a></h2>
+<h2 id="contact">Contact information</h2>
 
 <p> Author: <strong>Alexandre Erwin Ittner</strong> <br />
 Email: <a href="mailto:alexandre#ittner.com.br">alexandre<strong>#</strong>ittner.com.br</a>
