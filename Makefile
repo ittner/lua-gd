@@ -38,7 +38,7 @@ OMITFP=-fomit-frame-pointer
 # have these programs you must comment out these lines and uncomment and
 # change the next ones.
 
-LUABIN=lua
+LUABIN=lua5.1
 # Name of .pc file. "lua5.1" on Debian/Ubuntu
 LUAPKG=lua5.1
 OUTFILE=gd.so
@@ -90,13 +90,13 @@ $(OUTFILE): gd.lo
 	$(CC) -o $(OUTFILE) gd.lo $(LFLAGS)
 
 test: $(OUTFILE)
-	lua test_features.lua
+	$(LUABIN) test_features.lua
 
 gd.lo: luagd.c
 	$(CC) -o gd.lo -c $(GDFEATURES) $(CFLAGS) luagd.c
 
 install: $(OUTFILE)
-	install -D -s $(OUTFILE) $(INSTALL_PATH)
+	install -D -s $(OUTFILE) $(DESTDIR)/$(INSTALL_PATH)/$(OUTFILE)
 
 
 # Rules for making a distribution tarball
