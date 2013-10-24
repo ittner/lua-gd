@@ -21,7 +21,7 @@ local function createClock(size, hours, minutes)
   local rang, gsize
   while ang < 360 do
     rang = math.rad(ang)
-    if math.mod(ang, 90) == 0 then
+    if (ang % 90) == 0 then
       gsize = 0.75
     else
       gsize = 0.85

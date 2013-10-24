@@ -54,7 +54,8 @@
 #endif
 
 #if LUA_VERSION_NUM < 502
- #define luaL_newlib(L, f)  { lua_newtable(L); luaL_register(L, NULL, f); }
+ #define luaL_setfuncs(L, f, unused)  { luaL_register(L, NULL, f); }
+ #define lua_rawlen lua_objlen
 #endif
 
 #define boxptr(L, p)   (*(void**)(lua_newuserdata(L, sizeof(void*))) = (p))
@@ -74,6 +75,13 @@
 #define MY_GD_FONT_TINY             4
 
 
+static int typerror(lua_State *L, int narg, const char *tname) {
+    const char *msg = lua_pushfstring(L, "%s expected, got %s",
+        tname, luaL_typename(L, narg));
+    return luaL_argerror(L, narg, msg);
+}
+
+
 static gdImagePtr getImagePtr(lua_State *L, int i) {
     if (luaL_checkudata(L, i, GD_IMAGE_PTR_TYPENAME) != NULL) {
         gdImagePtr im = unboxptr(L, i);
@@ -81,7 +89,7 @@ static gdImagePtr getImagePtr(lua_State *L, int i) {
             luaL_error(L, "attempt to use an invalid " GD_IMAGE_PTR_TYPENAME);
         return im;
     }
-    luaL_typerror(L, i, GD_IMAGE_PTR_TYPENAME);
+    typerror(L, i, GD_IMAGE_PTR_TYPENAME);
     return NULL;
 }
 
@@ -97,7 +105,7 @@ static gdFontPtr getStdFont(lua_State *L, int i) {
     int size;
 
     if (lua_isnumber(L, i) == 0) {
-        luaL_typerror(L, i, "Standard GD Font");
+        typerror(L, i, "Standard GD Font");
         return gdFontGetSmall();
     }
 
@@ -119,7 +127,7 @@ static gdFontPtr getStdFont(lua_State *L, int i) {
             return gdFontGetTiny();
 
         default:
-            luaL_typerror(L, i, "Standard GD Font");
+            typerror(L, i, "Standard GD Font");
             return gdFontGetSmall();
     }
 
@@ -345,7 +353,7 @@ static int LgdImageCreateFromJpeg(lua_State *L) {
 /* gdImageCreateFromJpegPtr(int size, void *data) */
 static int LgdImageCreateFromJpegPtr(lua_State *L) {
     gdImagePtr im;
-    int size = lua_strlen(L, 1);
+    int size = lua_rawlen(L, 1);
     void *str = (void*) luaL_checkstring(L, 1);
 
     if (str == NULL) {
@@ -390,7 +398,7 @@ static int LgdImageCreateFromGif (lua_State *L) {
 /* gdImageCreateFromGifPtr(int size, void *data) */
 static int LgdImageCreateFromGifPtr(lua_State *L) {
     gdImagePtr im;
-    int size = lua_strlen(L, 1);
+    int size = lua_rawlen(L, 1);
     void *str = (void*) luaL_checkstring(L, 1);
 
     if (str == NULL) {
@@ -436,7 +444,7 @@ static int LgdImageCreateFromPng(lua_State *L) {
 /* gdImageCreateFromPngPtr(int size, void *data) */
 static int LgdImageCreateFromPngPtr(lua_State *L) {
     gdImagePtr im;
-    int size = lua_strlen(L, 1);
+    int size = lua_rawlen(L, 1);
     void *str = (void*) luaL_checkstring(L, 1);
 
     if (str == NULL) {
@@ -481,7 +489,7 @@ static int LgdImageCreateFromGd(lua_State *L) {
 /* gdImageCreateFromGdPtr(int size, void *data) */
 static int LgdImageCreateFromGdPtr(lua_State *L) {
     gdImagePtr im;
-    int size = lua_strlen(L, 1);
+    int size = lua_rawlen(L, 1);
     void *str = (void*) luaL_checkstring(L, 1);
 
     if (str == NULL) {
@@ -525,7 +533,7 @@ static int LgdImageCreateFromGd2(lua_State *L) {
 /* gdImageCreateFromGd2Ptr(int size, void *data) */
 static int LgdImageCreateFromGd2Ptr(lua_State *L) {
     gdImagePtr im;
-    int size = lua_strlen(L, 1);
+    int size = lua_rawlen(L, 1);
     void *str = (void*) luaL_checkstring(L, 1);
 
     if (str == NULL) {
@@ -574,7 +582,7 @@ static int LgdImageCreateFromGd2Part(lua_State *L) {
                 int srcX, int srcY, int w, int h)  */
 static int LgdImageCreateFromGd2PartPtr(lua_State *L) {
     gdImagePtr im;
-    int size = lua_strlen(L, 1);
+    int size = lua_rawlen(L, 1);
     void *str = (void*) luaL_checkstring(L, 1);
     const int x = luaL_checkinteger(L, 2);
     const int y = luaL_checkinteger(L, 3);
@@ -1286,7 +1294,7 @@ static gdPoint *getPointList(lua_State *L, int *size) {
     int i;
 
     luaL_checktype(L, -1, LUA_TTABLE);
-    *size = luaL_getn(L, -1);
+    *size = lua_rawlen(L, -1);
     plist = (gdPoint*) malloc(*size * sizeof(gdPoint));
 
     for (i = 0; i < *size; i++) {
@@ -1296,7 +1304,7 @@ static gdPoint *getPointList(lua_State *L, int *size) {
         /* Stack:  T, T'  */
         if (lua_type(L, 2) != LUA_TTABLE) {
             free(plist);
-            luaL_typerror(L, 2, "Point");
+            typerror(L, 2, "Point");
         }
 
         lua_rawgeti(L, 2, 1);
@@ -1508,7 +1516,7 @@ static int LgdImageSetStyle(lua_State *L) {
 
     /* Stack: Im, T */
     luaL_checktype(L, -1, LUA_TTABLE);
-    size = luaL_getn(L, -1);
+    size = lua_rawlen(L, -1);
     slist = (int*) malloc(size * sizeof(int));
 
     for (i = 0; i < size; i++) {
@@ -1518,7 +1526,7 @@ static int LgdImageSetStyle(lua_State *L) {
         /* Stack:  Im, T, num */
         if (lua_type(L, -1) != LUA_TNUMBER) {
             free(slist);
-            luaL_typerror(L, -1, "Number");
+            typerror(L, -1, "Number");
         }
 
         slist[i] = luaL_checkinteger(L, -1);
@@ -1621,7 +1629,7 @@ static int LgdImageChar(lua_State *L) {
     if (str) {
         chr = (int) str[0];
     } else {
-        luaL_typerror(L, 5, "string");
+        typerror(L, 5, "string");
         return 0;
     }
 
@@ -1644,7 +1652,7 @@ static int LgdImageCharUp(lua_State *L) {
     if (str)
         chr = (int) str[0];
     else {
-        luaL_typerror(L, 5, "string");
+        typerror(L, 5, "string");
         return 0;
     }
 
@@ -2142,7 +2150,7 @@ static int LgdImageGifAnimEndPtr(lua_State *L) {
 
 
 
-static const luaL_reg LgdFunctions[] =
+static const luaL_Reg LgdFunctions[] =
 {
 /*  Leave Lua do it!
     { "destroy",                LgdImageDestroy }, */
@@ -2286,7 +2294,7 @@ static const luaL_reg LgdFunctions[] =
 };
 
 
-static const luaL_reg LgdMetatable[] =
+static const luaL_Reg LgdMetatable[] =
 {
     { "__gc", LgdImageDestroy },
     { NULL, NULL }
@@ -2294,7 +2302,8 @@ static const luaL_reg LgdMetatable[] =
 
 
 int luaopen_gd(lua_State *L) {
-    luaL_newlib(L, LgdFunctions);
+    lua_newtable(L);
+    luaL_setfuncs(L, LgdFunctions, 0);
 
     lua_pushliteral(L, "VERSION");
     lua_pushstring(L, LIB_VERSION);
@@ -2345,7 +2354,7 @@ int luaopen_gd(lua_State *L) {
     lua_pushliteral(L, "__index");
     lua_pushvalue(L, -3);
     lua_settable(L, -3);
-    luaL_openlib(L, NULL, LgdMetatable, 0);
+    luaL_setfuncs(L, LgdMetatable, 0);
     lua_pop(L, 1);
 
     return 1;

@@ -91,7 +91,7 @@ local gd = require("gd")
 
 
 local function getLSB(n)
-  return math.mod(n, 2) ~= 0
+  return (n % 2) ~= 0
 end
 
 

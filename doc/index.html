@@ -2237,7 +2237,7 @@ function createClock(size, hours, minutes)
   local rang, gsize
   while ang &lt; 360 do
     rang = math.rad(ang)
-    if math.mod(ang, 90) == 0 then
+    if (ang % 90) == 0 then
       gsize = 0.75
     else
       gsize = 0.85
@@ -2486,7 +2486,7 @@ to stop. Of course, this program will also do this boring job for Bob.
 local gd = require("gd")
 
 function getLSB(n)
-  return math.mod(n, 2) ~= 0
+  return (n % 2) ~= 0
 end
 
 
