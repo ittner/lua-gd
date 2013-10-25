@@ -24,9 +24,13 @@
 # documentation would be greatly appreciated (but it is not required).
 #
 
+
+# Lua-GD version. This one must be set.
 VERSION=2.0.33r3
 
-CC=gcc
+# Command used to run Lua code
+LUABIN=lua5.1
+
 
 # Optimization for the brave of heart ;)
 OMITFP=-fomit-frame-pointer
@@ -38,17 +42,16 @@ OMITFP=-fomit-frame-pointer
 # have these programs you must comment out these lines and uncomment and
 # change the next ones.
 
-LUABIN=lua5.1
 # Name of .pc file. "lua5.1" on Debian/Ubuntu
 LUAPKG=lua5.1
 OUTFILE=gd.so
 
-CFLAGS=-O3 -Wall -fPIC
-CFLAGS+=`gdlib-config --cflags` `pkg-config $(LUAPKG) --cflags` $(OMITFP)
+CFLAGS=-O3 -Wall -fPIC $(OMITFP)
+CFLAGS+=`gdlib-config --cflags` `pkg-config $(LUAPKG) --cflags`
 CFLAGS+=-DVERSION=\"$(VERSION)\"
 
 GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
-LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -lgd $(OMITFP)
+LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -lgd
 
 INSTALL_PATH := `$(LUABIN) -e'                          \
     for dir in package.cpath:gmatch("(/[^?;]+)?") do    \
@@ -64,10 +67,11 @@ INSTALL_PATH := `$(LUABIN) -e'                          \
 # Manual configuration for systems without pkgconfig.
 
 #OUTFILE=gd.so
-#CFLAGS=-Wall `gdlib-config --cflags` -I/usr/include/lua5.1 -O3 $(OMITFP)
+#CFLAGS=-O3 -Wall -fPIC $(OMITFP)
+#CFLAGS+=`gdlib-config --cflags` -I/usr/include/lua5.1
 #CFLAGS+=-DVERSION=\"$(VERSION)\"
 #GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
-#LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -lgd $(OMITFP)
+#LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -lgd
 #INSTALL_PATH=/usr/lib/lua/
 
 
@@ -76,7 +80,8 @@ INSTALL_PATH := `$(LUABIN) -e'                          \
 # Uncomment, change and good luck :)
 
 #OUTFILE=gd.dll
-#CFLAGS=-Wall -IC:/lua5.1/ -O3 $(OMITFP)
+#CFLAGS=-O3 -Wall -fPIC $(OMITFP)
+#CFLAGS+=-IC:/lua5.1/
 #CFLAGS+=-DVERSION=\"$(VERSION)\"
 #GDFEATURES=-DGD_XPM -DGD_JPEG -DGD_FONTCONFIG -DGD_FREETYPE -DGD_PNG -DGD_GIF
 #LFLAGS=-shared -lgd2 -lm $(OMITFP)
