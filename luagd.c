@@ -155,14 +155,13 @@ static gdFontPtr getStdFont(lua_State *L, int i) {
  */
 #ifdef GD_FREETYPE
 static gdFTStringExtra *getFTStringExtraPtr(lua_State *L, int i) {
-    gdFTStringExtra *ex = (gdFTStringExtra*) malloc(sizeof(gdFTStringExtra));
+    luaL_checktype(L, i, LUA_TTABLE);
 
+    gdFTStringExtra *ex = (gdFTStringExtra*) malloc(sizeof(gdFTStringExtra));
     if (ex == NULL)
         luaL_error(L, "Memory allocation failure");
 
     ex->flags = 0;
-
-    luaL_checktype(L, i, LUA_TTABLE);
 
     lua_pushstring(L, "linespacing");
     lua_gettable(L, i);
