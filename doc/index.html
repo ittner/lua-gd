@@ -196,7 +196,11 @@ div.header {
    </ul>
   </li>
  <li><a href="#development">Development</a></li>
- <li><a href="#download">Download and installation</a></li>
+ <li><a href="#download">Download and installation</a>
+  <ul>
+   <li><a href="#install.rock">Installing with LuaRocks</a></li>
+  </ul>
+ </li>
  <li><a href="#load">Library loading and initialization</a></li>
  <li><a href="#api">Lua-GD API</a>
    <ul>
@@ -426,6 +430,13 @@ by yourself. </p>
 support, you will need the libgd2-xpm and libgd2-xpm-dev
 packages. The libgd2-noxpm does not have Fontconfig support.</p>
 
+
+<h3 id="install.rock">Installing with LuaRocks</h3>
+
+<p> The installation procedure described above can be automated with
+<a href="http://www.luarocks.org/">LuaRocks</a>. If you have it in your
+system, just type <code class="typed-command">sudo luarocks install luagd</code>
+to download, build, and install Lua-GD.</p>
 
 
 <h2 id="load">Library loading and initialization</h2>

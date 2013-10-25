@@ -1,10 +1,8 @@
 package = "LuaGD"
-version = "2.0.33r2-1"
+version = "2.0.33r3-1"
 
 source = {
-    -- url = "http://luaforge.net/frs/download.php/1592/lua-gd-2.0.33r2.tar.gz",
-    url = "http://www.ittner.com.br/lua/lua-gd-2.0.33r2.tar.gz",
-    md5 = "69e9c07ce208ce13d4373177c2e24df0"
+    url = "https://github.com/ittner/lua-gd/archive/lua-gd-2.0.33r3.tar.gz",
 }
 
 description = {
@@ -18,7 +16,7 @@ graphics package, but it does include most frequently requested features,
 including both truecolor and palette images, resampling (smooth resizing of
 truecolor images) and so forth. It is particularly useful in Web applications.
 ]],
-    homepage = "http://lua-gd.luaforge.net/",
+    homepage = "http://ittner.github.io/lua-gd/",
     license = "MIT/X11",
     maintainer = "Alexandre Erwin Ittner"
 }
