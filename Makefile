@@ -31,6 +31,9 @@ VERSION=2.0.33r3
 # Command used to run Lua code
 LUABIN=lua5.1
 
+# Path to the utility 'gdlib-config'. This may be changed to compile the
+# module with development versions of libgd.
+GDLIBCONFIG=gdlib-config
 
 # Optimization for the brave of heart ;)
 OMITFP=-fomit-frame-pointer
@@ -47,11 +50,11 @@ LUAPKG=lua5.1
 OUTFILE=gd.so
 
 CFLAGS=-O3 -Wall -fPIC $(OMITFP)
-CFLAGS+=`gdlib-config --cflags` `pkg-config $(LUAPKG) --cflags`
+CFLAGS+=`$(GDLIBCONFIG) --cflags` `pkg-config $(LUAPKG) --cflags`
 CFLAGS+=-DVERSION=\"$(VERSION)\"
 
-GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
-LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -lgd
+GDFEATURES=`$(GDLIBCONFIG) --features |sed -e "s/GD_/-DGD_/g"`
+LFLAGS=-shared `$(GDLIBCONFIG) --ldflags` `$(GDLIBCONFIG) --libs` -lgd
 
 INSTALL_PATH := `$(LUABIN) -e'                          \
     for dir in package.cpath:gmatch("(/[^?;]+)?") do    \
@@ -68,10 +71,10 @@ INSTALL_PATH := `$(LUABIN) -e'                          \
 
 #OUTFILE=gd.so
 #CFLAGS=-O3 -Wall -fPIC $(OMITFP)
-#CFLAGS+=`gdlib-config --cflags` -I/usr/include/lua5.1
+#CFLAGS+=`$(GDLIBCONFIG) --cflags` -I/usr/include/lua5.1
 #CFLAGS+=-DVERSION=\"$(VERSION)\"
-#GDFEATURES=`gdlib-config --features |sed -e "s/GD_/-DGD_/g"`
-#LFLAGS=-shared `gdlib-config --ldflags` `gdlib-config --libs` -lgd
+#GDFEATURES=`$(GDLIBCONFIG) --features |sed -e "s/GD_/-DGD_/g"`
+#LFLAGS=-shared `$(GDLIBCONFIG) --ldflags` `$(GDLIBCONFIG) --libs` -lgd
 #INSTALL_PATH=/usr/lib/lua/
 
 
